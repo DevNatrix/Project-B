@@ -840,7 +840,7 @@ MonoBehaviour:
   ID: 0
   latency: 0
   messageTimoutMS: 1000
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 2002082944}
   serverEvents: {fileID: 1836363827}
 --- !u!4 &1836363829
 Transform:
