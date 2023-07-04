@@ -785,5 +785,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   server: {fileID: 1836363828}
-  serverPort: 12345
+  serverPort: 6969
   serverIP: 192.36.176.139
