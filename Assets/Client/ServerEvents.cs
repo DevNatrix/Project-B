@@ -8,10 +8,20 @@ public class ServerEvents : MonoBehaviour
 	[SerializeField] UDPServer server;
 	[SerializeField] GameObject otherClientPrefab;
 	List<OtherClient> otherClientList = new List<OtherClient>();
-    /*public void sendEvent(string eventName, string data)
+
+	public float lerpPercent = 0;
+	public float pastUpdateTime;
+	public float timeBetweenUpdates;
+	/*public void sendEvent(string eventName, string data)
 	{
 		server.sendMessage(eventName + "~" + data);
 	}*/ //for the future where I add event sending
+
+	private void Update()
+	{
+		lerpPercent = (Time.time - pastUpdateTime)/timeBetweenUpdates;
+		print(lerpPercent);
+	}
 
 	public void processEvent(string message)
 	{
@@ -52,6 +62,9 @@ public class ServerEvents : MonoBehaviour
 
 	public void rawEvents(string rawEvents)
 	{
+		timeBetweenUpdates = Time.time - pastUpdateTime;
+		pastUpdateTime = Time.time;
+
 		string[] splitRawEvents = rawEvents.Split('|');
 		for (int eventID = 0; eventID < splitRawEvents.Length; eventID++)
 		{

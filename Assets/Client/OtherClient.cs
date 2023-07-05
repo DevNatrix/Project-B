@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Security;
 using UnityEngine;
 
 public class OtherClient : MonoBehaviour
@@ -7,14 +8,17 @@ public class OtherClient : MonoBehaviour
 	public int ID;
 	public string username;
 	[SerializeField] Transform lookDirectionIndicatorTransform;
+	ServerEvents serverEvents;
 
 	Vector3 pastPosition;
 	Vector3 targetPosition;
 	Vector3 pastRotation;
 	Vector3 targetrotation;
-	float lerpTime;
-	float pastUpdateTime;
 
+	private void Start()
+	{
+		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
+	}
 
 	public void setInfo(int _ID, string _username)
 	{
@@ -29,15 +33,10 @@ public class OtherClient : MonoBehaviour
 
 		pastRotation = targetrotation;
 		targetrotation = rotation;
-
-		lerpTime = Time.time - pastUpdateTime;
-
-		pastUpdateTime = Time.time;
 	}
 
 	private void Update()
 	{
-		float percentOfLerp = Mathf.Clamp((Time.time - pastUpdateTime) / lerpTime, 0, 1);
-		transform.position = Vector3.Lerp(pastPosition, targetPosition, percentOfLerp);
+		transform.position = Vector3.Lerp(pastPosition, targetPosition, serverEvents.lerpPercent);
 	}
 }
