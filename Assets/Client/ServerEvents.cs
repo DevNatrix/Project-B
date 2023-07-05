@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ServerEvents : MonoBehaviour
 {
@@ -42,6 +43,9 @@ public class ServerEvents : MonoBehaviour
 			case "newClient":
 				newClient(int.Parse(splitEvent[1]), splitEvent[2]); //client id, username
 				break;
+			case "removeClient":
+				removeClient(int.Parse(splitEvent[1])); //client id
+				break;
 		}
 	}
 
@@ -55,6 +59,23 @@ public class ServerEvents : MonoBehaviour
 				{
 					otherClient.setTransform(position, rotation);
 				}
+			}
+		}
+	}
+
+	void removeClient(int clientID)
+	{
+		if(clientID == server.ID)
+		{
+			Debug.LogError("Server sent leave event for this client, closing game");
+			Application.Quit();
+		}
+		foreach (OtherClient otherClient in otherClientList)
+		{
+			if (otherClient.ID == clientID)
+			{
+				otherClientList.Remove(otherClient);
+				Destroy(otherClient.gameObject);
 			}
 		}
 	}
