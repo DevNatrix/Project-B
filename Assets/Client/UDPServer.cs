@@ -56,7 +56,6 @@ public class UDPServer : MonoBehaviour
 			Debug.Log("Given TPS: " + TPS);
 
 			//start main update loop
-			serverEvents.timeBetweenUpdates = 1 / (float)TPS;
 			InvokeRepeating("serverUpdater", 0, 1 / (float)TPS);
 		}
 		catch (Exception e)

@@ -9,7 +9,7 @@ const { get } = require('http');
 const validCommands = ['u', 'e', 'newClient', 'leave']; // u = update, e = event (short for conservation of bandwidth)
 
 currentID = 0; //the ID given to players when they join
-TPS = 5; //Ticks per second - this is how fast you want players to update their position and check for events
+TPS = 15; //Ticks per second - this is how fast you want players to update their position and check for events
 SERVERPORT = 6969;
 
 const maxChecksBeforeDisconnect = 3; //this times diconnect interval is how long it takes (in ms) for a player to get disconnected

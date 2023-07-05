@@ -22,7 +22,7 @@ public class OtherClient : MonoBehaviour
 		username = _username;
 	}
 
-	public void setTransform(Vector3 position, Vector3 rotation, float time)
+	public void setTransform(Vector3 position, Vector3 rotation)
 	{
 		pastPosition = targetPosition;
 		targetPosition = position;
@@ -30,7 +30,7 @@ public class OtherClient : MonoBehaviour
 		pastRotation = targetrotation;
 		targetrotation = rotation;
 
-		lerpTime = time;
+		lerpTime = Time.time - pastUpdateTime;
 
 		pastUpdateTime = Time.time;
 	}
