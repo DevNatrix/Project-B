@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Security;
+using TMPro;
 using UnityEngine;
 
 public class OtherClient : MonoBehaviour
@@ -8,6 +9,9 @@ public class OtherClient : MonoBehaviour
 	public int ID;
 	public string username;
 	[SerializeField] Transform lookIndicator;
+	[SerializeField] Transform infoCanvas;
+	[SerializeField] TextMeshProUGUI usernameText;
+	Transform playerCam;
 	ServerEvents serverEvents;
 
 	Vector3 pastPosition;
@@ -17,6 +21,7 @@ public class OtherClient : MonoBehaviour
 
 	private void Start()
 	{
+		playerCam = GameObject.Find("Main Camera").transform;
 		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
 	}
 
@@ -24,6 +29,7 @@ public class OtherClient : MonoBehaviour
 	{
 		ID = _ID;
 		username = _username;
+		usernameText.text = username;
 	}
 
 	public void setTransform(Vector3 position, Quaternion rotation)
@@ -37,12 +43,15 @@ public class OtherClient : MonoBehaviour
 
 	private void Update()
 	{
+		//position
 		transform.position = Vector3.Lerp(pastPosition, targetPosition, serverEvents.lerpPercent);
 
+		//rotation
 		Quaternion currentRotation = Quaternion.Slerp(pastRotation, targetRotation, serverEvents.lerpPercent);
-		//body
 		transform.rotation = Quaternion.Euler(new Vector3(0f, currentRotation.eulerAngles.y, 0f));
-		//look indicator
 		lookIndicator.localRotation = Quaternion.Euler(new Vector3(currentRotation.eulerAngles.x, 0f, currentRotation.eulerAngles.z));
+
+		//make info canvas face towards player cam
+		infoCanvas.LookAt(playerCam);
 	}
 }
