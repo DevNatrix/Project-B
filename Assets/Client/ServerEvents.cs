@@ -8,6 +8,7 @@ public class ServerEvents : MonoBehaviour
 	[SerializeField] UDPServer server;
 	[SerializeField] GameObject otherClientPrefab;
 	List<OtherClient> otherClientList = new List<OtherClient>();
+	[HideInInspector] public float timeBetweenUpdates;
     /*public void sendEvent(string eventName, string data)
 	{
 		server.sendMessage(eventName + "~" + data);
@@ -37,7 +38,7 @@ public class ServerEvents : MonoBehaviour
 			{
 				if(otherClient.ID == clientID)
 				{
-					otherClient.setTransform(position, rotation);
+					otherClient.setTransform(position, rotation, timeBetweenUpdates);
 				}
 			}
 		}
