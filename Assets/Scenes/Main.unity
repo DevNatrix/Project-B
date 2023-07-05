@@ -573,7 +573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969391919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.140886, y: 1.7521069, z: -4.592577}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   server: {fileID: 1836363828}
-  otherClientPrefab: {fileID: 8492058919232412303, guid: 636f344e4258307418f1fab4ef0b7e5b, type: 3}
+  otherClientPrefab: {fileID: 9001124583556111622, guid: 636f344e4258307418f1fab4ef0b7e5b, type: 3}
   lerpPercent: 0
   dynamicPlayerLerp: 0
 --- !u!114 &1836363828
@@ -854,7 +854,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836363826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2362084, y: 1.4264407, z: 2.0492418}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -875,7 +875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   server: {fileID: 1836363828}
   serverPort: 6969
-  serverIP: 192.36.176.139
+  serverIP: localhost
 --- !u!1 &2002082939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1038,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002082939}
   m_LocalRotation: {x: 0, y: -0.5538275, z: 0, w: 0.8326314}
-  m_LocalPosition: {x: 1.14, y: 1.21, z: 0.87}
+  m_LocalPosition: {x: 12.69, y: 1.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
