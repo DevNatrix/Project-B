@@ -9,6 +9,6 @@ public class Example : MonoBehaviour
 	[SerializeField] string serverIP;
 	void Start()
 	{
-		server.connectToServer("Username", serverPort, serverIP);
+		server.connectToServer("Username", Lobby.bestPort, Lobby.bestIP);
 	}
 }
