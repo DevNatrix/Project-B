@@ -875,7 +875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   server: {fileID: 1836363828}
   serverPort: 6969
-  serverIP: localhost
+  serverIP: 192.36.176.139
 --- !u!1 &2002082939
 GameObject:
   m_ObjectHideFlags: 0
