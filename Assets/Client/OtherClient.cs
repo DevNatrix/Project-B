@@ -12,8 +12,8 @@ public class OtherClient : MonoBehaviour
 
 	Vector3 pastPosition;
 	Vector3 targetPosition;
-	Vector3 pastRotation;
-	Vector3 targetRotation;
+	Quaternion pastRotation;
+	Quaternion targetRotation;
 
 	private void Start()
 	{
@@ -26,7 +26,7 @@ public class OtherClient : MonoBehaviour
 		username = _username;
 	}
 
-	public void setTransform(Vector3 position, Vector3 rotation)
+	public void setTransform(Vector3 position, Quaternion rotation)
 	{
 		pastPosition = targetPosition;
 		targetPosition = position;
@@ -39,10 +39,10 @@ public class OtherClient : MonoBehaviour
 	{
 		transform.position = Vector3.Lerp(pastPosition, targetPosition, serverEvents.lerpPercent);
 
-		Vector3 currentRotation = Vector3.Slerp(pastRotation, targetRotation, serverEvents.lerpPercent);
+		Quaternion currentRotation = Quaternion.Slerp(pastRotation, targetRotation, serverEvents.lerpPercent);
 		//body
-		transform.rotation = Quaternion.Euler(new Vector3(0f, currentRotation.y, 0f));
+		transform.rotation = Quaternion.Euler(new Vector3(0f, currentRotation.eulerAngles.y, 0f));
 		//look indicator
-		lookIndicator.localRotation = Quaternion.Euler(new Vector3(currentRotation.x, 0f, currentRotation.z));
+		lookIndicator.localRotation = Quaternion.Euler(new Vector3(currentRotation.eulerAngles.x, 0f, currentRotation.eulerAngles.z));
 	}
 }

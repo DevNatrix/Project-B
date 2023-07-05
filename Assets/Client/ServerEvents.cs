@@ -37,7 +37,7 @@ public class ServerEvents : MonoBehaviour
 		switch (eventType)
 		{
 			case "u":
-				updateTransform(int.Parse(splitEvent[1]), parseVector3(splitEvent[2]), parseVector3(splitEvent[3])); //client id, position, rotation
+				updateTransform(int.Parse(splitEvent[1]), parseVector3(splitEvent[2]), parseQuaternion(splitEvent[3])); //client id, position, rotation
 				break;
 			case "newClient":
 				newClient(int.Parse(splitEvent[1]), splitEvent[2]); //client id, username
@@ -45,7 +45,7 @@ public class ServerEvents : MonoBehaviour
 		}
 	}
 
-	void updateTransform(int clientID, Vector3 position, Vector3 rotation)
+	void updateTransform(int clientID, Vector3 position, Quaternion rotation)
 	{
 		if(clientID != server.ID)
 		{
