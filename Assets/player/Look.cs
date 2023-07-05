@@ -59,7 +59,6 @@ public class Look : MonoBehaviour
     private void Awake()
     {
         originalCamHeight = cam.transform.localPosition.y;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ReceiveInput(Vector2 mouseInput)

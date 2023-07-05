@@ -14,7 +14,7 @@ public class UDPServer : MonoBehaviour
 	int SERVERPORT;
 	string SERVERADDRESS;
 	[HideInInspector] public int ID;
-	int TPS;
+	[HideInInspector] public int TPS;
 	public int latency = 0;
 	[SerializeField] int messageTimoutMS = 1000;
 	[SerializeField] Transform playerTransform;

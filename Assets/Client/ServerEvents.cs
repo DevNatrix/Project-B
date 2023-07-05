@@ -9,9 +9,10 @@ public class ServerEvents : MonoBehaviour
 	[SerializeField] GameObject otherClientPrefab;
 	List<OtherClient> otherClientList = new List<OtherClient>();
 
-	public float lerpPercent = 0;
-	public float pastUpdateTime;
-	public float timeBetweenUpdates;
+	[HideInInspector] public float lerpPercent = 0;
+	float pastUpdateTime;
+	float timeBetweenUpdates;
+	[SerializeField] bool dynamicPlayerLerp;
 	/*public void sendEvent(string eventName, string data)
 	{
 		server.sendMessage(eventName + "~" + data);
@@ -19,13 +20,18 @@ public class ServerEvents : MonoBehaviour
 
 	private void Update()
 	{
-		lerpPercent = (Time.time - pastUpdateTime)/timeBetweenUpdates;
-		print(lerpPercent);
+		if (dynamicPlayerLerp)
+		{
+			lerpPercent = (Time.time - pastUpdateTime)/timeBetweenUpdates;
+		}
+		else
+		{
+			lerpPercent = (Time.time - pastUpdateTime) / (1/(float)server.TPS);
+		}
 	}
 
 	public void processEvent(string message)
 	{
-		print("Processed event: " + message);
 		string[] splitEvent = message.Split("~");
 		string eventType = splitEvent[0];
 		switch (eventType)
