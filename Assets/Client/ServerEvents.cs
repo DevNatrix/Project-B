@@ -8,20 +8,36 @@ public class ServerEvents : MonoBehaviour
 	[SerializeField] UDPServer server;
 	[SerializeField] GameObject otherClientPrefab;
 	List<OtherClient> otherClientList = new List<OtherClient>();
-    /*public void sendEvent(string eventName, string data)
+
+	[HideInInspector] public float lerpPercent = 0;
+	float pastUpdateTime;
+	float timeBetweenUpdates;
+	[SerializeField] bool dynamicPlayerLerp;
+	/*public void sendEvent(string eventName, string data)
 	{
 		server.sendMessage(eventName + "~" + data);
 	}*/ //for the future where I add event sending
 
+	private void Update()
+	{
+		if (dynamicPlayerLerp)
+		{
+			lerpPercent = (Time.time - pastUpdateTime)/timeBetweenUpdates;
+		}
+		else
+		{
+			lerpPercent = (Time.time - pastUpdateTime) / (1/(float)server.TPS);
+		}
+	}
+
 	public void processEvent(string message)
 	{
-		print("Processed event: " + message);
 		string[] splitEvent = message.Split("~");
 		string eventType = splitEvent[0];
 		switch (eventType)
 		{
 			case "u":
-				updateTransform(int.Parse(splitEvent[1]), parseVector3(splitEvent[2]), parseVector3(splitEvent[3])); //client id, position, rotation
+				updateTransform(int.Parse(splitEvent[1]), parseVector3(splitEvent[2]), parseQuaternion(splitEvent[3])); //client id, position, rotation
 				break;
 			case "newClient":
 				newClient(int.Parse(splitEvent[1]), splitEvent[2]); //client id, username
@@ -29,7 +45,7 @@ public class ServerEvents : MonoBehaviour
 		}
 	}
 
-	void updateTransform(int clientID, Vector3 position, Vector3 rotation)
+	void updateTransform(int clientID, Vector3 position, Quaternion rotation)
 	{
 		if(clientID != server.ID)
 		{
@@ -52,6 +68,9 @@ public class ServerEvents : MonoBehaviour
 
 	public void rawEvents(string rawEvents)
 	{
+		timeBetweenUpdates = Time.time - pastUpdateTime;
+		pastUpdateTime = Time.time;
+
 		string[] splitRawEvents = rawEvents.Split('|');
 		for (int eventID = 0; eventID < splitRawEvents.Length; eventID++)
 		{

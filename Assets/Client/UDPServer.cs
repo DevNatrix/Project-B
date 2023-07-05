@@ -14,10 +14,11 @@ public class UDPServer : MonoBehaviour
 	int SERVERPORT;
 	string SERVERADDRESS;
 	[HideInInspector] public int ID;
-	int TPS;
+	[HideInInspector] public int TPS;
 	public int latency = 0;
 	[SerializeField] int messageTimoutMS = 1000;
 	[SerializeField] Transform playerTransform;
+	[SerializeField] Transform playerCamTransform;
 	[SerializeField] ServerEvents serverEvents;
 
 	public async void connectToServer(string username, int serverPort, string serverAddress, int clientPort = -1)
@@ -69,7 +70,7 @@ public class UDPServer : MonoBehaviour
 	async void serverUpdater()
 	{
 		//send
-		sendMessage("u~" + ID + "~" + playerTransform.position + "~" + playerTransform.eulerAngles);
+		sendMessage("u~" + ID + "~" + playerTransform.position + "~" + playerCamTransform.rotation);
 
 		//recieve
 		string info = "";

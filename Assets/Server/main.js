@@ -9,8 +9,8 @@ const { get } = require('http');
 const validCommands = ['u', 'e', 'newClient', 'leave']; // u = update, e = event (short for conservation of bandwidth)
 
 currentID = 0; //the ID given to players when they join
-TPS = 32; //Ticks per second - this is how fast you want players to update their position and check for events
-SERVERPORT = 12345;
+TPS = 64; //Ticks per second - this is how fast you want players to update their position and check for events
+SERVERPORT = 6969;
 
 const maxChecksBeforeDisconnect = 3; //this times diconnect interval is how long it takes (in ms) for a player to get disconnected
 setInterval(checkDisconnectTimers, 1000);
@@ -37,7 +37,7 @@ server.on('listening', () => {
 //on message recieved
 server.on('message', (msg, senderInfo) => {
 	msg = msg + "";
-	console.log(msg);
+	//console.log(msg);
 	try {
 		if (validCommands.includes(msg.split("~")[0])) {
 			eval(msg.split("~")[0] + "(\"" + msg + "\", " + senderInfo.port + ", \"" + senderInfo.address + "\")");
@@ -150,7 +150,7 @@ function e(info, senderPort, senderAddress) {
 
 async function u(info, senderPort, senderAddress) {
 	splitInfo = info.split("~")
-	console.log("Player with ID " + splitInfo[1] + " updated");
+	//console.log("Player with ID " + splitInfo[1] + " updated");
 	transformsToSend = "";
 	for (playerIndex in currentPlayerIDs) {
 		if (currentPlayerIDs[playerIndex] != splitInfo[1]) {

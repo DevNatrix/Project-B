@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
     //[SerializeField] MenuManager menuManager;
     [SerializeField] Look look;
 
+	bool cursorLocked;
+
     public PlayerControls controls;
     PlayerControls.GroundMovementActions groundMovementActions;
     PlayerControls.UIActions uiAtions;
@@ -32,8 +34,21 @@ public class InputManager : MonoBehaviour
         groundMovementActions.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         groundMovementActions.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
 		groundMovementActions.Dash.performed += _ => StartCoroutine(movement.dash());
-        //uiAtions.toggleMenu.performed += _ => menuManager.toggleMenu(!menuManager.menuIsActive);
+        
+		uiAtions.toggleMenu.performed += _ => toggleCursorLock();
     }
+
+	public void toggleCursorLock()
+	{
+		if(Cursor.lockState == CursorLockMode.Locked)
+		{
+			Cursor.lockState = CursorLockMode.None;
+		}
+		else
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+		}
+	}
 
     private void OnEnable()
     {
