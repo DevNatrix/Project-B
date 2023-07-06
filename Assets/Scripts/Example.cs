@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Example : MonoBehaviour
 {
 	[SerializeField] UDPServer server;
-	[SerializeField] int serverPort;
-	[SerializeField] string serverIP;
 	void Start()
 	{
-		server.connectToServer("Username", Lobby.bestPort, Lobby.bestIP);
+		if(Lobby.bestPort != -1)
+		{
+			server.connectToServer("Username", Lobby.bestPort, Lobby.bestIP);
+		}
+		else
+		{
+			SceneManager.LoadScene("Lobby");
+		}
 	}
 }

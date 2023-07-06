@@ -11,23 +11,29 @@ using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using UnityEditor.Experimental.GraphView;
 using System;
+using TMPro;
 
 public class Lobby : MonoBehaviour
 {
 	UdpClient client;
 	IPEndPoint remoteEndPoint;
 
-	public static int bestPort;
+	public static int bestPort = -1;
 	public static string bestIP;
-	float bestPing = -1;
+	float bestPing;
 
 	[SerializeField] List<ServerOption> possibleServers;
 	[SerializeField] int serverTimoutMS;
 	[SerializeField] int currentServerVersion;
 	[SerializeField] bool rejectWrongVersionServer;
 
+	[SerializeField] TextMeshProUGUI statusText;
+	[SerializeField] Button connectButton;
+
 	public void AutoJoin()
     {
+		connectButton.enabled = false;
+		statusText.text = "Pinging Servers...";
 		foreach(ServerOption option in possibleServers)
 		{
 			testConnection(option.port, option.ip);
@@ -35,16 +41,22 @@ public class Lobby : MonoBehaviour
 		Invoke("ChangeScene", ((float)serverTimoutMS)/1000);
 	}
 
-	public void ChangeScene()
+	async void ChangeScene()
 	{
-		if (bestPing != -1)
+		if (bestPort != -1)
 		{
 			Debug.Log("Best Server ----> IP: " + bestIP + ", Port: " + bestPort + ", Ping: " + bestPing);
+			statusText.text = "Joining Server...";
+			await Task.Delay(1000);
 			SceneManager.LoadScene("Main");
 		}
 		else
 		{
-			Debug.LogError("No Servers Found");
+			statusText.text = "No Online Servers";
+			Debug.LogError("No Online Servers");
+			await Task.Delay(2000);
+			connectButton.enabled = true;
+			statusText.text = "Try Again";
 		}
 	}
 
@@ -64,7 +76,7 @@ public class Lobby : MonoBehaviour
 
 			//wait for response
 			byte[] receiveBytes = new byte[0];
-			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)));
+			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(serverTimoutMS));
 			float ping = Time.time - startTime; //get ping
 			string recieveString = Encoding.ASCII.GetString(receiveBytes);
 
@@ -72,7 +84,7 @@ public class Lobby : MonoBehaviour
 			bool rightVersion = int.Parse(recieveString) == currentServerVersion;
 			if(rejectWrongVersionServer && rightVersion || !rejectWrongVersionServer)
 			{
-				if(ping < bestPing || bestPing == -1)
+				if(ping < bestPing || bestPort == -1)
 				{
 					bestPort = port;
 					bestIP = ip;

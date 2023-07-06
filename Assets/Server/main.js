@@ -5,6 +5,7 @@ const server = dgram.createSocket('udp4');
 const fs = require('fs');
 const { randomInt } = require('crypto');
 const { get } = require('http');
+const { version } = require('os');
 
 const validCommands = ['u', 'e', 'newClient', 'leave', "ping"]; // u = update, e = event (short for conservation of bandwidth)
 
@@ -31,7 +32,8 @@ server.on('error', (err) => {
 //on server start
 server.on('listening', () => {
 	const address = server.address();
-	console.log(`server listening on ${address.address}:${address.port}`);
+	console.log('Server port: ' + address.port);
+	console.log('Server version: ' + serverVersion);
 });
 
 
