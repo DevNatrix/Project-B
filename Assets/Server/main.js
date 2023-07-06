@@ -5,12 +5,14 @@ const server = dgram.createSocket('udp4');
 const fs = require('fs');
 const { randomInt } = require('crypto');
 const { get } = require('http');
+const { version } = require('os');
 
-const validCommands = ['u', 'e', 'newClient', 'leave']; // u = update, e = event (short for conservation of bandwidth)
+const validCommands = ['u', 'e', 'newClient', 'leave', "ping"]; // u = update, e = event (short for conservation of bandwidth)
 
 currentID = 0; //the ID given to players when they join
-TPS = 64; //Ticks per second - this is how fast you want players to update their position and check for events
+TPS = 32; //Ticks per second - this is how fast you want players to update their position and check for events
 SERVERPORT = 6969;
+serverVersion = 1;
 
 const maxChecksBeforeDisconnect = 3; //this times diconnect interval is how long it takes (in ms) for a player to get disconnected
 setInterval(checkDisconnectTimers, 1000);
@@ -30,7 +32,8 @@ server.on('error', (err) => {
 //on server start
 server.on('listening', () => {
 	const address = server.address();
-	console.log(`server listening on ${address.address}:${address.port}`);
+	console.log('Server port: ' + address.port);
+	console.log('Server version: ' + serverVersion);
 });
 
 
@@ -112,6 +115,10 @@ function logSenderInfo(msg, senderInfo) {
 }
 
 //Client functions -----------------------------------------------------------------------------
+function ping(info, senderPort, senderAddress) {
+	server.send(serverVersion + "", senderPort, senderAddress);
+}
+
 function leave(info, senderPort, senderAddress) {
 	disconnectClient(currentPlayerIDs.indexOf(parseInt(info.split("~")[1])));
 	console.log("Player with ID " + info.split("~")[1] + " has left the game");
