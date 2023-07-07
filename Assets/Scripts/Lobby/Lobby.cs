@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System;
 using TMPro;
+using UnityEditor;
 
 public class Lobby : MonoBehaviour
 {
@@ -105,5 +106,10 @@ public class Lobby : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-    }
+
+		/*if(EditorApplication.isPlaying == true)
+        {
+			EditorApplication.isPlaying = false;
+		}*/ //doesnt let you build
+	}
 }

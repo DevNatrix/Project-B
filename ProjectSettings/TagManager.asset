@@ -3,25 +3,31 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - FirePoint
+  - Critical
+  - Weapons
+  - Ramp
+  - BodyShot
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - map
+  - Ground
   - Water
   - UI
-  - Weapon
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Weapons
+  - Enemy
+  - Object
+  - Interactable
+  - Grass
+  - Metal
+  - Mud
+  - Wood
+  - UITop
+  - PostProcessing
+  - Effects
   - 
   - 
   - 
@@ -40,7 +46,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: InFront
-    uniqueID: 1799415103
     locked: 0

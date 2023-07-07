@@ -633,7 +633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1409804035}
   m_Layer: 0
-  m_Name: servers
+  m_Name: Servers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -763,7 +763,7 @@ GameObject:
   - component: {fileID: 1722181547}
   - component: {fileID: 1722181548}
   m_Layer: 0
-  m_Name: General - switz
+  m_Name: General - Sweden
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
