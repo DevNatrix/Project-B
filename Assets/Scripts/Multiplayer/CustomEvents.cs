@@ -5,6 +5,7 @@ using UnityEngine;
 public class CustomEvents : MonoBehaviour
 {
 	[SerializeField] ServerEvents serverEvents;
+	[SerializeField] Chat chat;
 
 	//function name is the same as event type sent, only perameter is string array
     public void exampleEvent(string[] data)
@@ -26,5 +27,13 @@ public class CustomEvents : MonoBehaviour
 		//data has to be in an array of strings (convert all data types to string and put in an array like shown)
 		string[] data = { 1 + "", .54 + "", "bruh" };
 		serverEvents.sendEvent("exampleEvent", data);
+	}
+
+	public void chatMessage(string[] data)
+	{
+		string username = data[0];
+		string message = data[1];
+
+		chat.newMessage(username, message);
 	}
 }

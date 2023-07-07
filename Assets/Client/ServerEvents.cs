@@ -103,7 +103,7 @@ public class ServerEvents : MonoBehaviour
 
 	//tools --------------------------------------------------------------
 
-	public string combineStringArray(string[] arrayItem, string seperator = "")
+	public static string combineStringArray(string[] arrayItem, string seperator = "")
 	{
 		string finalString = "";
 		foreach(string item in arrayItem)
@@ -113,7 +113,7 @@ public class ServerEvents : MonoBehaviour
 		return finalString;
 	}
 
-	public string[] sliceStringArray(string[] arrayItem, int start, int end)
+	public static string[] sliceStringArray(string[] arrayItem, int start, int end)
 	{
 		string[] finalArray = new string[arrayItem.Length];
 		for(int i = start; i < end; i++)
@@ -122,13 +122,13 @@ public class ServerEvents : MonoBehaviour
 		}
 		return finalArray;
 	}
-	public Vector3 parseVector3(string vector3String)
+	public static Vector3 parseVector3(string vector3String)
 	{
 		vector3String = vector3String.Substring(1, vector3String.Length - 2); //get rid of parenthisis
 		string[] parts = vector3String.Split(',');
 		return new Vector3(float.Parse(parts[0]), float.Parse(parts[1]), float.Parse(parts[2]));
 	}
-	public Quaternion parseQuaternion(string quaternionString)
+	public static Quaternion parseQuaternion(string quaternionString)
 	{
 		quaternionString = quaternionString.Substring(1, quaternionString.Length - 2); //get rid of parenthisis
 		string[] parts = quaternionString.Split(',');
