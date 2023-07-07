@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System;
+using UnityEngine.SceneManagement;
 
 public class UDPServer : MonoBehaviour
 {
@@ -20,6 +21,18 @@ public class UDPServer : MonoBehaviour
 	[SerializeField] Transform playerTransform;
 	[SerializeField] Transform playerCamTransform;
 	[SerializeField] ServerEvents serverEvents;
+
+	private void Start()
+	{
+		if (Lobby.bestPort != -1)
+		{
+			connectToServer("Username", Lobby.bestPort, Lobby.bestIP);
+		}
+		else
+		{
+			SceneManager.LoadScene("Lobby");
+		}
+	}
 
 	public async void connectToServer(string username, int serverPort, string serverAddress, int clientPort = -1)
 	{

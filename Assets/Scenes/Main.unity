@@ -720,6 +720,7 @@ GameObject:
   - component: {fileID: 1836363828}
   - component: {fileID: 1836363827}
   - component: {fileID: 1836363830}
+  - component: {fileID: 1836363831}
   m_Layer: 0
   m_Name: game manager
   m_TagString: Untagged
@@ -790,5 +791,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   server: {fileID: 1836363828}
-  serverPort: 6969
-  serverIP: 192.36.176.139
+--- !u!114 &1836363831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836363826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74be58e1b71e0a34b9c05696d169ac12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverEvents: {fileID: 1836363827}

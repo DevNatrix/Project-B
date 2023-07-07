@@ -7,6 +7,9 @@ using UnityEngine.UIElements;
 
 public class ServerEvents : MonoBehaviour
 {
+	//DO NOT CHANGE THIS FILE TO ADD EVENTS
+	//change CustomEvents.cs instead, it has examples and everything
+
 	[SerializeField] UDPServer server;
 	[SerializeField] GameObject otherClientPrefab;
 	List<OtherClient> otherClientList = new List<OtherClient>();
@@ -18,7 +21,7 @@ public class ServerEvents : MonoBehaviour
 	
 	public void sendEvent(string eventName, string[] data)
 	{
-		server.sendMessage(eventName + "~" + combineStringArray(data, "~"));
+		server.sendMessage("e" + "~" + eventName + "~" + combineStringArray(data, "~"));
 	}
 
 	private void Update()
