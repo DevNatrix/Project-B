@@ -46,6 +46,7 @@ public class ServerEvents : MonoBehaviour
 			if (splitRawEvents[eventID] != "")
 			{
 				string[] peices = splitRawEvents[eventID].Split("~");
+				print(peices[0]);
 				this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
 			}
 		}
@@ -84,6 +85,7 @@ public class ServerEvents : MonoBehaviour
 		{
 			if (otherClient.ID == clientID)
 			{
+				sendEvent("serverMessage", new string[] { otherClient.username + " left the game" });
 				otherClientList.Remove(otherClient);
 				Destroy(otherClient.gameObject);
 			}
@@ -98,6 +100,7 @@ public class ServerEvents : MonoBehaviour
 		OtherClient newClientScript = Instantiate(otherClientPrefab).GetComponent<OtherClient>();
 		otherClientList.Add(newClientScript);
 		newClientScript.setInfo(newClientID, newClientUsername);
+		sendEvent("serverMessage", new string[] { newClientUsername + " joined the game" });
 	}
 
 

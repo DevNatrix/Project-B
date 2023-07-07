@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.VersionControl;
 
 public class Chat : MonoBehaviour
 {
@@ -50,5 +49,13 @@ public class Chat : MonoBehaviour
 		GameObject messageObject = Instantiate(chatMessagePrefab, chatMessagesContainer);
 		TextMeshProUGUI textObject = messageObject.GetComponent<TextMeshProUGUI>();
 		textObject.text = username + ": " + message;
+	}
+
+	public void serverMessage(string message)
+	{
+		GameObject messageObject = Instantiate(chatMessagePrefab, chatMessagesContainer);
+		TextMeshProUGUI textObject = messageObject.GetComponent<TextMeshProUGUI>();
+		textObject.color = Color.red;
+		textObject.text = message;
 	}
 }

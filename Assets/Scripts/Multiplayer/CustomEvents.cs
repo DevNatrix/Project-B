@@ -36,4 +36,11 @@ public class CustomEvents : MonoBehaviour
 
 		chat.newMessage(username, message);
 	}
+
+	public void serverMessage(string[] data)
+	{
+		string message = data[0];
+
+		chat.serverMessage(message);
+	}
 }
