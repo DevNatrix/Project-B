@@ -26,7 +26,7 @@ public class UDPServer : MonoBehaviour
 	{
 		if (Lobby.bestPort != -1)
 		{
-			connectToServer("Username", Lobby.bestPort, Lobby.bestIP);
+			connectToServer(Lobby.username, Lobby.bestPort, Lobby.bestIP);
 		}
 		else
 		{

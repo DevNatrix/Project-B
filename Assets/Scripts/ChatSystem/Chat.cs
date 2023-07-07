@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor.VersionControl;
 
 public class Chat : MonoBehaviour
 {
     public GameObject ChatBackground;
     public TMP_InputField InputFieldContainer;
+	[SerializeField] Transform chatMessagesContainer;
+	[SerializeField] GameObject chatMessagePrefab;
+	[SerializeField] ServerEvents serverEvents;
 
     private void Start()
     {
@@ -37,6 +41,14 @@ public class Chat : MonoBehaviour
         {
             //Send Message(Joe code this)
             ChatBackground.SetActive(false);
-        }
+			serverEvents.sendEvent("chatMessage", new string[] { Lobby.username, ChatContainer });
+		}
     }
+
+	public void newMessage(string username, string message)
+	{
+		GameObject messageObject = Instantiate(chatMessagePrefab, chatMessagesContainer);
+		TextMeshProUGUI textObject = messageObject.GetComponent<TextMeshProUGUI>();
+		textObject.text = username + ": " + message;
+	}
 }
