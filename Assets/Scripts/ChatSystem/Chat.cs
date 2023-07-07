@@ -3,14 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using UnityEngine.InputSystem;
 
 public class Chat : MonoBehaviour
 {
     public GameObject ChatBackground;
     public TMP_InputField InputFieldContainer;
+    public GameObject InputFieldContainerGO;
 	[SerializeField] Transform chatMessagesContainer;
 	[SerializeField] GameObject chatMessagePrefab;
 	[SerializeField] ServerEvents serverEvents;
+
+    PlayerControls playerControls;
+
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
+
+    private void OnEnable()
+    {
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
 
     private void Start()
     {
@@ -20,28 +40,39 @@ public class Chat : MonoBehaviour
 
     private void Update()
     {
+        if (playerControls.ChatVoice.Chat.WasPressedThisFrame())
+        {
+            Debug.Log("KEY IS HELD");
+        }
+
         //String needed to see if client typed something in chat
         string ChatContainer = InputFieldContainer.text;
 
         //Get input to enable ChatBackground
-        if (Input.GetKeyDown(KeyCode.Return) && ChatBackground.activeSelf == false)
+        if (playerControls.ChatVoice.Chat.WasPressedThisFrame() && ChatBackground.activeSelf == false)
         {
             ChatBackground.SetActive(true);
             InputFieldContainer.ActivateInputField();
             //To do: disable all inputs such as movement, firing etc.
         }
         //If nothing is typed and client has clicked enter it disables ChatBackground
-        else if (ChatBackground.activeSelf == true && string.IsNullOrWhiteSpace(ChatContainer) && Input.GetKeyDown(KeyCode.Return))
+        else if (ChatBackground.activeSelf == true && string.IsNullOrWhiteSpace(ChatContainer) && playerControls.ChatVoice.Chat.WasPressedThisFrame())
         {
             ChatBackground.SetActive(false);
         }
         //If client has typed something and pressed enter it'll send message through the network and disables ChatBackground
-        else if (ChatBackground.activeSelf == true && !string.IsNullOrWhiteSpace(ChatContainer) && Input.GetKeyDown(KeyCode.Return))
+        else if (ChatBackground.activeSelf == true && !string.IsNullOrWhiteSpace(ChatContainer) && playerControls.ChatVoice.Chat.WasPressedThisFrame())
         {
-            //Send Message(Joe code this)
-            ChatBackground.SetActive(false);
-			serverEvents.sendEvent("chatMessage", new string[] { Lobby.username, ChatContainer });
-		}
+            serverEvents.sendEvent("chatMessage", new string[] { Lobby.username, ChatContainer });
+            InputFieldContainer.text = "";
+            StartCoroutine(DisableChatBox());
+        }
+    }
+
+    public IEnumerator DisableChatBox()
+    {
+        yield return new WaitForSeconds(1);
+        ChatBackground.SetActive(false);
     }
 
 	public void newMessage(string username, string message)

@@ -34,7 +34,6 @@ public class InputManager : MonoBehaviour
         groundMovementActions.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         groundMovementActions.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
 		groundMovementActions.Dash.performed += _ => StartCoroutine(movement.dash());
-        
 		uiAtions.toggleMenu.performed += _ => toggleCursorLock();
     }
 

@@ -200,6 +200,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Chat/Voice",
+            "id": "5ba46511-ea77-478d-a62c-266c44330848",
+            "actions": [
+                {
+                    "name": "Chat",
+                    "type": "Button",
+                    "id": "7ebd99ea-a182-4649-98e9-d2a47721fa92",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Voice",
+                    "type": "Button",
+                    "id": "862a8c19-5f9c-440d-b1db-efa446516788",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "717c5392-9218-4578-998a-427129573fcc",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Chat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b01f24f-7f7b-4720-8d7a-c6eedf4fe1d8",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Voice",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
