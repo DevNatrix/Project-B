@@ -21,6 +21,13 @@ public class Lobby : MonoBehaviour
 	public static string bestIP;
 	float bestPing;
 
+	public static string username;
+
+	[SerializeField] TMP_InputField usernameInput;
+	[SerializeField] GameObject usernameWarning;
+	[SerializeField] int usernameLengthMin;
+	[SerializeField] int usernameLengthLimit;
+
 	[SerializeField] List<ServerOption> possibleServers;
 	[SerializeField] int serverTimoutMS;
 	[SerializeField] int currentServerVersion;
@@ -31,13 +38,44 @@ public class Lobby : MonoBehaviour
 
 	public void AutoJoin()
     {
-		connectButton.enabled = false;
-		statusText.text = "Pinging Servers...";
-		foreach(ServerOption option in possibleServers)
+		if (usernameInput.text.Length >= usernameLengthMin)
 		{
-			testConnection(option.port, option.ip);
+			username = usernameInput.text;
+			connectButton.enabled = false;
+			statusText.text = "Pinging Servers...";
+			foreach (ServerOption option in possibleServers)
+			{
+				testConnection(option.port, option.ip);
+			}
+			Invoke("ChangeScene", ((float)serverTimoutMS) / 1000);
 		}
-		Invoke("ChangeScene", ((float)serverTimoutMS)/1000);
+	}
+
+	public void updateUsername()
+	{
+		string allowedChars = "1234567890abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUFWYXZ_";
+		int strLen = usernameInput.text.Length;
+		if (strLen >= 1)
+		{
+			if (!allowedChars.Contains(usernameInput.text[strLen - 1]))
+			{
+				usernameInput.text = usernameInput.text.Substring(0, strLen - 1);
+			}
+		}
+		if (usernameInput.text.Length > usernameLengthLimit)
+		{
+			usernameInput.text = usernameInput.text.Substring(0, usernameLengthLimit);
+		}
+		if (usernameInput.text.Length < usernameLengthMin)
+		{
+			usernameWarning.SetActive(true);
+		}
+		else
+		{
+			usernameWarning.SetActive(false);
+		}
+
+		username = usernameInput.text;
 	}
 
 	async void ChangeScene()
