@@ -46,7 +46,6 @@ public class ServerEvents : MonoBehaviour
 			if (splitRawEvents[eventID] != "")
 			{
 				string[] peices = splitRawEvents[eventID].Split("~");
-				print(peices[0]);
 				this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
 			}
 		}
