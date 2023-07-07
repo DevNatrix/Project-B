@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
-using UnityEditor.Experimental.GraphView;
 using System;
 using TMPro;
 using UnityEditor;
@@ -109,9 +107,9 @@ public class Lobby : MonoBehaviour
     {
         Application.Quit();
 
-		if(EditorApplication.isPlaying == true)
+		/*if(EditorApplication.isPlaying == true)
         {
 			EditorApplication.isPlaying = false;
-		}
+		}*/ //doesnt let you build
 	}
 }
