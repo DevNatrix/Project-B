@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -14,10 +15,11 @@ public class ServerEvents : MonoBehaviour
 	float pastUpdateTime;
 	float timeBetweenUpdates;
 	[SerializeField] bool dynamicPlayerLerp;
-	/*public void sendEvent(string eventName, string data)
+	
+	public void sendEvent(string eventName, string[] data)
 	{
-		server.sendMessage(eventName + "~" + data);
-	}*/ //for the future where I add event sending
+		server.sendMessage(eventName + "~" + combineStringArray(data, "~"));
+	}
 
 	private void Update()
 	{
@@ -30,28 +32,31 @@ public class ServerEvents : MonoBehaviour
 			lerpPercent = (Time.time - pastUpdateTime) / (1/(float)server.TPS);
 		}
 	}
-
-	public void processEvent(string message)
+	public void rawEvents(string rawEvents)
 	{
-		string[] splitEvent = message.Split("~");
-		string eventType = splitEvent[0];
-		switch (eventType)
+		timeBetweenUpdates = Time.time - pastUpdateTime;
+		pastUpdateTime = Time.time;
+
+		string[] splitRawEvents = rawEvents.Split('|');
+		for (int eventID = 0; eventID < splitRawEvents.Length; eventID++)
 		{
-			case "u":
-				updateTransform(int.Parse(splitEvent[1]), parseVector3(splitEvent[2]), parseQuaternion(splitEvent[3])); //client id, position, rotation
-				break;
-			case "newClient":
-				newClient(int.Parse(splitEvent[1]), splitEvent[2]); //client id, username
-				break;
-			case "removeClient":
-				removeClient(int.Parse(splitEvent[1])); //client id
-				break;
+			if (splitRawEvents[eventID] != "")
+			{
+				string[] peices = splitRawEvents[eventID].Split("~");
+				this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
+			}
 		}
 	}
 
-	void updateTransform(int clientID, Vector3 position, Quaternion rotation)
+	//events --------------------------------------------------------------
+
+	void u(string[] data)
 	{
-		if(clientID != server.ID)
+		int clientID = int.Parse(data[0]);
+		Vector3 position = parseVector3(data[1]);
+		Quaternion rotation = parseQuaternion(data[2]);
+
+		if (clientID != server.ID)
 		{
 			foreach (OtherClient otherClient in otherClientList)
 			{
@@ -63,8 +68,10 @@ public class ServerEvents : MonoBehaviour
 		}
 	}
 
-	void removeClient(int clientID)
+	void removeClient(string[] data)
 	{
+		int clientID = int.Parse(data[0]);
+
 		if(clientID == server.ID)
 		{
 			Debug.LogError("Server sent leave event for this client, closing game");
@@ -80,36 +87,38 @@ public class ServerEvents : MonoBehaviour
 		}
 	}
 
-	void newClient(int newClientID, string newClientUsername)
+	void newClient(string[] data)
 	{
+		int newClientID = int.Parse(data[0]);
+		string newClientUsername = data[1];
+
 		OtherClient newClientScript = Instantiate(otherClientPrefab).GetComponent<OtherClient>();
 		otherClientList.Add(newClientScript);
 		newClientScript.setInfo(newClientID, newClientUsername);
 	}
 
-	public void rawEvents(string rawEvents)
-	{
-		timeBetweenUpdates = Time.time - pastUpdateTime;
-		pastUpdateTime = Time.time;
 
-		string[] splitRawEvents = rawEvents.Split('|');
-		for (int eventID = 0; eventID < splitRawEvents.Length; eventID++)
+	//tools --------------------------------------------------------------
+
+	public string combineStringArray(string[] arrayItem, string seperator = "")
+	{
+		string finalString = "";
+		foreach(string item in arrayItem)
 		{
-			if (splitRawEvents[eventID] != "")
-			{
-				try
-				{
-					processEvent(splitRawEvents[eventID]);
-				}
-				catch (Exception error)
-				{
-					Debug.LogError(error);
-				}
-			}
+			finalString += item + seperator;
 		}
+		return finalString;
 	}
 
-	//tools 
+	public string[] sliceStringArray(string[] arrayItem, int start, int end)
+	{
+		string[] finalArray = new string[arrayItem.Length];
+		for(int i = start; i < end; i++)
+		{
+			finalArray[i - start] = arrayItem[i];
+		}
+		return finalArray;
+	}
 	public Vector3 parseVector3(string vector3String)
 	{
 		vector3String = vector3String.Substring(1, vector3String.Length - 2); //get rid of parenthisis
