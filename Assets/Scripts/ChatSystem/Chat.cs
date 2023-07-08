@@ -75,11 +75,19 @@ public class Chat : MonoBehaviour
         ChatBackground.SetActive(false);
     }
 
+    public IEnumerator RecieveMessage()
+    {
+        ChatBackground.SetActive(true);
+        yield return new WaitForSeconds(1);
+        ChatBackground.SetActive(false);
+    }
+
 	public void newMessage(string username, string message)
 	{
 		GameObject messageObject = Instantiate(chatMessagePrefab, chatMessagesContainer);
 		TextMeshProUGUI textObject = messageObject.GetComponent<TextMeshProUGUI>();
 		textObject.text = username + ": " + message;
+        StartCoroutine(RecieveMessage());
 	}
 
 	public void serverMessage(string message)
