@@ -83,7 +83,7 @@ public class Chat : MonoBehaviour
 		TextMeshProUGUI textObject = messageObject.GetComponent<TextMeshProUGUI>();
 		textObject.text = username + ": " + message;
 
-        if(!ChatBackground)
+        if(ChatBackground == false)
         {
             StartCoroutine(RecieveMessage());
         }
