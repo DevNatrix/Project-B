@@ -40,11 +40,6 @@ public class Chat : MonoBehaviour
 
     private void Update()
     {
-        if (playerControls.ChatVoice.Chat.WasPressedThisFrame())
-        {
-            Debug.Log("KEY IS HELD");
-        }
-
         //String needed to see if client typed something in chat
         string ChatContainer = InputFieldContainer.text;
 
@@ -87,7 +82,11 @@ public class Chat : MonoBehaviour
 		GameObject messageObject = Instantiate(chatMessagePrefab, chatMessagesContainer);
 		TextMeshProUGUI textObject = messageObject.GetComponent<TextMeshProUGUI>();
 		textObject.text = username + ": " + message;
-        StartCoroutine(RecieveMessage());
+
+        if(!ChatBackground)
+        {
+            StartCoroutine(RecieveMessage());
+        }
 	}
 
 	public void serverMessage(string message)
