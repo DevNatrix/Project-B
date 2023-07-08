@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UDPServer : MonoBehaviour
 {
@@ -16,11 +17,45 @@ public class UDPServer : MonoBehaviour
 	string SERVERADDRESS;
 	[HideInInspector] public int ID;
 	[HideInInspector] public int TPS;
-	public int latency = 0;
 	[SerializeField] int messageTimoutMS = 1000;
 	[SerializeField] Transform playerTransform;
 	[SerializeField] Transform playerCamTransform;
 	[SerializeField] ServerEvents serverEvents;
+
+
+	[Header("Debug:")]
+	[SerializeField] TextMeshProUGUI outgoingMessagesText;
+	[SerializeField] TextMeshProUGUI droppedMessagesText;
+	[SerializeField] TextMeshProUGUI sendBytesText;
+	[SerializeField] TextMeshProUGUI recieveBytesText;
+	[SerializeField] TextMeshProUGUI packetsText;
+	[SerializeField] TextMeshProUGUI latencyText;
+
+	public int outgoingMessages = 0;
+	public int droppedMessages = 0;
+	public int sendBytesCount = 0;
+	public int recieveBytesCount = 0;
+	public int latency = 0;
+	public int packets = 0;
+
+	public void updateDebugInterval()
+	{
+		droppedMessagesText.text = "Droped: " + droppedMessages;
+		sendBytesText.text = "Sent Bytes: " + sendBytesCount;
+		recieveBytesText.text = "Recieve Bytes: " + recieveBytesCount;
+		packetsText.text = packets + " / " + TPS + " TPS";
+
+		droppedMessages = 0;
+		sendBytesCount = 0;
+		recieveBytesCount = 0;
+		packets = 0;
+	}
+
+	public void updateDebug()
+	{
+		latencyText.text = "Latency (ms): " + latency;
+		outgoingMessagesText.text = "Outgoing: " + outgoingMessages;
+	}
 
 	private void Start()
 	{
@@ -69,6 +104,7 @@ public class UDPServer : MonoBehaviour
 
 			//start main update loop
 			InvokeRepeating("serverUpdater", 0, 1 / (float)TPS);
+			InvokeRepeating("updateDebugInterval", 0, 1);
 		}
 		catch (Exception e)
 		{
@@ -82,6 +118,9 @@ public class UDPServer : MonoBehaviour
 	{
 		//send
 		sendMessage("u~" + ID + "~" + playerTransform.position + "~" + playerCamTransform.rotation);
+		outgoingMessages++;
+		packets++;
+		updateDebug();
 
 		//recieve
 		string info = "";
@@ -90,16 +129,27 @@ public class UDPServer : MonoBehaviour
 		float latencyTimer = Time.time;
 		await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
 		latency = (int)Mathf.Round((Time.time - latencyTimer) * 1000);
+		outgoingMessages--;
+		updateDebug();
 		info = Encoding.ASCII.GetString(receiveBytes);
 
 		//processing response
-		serverEvents.rawEvents(info);
+		if(info != "EMPTY")
+		{
+			recieveBytesCount += receiveBytes.Length;
+			serverEvents.rawEvents(info);
+		}
+		else
+		{
+			droppedMessages++;
+		}
 	}
 
 	public void sendMessage(string message)
 	{
 		//Debug.Log("Sent: " + message);
 		byte[] sendBytes = Encoding.ASCII.GetBytes(message);
+		sendBytesCount += sendBytes.Length;
 		client.Send(sendBytes, sendBytes.Length);
 	}
 
