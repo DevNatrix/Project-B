@@ -11,7 +11,7 @@ public class PlayerListItem : MonoBehaviour
     public ulong PlayerSteamID;
     private bool AvatarReceived;
 
-    public Text PlayerNameText;
+    public TextMeshProUGUI PlayerNameText;
     public RawImage PlayerIcon;
 
     protected Callback<AvatarImageLoaded_t> ImageLoaded;
@@ -25,19 +25,18 @@ public class PlayerListItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        SetPlayerValues();
+    }
+
+    void SetPlayerValues()
+    {
+        PlayerNameText.text = SteamHandler.usernameSteam;
     }
 
     void GetPlayerIcon()
     {
         int ImageID = SteamFriends.GetLargeFriendAvatar((CSteamID)PlayerSteamID);
         if(ImageID == -1) { return; }
-    }
-
-    public void SetPlayerValues()
-    {
-        PlayerNameText.text = SteamHandler.usernameSteam;
-        if(!AvatarReceived) { GetPlayerIcon(); }
     }
 
     //Apply Texture To Image
