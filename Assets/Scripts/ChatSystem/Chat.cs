@@ -63,8 +63,6 @@ public class Chat : MonoBehaviour
         }
     }
 
-
-
 	public void newMessage(string username, string message)
 	{
 		GameObject messageObject = Instantiate(chatMessagePrefab, chatMessagesContainer);
