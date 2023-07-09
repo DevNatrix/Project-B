@@ -66,14 +66,14 @@ public class Chat : MonoBehaviour
 
     public IEnumerator DisableChatBox()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         ChatBackground.SetActive(false);
     }
 
     public IEnumerator RecieveMessage()
     {
         ChatBackground.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         ChatBackground.SetActive(false);
     }
 
