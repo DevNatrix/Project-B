@@ -17,6 +17,7 @@ public class UDPServer : MonoBehaviour
 	string SERVERADDRESS;
 	[HideInInspector] public int ID;
 	[HideInInspector] public int TPS;
+	[SerializeField] int maxOutgoingMessages;
 	[SerializeField] int messageTimoutMS = 1000;
 	[SerializeField] Transform playerTransform;
 	[SerializeField] Transform playerCamTransform;
@@ -30,13 +31,37 @@ public class UDPServer : MonoBehaviour
 	[SerializeField] TextMeshProUGUI recieveBytesText;
 	[SerializeField] TextMeshProUGUI packetsText;
 	[SerializeField] TextMeshProUGUI latencyText;
+	[SerializeField] TextMeshProUGUI currentFPSText;
+	[SerializeField] TextMeshProUGUI minFPSText;
+	[SerializeField] TextMeshProUGUI maxFPSText;
 
-	public int outgoingMessages = 0;
-	public int droppedMessages = 0;
-	public int sendBytesCount = 0;
-	public int recieveBytesCount = 0;
-	public int latency = 0;
-	public int packets = 0;
+	int outgoingMessages = 0;
+	int droppedMessages = 0;
+	int sendBytesCount = 0;
+	int recieveBytesCount = 0;
+	int latency = 0;
+	int packets = 0;
+
+	int FPS = 0;
+	int minFPS = 0;
+	int maxFPS = 0;
+
+
+	private void Update()
+	{
+		FPS++;
+
+		int currentFPS = (int) (1 / Time.deltaTime);
+		if (currentFPS > maxFPS)
+		{
+			maxFPS = currentFPS;
+		}
+
+		if (currentFPS < minFPS)
+		{
+			minFPS = currentFPS;
+		}
+	}
 
 	public void updateDebugInterval()
 	{
@@ -45,10 +70,18 @@ public class UDPServer : MonoBehaviour
 		recieveBytesText.text = "Recieve Bytes: " + recieveBytesCount;
 		packetsText.text = packets + " / " + TPS + " TPS";
 
+		currentFPSText.text = "FPS: " + FPS;
+		minFPSText.text = "Min FPS: " + minFPS;
+		maxFPSText.text = "Max FPS: " + maxFPS;
+
 		droppedMessages = 0;
 		sendBytesCount = 0;
 		recieveBytesCount = 0;
 		packets = 0;
+
+		minFPS = FPS;
+		maxFPS = FPS;
+		FPS = 0;
 	}
 
 	public void updateDebug()
@@ -116,32 +149,36 @@ public class UDPServer : MonoBehaviour
 
 	async void serverUpdater()
 	{
+
 		//send
 		sendMessage("u~" + ID + "~" + playerTransform.position + "~" + playerCamTransform.rotation);
-		outgoingMessages++;
-		packets++;
-		updateDebug();
-
-		//recieve
-		string info = "";
-		byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
-
-		float latencyTimer = Time.time;
-		await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
-		latency = (int)Mathf.Round((Time.time - latencyTimer) * 1000);
-		outgoingMessages--;
-		updateDebug();
-		info = Encoding.ASCII.GetString(receiveBytes);
-
-		//processing response
-		if(info != "EMPTY")
+		if(outgoingMessages <= maxOutgoingMessages)
 		{
-			recieveBytesCount += receiveBytes.Length;
-			serverEvents.rawEvents(info);
-		}
-		else
-		{
-			droppedMessages++;
+			outgoingMessages++;
+			packets++;
+			updateDebug();
+
+			//recieve
+			string info = "";
+			byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
+
+			float latencyTimer = Time.time;
+			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
+			latency = (int)Mathf.Round((Time.time - latencyTimer) * 1000);
+			outgoingMessages--;
+			updateDebug();
+			info = Encoding.ASCII.GetString(receiveBytes);
+
+			//processing response
+			if(info != "EMPTY")
+			{
+				recieveBytesCount += receiveBytes.Length;
+				serverEvents.rawEvents(info);
+			}
+			else
+			{
+				droppedMessages++;
+			}
 		}
 	}
 
