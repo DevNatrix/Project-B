@@ -17,7 +17,6 @@ public class Lobby : MonoBehaviour
 {
 	UdpClient client;
 	IPEndPoint remoteEndPoint;
-	SteamHandler steamhandlerscript;
 
 	public static int bestPort = -1;
 	public static string bestIP;
@@ -40,7 +39,7 @@ public class Lobby : MonoBehaviour
 
     private void Update()
     {
-		username = steamhandlerscript.username;
+		username = SteamHandler.usernameSteam;
 	}
 
     public void AutoJoin()

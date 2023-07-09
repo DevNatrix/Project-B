@@ -7,13 +7,13 @@ public class SteamHandler : MonoBehaviour
 {
     bool steam_initialized = SteamAPI.Init();
 
-    public string username;
+    public static string usernameSteam;
     // Start is called before the first frame update
     void Start()
     {
         SteamAPI.Init();
 
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this);
 
         if (!steam_initialized)
         {
@@ -31,6 +31,6 @@ public class SteamHandler : MonoBehaviour
     {
         CSteamID SteamID = SteamUser.GetSteamID();
         string SteamName = SteamFriends.GetPersonaName();
-        username = SteamName;
+        usernameSteam = SteamName;
     }
 }
