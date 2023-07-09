@@ -34,7 +34,12 @@ public class Lobby : MonoBehaviour
 
     private void Start()
     {
+		bool steam_initialized = SteamAPI.Init();
 		SteamAPI.Init();
+		if(!steam_initialized)
+        {
+			Debug.LogError("Steam is not opened, please open Steam");
+        }
 	}
 
     private void Update()
