@@ -114,6 +114,18 @@ public class ServerEvents : MonoBehaviour
 
 	//tools --------------------------------------------------------------
 
+	public string getUsername(int clientID)
+	{
+		foreach (OtherClient otherClient in otherClientList)
+		{
+			if (otherClient.ID == clientID)
+			{
+				return otherClient.username;
+			}
+		}
+		return null;
+	}
+
 	public static string combineStringArray(string[] arrayItem, string seperator = "")
 	{
 		string finalString = "";
