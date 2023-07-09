@@ -10,32 +10,29 @@ public class PlayerListItem : MonoBehaviour
     public string PlayerName;
     public ulong PlayerSteamID;
 
-    public TextMeshProUGUI PlayerNameText;
-    public RawImage PlayerIcon;
-    public GameObject PlayerListItemPrefab;
-    public GameObject YourTeam;
+    public Texture2D PlayerIcon;
+    public PlayerListItemUI PlayerListItemPrefab;
+    public Transform YourTeam;
 
     CSteamID cSteamId;
 
     // Start is called before the first frame update
     void Start()
     {
+        cSteamId = SteamUser.GetSteamID();
 
-        GameObject newPlayerListItem = Instantiate(PlayerListItemPrefab, YourTeam.transform);
-        PlayerListItemUI newPlayerListItemUI = newPlayerListItem.GetComponent<PlayerListItemUI>();
-
-        newPlayerListItemUI.PlayerName.text = SteamHandler.usernameSteam;
-        newPlayerListItemUI.PlayerIcon.texture = PlayerIcon.texture;
+        HandleSteamID((ulong)cSteamId);
+        PlayerListItemUI newPlayerListItem = Instantiate(PlayerListItemPrefab, YourTeam);
+        newPlayerListItem.Setup(SteamHandler.usernameSteam, PlayerIcon);
     }
 
-    public void HandleSteamID(ulong oldSteamId, ulong newSteamId)
+    public void HandleSteamID(ulong newSteamId)
     {
         cSteamId = new CSteamID(newSteamId);
         int imageId = SteamFriends.GetLargeFriendAvatar(cSteamId);
         if (imageId == -1) { return; }
 
-        PlayerIcon.texture = GetSteamImageAsTexture2D(imageId);
-
+        PlayerIcon = GetSteamImageAsTexture2D(imageId);
     }
 
     public static Texture2D GetSteamImageAsTexture2D(int iImage)
