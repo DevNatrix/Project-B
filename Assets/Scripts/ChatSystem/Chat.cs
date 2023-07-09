@@ -60,22 +60,10 @@ public class Chat : MonoBehaviour
         {
             serverEvents.sendEvent("chatMessage", new string[] { Lobby.username, ChatContainer });
             InputFieldContainer.text = "";
-            StartCoroutine(DisableChatBox());
         }
     }
 
-    public IEnumerator DisableChatBox()
-    {
-        yield return new WaitForSeconds(3);
-        ChatBackground.SetActive(false);
-    }
 
-    public IEnumerator RecieveMessage()
-    {
-        ChatBackground.SetActive(true);
-        yield return new WaitForSeconds(3);
-        ChatBackground.SetActive(false);
-    }
 
 	public void newMessage(string username, string message)
 	{
@@ -83,11 +71,7 @@ public class Chat : MonoBehaviour
 		TextMeshProUGUI textObject = messageObject.GetComponent<TextMeshProUGUI>();
 		textObject.text = username + ": " + message;
 
-        if(!ChatBackground)
-        {
-            StartCoroutine(RecieveMessage());
-        }
-        Debug.Log("Message Recieved");
+        Debug.Log("Message Recieved Or Sent");
 	}
 
 	public void serverMessage(string message)
