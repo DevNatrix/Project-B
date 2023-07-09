@@ -22,6 +22,8 @@ public class AudioPlayer : MonoBehaviour
 		newAudioSource.clip = clip;
 		newAudioSource.volume = volume;
 		newAudioSource.pitch = pitch;
+		newAudioSource.Play();
+		Destroy(newAudioSource.gameObject, clip.length);
 	}
 
 	public void sendAudioByClip(AudioClip audioClip, Vector3 position, float volume, float pitch)

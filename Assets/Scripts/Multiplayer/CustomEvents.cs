@@ -49,8 +49,8 @@ public class CustomEvents : MonoBehaviour
 	{
 		int clipID = int.Parse(data[0]);
 		Vector3 position = ServerEvents.parseVector3(data[1]);
-		float volume = float.Parse(data[3]);
-		float pitch = float.Parse(data[4]);
+		float volume = float.Parse(data[2]);
+		float pitch = float.Parse(data[3]);
 
 		audioPlayer.createAudio(audioPlayer.getClipByID(clipID), position, volume, pitch);
 	}

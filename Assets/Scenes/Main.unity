@@ -904,6 +904,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7656093453415565074, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+      propertyPath: audioPlayer
+      value: 
+      objectReference: {fileID: 1836363831}
+    - target: {fileID: 7656093453415565074, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+      propertyPath: footstepClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a47b64b8d432b94eb7317d268127b1d, type: 3}
+    - target: {fileID: 7656093453415565074, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+      propertyPath: distanceForFootstep
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8552368880977798431, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2889,7 +2901,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourcePrefab: {fileID: 9123408507271955232, guid: bb0ffa56f4719dc4b9abe9055c07890b, type: 3}
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 9a47b64b8d432b94eb7317d268127b1d, type: 3}
   serverEvents: {fileID: 1836363827}
 --- !u!1 &1995142819
 GameObject:

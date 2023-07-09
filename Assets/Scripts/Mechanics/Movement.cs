@@ -68,6 +68,12 @@ public class Movement : MonoBehaviour
 	[SerializeField] float speedBoostOnSlide;
 	bool sliding = false;
 
+	[Header("Audio Settings")]
+	[SerializeField] AudioPlayer audioPlayer;
+	[SerializeField] float distanceForFootstep;
+	[SerializeField] AudioClip footstepClip;
+	Vector3 pastStepPosition;
+
 	[Header("Debug")]
 	[SerializeField] bool showClosestWallCasts = false;
 	[SerializeField] bool showGroundCheck = false;
@@ -195,6 +201,13 @@ public class Movement : MonoBehaviour
 		//movement
 		if (isGrounded)
 		{
+			//footsteps
+			if(Vector3.Distance(pastStepPosition, transform.position) >= distanceForFootstep)
+			{
+				pastStepPosition = transform.position;
+				audioPlayer.sendAudioByClip(footstepClip, transform.position, 1, 1);
+			}
+
 			if (!sliding)
 			{
 				playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * acceleration);
