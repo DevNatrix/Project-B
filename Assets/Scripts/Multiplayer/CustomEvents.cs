@@ -6,6 +6,7 @@ public class CustomEvents : MonoBehaviour
 {
 	[SerializeField] ServerEvents serverEvents;
 	[SerializeField] Chat chat;
+	[SerializeField] AudioPlayer audioPlayer;
 
 	//function name is the same as event type sent, only perameter is string array
     public void exampleEvent(string[] data)
@@ -42,5 +43,15 @@ public class CustomEvents : MonoBehaviour
 		string message = data[0];
 
 		chat.serverMessage(message);
+	}
+
+	public void playAudio(string[] data)
+	{
+		int clipID = int.Parse(data[0]);
+		Vector3 position = ServerEvents.parseVector3(data[1]);
+		float volume = float.Parse(data[3]);
+		float pitch = float.Parse(data[4]);
+
+		audioPlayer.createAudio(audioPlayer.getClipByID(clipID), position, volume, pitch);
 	}
 }
