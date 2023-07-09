@@ -588,6 +588,7 @@ GameObject:
   - component: {fileID: 305778642}
   - component: {fileID: 305778644}
   - component: {fileID: 305778643}
+  - component: {fileID: 305778645}
   m_Layer: 5
   m_Name: ScoreBoard
   m_TagString: Untagged
@@ -658,6 +659,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305778641}
   m_CullTransparentMesh: 1
+--- !u!114 &305778645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305778641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041aa33b9658b174bbb6e7dd066df731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerName: 
+  PlayerSteamID: 0
+  PlayerNameText: {fileID: 0}
+  PlayerIcon: {fileID: 0}
+  PlayerListItemPrefab: {fileID: 4843274484820739331, guid: d3da77341b4c1b1449953db94496b47b, type: 3}
+  YourTeam: {fileID: 464686718}
 --- !u!1 &317098468
 GameObject:
   m_ObjectHideFlags: 0
