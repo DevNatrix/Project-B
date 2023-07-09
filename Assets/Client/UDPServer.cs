@@ -149,24 +149,20 @@ public class UDPServer : MonoBehaviour
 
 	async void serverUpdater()
 	{
-
-		//send
-		sendMessage("u~" + ID + "~" + playerTransform.position + "~" + playerCamTransform.rotation);
 		if(outgoingMessages <= maxOutgoingMessages)
 		{
+			float startTime = Time.time;
+			//send
+			sendMessage("u~" + ID + "~" + playerTransform.position + "~" + playerCamTransform.rotation);
 			outgoingMessages++;
 			packets++;
-			updateDebug();
 
 			//recieve
 			string info = "";
 			byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
-
-			float latencyTimer = Time.time;
 			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
-			latency = (int)Mathf.Round((Time.time - latencyTimer) * 1000);
+			latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
 			outgoingMessages--;
-			updateDebug();
 			info = Encoding.ASCII.GetString(receiveBytes);
 
 			//processing response
@@ -180,6 +176,7 @@ public class UDPServer : MonoBehaviour
 				droppedMessages++;
 			}
 		}
+		updateDebug();
 	}
 
 	public void sendMessage(string message)

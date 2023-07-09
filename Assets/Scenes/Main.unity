@@ -2815,7 +2815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   TPS: 0
-  maxOutgoingMessages: 3
+  maxOutgoingMessages: 10
   messageTimoutMS: 1000
   playerTransform: {fileID: 493430282}
   playerCamTransform: {fileID: 493430282}
