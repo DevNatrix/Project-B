@@ -577,6 +577,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210409825}
   m_CullTransparentMesh: 1
+--- !u!4 &326273545 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4193270395166983378, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+  m_PrefabInstance: {fileID: 493430281}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &359629649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2818,7 +2823,7 @@ MonoBehaviour:
   maxOutgoingMessages: 10
   messageTimoutMS: 1000
   playerTransform: {fileID: 493430282}
-  playerCamTransform: {fileID: 493430282}
+  playerCamTransform: {fileID: 326273545}
   serverEvents: {fileID: 1836363827}
   outgoingMessagesText: {fileID: 176685447}
   droppedMessagesText: {fileID: 1148547402}
