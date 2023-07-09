@@ -29,7 +29,6 @@ public class SteamHandler : MonoBehaviour
 
     public void GetSteamUsername()
     {
-        CSteamID SteamID = SteamUser.GetSteamID();
         string SteamName = SteamFriends.GetPersonaName();
         usernameSteam = SteamName;
     }
