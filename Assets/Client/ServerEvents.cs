@@ -32,14 +32,11 @@ public class ServerEvents : MonoBehaviour
 		}
 		else
 		{
-			lerpPercent = (Time.time - pastUpdateTime) / (1/(float)server.TPS);
+			lerpPercent = (Time.time - pastUpdateTime) / (1/(float)server.transformTPS);
 		}
 	}
 	public void rawEvents(string rawEvents)
 	{
-		timeBetweenUpdates = Time.time - pastUpdateTime;
-		pastUpdateTime = Time.time;
-
 		string[] splitRawEvents = rawEvents.Split('|');
 		for (int eventID = 0; eventID < splitRawEvents.Length; eventID++)
 		{
@@ -52,6 +49,12 @@ public class ServerEvents : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public void restartLerpTimer()
+	{
+		timeBetweenUpdates = Time.time - pastUpdateTime;
+		pastUpdateTime = Time.time;
 	}
 
 	//events --------------------------------------------------------------

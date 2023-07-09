@@ -16,7 +16,8 @@ public class UDPServer : MonoBehaviour
 	int SERVERPORT;
 	string SERVERADDRESS;
 	[HideInInspector] public int ID;
-	[HideInInspector] public int TPS;
+	[HideInInspector] public int transformTPS;
+	[HideInInspector] public int eventTPS;
 	[SerializeField] int maxOutgoingMessages;
 	[SerializeField] int messageTimoutMS = 1000;
 	[SerializeField] Transform playerTransform;
@@ -68,7 +69,7 @@ public class UDPServer : MonoBehaviour
 		droppedMessagesText.text = "Droped: " + droppedMessages;
 		sendBytesText.text = "Sent Bytes: " + sendBytesCount;
 		recieveBytesText.text = "Recieve Bytes: " + recieveBytesCount;
-		packetsText.text = packets + " / " + TPS + " TPS";
+		packetsText.text = packets + " / " + (transformTPS + eventTPS) + " TPS";
 
 		currentFPSText.text = "FPS: " + FPS;
 		minFPSText.text = "Min FPS: " + minFPS;
@@ -130,13 +131,16 @@ public class UDPServer : MonoBehaviour
 			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(1000));
 			string recieveString = Encoding.ASCII.GetString(receiveBytes);
 			ID = int.Parse(recieveString.Split('~')[0]);
-			TPS = int.Parse(recieveString.Split('~')[1]);
+			transformTPS = int.Parse(recieveString.Split('~')[1]);
+			eventTPS = int.Parse(recieveString.Split('~')[2]);
 
 			Debug.Log("User ID: " + ID);
-			Debug.Log("Given TPS: " + TPS);
+			Debug.Log("Given Transform TPS: " + transformTPS);
+			Debug.Log("Given Event TPS: " + eventTPS);
 
 			//start main update loop
-			InvokeRepeating("serverUpdater", 0, 1 / (float)TPS);
+			InvokeRepeating("transformUpdater", 0, 1 / (float)transformTPS);
+			InvokeRepeating("eventUpdater", 0, 1 / (float)eventTPS);
 			InvokeRepeating("updateDebugInterval", 0, 1);
 		}
 		catch (Exception e)
@@ -147,34 +151,61 @@ public class UDPServer : MonoBehaviour
 	}
 
 
-	async void serverUpdater()
+	async void transformUpdater()
 	{
-		if(outgoingMessages <= maxOutgoingMessages)
+		float startTime = Time.time;
+		//send
+		sendMessage("tu~" + ID + "~" + playerTransform.position + "~" + playerCamTransform.rotation);
+		outgoingMessages++;
+		packets++;
+
+		//recieve
+		string info = "";
+		byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
+		await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
+		latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
+		outgoingMessages--;
+		info = Encoding.ASCII.GetString(receiveBytes);
+
+		//processing response
+		if(info != "EMPTY")
 		{
-			float startTime = Time.time;
-			//send
-			sendMessage("u~" + ID + "~" + playerTransform.position + "~" + playerCamTransform.rotation);
-			outgoingMessages++;
-			packets++;
+			recieveBytesCount += receiveBytes.Length;
+			serverEvents.rawEvents(info);
+		}
+		else
+		{
+			droppedMessages++;
+		}
+		updateDebug();
+		serverEvents.restartLerpTimer();
+	}
 
-			//recieve
-			string info = "";
-			byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
-			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
-			latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
-			outgoingMessages--;
-			info = Encoding.ASCII.GetString(receiveBytes);
+	async void eventUpdater()
+	{
+		float startTime = Time.time;
+		//send
+		sendMessage("eu~" + ID);
+		outgoingMessages++;
+		packets++;
 
-			//processing response
-			if(info != "EMPTY")
-			{
-				recieveBytesCount += receiveBytes.Length;
-				serverEvents.rawEvents(info);
-			}
-			else
-			{
-				droppedMessages++;
-			}
+		//recieve
+		string info = "";
+		byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
+		await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
+		latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
+		outgoingMessages--;
+		info = Encoding.ASCII.GetString(receiveBytes);
+
+		//processing response
+		if(info != "EMPTY")
+		{
+			recieveBytesCount += receiveBytes.Length;
+			serverEvents.rawEvents(info);
+		}
+		else
+		{
+			droppedMessages++;
 		}
 		updateDebug();
 	}
