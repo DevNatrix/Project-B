@@ -83,10 +83,11 @@ public class Chat : MonoBehaviour
 		TextMeshProUGUI textObject = messageObject.GetComponent<TextMeshProUGUI>();
 		textObject.text = username + ": " + message;
 
-        if(ChatBackground == false)
+        if(!ChatBackground)
         {
             StartCoroutine(RecieveMessage());
         }
+        Debug.Log("Message Recieved");
 	}
 
 	public void serverMessage(string message)
