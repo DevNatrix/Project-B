@@ -92,6 +92,8 @@ public class ServerEvents : MonoBehaviour
 				sendEvent("serverMessage", new string[] { otherClient.username + " left the game" });
 				otherClientList.Remove(otherClient);
 				Destroy(otherClient.gameObject);
+				this.SendMessage("onPlayerDisconnect", clientID);
+				return;
 			}
 		}
 	}
@@ -105,6 +107,8 @@ public class ServerEvents : MonoBehaviour
 		otherClientList.Add(newClientScript);
 		newClientScript.setInfo(newClientID, newClientUsername);
 		sendEvent("serverMessage", new string[] { newClientUsername + " joined the game" });
+
+		this.SendMessage("onPlayerConnect", newClientID);
 	}
 
 

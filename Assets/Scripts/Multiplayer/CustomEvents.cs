@@ -54,4 +54,15 @@ public class CustomEvents : MonoBehaviour
 
 		audioPlayer.createAudio(audioPlayer.getClipByID(clipID), position, volume, pitch);
 	}
+
+	public void onPlayerConnect(int clientID)
+	{
+		//get client username using serverEvents.getUsername
+		print("join");
+	}
+
+	public void onPlayerDisconnect(int clientID)
+	{
+		print("leave");
+	}
 }
