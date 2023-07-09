@@ -11,6 +11,7 @@ using System.Net.NetworkInformation;
 using System;
 using TMPro;
 using UnityEditor;
+using Steamworks;
 
 public class Lobby : MonoBehaviour
 {
@@ -23,11 +24,6 @@ public class Lobby : MonoBehaviour
 
 	public static string username;
 
-	[SerializeField] TMP_InputField usernameInput;
-	[SerializeField] GameObject usernameWarning;
-	[SerializeField] int usernameLengthMin;
-	[SerializeField] int usernameLengthLimit;
-
 	[SerializeField] List<ServerOption> possibleServers;
 	[SerializeField] int serverTimoutMS;
 	[SerializeField] int currentServerVersion;
@@ -36,11 +32,20 @@ public class Lobby : MonoBehaviour
 	[SerializeField] TextMeshProUGUI statusText;
 	[SerializeField] Button connectButton;
 
-	public void AutoJoin()
+    private void Start()
     {
-		if (usernameInput.text.Length >= usernameLengthMin)
-		{
-			username = usernameInput.text;
+		SteamAPI.Init();
+	}
+
+    private void Update()
+    {
+        CSteamID SteamID = SteamUser.GetSteamID();
+		string SteamName = SteamFriends.GetPersonaName();
+		username = SteamName;
+	}
+
+    public void AutoJoin()
+    {
 			connectButton.enabled = false;
 			statusText.text = "Pinging Servers...";
 			foreach (ServerOption option in possibleServers)
@@ -48,34 +53,6 @@ public class Lobby : MonoBehaviour
 				testConnection(option.port, option.ip);
 			}
 			Invoke("ChangeScene", ((float)serverTimoutMS) / 1000);
-		}
-	}
-
-	public void updateUsername()
-	{
-		string allowedChars = "1234567890abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUFWYXZ_";
-		int strLen = usernameInput.text.Length;
-		if (strLen >= 1)
-		{
-			if (!allowedChars.Contains(usernameInput.text[strLen - 1]))
-			{
-				usernameInput.text = usernameInput.text.Substring(0, strLen - 1);
-			}
-		}
-		if (usernameInput.text.Length > usernameLengthLimit)
-		{
-			usernameInput.text = usernameInput.text.Substring(0, usernameLengthLimit);
-		}
-		if (usernameInput.text.Length < usernameLengthMin)
-		{
-			usernameWarning.SetActive(true);
-		}
-		else
-		{
-			usernameWarning.SetActive(false);
-		}
-
-		username = usernameInput.text;
 	}
 
 	async void ChangeScene()
