@@ -17,6 +17,7 @@ public class Lobby : MonoBehaviour
 {
 	UdpClient client;
 	IPEndPoint remoteEndPoint;
+	SteamHandler steamhandlerscript;
 
 	public static int bestPort = -1;
 	public static string bestIP;
@@ -34,19 +35,12 @@ public class Lobby : MonoBehaviour
 
     private void Start()
     {
-		bool steam_initialized = SteamAPI.Init();
-		SteamAPI.Init();
-		if(!steam_initialized)
-        {
-			Debug.LogError("Steam is not opened, please open Steam");
-        }
+
 	}
 
     private void Update()
     {
-        CSteamID SteamID = SteamUser.GetSteamID();
-		string SteamName = SteamFriends.GetPersonaName();
-		username = SteamName;
+		username = steamhandlerscript.username;
 	}
 
     public void AutoJoin()
