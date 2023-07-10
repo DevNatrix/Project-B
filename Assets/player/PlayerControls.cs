@@ -348,6 +348,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""3403140e-3516-426e-bed1-8ab8346214f8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inspect"",
+                    ""type"": ""Button"",
+                    ""id"": ""7475bfc8-8e40-4f91-b481-f49768db173d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""697ba5ae-73d2-4895-8f9e-9ccc4045e299"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -416,6 +443,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""BuyScreen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5cde155-88d0-4db2-974e-5cb2d90e758d"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf17ebd7-0258-4fb4-80c4-956b0637d177"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inspect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0676438f-5d63-4ffc-986d-b2b6b9ad0738"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -446,6 +506,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Weapon_SecondaryWeapon = m_Weapon.FindAction("SecondaryWeapon", throwIfNotFound: true);
         m_Weapon_Knife = m_Weapon.FindAction("Knife", throwIfNotFound: true);
         m_Weapon_BuyScreen = m_Weapon.FindAction("BuyScreen", throwIfNotFound: true);
+        m_Weapon_Reload = m_Weapon.FindAction("Reload", throwIfNotFound: true);
+        m_Weapon_Inspect = m_Weapon.FindAction("Inspect", throwIfNotFound: true);
+        m_Weapon_Drop = m_Weapon.FindAction("Drop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -707,6 +770,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Weapon_SecondaryWeapon;
     private readonly InputAction m_Weapon_Knife;
     private readonly InputAction m_Weapon_BuyScreen;
+    private readonly InputAction m_Weapon_Reload;
+    private readonly InputAction m_Weapon_Inspect;
+    private readonly InputAction m_Weapon_Drop;
     public struct WeaponActions
     {
         private @PlayerControls m_Wrapper;
@@ -717,6 +783,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @SecondaryWeapon => m_Wrapper.m_Weapon_SecondaryWeapon;
         public InputAction @Knife => m_Wrapper.m_Weapon_Knife;
         public InputAction @BuyScreen => m_Wrapper.m_Weapon_BuyScreen;
+        public InputAction @Reload => m_Wrapper.m_Weapon_Reload;
+        public InputAction @Inspect => m_Wrapper.m_Weapon_Inspect;
+        public InputAction @Drop => m_Wrapper.m_Weapon_Drop;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -744,6 +813,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @BuyScreen.started += instance.OnBuyScreen;
             @BuyScreen.performed += instance.OnBuyScreen;
             @BuyScreen.canceled += instance.OnBuyScreen;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
+            @Inspect.started += instance.OnInspect;
+            @Inspect.performed += instance.OnInspect;
+            @Inspect.canceled += instance.OnInspect;
+            @Drop.started += instance.OnDrop;
+            @Drop.performed += instance.OnDrop;
+            @Drop.canceled += instance.OnDrop;
         }
 
         private void UnregisterCallbacks(IWeaponActions instance)
@@ -766,6 +844,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @BuyScreen.started -= instance.OnBuyScreen;
             @BuyScreen.performed -= instance.OnBuyScreen;
             @BuyScreen.canceled -= instance.OnBuyScreen;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
+            @Inspect.started -= instance.OnInspect;
+            @Inspect.performed -= instance.OnInspect;
+            @Inspect.canceled -= instance.OnInspect;
+            @Drop.started -= instance.OnDrop;
+            @Drop.performed -= instance.OnDrop;
+            @Drop.canceled -= instance.OnDrop;
         }
 
         public void RemoveCallbacks(IWeaponActions instance)
@@ -810,5 +897,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnSecondaryWeapon(InputAction.CallbackContext context);
         void OnKnife(InputAction.CallbackContext context);
         void OnBuyScreen(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnInspect(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
     }
 }

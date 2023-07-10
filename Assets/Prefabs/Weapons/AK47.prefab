@@ -1939,6 +1939,7 @@ GameObject:
   - component: {fileID: 8008584457254880526}
   - component: {fileID: 3786422439672198964}
   - component: {fileID: 6035872536869755518}
+  - component: {fileID: -3086169299842053259}
   m_Layer: 6
   m_Name: AK47
   m_TagString: Untagged
@@ -1965,7 +1966,7 @@ Transform:
   - {fileID: 5524626657180592561}
   - {fileID: 8357261594741784058}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3786422439672198964
 Animator:
@@ -2002,6 +2003,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smooth: 8
   multiplier: 1.5
+--- !u!114 &-3086169299842053259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237255521753112500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddfbfbe49dc8a2140bdb0256f1f5c5db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: dcfd597e86f620b4dae0739e319303aa, type: 2}
 --- !u!1 &7242753359116564557
 GameObject:
   m_ObjectHideFlags: 0
