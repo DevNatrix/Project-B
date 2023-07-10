@@ -1,18 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    PlayerControls playerControls;
+    public GameObject BuyScreenGO;
+    bool ClickFrame = false;
+
+    private void Awake()
     {
-        
+        playerControls = new PlayerControls();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
+
+    private void Update()
+    {
+        BuyScreen();
+    }
+
+    void BuyScreen()
+    {
+        if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && !ClickFrame)
+        {
+            BuyScreenGO.SetActive(true);
+            ClickFrame = true;
+        }
+        else if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && ClickFrame)
+        {
+            BuyScreenGO.SetActive(false);
+            ClickFrame = false;
+        }
     }
 }

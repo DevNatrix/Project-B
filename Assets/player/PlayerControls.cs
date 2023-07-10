@@ -339,6 +339,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BuyScreen"",
+                    ""type"": ""Button"",
+                    ""id"": ""0715d955-6039-41c2-a9aa-b99e40fdacbe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -396,6 +405,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Knife"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf633221-fd23-4ba4-bb2d-1fba7123cd27"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BuyScreen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -425,6 +445,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Weapon_PrimaryWeapon = m_Weapon.FindAction("PrimaryWeapon", throwIfNotFound: true);
         m_Weapon_SecondaryWeapon = m_Weapon.FindAction("SecondaryWeapon", throwIfNotFound: true);
         m_Weapon_Knife = m_Weapon.FindAction("Knife", throwIfNotFound: true);
+        m_Weapon_BuyScreen = m_Weapon.FindAction("BuyScreen", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -685,6 +706,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Weapon_PrimaryWeapon;
     private readonly InputAction m_Weapon_SecondaryWeapon;
     private readonly InputAction m_Weapon_Knife;
+    private readonly InputAction m_Weapon_BuyScreen;
     public struct WeaponActions
     {
         private @PlayerControls m_Wrapper;
@@ -694,6 +716,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @PrimaryWeapon => m_Wrapper.m_Weapon_PrimaryWeapon;
         public InputAction @SecondaryWeapon => m_Wrapper.m_Weapon_SecondaryWeapon;
         public InputAction @Knife => m_Wrapper.m_Weapon_Knife;
+        public InputAction @BuyScreen => m_Wrapper.m_Weapon_BuyScreen;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -718,6 +741,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Knife.started += instance.OnKnife;
             @Knife.performed += instance.OnKnife;
             @Knife.canceled += instance.OnKnife;
+            @BuyScreen.started += instance.OnBuyScreen;
+            @BuyScreen.performed += instance.OnBuyScreen;
+            @BuyScreen.canceled += instance.OnBuyScreen;
         }
 
         private void UnregisterCallbacks(IWeaponActions instance)
@@ -737,6 +763,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Knife.started -= instance.OnKnife;
             @Knife.performed -= instance.OnKnife;
             @Knife.canceled -= instance.OnKnife;
+            @BuyScreen.started -= instance.OnBuyScreen;
+            @BuyScreen.performed -= instance.OnBuyScreen;
+            @BuyScreen.canceled -= instance.OnBuyScreen;
         }
 
         public void RemoveCallbacks(IWeaponActions instance)
@@ -780,5 +809,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnPrimaryWeapon(InputAction.CallbackContext context);
         void OnSecondaryWeapon(InputAction.CallbackContext context);
         void OnKnife(InputAction.CallbackContext context);
+        void OnBuyScreen(InputAction.CallbackContext context);
     }
 }
