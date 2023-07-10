@@ -10,9 +10,6 @@ public class WeaponSystem : MonoBehaviour
     public GameObject WeaponHolder;
     bool BuyScreenVisual = false;
 
-    [Header("References To Weapons")]
-    public GameObject AK47;
-
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -47,9 +44,9 @@ public class WeaponSystem : MonoBehaviour
         }
     }
 
-    public void BuyWeapon()
+    public void BuyWeapon(GameObject WeaponType)
     {
-        Instantiate(AK47, WeaponHolder.transform);
-        Debug.Log("Bought Weapon");
+        Instantiate(WeaponType, WeaponHolder.transform);
+        Debug.Log($"Bought {WeaponType}");
     }
 }
