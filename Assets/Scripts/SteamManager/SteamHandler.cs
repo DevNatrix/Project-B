@@ -8,6 +8,7 @@ public class SteamHandler : MonoBehaviour
     bool steam_initialized = SteamAPI.Init();
 
     public static string usernameSteam;
+    public static CSteamID SteamID;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +25,14 @@ public class SteamHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetSteamUsername();
+        GetSteamValues();
     }
 
-    public void GetSteamUsername()
+    public void GetSteamValues()
     {
         string SteamName = SteamFriends.GetPersonaName();
         usernameSteam = SteamName;
+
+        SteamID = SteamUser.GetSteamID();
     }
 }

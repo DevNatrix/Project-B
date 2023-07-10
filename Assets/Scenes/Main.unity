@@ -595,7 +595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &305778642
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1242,6 +1242,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7656093453415565074, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+      propertyPath: maxSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656093453415565074, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+      propertyPath: jumpPower
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656093453415565074, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
       propertyPath: audioPlayer
       value: 
       objectReference: {fileID: 1836363831}
@@ -1348,6 +1356,7 @@ GameObject:
   - component: {fileID: 643860523}
   - component: {fileID: 643860522}
   - component: {fileID: 643860526}
+  - component: {fileID: 643860527}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1459,6 +1468,19 @@ MonoBehaviour:
   chatMessagesContainer: {fileID: 1030109957}
   chatMessagePrefab: {fileID: 6701070514052639706, guid: fde569dad6ac3f04ab99fb6255da09dd, type: 3}
   serverEvents: {fileID: 1836363827}
+--- !u!114 &643860527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643860521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb7ebbd820d04c4daffbc814c4e781f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreBoardGO: {fileID: 305778641}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
