@@ -40,7 +40,7 @@ public class UDPServer : MonoBehaviour
 	int droppedMessages = 0;
 	int sendBytesCount = 0;
 	int recieveBytesCount = 0;
-	int latency = 0;
+	public static int latency = 0;
 	int packets = 0;
 
 	int FPS = 0;

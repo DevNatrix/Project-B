@@ -7,10 +7,10 @@ using Steamworks;
 
 public class PlayerListItem : MonoBehaviour
 {
-    public string PlayerName;
-    public ulong PlayerSteamID;
 
     public Texture2D PlayerIcon;
+    public TextMeshProUGUI PingText;
+    public TextMeshProUGUI PlayerNameText;
     public PlayerListItemUI PlayerListItemPrefab;
     public Transform YourTeam;
 

@@ -9,8 +9,24 @@ public class PlayerListItemUI : MonoBehaviour
 
     public TextMeshProUGUI PlayerName;
     public RawImage PlayerIcon;
+    public TextMeshProUGUI PingText;
 
-    public PlayerListItemUI Instance;
+    private void Start()
+    {
+        StartCoroutine(UpdatePing());
+    }
+
+    private void Update()
+    {
+        PlayerName.text = SteamHandler.usernameSteam;
+    }
+
+    IEnumerator UpdatePing()
+    {
+        PingText.text = UDPServer.latency.ToString() + "ms";
+        yield return new WaitForSeconds(1);
+        StartCoroutine(UpdatePing());
+    }
 
     public void Setup(string _PlayerName, Texture2D _PlayerIcon)
     {

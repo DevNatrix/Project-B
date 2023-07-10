@@ -263,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: {fileID: 8187582642078407246}
   PlayerIcon: {fileID: 880102183543088295}
-  Instance: {fileID: 0}
+  PingText: {fileID: 7840653840144306282}
 --- !u!1 &7181412590003351092
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +299,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1798.3993, y: -10.3}
+  m_AnchoredPosition: {x: 1820, y: -10.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1433108680681301852
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20ms
+  m_text: 200ms
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
