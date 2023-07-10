@@ -7,10 +7,14 @@ public class ScoreboardController : MonoBehaviour
 {
     PlayerControls playerControls;
     public GameObject ScoreBoardGO;
+    private bool isKeyHeld = false;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
+
+        playerControls.UI.Scoreboard.performed += OnKeyPerformed;
+        playerControls.UI.Scoreboard.canceled += OnKeyCanceled;
     }
 
     private void OnEnable()
@@ -23,22 +27,15 @@ public class ScoreboardController : MonoBehaviour
         playerControls.Disable();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnKeyPerformed(InputAction.CallbackContext context)
     {
-        
+        isKeyHeld = true;
+        ScoreBoardGO.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnKeyCanceled(InputAction.CallbackContext context)
     {
-        if(playerControls.UI.Scoreboard.WasPressedThisFrame() && !ScoreBoardGO)
-        {
-            ScoreBoardGO.SetActive(true);
-        }
-        else if(playerControls.UI.Scoreboard.WasReleasedThisFrame() && ScoreBoardGO)
-        {
-            ScoreBoardGO.SetActive(false);
-        }
+        isKeyHeld = false;
+        ScoreBoardGO.SetActive(false);
     }
 }
