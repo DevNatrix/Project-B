@@ -1964,6 +1964,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuyScreenGO: {fileID: 181944549}
+  WeaponHolder: {fileID: 877621805}
+  AK47: {fileID: 7237255521753112500, guid: 6e68f15179081d642bd11cedd8e38f75, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,6 +2310,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816966109}
   m_CullTransparentMesh: 1
+--- !u!1 &877621805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4589314065117614145, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+  m_PrefabInstance: {fileID: 493430281}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963691426
 GameObject:
   m_ObjectHideFlags: 0
@@ -3869,7 +3876,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1345991359}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 643860528}
+        m_TargetAssemblyTypeName: WeaponSystem, Assembly-CSharp
+        m_MethodName: BuyWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1345991359
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,11 @@ public class WeaponSystem : MonoBehaviour
 {
     PlayerControls playerControls;
     public GameObject BuyScreenGO;
-    bool ClickFrame = false;
+    public GameObject WeaponHolder;
+    bool BuyScreenVisual = false;
+
+    [Header("References To Weapons")]
+    public GameObject AK47;
 
     private void Awake()
     {
@@ -31,15 +35,21 @@ public class WeaponSystem : MonoBehaviour
 
     void BuyScreen()
     {
-        if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && !ClickFrame)
+        if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && !BuyScreenVisual)
         {
             BuyScreenGO.SetActive(true);
-            ClickFrame = true;
+            BuyScreenVisual = true;
         }
-        else if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && ClickFrame)
+        else if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && BuyScreenVisual)
         {
             BuyScreenGO.SetActive(false);
-            ClickFrame = false;
+            BuyScreenVisual = false;
         }
+    }
+
+    public void BuyWeapon()
+    {
+        Instantiate(AK47, WeaponHolder.transform);
+        Debug.Log("Bought Weapon");
     }
 }
