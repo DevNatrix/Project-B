@@ -7,7 +7,6 @@ public class ScoreboardController : MonoBehaviour
 {
     PlayerControls playerControls;
     public GameObject ScoreBoardGO;
-    private bool isKeyHeld = false;
 
     private void Awake()
     {
@@ -29,13 +28,11 @@ public class ScoreboardController : MonoBehaviour
 
     private void OnKeyPerformed(InputAction.CallbackContext context)
     {
-        isKeyHeld = true;
         ScoreBoardGO.SetActive(true);
     }
 
     private void OnKeyCanceled(InputAction.CallbackContext context)
     {
-        isKeyHeld = false;
         ScoreBoardGO.SetActive(false);
     }
 }
