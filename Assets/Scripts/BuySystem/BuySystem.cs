@@ -5,14 +5,18 @@ using UnityEngine.InputSystem;
 
 public class BuySystem : MonoBehaviour
 {
+    public static BuySystem Instance { get; private set; }
     PlayerControls playerControls;
     public GameObject BuyScreenGO;
     public GameObject WeaponHolder;
     bool BuyScreenVisual = false;
+    public GameObject WeaponCam;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
+
+        Instance = this;
     }
 
     private void OnEnable()
