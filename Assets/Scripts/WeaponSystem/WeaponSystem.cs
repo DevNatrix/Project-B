@@ -12,23 +12,13 @@ public class WeaponSystem : MonoBehaviour
     public WeaponInfo weaponInfo;
     public Animator anim;
 
-    [Header("Info")]
-    public string WeaponName;
-    public string WeaponID;
+    public int damage;
 
-    [Header("Shooting")]
-    public float damage;
-    public float maxDistance;
+    public int maxDistance;
 
-    [Header("Gun Properties")]
-    public int currentAmmo;
-    public int magSize;
-    public int mags;
     public float fireRate;
-    public float reloadTime;
 
-    [HideInInspector] public bool reloading = false;
-    private float TimeSinceLastShot;
+    private float nextFire;
 
     private void Awake()
     {
@@ -58,19 +48,29 @@ public class WeaponSystem : MonoBehaviour
         Shoot();
         Reload();
         Debug.DrawRay(cam.transform.position, cam.transform.forward);
+
+        if(nextFire > 0)
+        {
+            nextFire -= Time.deltaTime;
+        }
     }
 
     private void Shoot()
     {
-        if(currentAmmo > 0)
+       if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0)
         {
-            if (CanShoot())
+            nextFire = 1 / fireRate;
+
+            //Shoot Function
+            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance))
             {
-                if (playerControls.Weapon.Fire.IsPressed() && Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hitInfo, weaponInfo.maxDistance))
+                if(hit.transform.gameObject.GetComponent<Health>())
                 {
-                    Debug.Log(hitInfo.transform.name);
-                    currentAmmo--;
-                    TimeSinceLastShot = 0;
+                    hit.transform.gameObject.GetComponent<Health>().TakeDamage(damage);
                 }
             }
         }
@@ -90,6 +90,4 @@ public class WeaponSystem : MonoBehaviour
         //Reload Weapon
         anim.SetBool("Reloading", false);
     }
-
-    private bool CanShoot() => !reloading && TimeSinceLastShot > 1f / (fireRate / 60f);
 }
