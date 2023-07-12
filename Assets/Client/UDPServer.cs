@@ -42,6 +42,7 @@ public class UDPServer : MonoBehaviour
 	int recieveBytesCount = 0;
 	public static int latency = 0;
 	int packets = 0;
+	public int currentUMessageID = 0;
 
 	int FPS = 0;
 	int minFPS = 0;
@@ -133,6 +134,7 @@ public class UDPServer : MonoBehaviour
 			ID = int.Parse(recieveString.Split('~')[0]);
 			transformTPS = int.Parse(recieveString.Split('~')[1]);
 			eventTPS = int.Parse(recieveString.Split('~')[2]);
+			currentUMessageID = 0;
 
 			Debug.Log("User ID: " + ID);
 			Debug.Log("Given Transform TPS: " + transformTPS);
@@ -164,11 +166,29 @@ public class UDPServer : MonoBehaviour
 		byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
 		await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
 		latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
-		outgoingMessages--;
 		info = Encoding.ASCII.GetString(receiveBytes);
+		outgoingMessages--;
+
+		Debug.Log(info);
+		string[] splitRawEvents = info.Split('|');
+		int gottenUMessageID = int.Parse(splitRawEvents[splitRawEvents.Length - 1]);
+		currentUMessageID++;
+		if (gottenUMessageID != currentUMessageID)
+		{
+			Debug.LogWarning("Update message recieved out of order ------ recieved: " + gottenUMessageID + ", current: " + currentUMessageID);
+			if(gottenUMessageID > currentUMessageID)
+			{
+				currentUMessageID = gottenUMessageID;
+			}
+			else
+			{
+				return;
+			}
+		}
+
 
 		//processing response
-		if(info != "EMPTY")
+		if (info != "EMPTY")
 		{
 			recieveBytesCount += receiveBytes.Length;
 			serverEvents.rawEvents(info);

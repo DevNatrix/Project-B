@@ -1193,8 +1193,8 @@ MonoBehaviour:
   - {fileID: 1048963592}
   - {fileID: 49565724}
   serverTimoutMS: 1000
-  currentServerVersion: 2
-  rejectWrongVersionServer: 1
+  currentServerVersion: 3
+  rejectWrongVersionServer: 0
   statusText: {fileID: 771880913}
   connectButton: {fileID: 2111907495}
 --- !u!4 &2110258938

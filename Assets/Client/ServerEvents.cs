@@ -10,6 +10,7 @@ public class ServerEvents : MonoBehaviour
 {
 	//DO NOT CHANGE THIS FILE TO ADD EVENTS
 	//change CustomEvents.cs instead, it has examples and everything
+	//ask me if you really want to do it
 
 	[SerializeField] UDPServer server;
 	[SerializeField] GameObject otherClientPrefab;
@@ -39,7 +40,7 @@ public class ServerEvents : MonoBehaviour
 	public void rawEvents(string rawEvents)
 	{
 		string[] splitRawEvents = rawEvents.Split('|');
-		for (int eventID = 0; eventID < splitRawEvents.Length; eventID++)
+		for (int eventID = 0; eventID < splitRawEvents.Length - 1; eventID++)
 		{
 			if (splitRawEvents[eventID] != "")
 			{
