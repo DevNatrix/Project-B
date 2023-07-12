@@ -42,7 +42,8 @@ public class UDPServer : MonoBehaviour
 	int recieveBytesCount = 0;
 	public static int latency = 0;
 	int packets = 0;
-	public int currentUMessageID = 0;
+	int currentUMessageID = 0;
+	int maxMessageID;
 
 	int FPS = 0;
 	int minFPS = 0;
@@ -135,6 +136,7 @@ public class UDPServer : MonoBehaviour
 			transformTPS = int.Parse(recieveString.Split('~')[1]);
 			eventTPS = int.Parse(recieveString.Split('~')[2]);
 			currentUMessageID = 0;
+			maxMessageID = int.Parse(recieveString.Split('~')[3]);
 
 			Debug.Log("User ID: " + ID);
 			Debug.Log("Given Transform TPS: " + transformTPS);
@@ -173,6 +175,10 @@ public class UDPServer : MonoBehaviour
 		string[] splitRawEvents = info.Split('|');
 		int gottenUMessageID = int.Parse(splitRawEvents[splitRawEvents.Length - 1]);
 		currentUMessageID++;
+		if(currentUMessageID >= maxMessageID)
+		{
+			currentUMessageID = 0;
+		}
 		if (gottenUMessageID != currentUMessageID)
 		{
 			Debug.LogWarning("Update message recieved out of order ------ recieved: " + gottenUMessageID + ", current: " + currentUMessageID);
