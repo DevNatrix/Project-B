@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 84643471}
   - component: {fileID: 84643470}
   - component: {fileID: 84643469}
-  - component: {fileID: 84643468}
+  - component: {fileID: 84643472}
   m_Layer: 3
   m_Name: floor
   m_TagString: Untagged
@@ -142,28 +142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!64 &84643468
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 84643467}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &84643469
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -213,7 +191,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84643467}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &84643471
 Transform:
   m_ObjectHideFlags: 0
@@ -222,13 +200,34 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84643467}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5881314, y: -0.69777215, z: -4.3979564}
-  m_LocalScale: {x: 8.403, y: 1.6806, z: 8.403}
+  m_LocalPosition: {x: 2.5881314, y: -1.32, z: -4.3979564}
+  m_LocalScale: {x: 95.02112, y: 1.6806, z: 117.02314}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 193973496}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &84643472
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84643467}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.99999994, z: 1}
+  m_Center: {x: 0, y: 0.000000029802322, z: 0}
 --- !u!1 &100857864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,6 +1949,7 @@ MonoBehaviour:
   WeaponCam: {fileID: 493430282}
   camDir: {fileID: 1900545344}
   WeaponIns: {fileID: 0}
+  WeaponType: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -5131,6 +5131,7 @@ MonoBehaviour:
   currentFPSText: {fileID: 1223233795}
   minFPSText: {fileID: 1295235837}
   maxFPSText: {fileID: 435888291}
+  currentUMessageID: 0
 --- !u!4 &1836363829
 Transform:
   m_ObjectHideFlags: 0

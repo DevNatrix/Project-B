@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7430681447846284614}
   - component: {fileID: 6138480104740207635}
   - component: {fileID: 7362236006267846285}
-  - component: {fileID: 6425732657087787785}
+  - component: {fileID: 3196505116190293747}
   m_Layer: 0
   m_Name: mag
   m_TagString: Untagged
@@ -168,7 +168,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6425732657087787785
+--- !u!64 &3196505116190293747
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 3745349392456534729}
   - component: {fileID: 7492001792646212127}
   - component: {fileID: 8735891398197251660}
-  - component: {fileID: 3352259762542978117}
+  - component: {fileID: 3415552219239040385}
   m_Layer: 0
   m_Name: base
   m_TagString: Untagged
@@ -476,7 +476,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3352259762542978117
+--- !u!64 &3415552219239040385
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
