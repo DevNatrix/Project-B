@@ -12,6 +12,7 @@ public class BuySystem : MonoBehaviour
     bool BuyScreenVisual = false;
     public GameObject WeaponCam;
     public GameObject camDir;
+    [HideInInspector] public GameObject WeaponIns;
 
     private void Awake()
     {
@@ -51,7 +52,7 @@ public class BuySystem : MonoBehaviour
 
     public void BuyWeapon(GameObject WeaponType)
     {
-        Instantiate(WeaponType, WeaponHolder.transform);
+        WeaponIns = Instantiate(WeaponType, WeaponHolder.transform);
         Debug.Log($"Bought {WeaponType}");
     }
 }

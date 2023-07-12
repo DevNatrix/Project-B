@@ -1941,6 +1941,7 @@ MonoBehaviour:
   WeaponHolder: {fileID: 4589314064938907208}
   WeaponCam: {fileID: 493430282}
   camDir: {fileID: 1900545344}
+  WeaponIns: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

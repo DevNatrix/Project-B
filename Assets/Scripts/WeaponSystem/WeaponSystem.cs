@@ -8,14 +8,20 @@ public class WeaponSystem : MonoBehaviour
 {
 
     [Header("References")]
+    [HideInInspector] public static WeaponSystem Instance;
     [SerializeField] private WeaponInfo weaponInfo;
     [HideInInspector] public Transform cam;
-    [HideInInspector] private GameObject eyesDirection;
+    [HideInInspector] public GameObject eyesDirection;
     [SerializeField] public GameObject WeaponModel;
 
     float timeSinceLastShot;
 
     PlayerControls playerControls;
+
+    private void Start()
+    {
+        Instance = this;
+    }
 
     private void Awake()
     {
@@ -95,6 +101,18 @@ public class WeaponSystem : MonoBehaviour
 
     private void DropCurrentWeapon()
     {
+        Destroy(BuySystem.Instance.WeaponIns);
         Instantiate(WeaponModel, transform.position, default);
+    }
+
+    private void PickUpWeapon()
+    {
+        if (playerControls.Weapon.Interact.WasPressedThisFrame() && Physics.Raycast(cam.position, eyesDirection.transform.forward, out RaycastHit hitInfo, weaponInfo.maxDistance))
+        {
+            if (hitInfo.transform.name == WeaponModel.transform.name)
+            {
+                Debug.Log("IDk BROs");
+            }
+        }
     }
 }
