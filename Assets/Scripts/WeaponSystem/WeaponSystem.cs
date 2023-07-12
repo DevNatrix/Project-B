@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,32 +5,37 @@ using UnityEngine.InputSystem;
 
 public class WeaponSystem : MonoBehaviour
 {
-
-    [Header("References")]
-    [HideInInspector] public static WeaponSystem Instance;
-    [SerializeField] private WeaponInfo weaponInfo;
-    [HideInInspector] public Transform cam;
-    [HideInInspector] public GameObject eyesDirection;
-    [SerializeField] public GameObject WeaponModel;
-	[SerializeField] public ServerEvents serverEvents;
-	[SerializeField] public UDPServer uDPServer;
-    [HideInInspector] public GameObject WeaponModelClone;
-
-    float timeSinceLastShot;
-
     PlayerControls playerControls;
 
-    private void Start()
-    {
-        Instance = this;
-    }
+    [Header("References")]
+    private GameObject cam;
+    public WeaponInfo weaponInfo;
+    public Animator anim;
+
+    [Header("Info")]
+    public string WeaponName;
+    public string WeaponID;
+
+    [Header("Shooting")]
+    public float damage;
+    public float maxDistance;
+
+    [Header("Gun Properties")]
+    public int currentAmmo;
+    public int magSize;
+    public int mags;
+    public float fireRate;
+    public float reloadTime;
+
+    [HideInInspector] public bool reloading = false;
+    private float TimeSinceLastShot;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
 
-        cam = BuySystem.Instance.WeaponCam.transform;
-        eyesDirection = BuySystem.Instance.camDir;
+        cam = GameReferences.Instance.MainCam;
+
     }
 
     private void OnEnable()
@@ -42,69 +46,50 @@ public class WeaponSystem : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
-        weaponInfo.reloading = false;
     }
 
-    public void StartReload()
+    void Start()
     {
-        if (!weaponInfo.reloading && this.gameObject.activeSelf)
-            StartCoroutine(Reload());
+        
     }
 
-    private IEnumerator Reload()
+    void Update()
     {
-        weaponInfo.reloading = true;
-
-        yield return new WaitForSeconds(weaponInfo.reloadTime);
-
-        weaponInfo.startAmmo = weaponInfo.magSize;
-
-        weaponInfo.reloading = false;
+        Shoot();
+        Reload();
+        Debug.DrawRay(cam.transform.position, cam.transform.forward);
     }
-
-    private bool CanShoot() => !weaponInfo.reloading && timeSinceLastShot > 1f / (weaponInfo.fireRate / 60f);
 
     private void Shoot()
     {
-        if (weaponInfo.startAmmo > 0)
+        if(currentAmmo > 0)
         {
             if (CanShoot())
             {
-                if (Physics.Raycast(cam.position, eyesDirection.transform.forward, out RaycastHit hitInfo, weaponInfo.maxDistance))
+                if (playerControls.Weapon.Fire.IsPressed() && Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hitInfo, weaponInfo.maxDistance))
                 {
                     Debug.Log(hitInfo.transform.name);
+                    currentAmmo--;
+                    TimeSinceLastShot = 0;
                 }
-
-                timeSinceLastShot = 0;
             }
         }
     }
 
-    private void Update()
+    void Reload()
     {
-        CheckForInput();
-
-        timeSinceLastShot += Time.deltaTime;
-
-        Debug.DrawRay(cam.position, eyesDirection.transform.forward * weaponInfo.maxDistance);
-    }
-
-    void CheckForInput()
-    {
-        if(playerControls.Weapon.Fire.IsPressed())
+        if(playerControls.Weapon.Reload.WasPressedThisFrame())
         {
-            Shoot();
-        }
-
-        if(playerControls.Weapon.Drop.WasPerformedThisFrame())
-        {
-            DropCurrentWeapon();
+            anim.Play("ReloadAnim");
+            anim.SetBool("Reloading", true);
         }
     }
 
-    private void DropCurrentWeapon()
+    public void SetReloadFalse()
     {
-        BuySystem.Instance.WeaponIns.SetActive(false);
-        WeaponModelClone = Instantiate(WeaponModel, cam.transform.position, default);
-	}
+        //Reload Weapon
+        anim.SetBool("Reloading", false);
+    }
+
+    private bool CanShoot() => !reloading && TimeSinceLastShot > 1f / (fireRate / 60f);
 }

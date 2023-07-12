@@ -8,10 +8,7 @@ public class BuySystem : MonoBehaviour
     public static BuySystem Instance { get; private set; }
     PlayerControls playerControls;
     public GameObject BuyScreenGO;
-    public GameObject WeaponHolder;
     bool BuyScreenVisual = false;
-    public GameObject WeaponCam;
-    public GameObject camDir;
     [HideInInspector] public GameObject WeaponIns;
     [HideInInspector] public GameObject WeaponType;
 
@@ -54,7 +51,7 @@ public class BuySystem : MonoBehaviour
     public void BuyWeapon(GameObject _WeaponType)
     {
         WeaponType = _WeaponType;
-        WeaponIns = Instantiate(WeaponType, WeaponHolder.transform);
+        WeaponIns = Instantiate(WeaponType, GameReferences.Instance.weaponHolder.transform);
         Debug.Log($"Bought {WeaponType}");
     }
 }
