@@ -11,6 +11,7 @@ public class WeaponSystem : MonoBehaviour
     [SerializeField] private WeaponInfo weaponInfo;
     [HideInInspector] public Transform cam;
     [HideInInspector] private GameObject eyesDirection;
+    [SerializeField] public GameObject WeaponModel;
 
     float timeSinceLastShot;
 
@@ -72,13 +73,28 @@ public class WeaponSystem : MonoBehaviour
 
     private void Update()
     {
+        CheckForInput();
+
+        timeSinceLastShot += Time.deltaTime;
+
+        Debug.DrawRay(cam.position, eyesDirection.transform.forward * weaponInfo.maxDistance);
+    }
+
+    void CheckForInput()
+    {
         if(playerControls.Weapon.Fire.IsPressed())
         {
             Shoot();
         }
 
-        timeSinceLastShot += Time.deltaTime;
+        if(playerControls.Weapon.Drop.WasPerformedThisFrame())
+        {
+            DropCurrentWeapon();
+        }
+    }
 
-        Debug.DrawRay(cam.position, eyesDirection.transform.forward * weaponInfo.maxDistance);
+    private void DropCurrentWeapon()
+    {
+        Instantiate(WeaponModel, transform.position, default);
     }
 }
