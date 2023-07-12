@@ -13,6 +13,7 @@ public class BuySystem : MonoBehaviour
     public GameObject WeaponCam;
     public GameObject camDir;
     [HideInInspector] public GameObject WeaponIns;
+    [HideInInspector] public GameObject WeaponType;
 
     private void Awake()
     {
@@ -50,8 +51,9 @@ public class BuySystem : MonoBehaviour
         }
     }
 
-    public void BuyWeapon(GameObject WeaponType)
+    public void BuyWeapon(GameObject _WeaponType)
     {
+        WeaponType = _WeaponType;
         WeaponIns = Instantiate(WeaponType, WeaponHolder.transform);
         Debug.Log($"Bought {WeaponType}");
     }

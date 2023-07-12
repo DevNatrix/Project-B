@@ -15,6 +15,7 @@ public class WeaponSystem : MonoBehaviour
     [SerializeField] public GameObject WeaponModel;
 	[SerializeField] public ServerEvents serverEvents;
 	[SerializeField] public UDPServer uDPServer;
+    [HideInInspector] public GameObject WeaponModelClone;
 
     float timeSinceLastShot;
 
@@ -103,26 +104,7 @@ public class WeaponSystem : MonoBehaviour
 
     private void DropCurrentWeapon()
     {
-        Destroy(BuySystem.Instance.WeaponIns);
-        Instantiate(WeaponModel, transform.position, default);
-		SwitchWeapons("none");
-	}
-
-    private void PickUpWeapon()
-    {
-        if (playerControls.Weapon.Interact.WasPressedThisFrame() && Physics.Raycast(cam.position, eyesDirection.transform.forward, out RaycastHit hitInfo, weaponInfo.maxDistance))
-        {
-            if (hitInfo.transform.name == WeaponModel.transform.name)
-            {
-                Debug.Log("IDk BROs");
-				SwitchWeapons(hitInfo.transform.name);
-			}
-        }
-    }
-
-	private void SwitchWeapons(String weaponName)
-	{
-		string[] data = { uDPServer.ID + "", weaponName };
-		serverEvents.sendEvent("switchGun", data);
+        BuySystem.Instance.WeaponIns.SetActive(false);
+        WeaponModelClone = Instantiate(WeaponModel, transform.position, default);
 	}
 }
