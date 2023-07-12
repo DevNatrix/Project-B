@@ -9,7 +9,8 @@ public class WeaponSystem : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private WeaponInfo weaponInfo;
-    [SerializeField] public Transform cam;
+    [HideInInspector] public Transform cam;
+    [HideInInspector] private GameObject eyesDirection;
 
     float timeSinceLastShot;
 
@@ -20,6 +21,7 @@ public class WeaponSystem : MonoBehaviour
         playerControls = new PlayerControls();
 
         cam = BuySystem.Instance.WeaponCam.transform;
+        eyesDirection = BuySystem.Instance.camDir;
     }
 
     private void OnEnable()
@@ -58,9 +60,9 @@ public class WeaponSystem : MonoBehaviour
         {
             if (CanShoot())
             {
-                if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, weaponInfo.maxDistance))
+                if (Physics.Raycast(cam.position, eyesDirection.transform.forward, out RaycastHit hitInfo, weaponInfo.maxDistance))
                 {
-                    Debug.Log(hitInfo);
+                    Debug.Log(hitInfo.transform.name);
                 }
 
                 timeSinceLastShot = 0;
@@ -70,8 +72,13 @@ public class WeaponSystem : MonoBehaviour
 
     private void Update()
     {
+        if(playerControls.Weapon.Fire.IsPressed())
+        {
+            Shoot();
+        }
+
         timeSinceLastShot += Time.deltaTime;
 
-        Debug.DrawRay(cam.position, cam.forward * weaponInfo.maxDistance);
+        Debug.DrawRay(cam.position, eyesDirection.transform.forward * weaponInfo.maxDistance);
     }
 }

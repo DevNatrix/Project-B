@@ -11,6 +11,7 @@ public class BuySystem : MonoBehaviour
     public GameObject WeaponHolder;
     bool BuyScreenVisual = false;
     public GameObject WeaponCam;
+    public GameObject camDir;
 
     private void Awake()
     {

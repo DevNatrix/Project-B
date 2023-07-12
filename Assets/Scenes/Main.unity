@@ -1939,6 +1939,7 @@ MonoBehaviour:
   BuyScreenGO: {fileID: 181944549}
   WeaponHolder: {fileID: 4589314064938907208}
   WeaponCam: {fileID: 493430282}
+  camDir: {fileID: 1900545344}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -5053,6 +5054,11 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 9a47b64b8d432b94eb7317d268127b1d, type: 3}
   serverEvents: {fileID: 1836363827}
+--- !u!1 &1900545344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7446284596128828776, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+  m_PrefabInstance: {fileID: 493430281}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1995142819
 GameObject:
   m_ObjectHideFlags: 0
