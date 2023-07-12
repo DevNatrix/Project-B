@@ -35,6 +35,7 @@ public class UDPServer : MonoBehaviour
 	[SerializeField] TextMeshProUGUI currentFPSText;
 	[SerializeField] TextMeshProUGUI minFPSText;
 	[SerializeField] TextMeshProUGUI maxFPSText;
+	[SerializeField] TextMeshProUGUI messageIDText;
 
 	int outgoingMessages = 0;
 	int droppedMessages = 0;
@@ -171,7 +172,6 @@ public class UDPServer : MonoBehaviour
 		info = Encoding.ASCII.GetString(receiveBytes);
 		outgoingMessages--;
 
-		Debug.Log(info);
 		string[] splitRawEvents = info.Split('|');
 		int gottenUMessageID = int.Parse(splitRawEvents[splitRawEvents.Length - 1]);
 		currentUMessageID++;
@@ -179,6 +179,7 @@ public class UDPServer : MonoBehaviour
 		{
 			currentUMessageID = 0;
 		}
+		messageIDText.text = "U-Message ID: " + currentUMessageID;
 		if (gottenUMessageID != currentUMessageID)
 		{
 			Debug.LogWarning("Update message recieved out of order ------ recieved: " + gottenUMessageID + ", current: " + currentUMessageID);
