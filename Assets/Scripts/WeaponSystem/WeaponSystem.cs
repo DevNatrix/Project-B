@@ -11,7 +11,7 @@ public class WeaponSystem : MonoBehaviour
     private GameObject cam;
     public WeaponInfo weaponInfo;
     public Animator anim;
-    public ServerEvents serverEvents;
+    [HideInInspector] public ServerEvents serverEvents;
 
     public int damage;
 
