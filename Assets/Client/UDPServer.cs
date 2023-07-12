@@ -176,8 +176,8 @@ public class UDPServer : MonoBehaviour
 		int gottenUMessageID;
 		try
 		{
-			gottenUMessageID = int.Parse(splitRawEvents[splitRawEvents.Length - 1]);
 			currentUMessageID++;
+			gottenUMessageID = int.Parse(splitRawEvents[splitRawEvents.Length - 1]);
 			if(currentUMessageID >= maxMessageID)
 			{
 				currentUMessageID = 0;
