@@ -75,6 +75,7 @@ public class CustomEvents : MonoBehaviour
     {
 		int damage = int.Parse(data[0]);
 		int clientID = int.Parse(data[1]);
+		Debug.Log("Event works lmaos");
 		if(clientID == UDPServer.ID)
         {
 			return;

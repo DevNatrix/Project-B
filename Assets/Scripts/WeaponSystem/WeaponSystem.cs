@@ -69,8 +69,9 @@ public class WeaponSystem : MonoBehaviour
 
             if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance))
             {
-                if (hit.transform.gameObject.GetComponent<Health>())
+                if (hit.transform.gameObject.GetComponent<OtherClient>())
                 {
+                    hit.transform.gameObject.GetComponent<OtherClient>().TakeDamage(damage);
                     string ClientID =  hit.transform.gameObject.GetComponent<OtherClient>().ID.ToString();
                     serverEvents.sendEvent("Damage", new string[]{damage.ToString(), ClientID});
                 }
