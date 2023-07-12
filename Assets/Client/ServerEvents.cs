@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -113,6 +114,23 @@ public class ServerEvents : MonoBehaviour
 
 
 	//tools --------------------------------------------------------------
+
+	public OtherClient getOtherClientScriptByID(int clientID)
+	{
+		foreach (OtherClient otherClient in otherClientList)
+		{
+			if (otherClient.ID == clientID)
+			{
+				return otherClient;
+			}
+		}
+		return null;
+	}
+
+	public int getIDByOtherClientScript(OtherClient otherClient1)
+	{
+		return otherClient1.ID;
+	}
 
 	public string getUsername(int clientID)
 	{
