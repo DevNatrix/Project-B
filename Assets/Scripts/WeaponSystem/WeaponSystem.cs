@@ -105,6 +105,6 @@ public class WeaponSystem : MonoBehaviour
     private void DropCurrentWeapon()
     {
         BuySystem.Instance.WeaponIns.SetActive(false);
-        WeaponModelClone = Instantiate(WeaponModel, transform.position, default);
+        WeaponModelClone = Instantiate(WeaponModel, cam.transform.position, default);
 	}
 }
