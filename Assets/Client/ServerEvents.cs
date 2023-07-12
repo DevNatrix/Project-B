@@ -73,7 +73,7 @@ public class ServerEvents : MonoBehaviour
 		Vector3 position = parseVector3(data[1]);
 		Quaternion rotation = parseQuaternion(data[2]);
 
-		if (clientID != server.ID)
+		if (clientID != UDPServer.ID)
 		{
 			foreach (OtherClient otherClient in otherClientList)
 			{
@@ -89,7 +89,7 @@ public class ServerEvents : MonoBehaviour
 	{
 		int clientID = int.Parse(data[0]);
 
-		if(clientID == server.ID)
+		if(clientID == UDPServer.ID)
 		{
 			Debug.LogError("Server sent leave event for this client, closing game");
 			Application.Quit();
