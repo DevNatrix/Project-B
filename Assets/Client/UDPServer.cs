@@ -173,24 +173,32 @@ public class UDPServer : MonoBehaviour
 		outgoingMessages--;
 
 		string[] splitRawEvents = info.Split('|');
-		int gottenUMessageID = int.Parse(splitRawEvents[splitRawEvents.Length - 1]);
-		currentUMessageID++;
-		if(currentUMessageID >= maxMessageID)
+		int gottenUMessageID;
+		try
 		{
-			currentUMessageID = 0;
+			gottenUMessageID = int.Parse(splitRawEvents[splitRawEvents.Length - 1]);
+			currentUMessageID++;
+			if(currentUMessageID >= maxMessageID)
+			{
+				currentUMessageID = 0;
+			}
+			messageIDText.text = "U-Message ID: " + currentUMessageID;
+			if (gottenUMessageID != currentUMessageID)
+			{
+				Debug.LogWarning("Update message recieved out of order ------ recieved: " + gottenUMessageID + ", current: " + currentUMessageID);
+				if(gottenUMessageID > currentUMessageID)
+				{
+					currentUMessageID = gottenUMessageID;
+				}
+				else
+				{
+					return;
+				}
+			}
 		}
-		messageIDText.text = "U-Message ID: " + currentUMessageID;
-		if (gottenUMessageID != currentUMessageID)
+		catch (Exception e)
 		{
-			Debug.LogWarning("Update message recieved out of order ------ recieved: " + gottenUMessageID + ", current: " + currentUMessageID);
-			if(gottenUMessageID > currentUMessageID)
-			{
-				currentUMessageID = gottenUMessageID;
-			}
-			else
-			{
-				return;
-			}
+			Debug.LogError(e.Message + ", message: " + info);
 		}
 
 
