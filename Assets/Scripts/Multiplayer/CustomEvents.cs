@@ -70,4 +70,18 @@ public class CustomEvents : MonoBehaviour
 
 		Debug.Log(clientID + ", " + weaponName);
 	}
+
+	public void Damage(string[] data)
+    {
+		int damage = int.Parse(data[0]);
+		int clientID = int.Parse(data[1]);
+		if(clientID == UDPServer.ID)
+        {
+			return;
+        }
+		else
+        {
+			serverEvents.getOtherClientScriptByID(clientID).TakeDamage(damage);
+		}
+    }
 }

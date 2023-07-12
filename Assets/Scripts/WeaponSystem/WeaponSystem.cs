@@ -11,6 +11,7 @@ public class WeaponSystem : MonoBehaviour
     private GameObject cam;
     public WeaponInfo weaponInfo;
     public Animator anim;
+    public ServerEvents serverEvents;
 
     public int damage;
 
@@ -68,9 +69,10 @@ public class WeaponSystem : MonoBehaviour
 
             if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance))
             {
-                if(hit.transform.gameObject.GetComponent<Health>())
+                if (hit.transform.gameObject.GetComponent<Health>())
                 {
-                    hit.transform.gameObject.GetComponent<Health>().TakeDamage(damage);
+                    string ClientID =  hit.transform.gameObject.GetComponent<OtherClient>().ID.ToString();
+                    serverEvents.sendEvent("Damage", new string[]{damage.ToString(), ClientID});
                 }
             }
         }

@@ -15,7 +15,7 @@ public class UDPServer : MonoBehaviour
 	IPEndPoint remoteEndPoint;
 	int SERVERPORT;
 	string SERVERADDRESS;
-	[HideInInspector] public int ID;
+	[HideInInspector] public static int ID;
 	[HideInInspector] public int transformTPS;
 	[HideInInspector] public int eventTPS;
 	[SerializeField] int maxOutgoingMessages;
