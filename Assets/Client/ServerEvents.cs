@@ -47,7 +47,14 @@ public class ServerEvents : MonoBehaviour
 				string[] peices = splitRawEvents[eventID].Split("~");
 				if(this != null) //events get recieved even after exit, showing a ton of annoying errors (this removes that)
 				{
-					this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
+					try
+					{
+						this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
+					}
+					catch (Exception e)
+					{
+						Debug.LogWarning(e.Message + ", no event for received event: " + splitRawEvents[eventID]);
+					}
 				}
 			}
 		}
