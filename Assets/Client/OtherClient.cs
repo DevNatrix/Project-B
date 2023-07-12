@@ -19,7 +19,7 @@ public class OtherClient : MonoBehaviour
 	Quaternion pastRotation;
 	Quaternion targetRotation;
 
-	public int health;
+	public int health = 200;
 
 	private void Start()
 	{
