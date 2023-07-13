@@ -13,6 +13,9 @@ public class WeaponSystem : MonoBehaviour
     public Animator anim;
     [HideInInspector] public ServerEvents serverEvents;
 
+    [Header("Info")]
+    public string WeaponID;
+
     public int damage;
 
     public int maxDistance;
@@ -20,6 +23,11 @@ public class WeaponSystem : MonoBehaviour
     public float fireRate;
 
     private float nextFire;
+
+    [Header("Ammo")]
+    public int AmmoInReserve;
+    public int currentAmmo;
+    public int maxAmmo;
 
     private void Awake()
     {
@@ -58,11 +66,11 @@ public class WeaponSystem : MonoBehaviour
 
     private void Shoot()
     {
-       if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0)
+       if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false)
         {
             nextFire = 1 / fireRate;
 
-            //Shoot Function
+            //Shoot raycast
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
 
             RaycastHit hit;
@@ -75,6 +83,8 @@ public class WeaponSystem : MonoBehaviour
                     string ClientID =  hit.transform.gameObject.GetComponent<OtherClient>().ID.ToString();
                     serverEvents.sendEvent("Damage", new string[]{damage.ToString(), ClientID});
                 }
+
+                currentAmmo--;
             }
         }
     }
@@ -83,14 +93,22 @@ public class WeaponSystem : MonoBehaviour
     {
         if(playerControls.Weapon.Reload.WasPressedThisFrame())
         {
-            anim.Play("ReloadAnim");
-            anim.SetBool("Reloading", true);
+            if (currentAmmo < maxAmmo && AmmoInReserve > 0)
+            {
+                int ammoToAdd = maxAmmo - currentAmmo;
+                int clamped = Mathf.Min(ammoToAdd, AmmoInReserve);
+                AmmoInReserve -= clamped;
+                currentAmmo += clamped;
+
+                //Play Reload Animation
+                anim.SetBool("Reloading", true);
+            }
         }
     }
 
+    //Stops reloading
     public void SetReloadFalse()
     {
-        //Reload Weapon
         anim.SetBool("Reloading", false);
     }
 }
