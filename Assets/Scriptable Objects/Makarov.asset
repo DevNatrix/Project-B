@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc9e5623d8f6ab042bb7b052b6bc6d76, type: 3}
-  m_Name: AK47
+  m_Name: Makarov
   m_EditorClassIdentifier: 
-  WeaponName: AK47
-  damage: 37
-  maxDistance: 100
-  startAmmo: 30
-  magSize: 30
-  mags: 4
-  fireRate: 600
+  WeaponName: Makarov
+  damage: 17
+  maxDistance: 50
+  startAmmo: 12
+  magSize: 12
+  mags: 5
+  fireRate: 315
   reloadTime: 1
   reloading: 0

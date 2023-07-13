@@ -91,6 +91,7 @@ public class Lobby : MonoBehaviour
 			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(serverTimoutMS));
 			float ping = Time.time - startTime; //get ping
 			string recieveString = Encoding.ASCII.GetString(receiveBytes);
+			Debug.Log("Recieved Message from " + ip + ": " + recieveString);
 
 			//process
 			bool rightVersion = int.Parse(recieveString) == currentServerVersion;

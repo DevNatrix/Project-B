@@ -15,7 +15,7 @@ public class UDPServer : MonoBehaviour
 	IPEndPoint remoteEndPoint;
 	int SERVERPORT;
 	string SERVERADDRESS;
-	[HideInInspector] public int ID;
+	[HideInInspector] public static int ID;
 	[HideInInspector] public int transformTPS;
 	[HideInInspector] public int eventTPS;
 	[SerializeField] int maxOutgoingMessages;
@@ -35,6 +35,7 @@ public class UDPServer : MonoBehaviour
 	[SerializeField] TextMeshProUGUI currentFPSText;
 	[SerializeField] TextMeshProUGUI minFPSText;
 	[SerializeField] TextMeshProUGUI maxFPSText;
+	[SerializeField] TextMeshProUGUI messageIDText;
 
 	int outgoingMessages = 0;
 	int droppedMessages = 0;
@@ -42,6 +43,8 @@ public class UDPServer : MonoBehaviour
 	int recieveBytesCount = 0;
 	public static int latency = 0;
 	int packets = 0;
+	int currentUMessageID = 0;
+	int maxMessageID;
 
 	int FPS = 0;
 	int minFPS = 0;
@@ -133,6 +136,8 @@ public class UDPServer : MonoBehaviour
 			ID = int.Parse(recieveString.Split('~')[0]);
 			transformTPS = int.Parse(recieveString.Split('~')[1]);
 			eventTPS = int.Parse(recieveString.Split('~')[2]);
+			currentUMessageID = 0;
+			maxMessageID = int.Parse(recieveString.Split('~')[3]);
 
 			Debug.Log("User ID: " + ID);
 			Debug.Log("Given Transform TPS: " + transformTPS);
@@ -164,11 +169,41 @@ public class UDPServer : MonoBehaviour
 		byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
 		await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
 		latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
-		outgoingMessages--;
 		info = Encoding.ASCII.GetString(receiveBytes);
+		outgoingMessages--;
+
+		string[] splitRawEvents = info.Split('|');
+		int gottenUMessageID;
+		currentUMessageID++;
+		try
+		{
+			gottenUMessageID = int.Parse(splitRawEvents[splitRawEvents.Length - 1]);
+			if(currentUMessageID >= maxMessageID)
+			{
+				currentUMessageID = 0;
+			}
+			messageIDText.text = "U-Message ID: " + currentUMessageID;
+			if (gottenUMessageID != currentUMessageID)
+			{
+				Debug.LogWarning("Update message recieved out of order ------ recieved: " + gottenUMessageID + ", current: " + currentUMessageID);
+				if(gottenUMessageID > currentUMessageID)
+				{
+					currentUMessageID = gottenUMessageID;
+				}
+				else
+				{
+					return;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			Debug.LogError(e.Message + ", message: " + info);
+		}
+
 
 		//processing response
-		if(info != "EMPTY")
+		if (info != "EMPTY")
 		{
 			recieveBytesCount += receiveBytes.Length;
 			serverEvents.rawEvents(info);

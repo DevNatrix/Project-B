@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,6 +10,7 @@ public class ServerEvents : MonoBehaviour
 {
 	//DO NOT CHANGE THIS FILE TO ADD EVENTS
 	//change CustomEvents.cs instead, it has examples and everything
+	//ask me if you really want to do it
 
 	[SerializeField] UDPServer server;
 	[SerializeField] GameObject otherClientPrefab;
@@ -38,14 +40,21 @@ public class ServerEvents : MonoBehaviour
 	public void rawEvents(string rawEvents)
 	{
 		string[] splitRawEvents = rawEvents.Split('|');
-		for (int eventID = 0; eventID < splitRawEvents.Length; eventID++)
+		for (int eventID = 0; eventID < splitRawEvents.Length - 1; eventID++)
 		{
 			if (splitRawEvents[eventID] != "")
 			{
 				string[] peices = splitRawEvents[eventID].Split("~");
 				if(this != null) //events get recieved even after exit, showing a ton of annoying errors (this removes that)
 				{
-					this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
+					try
+					{
+						this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
+					}
+					catch (Exception e)
+					{
+						Debug.LogWarning(e.Message + ", no event for received event: " + splitRawEvents[eventID]);
+					}
 				}
 			}
 		}
@@ -64,7 +73,7 @@ public class ServerEvents : MonoBehaviour
 		Vector3 position = parseVector3(data[1]);
 		Quaternion rotation = parseQuaternion(data[2]);
 
-		if (clientID != server.ID)
+		if (clientID != UDPServer.ID)
 		{
 			foreach (OtherClient otherClient in otherClientList)
 			{
@@ -80,7 +89,7 @@ public class ServerEvents : MonoBehaviour
 	{
 		int clientID = int.Parse(data[0]);
 
-		if(clientID == server.ID)
+		if(clientID == UDPServer.ID)
 		{
 			Debug.LogError("Server sent leave event for this client, closing game");
 			Application.Quit();
@@ -113,6 +122,23 @@ public class ServerEvents : MonoBehaviour
 
 
 	//tools --------------------------------------------------------------
+
+	public OtherClient getOtherClientScriptByID(int clientID)
+	{
+		foreach (OtherClient otherClient in otherClientList)
+		{
+			if (otherClient.ID == clientID)
+			{
+				return otherClient;
+			}
+		}
+		return null;
+	}
+
+	public int getIDByOtherClientScript(OtherClient otherClient1)
+	{
+		return otherClient1.ID;
+	}
 
 	public string getUsername(int clientID)
 	{

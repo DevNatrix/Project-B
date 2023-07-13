@@ -375,6 +375,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5971e09-961c-49fa-95e8-c2e9d34e41fd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -476,6 +485,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfcebaec-df15-4bd2-948c-d812d5710360"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -509,6 +529,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Weapon_Reload = m_Weapon.FindAction("Reload", throwIfNotFound: true);
         m_Weapon_Inspect = m_Weapon.FindAction("Inspect", throwIfNotFound: true);
         m_Weapon_Drop = m_Weapon.FindAction("Drop", throwIfNotFound: true);
+        m_Weapon_Interact = m_Weapon.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -773,6 +794,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Weapon_Reload;
     private readonly InputAction m_Weapon_Inspect;
     private readonly InputAction m_Weapon_Drop;
+    private readonly InputAction m_Weapon_Interact;
     public struct WeaponActions
     {
         private @PlayerControls m_Wrapper;
@@ -786,6 +808,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Reload => m_Wrapper.m_Weapon_Reload;
         public InputAction @Inspect => m_Wrapper.m_Weapon_Inspect;
         public InputAction @Drop => m_Wrapper.m_Weapon_Drop;
+        public InputAction @Interact => m_Wrapper.m_Weapon_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -822,6 +845,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Drop.started += instance.OnDrop;
             @Drop.performed += instance.OnDrop;
             @Drop.canceled += instance.OnDrop;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IWeaponActions instance)
@@ -853,6 +879,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Drop.started -= instance.OnDrop;
             @Drop.performed -= instance.OnDrop;
             @Drop.canceled -= instance.OnDrop;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IWeaponActions instance)
@@ -900,5 +929,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnInspect(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

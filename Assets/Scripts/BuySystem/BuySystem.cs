@@ -5,14 +5,18 @@ using UnityEngine.InputSystem;
 
 public class BuySystem : MonoBehaviour
 {
+    public static BuySystem Instance { get; private set; }
     PlayerControls playerControls;
     public GameObject BuyScreenGO;
-    public GameObject WeaponHolder;
     bool BuyScreenVisual = false;
+    [HideInInspector] public GameObject WeaponIns;
+    [HideInInspector] public GameObject WeaponType;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
+
+        Instance = this;
     }
 
     private void OnEnable()
@@ -44,9 +48,10 @@ public class BuySystem : MonoBehaviour
         }
     }
 
-    public void BuyWeapon(GameObject WeaponType)
+    public void BuyWeapon(GameObject _WeaponType)
     {
-        Instantiate(WeaponType, WeaponHolder.transform);
+        WeaponType = _WeaponType;
+        WeaponIns = Instantiate(WeaponType, GameReferences.Instance.weaponHolder.transform);
         Debug.Log($"Bought {WeaponType}");
     }
 }

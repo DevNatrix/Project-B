@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +5,28 @@ using UnityEngine.InputSystem;
 
 public class WeaponSystem : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] WeaponData weaponData;
-
     PlayerControls playerControls;
-    float timeSinceLastShot;
+
+    [Header("References")]
+    private GameObject cam;
+    public WeaponInfo weaponInfo;
+    public Animator anim;
+    [HideInInspector] public ServerEvents serverEvents;
+
+    public int damage;
+
+    public int maxDistance;
+
+    public float fireRate;
+
+    private float nextFire;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
+
+        cam = GameReferences.Instance.MainCam;
+
     }
 
     private void OnEnable()
@@ -27,39 +39,58 @@ public class WeaponSystem : MonoBehaviour
         playerControls.Disable();
     }
 
-    private void Update()
+    void Start()
     {
-        if(playerControls.Weapon.Fire.IsPressed())
-        {
-            Shoot();
-        }
-
-        timeSinceLastShot += Time.deltaTime;
+        
     }
 
-    private bool CanShoot() => !weaponData.Reloading && timeSinceLastShot > 1f / (weaponData.FireRate / 60f);
-
-    public void Shoot()
+    void Update()
     {
-        if(weaponData.CurrentAmmo > 0)
+        Shoot();
+        Reload();
+        Debug.DrawRay(cam.transform.position, cam.transform.forward);
+
+        if(nextFire > 0)
         {
-            if(CanShoot())
+            nextFire -= Time.deltaTime;
+        }
+    }
+
+    private void Shoot()
+    {
+       if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0)
+        {
+            nextFire = 1 / fireRate;
+
+            //Shoot Function
+            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance))
             {
-                if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, weaponData.MaxDistance))
+                if (hit.transform.gameObject.GetComponent<OtherClient>())
                 {
-                    Debug.Log(hitInfo.transform.name);
+                    hit.transform.gameObject.GetComponent<OtherClient>().TakeDamage(damage);
+                    string ClientID =  hit.transform.gameObject.GetComponent<OtherClient>().ID.ToString();
+                    serverEvents.sendEvent("Damage", new string[]{damage.ToString(), ClientID});
                 }
-
-                weaponData.CurrentAmmo--;
-                timeSinceLastShot = 0;
-                OnGunShot();
-
             }
         }
     }
 
-    private void OnGunShot()
+    void Reload()
     {
-        
+        if(playerControls.Weapon.Reload.WasPressedThisFrame())
+        {
+            anim.Play("ReloadAnim");
+            anim.SetBool("Reloading", true);
+        }
+    }
+
+    public void SetReloadFalse()
+    {
+        //Reload Weapon
+        anim.SetBool("Reloading", false);
     }
 }

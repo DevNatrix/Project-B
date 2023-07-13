@@ -20,8 +20,6 @@ public class CustomEvents : MonoBehaviour
 		Debug.Log(exampleData1 + ", " + exampleData2 + ", " + exampleData3);
 	}
 
-
-
 	//doesnt have to have it's own function, just do the things inside of the function
 	public void sendExampleEventExample()
 	{
@@ -41,7 +39,6 @@ public class CustomEvents : MonoBehaviour
 	public void serverMessage(string[] data)
 	{
 		string message = data[0];
-
 		chat.serverMessage(message);
 	}
 
@@ -65,4 +62,27 @@ public class CustomEvents : MonoBehaviour
 	{
 		print("leave");
 	}
+
+	public void switchGun(string[] data)
+	{
+		int clientID = int.Parse(data[0]);
+		string weaponName = data[1];
+
+		Debug.Log(clientID + ", " + weaponName);
+	}
+
+	public void Damage(string[] data)
+    {
+		int damage = int.Parse(data[0]);
+		int clientID = int.Parse(data[1]);
+		Debug.Log("Event works lmaos");
+		if(clientID == UDPServer.ID)
+        {
+			return;
+        }
+		else
+        {
+			serverEvents.getOtherClientScriptByID(clientID).TakeDamage(damage);
+		}
+    }
 }
