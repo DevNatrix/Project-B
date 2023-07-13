@@ -50,7 +50,7 @@ public class Lobby : MonoBehaviour
 			{
 				testConnection(option.port, option.ip);
 			}
-			Invoke("ChangeScene", ((float)serverTimoutMS) / 1000);
+			Invoke("ChangeScene", ((float)serverTimoutMS + 500) / 1000);
 	}
 
 	async void ChangeScene()
