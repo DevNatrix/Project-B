@@ -133,6 +133,7 @@ public class UDPServer : MonoBehaviour
 			byte[] receiveBytes = new byte[0];
 			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(1000));
 			string recieveString = Encoding.ASCII.GetString(receiveBytes);
+			print(recieveString);
 			ID = int.Parse(recieveString.Split('~')[0]);
 			transformTPS = int.Parse(recieveString.Split('~')[1]);
 			eventTPS = int.Parse(recieveString.Split('~')[2]);
