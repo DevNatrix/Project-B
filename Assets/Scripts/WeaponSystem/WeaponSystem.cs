@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class WeaponSystem : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class WeaponSystem : MonoBehaviour
     private GameObject cam;
     public WeaponInfo weaponInfo;
     public Animator anim;
+    public GameObject bulletHole;
     [HideInInspector] public ServerEvents serverEvents;
 
     [Header("Info")]
@@ -29,27 +31,35 @@ public class WeaponSystem : MonoBehaviour
     public int currentAmmo;
     public int maxAmmo;
 
+    [Header("UI")]
+    private TextMeshProUGUI AmmoAndMagText;
+    private GameObject AmmoDisplayGOS;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
 
         cam = GameReferences.Instance.MainCam;
+        AmmoAndMagText = GameReferences.Instance.AmmoAndMagText;
+        AmmoDisplayGOS = GameReferences.Instance.AmmoDisplayGO;
 
     }
 
     private void OnEnable()
     {
         playerControls.Enable();
+        AmmoDisplayGOS.SetActive(true);
     }
 
     private void OnDisable()
     {
         playerControls.Disable();
+        AmmoDisplayGOS.SetActive(false);
     }
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -62,7 +72,10 @@ public class WeaponSystem : MonoBehaviour
         {
             nextFire -= Time.deltaTime;
         }
-    }
+
+
+        AmmoAndMagText.text = currentAmmo.ToString() + "/" + AmmoInReserve.ToString();
+}
 
     private void Shoot()
     {
@@ -85,6 +98,8 @@ public class WeaponSystem : MonoBehaviour
                 }
 
                 currentAmmo--;
+                Instantiate(bulletHole, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(hit.normal));
+
             }
         }
     }
@@ -95,15 +110,18 @@ public class WeaponSystem : MonoBehaviour
         {
             if (currentAmmo < maxAmmo && AmmoInReserve > 0)
             {
-                int ammoToAdd = maxAmmo - currentAmmo;
-                int clamped = Mathf.Min(ammoToAdd, AmmoInReserve);
-                AmmoInReserve -= clamped;
-                currentAmmo += clamped;
-
                 //Play Reload Animation
                 anim.SetBool("Reloading", true);
             }
         }
+    }
+
+    public void ReloadAmmo()
+    {
+        int ammoToAdd = maxAmmo - currentAmmo;
+        int clamped = Mathf.Min(ammoToAdd, AmmoInReserve);
+        AmmoInReserve -= clamped;
+        currentAmmo += clamped;
     }
 
     //Stops reloading
