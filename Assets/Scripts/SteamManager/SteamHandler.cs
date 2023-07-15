@@ -19,6 +19,7 @@ public class SteamHandler : MonoBehaviour
         if (!steam_initialized)
         {
             Debug.LogError("Steam is not opened, please open Steam");
+            usernameSteam = "guest" + Random.Range(0, 9999);
         }
     }
 
