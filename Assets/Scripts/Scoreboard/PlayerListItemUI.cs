@@ -6,12 +6,11 @@ using TMPro;
 
 public class PlayerListItemUI : MonoBehaviour
 {
-
     public TextMeshProUGUI PlayerName;
     public RawImage PlayerIcon;
     public TextMeshProUGUI PingText;
 
-    private void Start()
+    void OnEnable()
     {
         StartCoroutine(UpdatePing());
     }
@@ -24,7 +23,8 @@ public class PlayerListItemUI : MonoBehaviour
     IEnumerator UpdatePing()
     {
         PingText.text = UDPServer.latency.ToString() + "ms";
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Updated");
         StartCoroutine(UpdatePing());
     }
 
