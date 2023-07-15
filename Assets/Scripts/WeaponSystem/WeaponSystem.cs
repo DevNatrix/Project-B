@@ -47,13 +47,11 @@ public class WeaponSystem : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Enable();
-        AmmoDisplayGOS.SetActive(true);
     }
 
     private void OnDisable()
     {
         playerControls.Disable();
-        AmmoDisplayGOS.SetActive(false);
     }
 
     void Start()
@@ -96,10 +94,10 @@ public class WeaponSystem : MonoBehaviour
                     serverEvents.sendEvent("Damage", new string[]{damage.ToString(), ClientID});
                 }
 
-                currentAmmo--;
                 Instantiate(bulletHole, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(hit.normal));
-
             }
+
+            currentAmmo--;
         }
     }
 
