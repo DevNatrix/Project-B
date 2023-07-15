@@ -10,7 +10,6 @@ public class WeaponSystem : MonoBehaviour
 
     [Header("References")]
     private GameObject cam;
-    public WeaponInfo weaponInfo;
     public Animator anim;
     public GameObject bulletHole;
     [HideInInspector] public ServerEvents serverEvents;
