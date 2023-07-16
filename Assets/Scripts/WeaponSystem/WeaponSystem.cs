@@ -6,11 +6,13 @@ using TMPro;
 
 public class WeaponSystem : MonoBehaviour
 {
+    [HideInInspector] public static WeaponSystem Instance;
     PlayerControls playerControls;
 
     [Header("References")]
     private GameObject cam;
     public Animator anim;
+    public GameObject groundPrefab;
     public GameObject bulletHole;
     [HideInInspector] public ServerEvents serverEvents;
 
@@ -37,6 +39,7 @@ public class WeaponSystem : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
+        Instance = this;
 
         cam = GameReferences.Instance.MainCam;
         AmmoAndMagText = GameReferences.Instance.AmmoAndMagText;
@@ -72,7 +75,12 @@ public class WeaponSystem : MonoBehaviour
 
 
         AmmoAndMagText.text = currentAmmo.ToString() + "/" + AmmoInReserve.ToString();
-}
+
+        if(playerControls.Weapon.Drop.WasPerformedThisFrame())
+        {
+            DropItem();
+        }
+    }
 
     private void Shoot()
     {
@@ -125,5 +133,11 @@ public class WeaponSystem : MonoBehaviour
     public void SetReloadFalse()
     {
         anim.SetBool("Reloading", false);
+    }
+
+    public void DropItem()
+    {
+        Destroy(gameObject);
+        Instantiate(groundPrefab, cam.transform.position, default);
     }
 }

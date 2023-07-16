@@ -34,10 +34,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     void Update()
     {
-
         int previousWeapon = selectedWeapon;
-
-
 
         if(playerControls.Weapon.PrimaryWeapon.WasPressedThisFrame())
         {
