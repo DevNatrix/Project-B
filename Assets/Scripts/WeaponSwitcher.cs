@@ -9,6 +9,7 @@ public class WeaponSwitcher : MonoBehaviour
     private int selectedWeapon = 0;
     public bool switchonScroll = true;
     private Animator anim;
+    private GameObject currentSelectedWeapon;
 
     private void Awake()
     {
@@ -33,7 +34,10 @@ public class WeaponSwitcher : MonoBehaviour
 
     void Update()
     {
+
         int previousWeapon = selectedWeapon;
+
+
 
         if(playerControls.Weapon.PrimaryWeapon.WasPressedThisFrame())
         {
@@ -102,6 +106,8 @@ public class WeaponSwitcher : MonoBehaviour
             }
             else
             {
+                anim = _weapon.gameObject.GetComponent<Animator>();
+                anim.SetBool("Reloading", false);
                 _weapon.gameObject.SetActive(false);
             }
 
