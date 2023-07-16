@@ -522,7 +522,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8243980396678913872, guid: 319ce60d8a86c694e916373514c6d1ed, type: 3}
+  - {fileID: 2100000, guid: 928ace354936e2342a6a9f3d93841365, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1906,7 +1906,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7156507587566948871, guid: 319ce60d8a86c694e916373514c6d1ed, type: 3}
+  - {fileID: 2100000, guid: 0b7c967f8510a3040851e5533b0ed90e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2016,7 +2016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccdf218077a910a40a56ac2be4ff8a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponInfo: {fileID: 11400000, guid: f61b70da29c586f43a1361e2319bc177, type: 2}
   anim: {fileID: 3786422439672198964}
   bulletHole: {fileID: 3980126314146801182, guid: 10602d8e273ed3140a812277765964cf, type: 3}
   serverEvents: {fileID: 0}
