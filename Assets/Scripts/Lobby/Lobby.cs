@@ -33,6 +33,9 @@ public class Lobby : MonoBehaviour
 	[SerializeField] Button connectButton;
 	[SerializeField] GameObject lostConnectionGUI;
 
+	[Header("Browser:")]
+	[SerializeField] GameObject serverContainer;
+	[SerializeField] GameObject serverPrefab;
 
 	private void Start()
     {
@@ -44,9 +47,21 @@ public class Lobby : MonoBehaviour
 		Cursor.lockState = CursorLockMode.None;
 	}
 
+	public void updateBrowser()
+	{
+		foreach(ServerOption option in possibleServers)
+		{
+			option.refreshInfo(serverTimoutMS);
+		}
+	}
+
 	public void Deactivate(GameObject objectToDeactivate)
 	{
 		objectToDeactivate.SetActive(false);
+	}
+	public void Activate(GameObject objectToActivate)
+	{
+		objectToActivate.SetActive(true);
 	}
 
 	private void Update()

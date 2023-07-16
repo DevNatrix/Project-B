@@ -72,6 +72,7 @@ public class Movement : MonoBehaviour
 	[SerializeField] AudioPlayer audioPlayer;
 	[SerializeField] float distanceForFootstep;
 	[SerializeField] AudioClip footstepClip;
+	[SerializeField] float footstepVolume;
 	Vector3 pastStepPosition;
 
 	[Header("Debug")]
@@ -205,7 +206,7 @@ public class Movement : MonoBehaviour
 			if(Vector3.Distance(pastStepPosition, transform.position) >= distanceForFootstep)
 			{
 				pastStepPosition = transform.position;
-				audioPlayer.sendAudioByClip(footstepClip, transform.position, 1, 1);
+				audioPlayer.sendAudioByClip(footstepClip, transform.position, footstepVolume, 1);
 			}
 
 			if (!sliding)

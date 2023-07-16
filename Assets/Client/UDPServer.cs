@@ -18,8 +18,7 @@ public class UDPServer : MonoBehaviour
 	[HideInInspector] public static int ID;
 	[HideInInspector] public int transformTPS;
 	[HideInInspector] public int eventTPS;
-	[SerializeField] int maxEmptyMessages;
-	int emptyMessageCounter = 0;
+	[SerializeField] int maxDroppedMessagesForDisconnect;
 	[SerializeField] int messageTimoutMS = 1000;
 	[SerializeField] Transform playerTransform;
 	[SerializeField] Transform playerCamTransform;
@@ -90,7 +89,7 @@ public class UDPServer : MonoBehaviour
 		maxFPS = FPS;
 		FPS = 0;
 
-		if (emptyMessageCounter > maxEmptyMessages)
+		if (droppedMessages > maxDroppedMessagesForDisconnect)
 		{
 			lostConnection = true;
 			SceneManager.LoadScene("Lobby");
@@ -217,11 +216,9 @@ public class UDPServer : MonoBehaviour
 			latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
 			recieveBytesCount += receiveBytes.Length;
 			serverEvents.rawEvents(info);
-			emptyMessageCounter = 0;
 		}
 		else
 		{
-			emptyMessageCounter++;
 			droppedMessages++;
 		}
 		updateDebug();
