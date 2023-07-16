@@ -41,6 +41,7 @@ public class Lobby : MonoBehaviour
 			UDPServer.lostConnection = false;
 			lostConnectionGUI.SetActive(true);
 		}
+		Cursor.lockState = CursorLockMode.None;
 	}
 
 	public void Deactivate(GameObject objectToDeactivate)
