@@ -18,7 +18,8 @@ public class UDPServer : MonoBehaviour
 	[HideInInspector] public static int ID;
 	[HideInInspector] public int transformTPS;
 	[HideInInspector] public int eventTPS;
-	[SerializeField] int maxOutgoingMessages;
+	[SerializeField] int maxEmptyMessages;
+	int emptyMessageCounter = 0;
 	[SerializeField] int messageTimoutMS = 1000;
 	[SerializeField] Transform playerTransform;
 	[SerializeField] Transform playerCamTransform;
@@ -49,6 +50,8 @@ public class UDPServer : MonoBehaviour
 	int FPS = 0;
 	int minFPS = 0;
 	int maxFPS = 0;
+
+	public static bool lostConnection = false;
 
 
 	private void Update()
@@ -169,7 +172,6 @@ public class UDPServer : MonoBehaviour
 		string info = "";
 		byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
 		await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
-		latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
 		info = Encoding.ASCII.GetString(receiveBytes);
 		outgoingMessages--;
 
@@ -206,12 +208,21 @@ public class UDPServer : MonoBehaviour
 		//processing response
 		if (info != "EMPTY")
 		{
+			latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
 			recieveBytesCount += receiveBytes.Length;
 			serverEvents.rawEvents(info);
+			emptyMessageCounter = 0;
 		}
 		else
 		{
+			emptyMessageCounter++;
 			droppedMessages++;
+
+			if(emptyMessageCounter > maxEmptyMessages)
+			{
+				lostConnection = true;
+				SceneManager.LoadScene("Lobby");
+			}
 		}
 		updateDebug();
 		serverEvents.restartLerpTimer();
@@ -219,7 +230,7 @@ public class UDPServer : MonoBehaviour
 
 	async void eventUpdater()
 	{
-		float startTime = Time.time;
+		//float startTime = Time.time;
 		//send
 		sendMessage("eu~" + ID);
 		outgoingMessages++;
@@ -229,7 +240,7 @@ public class UDPServer : MonoBehaviour
 		string info = "";
 		byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
 		await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
-		latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
+		//latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
 		outgoingMessages--;
 		info = Encoding.ASCII.GetString(receiveBytes);
 

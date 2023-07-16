@@ -5548,8 +5548,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transformTPS: 0
   eventTPS: 0
-  maxOutgoingMessages: 10
-  messageTimoutMS: 1000
+  maxEmptyMessages: 10
+  messageTimoutMS: 300
   playerTransform: {fileID: 5846882482729803036}
   playerCamTransform: {fileID: 4193270394687202011}
   serverEvents: {fileID: 1836363827}
@@ -6192,6 +6192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 014e5a33576f0294fbea01ba345fc5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchonScroll: 1
 --- !u!4 &5846882482729803036 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5846882482686360341, guid: a97e20e3f8906224c868860ab421ef41, type: 3}

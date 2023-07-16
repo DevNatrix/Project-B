@@ -31,13 +31,24 @@ public class Lobby : MonoBehaviour
 
 	[SerializeField] TextMeshProUGUI statusText;
 	[SerializeField] Button connectButton;
+	[SerializeField] GameObject lostConnectionGUI;
 
-    private void Start()
+
+	private void Start()
     {
-
+		if(UDPServer.lostConnection)
+		{
+			UDPServer.lostConnection = false;
+			lostConnectionGUI.SetActive(true);
+		}
 	}
 
-    private void Update()
+	public void Deactivate(GameObject objectToDeactivate)
+	{
+		objectToDeactivate.SetActive(false);
+	}
+
+	private void Update()
     {
 		username = SteamHandler.usernameSteam;
 	}
