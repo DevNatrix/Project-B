@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc9e5623d8f6ab042bb7b052b6bc6d76, type: 3}
-  m_Name: Makarov
+  m_Name: Beretta
   m_EditorClassIdentifier: 
-  WeaponName: Makarov
+  WeaponName: Beretta
   damage: 17
   maxDistance: 50
   startAmmo: 12
