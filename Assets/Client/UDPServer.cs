@@ -89,6 +89,12 @@ public class UDPServer : MonoBehaviour
 		minFPS = FPS;
 		maxFPS = FPS;
 		FPS = 0;
+
+		if (emptyMessageCounter > maxEmptyMessages)
+		{
+			lostConnection = true;
+			SceneManager.LoadScene("Lobby");
+		}
 	}
 
 	public void updateDebug()
@@ -217,12 +223,6 @@ public class UDPServer : MonoBehaviour
 		{
 			emptyMessageCounter++;
 			droppedMessages++;
-
-			if(emptyMessageCounter > maxEmptyMessages)
-			{
-				lostConnection = true;
-				SceneManager.LoadScene("Lobby");
-			}
 		}
 		updateDebug();
 		serverEvents.restartLerpTimer();
