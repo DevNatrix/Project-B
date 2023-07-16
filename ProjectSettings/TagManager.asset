@@ -10,6 +10,9 @@ TagManager:
   - Weapons
   - Ramp
   - BodyShot
+  - PrimaryWeapons
+  - SecondaryWeapons
+  - Knifes
   layers:
   - Default
   - TransparentFX
