@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Threading;
 
 public class UDPServer : MonoBehaviour
 {
@@ -167,8 +168,8 @@ public class UDPServer : MonoBehaviour
 
 	async void transformUpdater()
 	{
-		float startTime = Time.time;
 		//send
+		float startTime = Time.time;
 		sendMessage("tu~" + ID + "~" + playerTransform.position + "~" + playerCamTransform.rotation);
 		outgoingMessages++;
 		packets++;
@@ -176,45 +177,56 @@ public class UDPServer : MonoBehaviour
 		//recieve
 		string info = "";
 		byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
-		await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
+		Task receiveTask = Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint));
+		Task timeoutTask = Task.Delay(messageTimoutMS);
+		await Task.WhenAny(receiveTask, timeoutTask);
 		info = Encoding.ASCII.GetString(receiveBytes);
 		outgoingMessages--;
 
-		string[] splitRawEvents = info.Split('|');
-		int gottenUMessageID;
-		currentUMessageID++;
-		try
+		if(!timeoutTask.IsCompleted && info != "EMPTY")
 		{
-			gottenUMessageID = int.Parse(splitRawEvents[splitRawEvents.Length - 1]);
+			//update message id
+			string[] splitRawEvents = info.Split('|');
+			currentUMessageID++;
+			int gottenUMessageID;
+			try
+			{
+				gottenUMessageID = int.Parse(splitRawEvents[splitRawEvents.Length - 1]);
+			}
+			catch
+			{
+				Debug.LogError("Bad message: " + info);
+				return;
+			}
+
+			//message id looping
 			if(currentUMessageID >= maxMessageID)
 			{
 				currentUMessageID = 0;
 			}
-			messageIDText.text = "U-Message ID: " + currentUMessageID;
+
+			//making sure it's the right id (in the right order)
 			if (gottenUMessageID != currentUMessageID)
 			{
 				Debug.LogWarning("Update message recieved out of order ------ recieved: " + gottenUMessageID + ", current: " + currentUMessageID);
 				if(gottenUMessageID > currentUMessageID)
 				{
+					//if not in the right order (and is ahead)
 					currentUMessageID = gottenUMessageID;
 				}
 				else
 				{
+					//if not in the right order (and is behind)
 					return;
 				}
 			}
-		}
-		catch (Exception e)
-		{
-			Debug.LogError(e.Message + ", message: " + info);
-		}
 
 
-		//processing response
-		if (info != "EMPTY")
-		{
-			latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
+			//process info
+			latency = (int)Mathf.Round((Time.time - startTime) * 1000);
 			recieveBytesCount += receiveBytes.Length;
+			messageIDText.text = "U-Message ID: " + currentUMessageID;
+			serverEvents.restartLerpTimer();
 			serverEvents.rawEvents(info);
 		}
 		else
@@ -222,7 +234,6 @@ public class UDPServer : MonoBehaviour
 			droppedMessages++;
 		}
 		updateDebug();
-		serverEvents.restartLerpTimer();
 	}
 
 	async void eventUpdater()
