@@ -9,6 +9,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using System.Threading;
+using UnityEngine.UI;
 
 public class ServerOption : MonoBehaviour
 {
@@ -19,6 +20,19 @@ public class ServerOption : MonoBehaviour
 
 	UdpClient client;
 	IPEndPoint remoteEndPoint;
+
+	public bool online = false;
+	Lobby lobby;
+
+	private void Start()
+	{
+		lobby = GameObject.Find("LobbyHandler").GetComponent<Lobby>();
+	}
+
+	public void selectServer()
+	{
+		lobby.setSelectedServer(this);
+	}
 
 	public async void refreshInfo(int timeoutMS)
 	{
@@ -40,22 +54,24 @@ public class ServerOption : MonoBehaviour
 			Task timeoutTask = Task.Delay(timeoutMS);
 			await Task.WhenAny(receiveTask, timeoutTask);
 
-			if(!receiveTask.IsCompleted)
+			string recieveString = Encoding.ASCII.GetString(receiveBytes);
+			if(timeoutTask.IsCompleted || recieveString == "EMPTY")
 			{
 				serverOffline.SetActive(true);
 				versionText.text = "";
 				playersText.text = "";
 				pingText.text = "";
+				online = false;
 			}
 			else
 			{
-				string recieveString = Encoding.ASCII.GetString(receiveBytes);
 				Debug.Log("Recieved Message from " + ip + ": " + recieveString);
 				float ping = (int)((Time.time - startTime)*1000); //get ping
 				serverOffline.SetActive(false);
 				versionText.text = "V" + recieveString;
 				playersText.text = "?";
 				pingText.text = ping + "ms";
+				online = true;
 			}
 		}
 		catch (Exception e)

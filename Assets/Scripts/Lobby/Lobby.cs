@@ -12,6 +12,7 @@ using System;
 using TMPro;
 using UnityEditor;
 using Steamworks;
+using UnityEditor.Experimental.GraphView;
 
 public class Lobby : MonoBehaviour
 {
@@ -38,6 +39,10 @@ public class Lobby : MonoBehaviour
 	[SerializeField] GameObject serverPrefab;
 	[SerializeField] bool autoUpdateBrowser;
 	[SerializeField] float browserUpdateInterval;
+
+	[SerializeField] Button browserJoinButton;
+
+	ServerOption currentServerInBrowser;
 
 	private void Start()
     {
@@ -160,5 +165,28 @@ public class Lobby : MonoBehaviour
         {
 			EditorApplication.isPlaying = false;
 		}*/ //doesnt let you build
+	}
+
+	public void setSelectedServer(ServerOption selectedServer)
+	{
+		if(currentServerInBrowser != null)
+		{
+			currentServerInBrowser.gameObject.GetComponent<Image>().color = new Color(0.69f, 0.69f, 0.69f);
+		}
+		selectedServer.gameObject.GetComponent<Image>().color = new Color(0.47f, 0.61f, 0.43f);
+		currentServerInBrowser = selectedServer;
+
+		browserJoinButton.enabled = true;
+		browserJoinButton.gameObject.GetComponent<Image>().color = new Color(248, 248, 248, 255);
+	}
+
+	public void joinSelectedServer()
+	{
+		if(currentServerInBrowser != null && currentServerInBrowser.online)
+		{
+			bestPort = currentServerInBrowser.port;
+			bestIP = currentServerInBrowser.ip;
+			ChangeScene();
+		}
 	}
 }

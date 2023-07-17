@@ -208,10 +208,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 72
+  m_fontSizeBase: 54.33
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -306,6 +306,7 @@ MonoBehaviour:
   playersText: {fileID: 0}
   versionText: {fileID: 0}
   serverOffline: {fileID: 0}
+  online: 0
   port: 6969
   ip: 198.162.0.50
 --- !u!1 &65736885
@@ -1133,6 +1134,7 @@ MonoBehaviour:
   playersText: {fileID: 0}
   versionText: {fileID: 0}
   serverOffline: {fileID: 0}
+  online: 0
   port: 6969
   ip: 75.100.205.73
 --- !u!1 &653968026
@@ -1359,10 +1361,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 72
+  m_fontSizeBase: 54.33
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -2074,6 +2076,7 @@ MonoBehaviour:
   playersText: {fileID: 0}
   versionText: {fileID: 0}
   serverOffline: {fileID: 0}
+  online: 0
   port: 6969
   ip: localhost
 --- !u!1 &1137355435
@@ -3174,6 +3177,7 @@ MonoBehaviour:
   playersText: {fileID: 0}
   versionText: {fileID: 0}
   serverOffline: {fileID: 0}
+  online: 0
   port: 6969
   ip: 192.36.176.139
 --- !u!1 &1815397368
@@ -3481,7 +3485,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833644223}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -3517,7 +3521,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1833644226}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2110258937}
+        m_TargetAssemblyTypeName: Lobby, Assembly-CSharp
+        m_MethodName: joinSelectedServer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1833644226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3531,7 +3547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 1}
+  m_Color: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3775,10 +3791,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 72
+  m_fontSizeBase: 54.33
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -4225,6 +4241,7 @@ MonoBehaviour:
   serverPrefab: {fileID: 1448672092114638562, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
   autoUpdateBrowser: 1
   browserUpdateInterval: 3
+  browserJoinButton: {fileID: 1833644225}
 --- !u!4 &2110258938
 Transform:
   m_ObjectHideFlags: 0
