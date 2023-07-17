@@ -36,6 +36,8 @@ public class Lobby : MonoBehaviour
 	[Header("Browser:")]
 	[SerializeField] GameObject serverContainer;
 	[SerializeField] GameObject serverPrefab;
+	[SerializeField] bool autoUpdateBrowser;
+	[SerializeField] float browserUpdateInterval;
 
 	private void Start()
     {
@@ -45,10 +47,16 @@ public class Lobby : MonoBehaviour
 			lostConnectionGUI.SetActive(true);
 		}
 		Cursor.lockState = CursorLockMode.None;
+
+		if(autoUpdateBrowser )
+		{
+			InvokeRepeating("updateBrowser", 1, browserUpdateInterval);
+		}
 	}
 
 	public void updateBrowser()
 	{
+		print("udpated browser");
 		foreach(ServerOption option in possibleServers)
 		{
 			option.refreshInfo(serverTimoutMS);

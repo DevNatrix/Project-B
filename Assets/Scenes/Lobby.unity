@@ -792,6 +792,10 @@ PrefabInstance:
       propertyPath: m_text
       value: General - US
       objectReference: {fileID: 0}
+    - target: {fileID: 3471536410066813293, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
 --- !u!224 &424330970 stripped
@@ -2614,6 +2618,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Local Raspi
       objectReference: {fileID: 0}
+    - target: {fileID: 3471536410066813293, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
 --- !u!224 &1528505049 stripped
@@ -4215,6 +4223,8 @@ MonoBehaviour:
   lostConnectionGUI: {fileID: 926741339}
   serverContainer: {fileID: 423933475}
   serverPrefab: {fileID: 1448672092114638562, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
+  autoUpdateBrowser: 1
+  browserUpdateInterval: 3
 --- !u!4 &2110258938
 Transform:
   m_ObjectHideFlags: 0

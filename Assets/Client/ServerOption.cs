@@ -7,6 +7,8 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
+using System.Threading;
 
 public class ServerOption : MonoBehaviour
 {
@@ -17,11 +19,6 @@ public class ServerOption : MonoBehaviour
 
 	UdpClient client;
 	IPEndPoint remoteEndPoint;
-
-	private void Start()
-	{
-		refreshInfo(1000);
-	}
 
 	public async void refreshInfo(int timeoutMS)
 	{
@@ -37,14 +34,13 @@ public class ServerOption : MonoBehaviour
 			float startTime = Time.time; //start ping timer
 			client.Send(sendBytes, sendBytes.Length);
 
-			//wait for response
-			byte[] receiveBytes = new byte[0];
-			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(timeoutMS));
-			float ping = (int)((Time.time - startTime)*1000); //get ping
-			string recieveString = Encoding.ASCII.GetString(receiveBytes);
-			Debug.Log("Recieved Message from " + ip + ": " + recieveString);
+			//wait for response or if a timout happens
+			byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
+			Task receiveTask = Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint));
+			Task timeoutTask = Task.Delay(timeoutMS);
+			await Task.WhenAny(receiveTask, timeoutTask);
 
-			if(recieveString == "")
+			if(!receiveTask.IsCompleted)
 			{
 				serverOffline.SetActive(true);
 				versionText.text = "";
@@ -53,6 +49,9 @@ public class ServerOption : MonoBehaviour
 			}
 			else
 			{
+				string recieveString = Encoding.ASCII.GetString(receiveBytes);
+				Debug.Log("Recieved Message from " + ip + ": " + recieveString);
+				float ping = (int)((Time.time - startTime)*1000); //get ping
 				serverOffline.SetActive(false);
 				versionText.text = "V" + recieveString;
 				playersText.text = "?";
