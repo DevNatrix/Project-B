@@ -36,6 +36,9 @@ public class WeaponSystem : MonoBehaviour
     private TextMeshProUGUI AmmoAndMagText;
     private GameObject AmmoDisplayGOS;
 
+    [Header("Other")]
+    public float dropForce = 0.5f;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -138,6 +141,6 @@ public class WeaponSystem : MonoBehaviour
     public void DropItem()
     {
         Destroy(gameObject);
-        Instantiate(groundPrefab, cam.transform.position, default);
+        Instantiate(groundPrefab, cam.transform.position + (cam.transform.forward * dropForce), Quaternion.identity);
     }
 }
