@@ -13,6 +13,6 @@ public class PickUpSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
