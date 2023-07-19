@@ -34,7 +34,6 @@ public class WeaponSystem : MonoBehaviour
 
     [Header("UI")]
     private TextMeshProUGUI AmmoAndMagText;
-    private GameObject AmmoDisplayGOS;
 
     [Header("Other")]
     public float dropForce = 0.5f;
@@ -46,7 +45,6 @@ public class WeaponSystem : MonoBehaviour
 
         cam = GameReferences.Instance.MainCam;
         AmmoAndMagText = GameReferences.Instance.AmmoAndMagText;
-        AmmoDisplayGOS = GameReferences.Instance.AmmoDisplayGO;
 
     }
 
@@ -142,5 +140,6 @@ public class WeaponSystem : MonoBehaviour
     {
         Destroy(gameObject);
         Instantiate(groundPrefab, cam.transform.position + (cam.transform.forward * dropForce), Quaternion.identity);
+        WeaponSwitcher.Instance.UnequipWeapons();
     }
 }

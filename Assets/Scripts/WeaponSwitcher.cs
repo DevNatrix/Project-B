@@ -2,18 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class WeaponSwitcher : MonoBehaviour
 {
+    public static WeaponSwitcher Instance;
+
     PlayerControls playerControls;
-    private int selectedWeapon = 0;
+    [HideInInspector] public int selectedWeapon = 0;
     public bool switchonScroll = true;
     private Animator anim;
-    private GameObject currentSelectedWeapon;
+
+    [Header("UI Weapon")]
+    private GameObject AmmoDisplayGOS;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
+        Instance = this;
+
+        AmmoDisplayGOS = GameReferences.Instance.AmmoDisplayGO;
     }
 
     private void OnEnable()
@@ -61,7 +69,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     void SwitchOnScrollWheel()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
             if (selectedWeapon >= transform.childCount - 1)
             {
@@ -73,7 +81,7 @@ public class WeaponSwitcher : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             if (selectedWeapon <= 0)
             {
@@ -86,7 +94,7 @@ public class WeaponSwitcher : MonoBehaviour
         }
     }
 
-    void SelectWeapon()
+    public void SelectWeapon()
     {
         if(selectedWeapon >= transform.childCount)
         {
@@ -100,6 +108,7 @@ public class WeaponSwitcher : MonoBehaviour
             if(i == selectedWeapon)
             {
                 _weapon.gameObject.SetActive(true);
+                AmmoDisplayGOS.SetActive(true);
             }
             else
             {
@@ -110,5 +119,12 @@ public class WeaponSwitcher : MonoBehaviour
 
             i++;
         }
+    }
+
+    public void UnequipWeapons()
+    {
+        selectedWeapon = -1;
+        SelectWeapon();
+        AmmoDisplayGOS.SetActive(false);
     }
 }

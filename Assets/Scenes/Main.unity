@@ -2064,7 +2064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &592215169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6169,6 +6169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 014e5a33576f0294fbea01ba345fc5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedWeapon: 0
   switchonScroll: 1
 --- !u!4 &5846882482729803036 stripped
 Transform:
