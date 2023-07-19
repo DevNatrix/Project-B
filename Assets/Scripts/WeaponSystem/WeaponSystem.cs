@@ -138,6 +138,11 @@ public class WeaponSystem : MonoBehaviour
 
     public void DropItem()
     {
+        //Store gun info on the groundPrefab
+        PickUpSystem.AmmoInReserve = AmmoInReserve;
+        PickUpSystem.currentAmmo = currentAmmo;
+        PickUpSystem.maxAmmo = maxAmmo;
+
         Destroy(gameObject);
         Instantiate(groundPrefab, cam.transform.position + (cam.transform.forward * dropForce), Quaternion.identity);
         WeaponSwitcher.Instance.UnequipWeapons();
