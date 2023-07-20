@@ -11,6 +11,7 @@ public class PickUpSystem : MonoBehaviour
     private GameObject cam;
 
     [Header("StoreInfo")]
+    [HideInInspector] public static string WeaponID;
     [HideInInspector] public static int AmmoInReserve;
     [HideInInspector] public static int currentAmmo;
     [HideInInspector] public static int maxAmmo;
@@ -63,6 +64,9 @@ public class PickUpSystem : MonoBehaviour
                 PickUpGunInfo.currentAmmo = currentAmmo;
                 PickUpGunInfo.maxAmmo = maxAmmo;
                 PickUpGunInfo.AmmoInReserve = AmmoInReserve;
+                PickUpGunInfo.WeaponID = WeaponID;
+
+
                 AmmoDisplayGOS.SetActive(true);
                 WeaponSwitcher.Instance.currentSelectedWeapon.SetActive(false);
 
