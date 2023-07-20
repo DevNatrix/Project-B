@@ -64,6 +64,7 @@ public class PickUpSystem : MonoBehaviour
                 PickUpGunInfo.maxAmmo = maxAmmo;
                 PickUpGunInfo.AmmoInReserve = AmmoInReserve;
                 AmmoDisplayGOS.SetActive(true);
+                WeaponSwitcher.Instance.currentSelectedWeapon.SetActive(false);
 
 
                 Destroy(gameObject);

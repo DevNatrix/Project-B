@@ -12,6 +12,7 @@ public class WeaponSwitcher : MonoBehaviour
     [HideInInspector] public int selectedWeapon = 0;
     public bool switchonScroll = true;
     private Animator anim;
+    [HideInInspector] public GameObject currentSelectedWeapon;
 
     [Header("UI Weapon")]
     private GameObject AmmoDisplayGOS;
@@ -107,6 +108,7 @@ public class WeaponSwitcher : MonoBehaviour
         {
             if(i == selectedWeapon)
             {
+                currentSelectedWeapon = _weapon.gameObject;
                 _weapon.gameObject.SetActive(true);
                 AmmoDisplayGOS.SetActive(true);
             }
