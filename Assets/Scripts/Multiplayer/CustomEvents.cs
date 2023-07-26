@@ -89,9 +89,5 @@ public class CustomEvents : MonoBehaviour
 				serverEvents.sendEvent("SetHealth", sendData);
 			}
 		}
-		else
-		{
-			serverEvents.getOtherClientScriptByID(clientID).TakeDamage(damage);
-		}
 	}
 }
