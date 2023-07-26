@@ -72,17 +72,26 @@ public class CustomEvents : MonoBehaviour
 	}
 
 	public void Damage(string[] data)
-    {
+	{
 		int damage = int.Parse(data[0]);
 		int clientID = int.Parse(data[1]);
 		Debug.Log("Event works lmaos");
-		if(clientID == UDPServer.ID)
-        {
-			return;
-        }
+		if (clientID == UDPServer.ID)
+		{
+			if (damage >= Health.Instance.health)
+			{
+				string[] sendData = { UDPServer.ID + "" };
+				serverEvents.sendEvent("Death", sendData);
+			}
+			else
+			{
+				string[] sendData = { UDPServer.ID + "", (Health.Instance.health - damage) + "" };
+				serverEvents.sendEvent("SetHealth", sendData);
+			}
+		}
 		else
-        {
+		{
 			serverEvents.getOtherClientScriptByID(clientID).TakeDamage(damage);
 		}
-    }
+	}
 }

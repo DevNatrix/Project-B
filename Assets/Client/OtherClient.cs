@@ -19,8 +19,6 @@ public class OtherClient : MonoBehaviour
 	Quaternion pastRotation;
 	Quaternion targetRotation;
 
-	public int health = 200;
-
 	private void Start()
 	{
 		playerCam = GameObject.Find("Main Camera").transform;
@@ -41,17 +39,6 @@ public class OtherClient : MonoBehaviour
 
 		pastRotation = targetRotation;
 		targetRotation = rotation;
-	}
-
-	public void TakeDamage(int _damage)
-	{
-		health -= _damage;
-
-		if (health <= 0)
-		{
-			Destroy(gameObject);
-			Debug.Log("You killed something");
-		}
 	}
 
 	private void Update()

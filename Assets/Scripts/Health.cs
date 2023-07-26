@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [HideInInspector] public static Health Instance;
     public int health;
 
     public void TakeDamage(int _damage)
