@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Health : MonoBehaviour
 {
     [HideInInspector] public static Health Instance;
     public int health;
+    public TextMeshProUGUI healthText;
+
+    private void Update()
+    {
+        healthText.text = health.ToString();
+    }
 
     public void TakeDamage(int _damage)
     {
         health -= _damage;
+        
 
         if(health <= 0)
         {
