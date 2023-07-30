@@ -11,11 +11,14 @@ public class Health : MonoBehaviour
     {
         health -= _damage;
         
-
         if(health <= 0)
         {
-            Destroy(gameObject);
+			health = 100;
             Debug.Log("You killed something");
         }
+    }
+	public void SetHealth(int _health)
+    {
+        health = _health;
     }
 }

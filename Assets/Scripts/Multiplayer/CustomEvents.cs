@@ -91,7 +91,28 @@ public class CustomEvents : MonoBehaviour
 		}
 		else
         {
+			OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
+			Health otherClientHealth = otherClientScript.gameObject.GetComponent<Health>();
+			
+			otherClientHealth.TakeDamage(damage);
+		}
+	}
 
-        }
+	public void SetHealth(string[] data)
+	{
+		int clientID = int.Parse(data[0]);
+		int health = int.Parse(data[1]);
+
+		if (clientID == UDPServer.ID)
+		{
+			//LocalHealth.Instance.health = health;
+		}
+		else
+		{
+			OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
+			Health otherClientHealth = otherClientScript.gameObject.GetComponent<Health>();
+
+			otherClientHealth.SetHealth(health);
+		}
 	}
 }
