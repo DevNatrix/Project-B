@@ -1757,6 +1757,10 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 2117224161}
+    - target: {fileID: 4993737252273829260, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+      propertyPath: serverEvents
+      value: 
+      objectReference: {fileID: 1836363827}
     - target: {fileID: 5846882482686360341, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
       propertyPath: m_RootOrder
       value: 4

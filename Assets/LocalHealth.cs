@@ -8,6 +8,7 @@ public class LocalHealth : MonoBehaviour
     [HideInInspector] public static LocalHealth Instance;
     public int health;
     public TextMeshProUGUI healthText;
+	public ServerEvents serverEvents;
 
     private void Update()
     {
@@ -21,8 +22,14 @@ public class LocalHealth : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
-            Debug.Log("You killed something");
+			Debug.Log("You Died");
+
+			health = 100;
+
+			string[] sendData = { UDPServer.ID + "", health + "" };
+			serverEvents.sendEvent("SetHealth", sendData);
+
+			transform.position = new Vector3(0f, 10f, 0f);
         }
     }
 }
