@@ -60,7 +60,7 @@ public class WeaponSystem : MonoBehaviour
 
     void Start()
     {
-
+		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
     }
 
     void Update()
