@@ -7,9 +7,10 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] ServerEvents serverEvents;
 	[SerializeField] Chat chat;
 	[SerializeField] AudioPlayer audioPlayer;
+	[SerializeField] LocalHealth localHealth;
 
 	//function name is the same as event type sent, only perameter is string array
-    public void exampleEvent(string[] data)
+	public void exampleEvent(string[] data)
 	{
 		//set data
 		int exampleData1 = int.Parse(data[0]);
@@ -76,22 +77,23 @@ public class CustomEvents : MonoBehaviour
 		int damage = int.Parse(data[0]);
 		int clientID = int.Parse(data[1]);
 
-		Debug.Log("Damage: " + damage + ", ID: " + clientID);
 		if (clientID == UDPServer.ID)
 		{
-			if (damage >= LocalHealth.Instance.health)
+			Debug.Log("You got damaged: " + damage);
+			if (damage >= localHealth.health)
 			{
 				string[] sendData = { UDPServer.ID + "" };
 				serverEvents.sendEvent("Death", sendData);
 			}
 			else
 			{
-				string[] sendData = { UDPServer.ID + "", (LocalHealth.Instance.health - damage) + "" };
+				string[] sendData = { UDPServer.ID + "", (localHealth.health - damage) + "" };
 				serverEvents.sendEvent("SetHealth", sendData);
 			}
 		}
 		else
         {
+			Debug.Log("Damage: " + damage + ", ID: " + clientID);
 			OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
 			Health otherClientHealth = otherClientScript.gameObject.GetComponent<Health>();
 			

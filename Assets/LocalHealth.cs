@@ -5,7 +5,6 @@ using TMPro;
 
 public class LocalHealth : MonoBehaviour
 {
-    [HideInInspector] public static LocalHealth Instance;
     public int health;
     public TextMeshProUGUI healthText;
 	public ServerEvents serverEvents;

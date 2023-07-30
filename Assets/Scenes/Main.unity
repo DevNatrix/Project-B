@@ -5579,6 +5579,7 @@ MonoBehaviour:
   serverEvents: {fileID: 1836363827}
   chat: {fileID: 643860526}
   audioPlayer: {fileID: 1836363831}
+  localHealth: {fileID: 7656093453908861213}
 --- !u!114 &1836363831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6330,5 +6331,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c024826dca2a8e64baacb485fd40a0ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7656093453908861213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4993737252273829260, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+  m_PrefabInstance: {fileID: 493430281}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f4261d3b06ca340b3b434bcdd364c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

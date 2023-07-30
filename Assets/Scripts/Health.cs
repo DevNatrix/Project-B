@@ -10,12 +10,6 @@ public class Health : MonoBehaviour
     public void TakeDamage(int _damage)
     {
         health -= _damage;
-        
-        if(health <= 0)
-        {
-			health = 100;
-            Debug.Log("You killed something");
-        }
     }
 	public void SetHealth(int _health)
     {
