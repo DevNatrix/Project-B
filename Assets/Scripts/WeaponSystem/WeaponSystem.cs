@@ -27,6 +27,8 @@ public class WeaponSystem : MonoBehaviour
 
     private float nextFire;
 
+    public WeaponType weaponType;
+
     [Header("Ammo")]
     public int AmmoInReserve;
     public int currentAmmo;
@@ -63,6 +65,8 @@ public class WeaponSystem : MonoBehaviour
 		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
     }
 
+    public enum WeaponType { Primary, Secondary}
+
     void Update()
     {
         Shoot();
@@ -79,7 +83,7 @@ public class WeaponSystem : MonoBehaviour
 
         if(playerControls.Weapon.Drop.WasPerformedThisFrame())
         {
-            DropItem();
+            //DropItem();
         }
     }
 
@@ -136,7 +140,7 @@ public class WeaponSystem : MonoBehaviour
         anim.SetBool("Reloading", false);
     }
 
-    public void DropItem()
+    /*public void DropItem()
     {
         //Store gun info on the groundPrefab
         PickUpSystem.AmmoInReserve = AmmoInReserve;
@@ -146,5 +150,5 @@ public class WeaponSystem : MonoBehaviour
         Destroy(gameObject);
         Instantiate(groundPrefab, cam.transform.position + (cam.transform.forward * dropForce), Quaternion.identity);
         WeaponSwitcher.Instance.UnequipWeapons();
-    }
+    }*/
 }

@@ -239,6 +239,7 @@ MonoBehaviour:
   damage: 22
   maxDistance: 100
   fireRate: 11.6
+  weaponType: 1
   AmmoInReserve: 54
   currentAmmo: 18
   maxAmmo: 18
