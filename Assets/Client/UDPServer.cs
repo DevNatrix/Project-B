@@ -9,10 +9,12 @@ using System;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Threading;
+using UnityEditor.PackageManager;
 
 public class UDPServer : MonoBehaviour
 {
-	UdpClient client;
+	[HideInInspector] public UdpClient clientE;
+	[HideInInspector] public UdpClient clientT;
 	IPEndPoint remoteEndPoint;
 	int SERVERPORT;
 	string SERVERADDRESS;
@@ -123,24 +125,20 @@ public class UDPServer : MonoBehaviour
 		//attempt connect
 		try
 		{
+			//client t for transforms, client e for events
 			Debug.Log("Setting server...");
-			if (clientPort == -1)
-			{
-				client = new UdpClient();
-			}
-			else
-			{
-				client = new UdpClient(clientPort);
-			}
-			client.Connect(SERVERADDRESS, SERVERPORT);
+			clientT = new UdpClient();
+			clientE = new UdpClient();
+			clientT.Connect(SERVERADDRESS, SERVERPORT);
+			clientE.Connect(SERVERADDRESS, SERVERPORT);
 			remoteEndPoint = new IPEndPoint(IPAddress.Any, SERVERPORT);
 
 			Debug.Log("Server set, Sending Join Message...");
-			sendMessage("newClient~" + username);
+			sendMessage("newClient~" + username, clientE);
 
 			//wait for response
 			byte[] receiveBytes = new byte[0];
-			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(1000));
+			await Task.WhenAny(Task.Run(() => receiveBytes = clientE.Receive(ref remoteEndPoint)), Task.Delay(1000));
 			string recieveString = Encoding.ASCII.GetString(receiveBytes);
 			print(recieveString);
 			ID = int.Parse(recieveString.Split('~')[0]);
@@ -170,14 +168,14 @@ public class UDPServer : MonoBehaviour
 	{
 		//send
 		float startTime = Time.time;
-		sendMessage("tu~" + ID + "~" + playerTransform.position + "~" + playerCamTransform.rotation);
+		sendMessage("tu~" + ID + "~" + playerTransform.position + "~" + playerCamTransform.rotation, clientT);
 		outgoingMessages++;
 		packets++;
 
 		//recieve
 		string info = "";
 		byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
-		Task receiveTask = Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint));
+		Task receiveTask = Task.Run(() => receiveBytes = clientT.Receive(ref remoteEndPoint));
 		Task timeoutTask = Task.Delay(messageTimoutMS);
 		await Task.WhenAny(receiveTask, timeoutTask);
 		info = Encoding.ASCII.GetString(receiveBytes);
@@ -240,14 +238,14 @@ public class UDPServer : MonoBehaviour
 	{
 		//float startTime = Time.time;
 		//send
-		sendMessage("eu~" + ID);
+		sendMessage("eu~" + ID, clientE);
 		outgoingMessages++;
 		packets++;
 
 		//recieve
 		string info = "";
 		byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
-		await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
+		await Task.WhenAny(Task.Run(() => receiveBytes = clientE.Receive(ref remoteEndPoint)), Task.Delay(messageTimoutMS));
 		//latency = (int)Mathf.Round((Time.time - startTime) * 1000); //get ping
 		outgoingMessages--;
 		info = Encoding.ASCII.GetString(receiveBytes);
@@ -265,7 +263,7 @@ public class UDPServer : MonoBehaviour
 		updateDebug();
 	}
 
-	public void sendMessage(string message)
+	public void sendMessage(string message, UdpClient client)
 	{
 		//Debug.Log("Sent: " + message);
 		byte[] sendBytes = Encoding.ASCII.GetBytes(message);

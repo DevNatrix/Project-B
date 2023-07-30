@@ -22,7 +22,7 @@ public class ServerEvents : MonoBehaviour
 	
 	public void sendEvent(string eventName, string[] data)
 	{
-		server.sendMessage("e" + "~" + eventName + "~" + combineStringArray(data, "~"));
+		server.sendMessage("e" + "~" + eventName + "~" + combineStringArray(data, "~"), server.clientE);
 	}
 
 	private void Update()
