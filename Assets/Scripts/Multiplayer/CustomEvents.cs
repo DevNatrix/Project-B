@@ -80,17 +80,10 @@ public class CustomEvents : MonoBehaviour
 
 		if (clientID == UDPServer.ID)
 		{
-			if (damage >= localHealth.health)
-			{
-				string[] sendData = { UDPServer.ID + "" };
-				serverEvents.sendEvent("Death", sendData);
-			}
-			else
-			{
-				string[] sendData = { UDPServer.ID + "", (localHealth.health - damage) + "" };
-				serverEvents.sendEvent("SetHealth", sendData);
-				localHealth.TakeDamage(damage);
-			}
+			localHealth.TakeDamage(damage);
+
+			string[] sendData = { UDPServer.ID + "", (localHealth.health - damage) + "" };
+			serverEvents.sendEvent("SetHealth", sendData);
 		}
 		else
         {
