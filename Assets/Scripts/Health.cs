@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int _damage)
     {
+		Debug.Log("Other client took " +  _damage + " damage");
         health -= _damage;
     }
 	public void SetHealth(int _health)

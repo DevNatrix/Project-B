@@ -76,10 +76,10 @@ public class CustomEvents : MonoBehaviour
 	{
 		int damage = int.Parse(data[0]);
 		int clientID = int.Parse(data[1]);
+		Debug.Log("Damage event");
 
 		if (clientID == UDPServer.ID)
 		{
-			Debug.Log("You got damaged: " + damage);
 			if (damage >= localHealth.health)
 			{
 				string[] sendData = { UDPServer.ID + "" };
@@ -89,11 +89,11 @@ public class CustomEvents : MonoBehaviour
 			{
 				string[] sendData = { UDPServer.ID + "", (localHealth.health - damage) + "" };
 				serverEvents.sendEvent("SetHealth", sendData);
+				localHealth.TakeDamage(damage);
 			}
 		}
 		else
         {
-			Debug.Log("Damage: " + damage + ", ID: " + clientID);
 			OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
 			Health otherClientHealth = otherClientScript.gameObject.GetComponent<Health>();
 			

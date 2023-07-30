@@ -9,17 +9,14 @@ public class LocalHealth : MonoBehaviour
     public TextMeshProUGUI healthText;
 	public ServerEvents serverEvents;
 
-    private void Update()
-    {
-        healthText.text = health.ToString();
-    }
-
     public void TakeDamage(int _damage)
     {
+		Debug.Log("You got damaged");
         health -= _damage;
+		healthText.text = health.ToString();
 
 
-        if (health <= 0)
+		if (health <= 0)
         {
 			Debug.Log("You Died");
 
