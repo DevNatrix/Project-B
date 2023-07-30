@@ -12,20 +12,32 @@ public class LocalHealth : MonoBehaviour
     public void TakeDamage(int _damage)
     {
 		Debug.Log("You got damaged");
-        health -= _damage;
-		healthText.text = health.ToString();
+		ChangeHealth(-_damage);
 
 
 		if (health <= 0)
         {
 			Debug.Log("You Died");
 
-			health = 100;
+			ChangeHealth(100, true);
 
-			string[] sendData = { UDPServer.ID + "", health + "" };
+			string[] sendData = { UDPServer.ID + "", health + ""};
 			serverEvents.sendEvent("SetHealth", sendData);
 
 			transform.position = new Vector3(0f, 10f, 0f);
         }
     }
+
+	public void ChangeHealth(int _health, bool set = false)
+	{
+		if (set)
+		{
+			health = _health;
+		}
+		else
+		{
+			health += _health;
+		}
+		healthText.text = health.ToString();
+	}
 }
