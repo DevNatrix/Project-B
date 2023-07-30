@@ -78,16 +78,20 @@ public class CustomEvents : MonoBehaviour
 		Debug.Log("Event works lmaos");
 		if (clientID == UDPServer.ID)
 		{
-			if (damage >= Health.Instance.health)
+			if (damage >= LocalHealth.Instance.health)
 			{
 				string[] sendData = { UDPServer.ID + "" };
 				serverEvents.sendEvent("Death", sendData);
 			}
 			else
 			{
-				string[] sendData = { UDPServer.ID + "", (Health.Instance.health - damage) + "" };
+				string[] sendData = { UDPServer.ID + "", (LocalHealth.Instance.health - damage) + "" };
 				serverEvents.sendEvent("SetHealth", sendData);
 			}
 		}
+		else
+        {
+
+        }
 	}
 }
