@@ -15,6 +15,7 @@ public class MenuController : MonoBehaviour
 
 	private void Awake()
 	{
+		Cursor.lockState = CursorLockMode.Locked;
 		playerControls = new PlayerControls();
 
 		playerControls.UI.toggleMenu.performed += OnKeyPerformed;
