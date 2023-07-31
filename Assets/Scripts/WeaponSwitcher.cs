@@ -13,7 +13,7 @@ public class WeaponSwitcher : MonoBehaviour
     private Animator anim;
     [HideInInspector] public GameObject currentSelectedWeapon;
 
-    public WeaponSystem[] weaponInventory;
+    [SerializeField] private WeaponSystem[] weaponInventory;
 
     [Header("UI Weapon")]
     private GameObject AmmoDisplayGOS;
