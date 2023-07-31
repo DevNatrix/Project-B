@@ -65,7 +65,6 @@ public class WeaponSwitcher : MonoBehaviour
 
         // Instantiate the gun's GameObject (visuals) and parent it to the weapon switcher game object
         GameObject weaponGO = Instantiate(weaponPrefab, transform);
-        weaponGO.SetActive(false);
         weaponInventory[newItemIndex] = weaponGO;
     }
 

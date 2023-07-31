@@ -53,7 +53,6 @@ public class BuySystem : MonoBehaviour
     public void BuyWeapon(GameObject _WeaponType)
     {
         WeaponType = _WeaponType;
-        WeaponIns = Instantiate(WeaponType, GameReferences.Instance.weaponHolder.transform);
         Debug.Log($"Bought {WeaponType.name}");
         WeaponSwitcher.Instance.AddItem(_WeaponType, _WeaponType.GetComponent<WeaponSystem>().weaponType);
     }
