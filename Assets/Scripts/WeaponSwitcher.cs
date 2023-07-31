@@ -13,10 +13,15 @@ public class WeaponSwitcher : MonoBehaviour
     private Animator anim;
     [HideInInspector] public GameObject currentSelectedWeapon;
 
-    [SerializeField] private WeaponSystem[] weaponInventory;
+    [SerializeField] private GameObject[] weaponInventory;
 
     [Header("UI Weapon")]
     private GameObject AmmoDisplayGOS;
+
+    [Header("Info")]
+    public float pickupDistance = 10f;
+
+    public Camera cam;
 
     private void Awake()
     {
@@ -38,38 +43,34 @@ public class WeaponSwitcher : MonoBehaviour
 
     private void Start()
     {
-        SetVariables();
+        weaponInventory = new GameObject[3];
     }
 
 
     void Update()
     {
-      
+
     }
 
-    public void AddItem(WeaponSystem newItem)
+    public void AddItem(GameObject weaponPrefab, WeaponSystem.WeaponType weaponType)
     {
-        int newItemIndex = (int)newItem.weaponType;
+        int newItemIndex = (int)weaponType;
 
         if (weaponInventory[newItemIndex] != null)
         {
             RemoveItem(newItemIndex);
         }
-        weaponInventory[newItemIndex] = newItem;
+
+        weaponInventory[newItemIndex] = weaponPrefab;
+
+        // Instantiate the gun's GameObject (visuals) and parent it to the weapon switcher game object
+        GameObject weaponGO = Instantiate(weaponPrefab, transform);
+        weaponGO.SetActive(false);
+        weaponInventory[newItemIndex] = weaponGO;
     }
 
     public void RemoveItem(int index)
     {
         weaponInventory[index] = null;
-    }
-
-    public WeaponSystem GetItem(int index)
-    {
-        return weaponInventory[index];
-    }
-
-    public void SetVariables()
-    {
-        weaponInventory = new WeaponSystem[3];
     }
 }
