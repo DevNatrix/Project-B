@@ -40,9 +40,11 @@ public class BuySystem : MonoBehaviour
         {
             BuyScreenGO.SetActive(true);
             BuyScreenVisual = true;
-        }
+			Cursor.lockState = CursorLockMode.None;
+		}
         else if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && BuyScreenVisual)
         {
+			Cursor.lockState = CursorLockMode.Locked;
             BuyScreenGO.SetActive(false);
             BuyScreenVisual = false;
         }
