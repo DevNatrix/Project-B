@@ -55,5 +55,6 @@ public class BuySystem : MonoBehaviour
         WeaponType = _WeaponType;
         Debug.Log($"Bought {WeaponType.name}");
         WeaponSwitcher.Instance.AddItem(_WeaponType, _WeaponType.GetComponent<WeaponSystem>().weaponType);
+        WeaponSwitcher.Instance.SwitchWeapon((int)_WeaponType.GetComponent<WeaponSystem>().weaponType);
     }
 }

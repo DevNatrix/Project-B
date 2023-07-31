@@ -49,7 +49,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     void Update()
     {
-
+        EquipWeapon();
     }
 
     public void AddItem(GameObject weaponPrefab, WeaponSystem.WeaponType weaponType)
@@ -71,5 +71,43 @@ public class WeaponSwitcher : MonoBehaviour
     public void RemoveItem(int index)
     {
         weaponInventory[index] = null;
+    }
+
+    public void EquipWeapon()
+    {
+        if(playerControls.Weapon.PrimaryWeapon.WasPerformedThisFrame())
+        {
+            SwitchWeapon(0);
+        }
+
+        if (playerControls.Weapon.SecondaryWeapon.WasPerformedThisFrame())
+        {
+            SwitchWeapon(1);
+        }
+
+        if (playerControls.Weapon.Knife.WasPerformedThisFrame())
+        {
+            SwitchWeapon(2);
+        }
+    }
+
+    public void SwitchWeapon(int newIndex)
+    {
+        if (newIndex >= 0 && newIndex < weaponInventory.Length && weaponInventory[newIndex] != null)
+        {
+            if (currentSelectedWeapon != null)
+            {
+                currentSelectedWeapon.SetActive(false); // Unequip the previous weapon
+            }
+
+            currentSelectedWeapon = weaponInventory[newIndex];
+            currentSelectedWeapon.SetActive(true); // Equip the new weapon
+
+            WeaponSystem currentWeaponSystem = currentSelectedWeapon.GetComponent<WeaponSystem>();
+            if (currentWeaponSystem != null)
+            {
+                AmmoDisplayGOS.GetComponent<TextMeshProUGUI>().text = currentWeaponSystem.currentAmmo.ToString();
+            }
+        }
     }
 }
