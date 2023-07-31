@@ -28,11 +28,13 @@ public class ScoreboardController : MonoBehaviour
 
     private void OnKeyPerformed(InputAction.CallbackContext context)
     {
+		Cursor.lockState = CursorLockMode.None;
         ScoreBoardGO.SetActive(true);
     }
 
     private void OnKeyCanceled(InputAction.CallbackContext context)
     {
+		Cursor.lockState = CursorLockMode.Locked;
         ScoreBoardGO.SetActive(false);
     }
 }
