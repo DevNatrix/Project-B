@@ -47,6 +47,7 @@ public class WeaponSwitcher : MonoBehaviour
     {
         weaponInventory = new GameObject[3];
         AmmoDisplayGOS.SetActive(false);
+        LoadKnife();
     }
 
 
@@ -142,7 +143,7 @@ public class WeaponSwitcher : MonoBehaviour
     {
         if (playerControls.Weapon.Drop.WasPerformedThisFrame())
         {
-            if (currentSelectedWeapon != null)
+            if (currentSelectedWeapon != null && currentSelectedWeapon.tag != "Knifes")
             {
                 DropItem(currentSelectedWeapon, currentSelectedWeapon.GetComponent<WeaponSystem>().groundPrefab);
             }
@@ -159,5 +160,11 @@ public class WeaponSwitcher : MonoBehaviour
         {
             AmmoDisplayGOS.SetActive(false);
         }
+    }
+
+    public void LoadKnife()
+    {
+        AddItem(Inventory.Instance.selectedItem, WeaponSystem.WeaponType.Melee);
+        SwitchWeapon((int)WeaponSystem.WeaponType.Melee);
     }
 }
