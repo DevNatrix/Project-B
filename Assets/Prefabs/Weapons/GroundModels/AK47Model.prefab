@@ -492,6 +492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8008584457254880526}
   - component: {fileID: 1281788304317184905}
+  - component: {fileID: 3245249923588147110}
   m_Layer: 17
   m_Name: AK47Model
   m_TagString: Untagged
@@ -531,6 +532,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3245249923588147110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237255521753112500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55aae7a67dbad43448185368f12f1ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceCanPickup: 100
+  WeaponType: {fileID: 7237255521753112500, guid: 6e68f15179081d642bd11cedd8e38f75, type: 3}
 --- !u!1 &8645869599368800180
 GameObject:
   m_ObjectHideFlags: 0
