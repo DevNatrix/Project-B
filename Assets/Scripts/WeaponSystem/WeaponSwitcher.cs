@@ -135,8 +135,10 @@ public class WeaponSwitcher : MonoBehaviour
         droppedItemPrefabPS.maxAmmo = itemDropWP.maxAmmo;
         droppedItemPrefabPS.WeaponID = itemDropWP.WeaponID;
 
-
         Destroy(itemDrop);
+
+        //Selects closest item
+        
     }
 
     public void DropCurrentWeapon()
