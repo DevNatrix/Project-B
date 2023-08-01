@@ -11,10 +11,10 @@ public class PickUpSystem : MonoBehaviour
     private GameObject cam;
 
     [Header("StoreInfo")]
-    [HideInInspector] public static string WeaponID;
-    [HideInInspector] public static int AmmoInReserve;
-    [HideInInspector] public static int currentAmmo;
-    [HideInInspector] public static int maxAmmo;
+    [HideInInspector] public string WeaponID;
+    [HideInInspector] public int AmmoInReserve;
+    [HideInInspector] public int currentAmmo;
+    [HideInInspector] public int maxAmmo;
     public GameObject WeaponType;
 
     private GameObject AmmoDisplayGOS;
@@ -57,18 +57,16 @@ public class PickUpSystem : MonoBehaviour
         {
             if(hit.transform.gameObject == gameObject)
             {
-                GameObject PickUpGun = Instantiate(WeaponType, GameReferences.Instance.weaponHolder.transform);
-                WeaponSystem PickUpGunInfo = PickUpGun.GetComponent<WeaponSystem>();
+                GameObject newWeaponPickup = WeaponSwitcher.Instance.AddItem(WeaponType, WeaponType.GetComponent<WeaponSystem>().weaponType);
+                WeaponSwitcher.Instance.SwitchWeapon((int)newWeaponPickup.GetComponent<WeaponSystem>().weaponType);
 
-                //Apply those stored info
-                PickUpGunInfo.currentAmmo = currentAmmo;
-                PickUpGunInfo.maxAmmo = maxAmmo;
-                PickUpGunInfo.AmmoInReserve = AmmoInReserve;
-                PickUpGunInfo.WeaponID = WeaponID;
+                WeaponSystem _WeaponTypeWP = newWeaponPickup.GetComponent<WeaponSystem>();
 
-
-                AmmoDisplayGOS.SetActive(true);
-                WeaponSwitcher.Instance.currentSelectedWeapon.SetActive(false);
+                //Apply the stored info
+                _WeaponTypeWP.AmmoInReserve = AmmoInReserve;
+                _WeaponTypeWP.currentAmmo = currentAmmo;
+                _WeaponTypeWP.maxAmmo = maxAmmo;
+                _WeaponTypeWP.WeaponID = WeaponID;
 
 
                 Destroy(gameObject);

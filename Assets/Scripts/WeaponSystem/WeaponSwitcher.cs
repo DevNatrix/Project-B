@@ -11,7 +11,7 @@ public class WeaponSwitcher : MonoBehaviour
     PlayerControls playerControls;
     public bool switchonScroll = true;
     private Animator anim;
-    [HideInInspector] public GameObject currentSelectedWeapon;
+    public GameObject currentSelectedWeapon;
 
     [SerializeField] private GameObject[] weaponInventory;
 
@@ -55,7 +55,7 @@ public class WeaponSwitcher : MonoBehaviour
         DropCurrentWeapon();
     }
 
-    public void AddItem(GameObject weaponPrefab, WeaponSystem.WeaponType weaponType)
+    public GameObject AddItem(GameObject weaponPrefab, WeaponSystem.WeaponType weaponType)
     {
         int newItemIndex = (int)weaponType;
 
@@ -69,6 +69,8 @@ public class WeaponSwitcher : MonoBehaviour
         // Instantiate the gun's GameObject (visuals) and parent it to the weapon switcher game object
         GameObject weaponGO = Instantiate(weaponPrefab, transform);
         weaponInventory[newItemIndex] = weaponGO;
+
+        return weaponGO;
     }
 
     public void RemoveItem(int index)
@@ -78,7 +80,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     public void EquipWeapon()
     {
-        if(playerControls.Weapon.PrimaryWeapon.WasPerformedThisFrame())
+        if (playerControls.Weapon.PrimaryWeapon.WasPerformedThisFrame())
         {
             SwitchWeapon(0);
         }
@@ -121,14 +123,27 @@ public class WeaponSwitcher : MonoBehaviour
         float random = Random.Range(-1f, 1f);
         visualDroppedItemRB.AddTorque(new Vector3(random, random, random) * 10);
 
+        //Store data on groundPrefab
+        WeaponSystem itemDropWP = itemDrop.GetComponent<WeaponSystem>();
+        PickUpSystem droppedItemPrefabPS = visualDroppedItem.GetComponent<PickUpSystem>();
+
+        droppedItemPrefabPS.AmmoInReserve = itemDropWP.AmmoInReserve;
+        droppedItemPrefabPS.currentAmmo = itemDropWP.currentAmmo;
+        droppedItemPrefabPS.maxAmmo = itemDropWP.maxAmmo;
+        droppedItemPrefabPS.WeaponID = itemDropWP.WeaponID;
+
+
         Destroy(itemDrop);
     }
 
     public void DropCurrentWeapon()
     {
-        if(playerControls.Weapon.Drop.WasPerformedThisFrame())
+        if (playerControls.Weapon.Drop.WasPerformedThisFrame())
         {
-            DropItem(currentSelectedWeapon, currentSelectedWeapon.GetComponent<WeaponSystem>().groundPrefab);
+            if (currentSelectedWeapon != null)
+            {
+                DropItem(currentSelectedWeapon, currentSelectedWeapon.GetComponent<WeaponSystem>().groundPrefab);
+            }
         }
     }
 }
