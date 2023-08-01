@@ -102,12 +102,6 @@ public class WeaponSwitcher : MonoBehaviour
 
             currentSelectedWeapon = weaponInventory[newIndex];
             currentSelectedWeapon.SetActive(true); // Equip the new weapon
-
-            WeaponSystem currentWeaponSystem = currentSelectedWeapon.GetComponent<WeaponSystem>();
-            if (currentWeaponSystem != null)
-            {
-                AmmoDisplayGOS.GetComponent<TextMeshProUGUI>().text = currentWeaponSystem.currentAmmo.ToString();
-            }
         }
     }
 }
