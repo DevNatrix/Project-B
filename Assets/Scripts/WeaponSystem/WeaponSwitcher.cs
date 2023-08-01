@@ -46,6 +46,7 @@ public class WeaponSwitcher : MonoBehaviour
     private void Start()
     {
         weaponInventory = new GameObject[3];
+        AmmoDisplayGOS.SetActive(false);
     }
 
 
@@ -53,6 +54,7 @@ public class WeaponSwitcher : MonoBehaviour
     {
         EquipWeapon();
         DropCurrentWeapon();
+        UpdateUI();
     }
 
     public GameObject AddItem(GameObject weaponPrefab, WeaponSystem.WeaponType weaponType)
@@ -144,6 +146,18 @@ public class WeaponSwitcher : MonoBehaviour
             {
                 DropItem(currentSelectedWeapon, currentSelectedWeapon.GetComponent<WeaponSystem>().groundPrefab);
             }
+        }
+    }
+
+    public void UpdateUI()
+    {
+        if(currentSelectedWeapon != null && currentSelectedWeapon.tag != "Knifes")
+        {
+            AmmoDisplayGOS.SetActive(true);
+        }
+        else
+        {
+            AmmoDisplayGOS.SetActive(false);
         }
     }
 }

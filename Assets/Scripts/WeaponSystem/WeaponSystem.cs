@@ -62,10 +62,10 @@ public class WeaponSystem : MonoBehaviour
 
     void Start()
     {
-		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
+
     }
 
-    public enum WeaponType { Primary, Secondary}
+    public enum WeaponType { Primary, Secondary, Melee}
 
     void Update()
     {
