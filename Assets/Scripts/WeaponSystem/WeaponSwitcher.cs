@@ -116,7 +116,6 @@ public class WeaponSwitcher : MonoBehaviour
         //Add Force
         visualDroppedItemRB.velocity = playerT.GetComponent<Rigidbody>().velocity;
         visualDroppedItemRB.AddForce(cam.transform.forward * dropForwardForce, ForceMode.Impulse);
-        visualDroppedItemRB.AddForce(cam.transform.up * dropUpwardForce, ForceMode.Impulse);
 
         //Random rotation
         float random = Random.Range(-1f, 1f);

@@ -8209,8 +8209,8 @@ MonoBehaviour:
   currentSelectedWeapon: {fileID: 0}
   weaponInventory: []
   pickupDistance: 10
-  dropForwardForce: 2
-  dropUpwardForce: 2
+  dropForwardForce: 8
+  dropUpwardForce: 0
   cam: {fileID: 4193270394687202012}
   playerT: {fileID: 5846882482729803036}
 --- !u!4 &5846882482729803036 stripped
