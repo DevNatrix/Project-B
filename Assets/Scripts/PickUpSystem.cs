@@ -58,7 +58,7 @@ public class PickUpSystem : MonoBehaviour
             if(hit.transform.gameObject == gameObject)
             {
                 GameObject newWeaponPickup = WeaponSwitcher.Instance.AddItem(WeaponType, WeaponType.GetComponent<WeaponSystem>().weaponType);
-                WeaponSwitcher.Instance.SwitchWeapon((int)newWeaponPickup.GetComponent<WeaponSystem>().weaponType);
+                newWeaponPickup.SetActive(false);
 
                 WeaponSystem _WeaponTypeWP = newWeaponPickup.GetComponent<WeaponSystem>();
 

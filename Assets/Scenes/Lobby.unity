@@ -5097,6 +5097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryVisual: {fileID: 268832135}
   selectedItem: {fileID: 0}
+  defaultKnife: {fileID: 910030901060662416, guid: f037bb1918d78ca4988b2505f23e6a7f, type: 3}
 --- !u!1 &2075364973
 GameObject:
   m_ObjectHideFlags: 0

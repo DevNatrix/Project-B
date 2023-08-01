@@ -9,10 +9,12 @@ public class Inventory : MonoBehaviour
 
     public GameObject InventoryVisual;
     [HideInInspector] public GameObject selectedItem;
+    [SerializeField] private GameObject defaultKnife;
 
     void Start()
     {
         InventoryVisual.SetActive(false);
+        selectedItem = defaultKnife;
     }
 
     private void Awake()
