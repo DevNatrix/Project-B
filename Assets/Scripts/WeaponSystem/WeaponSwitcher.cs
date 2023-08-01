@@ -20,8 +20,10 @@ public class WeaponSwitcher : MonoBehaviour
 
     [Header("Info")]
     public float pickupDistance = 10f;
+    public float dropForwardForce, dropUpwardForce;
 
     public Camera cam;
+    public Transform playerT;
 
     private void Awake()
     {
@@ -50,6 +52,7 @@ public class WeaponSwitcher : MonoBehaviour
     void Update()
     {
         EquipWeapon();
+        DropCurrentWeapon();
     }
 
     public void AddItem(GameObject weaponPrefab, WeaponSystem.WeaponType weaponType)
@@ -102,6 +105,31 @@ public class WeaponSwitcher : MonoBehaviour
 
             currentSelectedWeapon = weaponInventory[newIndex];
             currentSelectedWeapon.SetActive(true); // Equip the new weapon
+        }
+    }
+
+    public void DropItem(GameObject itemDrop, GameObject droppedItemPrefab)
+    {
+        GameObject visualDroppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity);
+        Rigidbody visualDroppedItemRB = visualDroppedItem.GetComponent<Rigidbody>();
+
+        //Add Force
+        visualDroppedItemRB.velocity = playerT.GetComponent<Rigidbody>().velocity;
+        visualDroppedItemRB.AddForce(cam.transform.forward * dropForwardForce, ForceMode.Impulse);
+        visualDroppedItemRB.AddForce(cam.transform.up * dropUpwardForce, ForceMode.Impulse);
+
+        //Random rotation
+        float random = Random.Range(-1f, 1f);
+        visualDroppedItemRB.AddTorque(new Vector3(random, random, random) * 10);
+
+        Destroy(itemDrop);
+    }
+
+    public void DropCurrentWeapon()
+    {
+        if(playerControls.Weapon.Drop.WasPerformedThisFrame())
+        {
+            DropItem(currentSelectedWeapon, currentSelectedWeapon.GetComponent<WeaponSystem>().groundPrefab);
         }
     }
 }

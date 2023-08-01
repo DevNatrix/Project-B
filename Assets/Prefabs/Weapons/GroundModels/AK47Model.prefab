@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3410116257809938040}
   - component: {fileID: 8372255852742583390}
   - component: {fileID: 6512619246462509957}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6138480104740207635}
   - component: {fileID: 7362236006267846285}
   - component: {fileID: 3196505116190293747}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 7135633913758444377}
   - component: {fileID: 2910254363692148472}
   - component: {fileID: 4845205292745593767}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8568997263690674220}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 5394057971805917959}
   - component: {fileID: 5664016803429599428}
   - component: {fileID: 7381939799352390214}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: release
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 7492001792646212127}
   - component: {fileID: 8735891398197251660}
   - component: {fileID: 3415552219239040385}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,8 +492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8008584457254880526}
   - component: {fileID: 1281788304317184905}
-  - component: {fileID: -7439851810925506906}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: AK47Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -532,20 +531,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-7439851810925506906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7237255521753112500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55aae7a67dbad43448185368f12f1ac5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceCanPickup: 100
-  WeaponType: {fileID: 7237255521753112500, guid: 6e68f15179081d642bd11cedd8e38f75, type: 3}
 --- !u!1 &8645869599368800180
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +542,7 @@ GameObject:
   - component: {fileID: 5760820030895007647}
   - component: {fileID: 2256222956774092087}
   - component: {fileID: 1802891447376818760}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

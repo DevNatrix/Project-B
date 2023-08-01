@@ -2398,6 +2398,10 @@ PrefabInstance:
       propertyPath: m_AllowMSAA
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4068278970138739623, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 262079
+      objectReference: {fileID: 0}
     - target: {fileID: 4993737252273829260, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
       propertyPath: healthText
       value: 
@@ -8205,7 +8209,10 @@ MonoBehaviour:
   currentSelectedWeapon: {fileID: 0}
   weaponInventory: []
   pickupDistance: 10
+  dropForwardForce: 2
+  dropUpwardForce: 2
   cam: {fileID: 4193270394687202012}
+  playerT: {fileID: 5846882482729803036}
 --- !u!4 &5846882482729803036 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5846882482686360341, guid: a97e20e3f8906224c868860ab421ef41, type: 3}

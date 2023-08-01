@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9189065619871013933}
   - component: {fileID: 5329364898982686389}
   - component: {fileID: 3290350202625233901}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Pistol_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 3909136909142892298}
   - component: {fileID: 3182262054404884917}
   - component: {fileID: 787922191747983382}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Pistol_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,8 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9211418466526889789}
   - component: {fileID: 1939226902971866913}
-  - component: {fileID: -483194104904516273}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: BerretaModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,20 +249,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-483194104904516273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3663234147644531100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55aae7a67dbad43448185368f12f1ac5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceCanPickup: 100
-  WeaponType: {fileID: 3663234147644531100, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
 --- !u!1 &4400205254071773206
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +261,7 @@ GameObject:
   - component: {fileID: 6045144569607138259}
   - component: {fileID: 8286701175710972902}
   - component: {fileID: 2854200806125155087}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Pistol_Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +359,7 @@ GameObject:
   - component: {fileID: 2381416513621188801}
   - component: {fileID: 4561480924493328887}
   - component: {fileID: 3319390419027081771}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Pistol_Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,7 +457,7 @@ GameObject:
   - component: {fileID: 9218625376875186495}
   - component: {fileID: 7712235061443435244}
   - component: {fileID: 2688272392193535775}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Pistol_Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
