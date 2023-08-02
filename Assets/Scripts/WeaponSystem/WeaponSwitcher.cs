@@ -47,7 +47,7 @@ public class WeaponSwitcher : MonoBehaviour
     {
         weaponInventory = new GameObject[3];
         AmmoDisplayGOS.SetActive(false);
-        LoadKnife();
+        LoadWeapons();
     }
 
 
@@ -164,9 +164,12 @@ public class WeaponSwitcher : MonoBehaviour
         }
     }
 
-    public void LoadKnife()
+    //Loads Selected weapons skins and such from Inventory.cs
+    public void LoadWeapons()
     {
-        AddItem(Inventory.Instance.selectedItem, WeaponSystem.WeaponType.Melee);
-        SwitchWeapon((int)WeaponSystem.WeaponType.Melee);
+        AddItem(Inventory.Instance.meleeWeapon, WeaponSystem.WeaponType.Melee);
+
+        AddItem(Inventory.Instance.secondaryWeapon, WeaponSystem.WeaponType.Secondary);
+        SwitchWeapon((int)WeaponSystem.WeaponType.Secondary);
     }
 }
