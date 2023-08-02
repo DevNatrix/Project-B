@@ -13,7 +13,7 @@ public class WeaponSwitcher : MonoBehaviour
     private Animator anim;
     public GameObject currentSelectedWeapon;
 
-    [SerializeField] private GameObject[] weaponInventory;
+    public GameObject[] weaponInventory;
 
     [Header("UI Weapon")]
     private GameObject AmmoDisplayGOS;
@@ -164,12 +164,13 @@ public class WeaponSwitcher : MonoBehaviour
         }
     }
 
-    //Loads Selected weapons skins and such from Inventory.cs
+    //Loads Selected weapons, skins and such from Inventory.cs
     public void LoadWeapons()
     {
-        AddItem(Inventory.Instance.meleeWeapon, WeaponSystem.WeaponType.Melee);
+        GameObject _MeleeWeapon = AddItem(Inventory.Instance.meleeWeapon, WeaponSystem.WeaponType.Melee);
+        _MeleeWeapon.SetActive(false);
 
-        AddItem(Inventory.Instance.secondaryWeapon, WeaponSystem.WeaponType.Secondary);
+        GameObject _SecondaryWeapon = AddItem(Inventory.Instance.secondaryWeapon, WeaponSystem.WeaponType.Secondary);
         SwitchWeapon((int)WeaponSystem.WeaponType.Secondary);
     }
 }

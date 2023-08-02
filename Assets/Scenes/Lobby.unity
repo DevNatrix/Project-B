@@ -2285,7 +2285,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2035137128}
         m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
-        m_MethodName: SelectItem
+        m_MethodName: SelectMelee
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 910030901060662416, guid: f037bb1918d78ca4988b2505f23e6a7f, type: 3}
@@ -5096,8 +5096,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventoryVisual: {fileID: 268832135}
-  selectedItem: {fileID: 0}
-  defaultKnife: {fileID: 910030901060662416, guid: f037bb1918d78ca4988b2505f23e6a7f, type: 3}
+  primaryWeapon: {fileID: 0}
+  secondaryWeapon: {fileID: 0}
+  meleeWeapon: {fileID: 0}
+  defaultPrimary: {fileID: 7237255521753112500, guid: 6e68f15179081d642bd11cedd8e38f75, type: 3}
+  defaultSecondary: {fileID: 3663234147644531100, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
+  defaultMelee: {fileID: 910030901060662416, guid: f037bb1918d78ca4988b2505f23e6a7f, type: 3}
+  weaponSlotVisual: {fileID: 0}
 --- !u!1 &2075364973
 GameObject:
   m_ObjectHideFlags: 0

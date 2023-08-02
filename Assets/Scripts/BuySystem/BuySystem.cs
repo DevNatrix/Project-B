@@ -54,7 +54,24 @@ public class BuySystem : MonoBehaviour
     {
         WeaponType = _WeaponType;
         Debug.Log($"Bought {WeaponType.name}");
-        WeaponSwitcher.Instance.AddItem(_WeaponType, _WeaponType.GetComponent<WeaponSystem>().weaponType);
+        GameObject purchasedWeapon = WeaponSwitcher.Instance.AddItem(_WeaponType, _WeaponType.GetComponent<WeaponSystem>().weaponType);
         WeaponSwitcher.Instance.SwitchWeapon((int)_WeaponType.GetComponent<WeaponSystem>().weaponType);
+
+        for (int i = 0; i < WeaponSwitcher.Instance.weaponInventory.Length; i++)
+        {
+            if (WeaponSwitcher.Instance.weaponInventory[i] == null)
+            {
+                continue;
+            }
+
+            if (WeaponSwitcher.Instance.weaponInventory[i].TryGetComponent(out WeaponSystem weaponSystem))
+            {
+
+                if(weaponSystem.weaponType == _WeaponType.GetComponent<WeaponSystem>().weaponType)
+                {
+                    WeaponSwitcher.Instance.DropItemWithoutDestruction(_WeaponType, _WeaponType.GetComponent<WeaponSystem>().groundPrefab);
+                }
+            }
+        }
     }
 }
