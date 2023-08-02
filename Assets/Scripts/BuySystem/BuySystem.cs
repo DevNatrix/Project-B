@@ -69,7 +69,7 @@ public class BuySystem : MonoBehaviour
 
                 if(weaponSystem.weaponType == _WeaponType.GetComponent<WeaponSystem>().weaponType)
                 {
-                    WeaponSwitcher.Instance.DropItemWithoutDestruction(_WeaponType, _WeaponType.GetComponent<WeaponSystem>().groundPrefab);
+                    WeaponSwitcher.Instance.DropItem(_WeaponType, _WeaponType.GetComponent<WeaponSystem>().groundPrefab);
                 }
             }
         }
