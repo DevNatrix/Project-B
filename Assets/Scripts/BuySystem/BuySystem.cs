@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -52,26 +53,56 @@ public class BuySystem : MonoBehaviour
 
     public void BuyWeapon(GameObject _WeaponType)
     {
-        WeaponType = _WeaponType;
-        Debug.Log($"Bought {WeaponType.name}");
-        GameObject purchasedWeapon = WeaponSwitcher.Instance.AddItem(_WeaponType, _WeaponType.GetComponent<WeaponSystem>().weaponType);
-        WeaponSwitcher.Instance.SwitchWeapon((int)_WeaponType.GetComponent<WeaponSystem>().weaponType);
+        WeaponSystem.WeaponType currentWeaponType = _WeaponType.GetComponent<WeaponSystem>().weaponType;
+        Debug.Log($"Bought {currentWeaponType.ToString()}");
 
-        for (int i = 0; i < WeaponSwitcher.Instance.weaponInventory.Length; i++)
+        // Check if the item already exists in the inventory
+        GameObject existingWeapon = GetWeaponFromInventory(currentWeaponType);
+
+        if (existingWeapon != null)
         {
-            if (WeaponSwitcher.Instance.weaponInventory[i] == null)
-            {
-                continue;
-            }
-
-            if (WeaponSwitcher.Instance.weaponInventory[i].TryGetComponent(out WeaponSystem weaponSystem))
-            {
-
-                if(weaponSystem.weaponType == _WeaponType.GetComponent<WeaponSystem>().weaponType)
-                {
-                    WeaponSwitcher.Instance.DropItem(_WeaponType, _WeaponType.GetComponent<WeaponSystem>().groundPrefab);
-                }
-            }
+            // If the weapon already exists in the inventory, drop the newly purchased weapon
+            DropWeapon(_WeaponType);
+        }
+        else
+        {
+            // If the weapon does not exist in the inventory, add it to the inventory
+            GameObject purchasedWeapon = WeaponSwitcher.Instance.AddItem(_WeaponType, currentWeaponType);
+            WeaponSwitcher.Instance.SwitchWeapon((int)purchasedWeapon.GetComponent<WeaponSystem>().weaponType);
         }
     }
+
+    // Function to check if a weapon with the given weaponType exists in the inventory
+    private GameObject GetWeaponFromInventory(WeaponSystem.WeaponType weaponType)
+    {
+        // Iterate through the weaponInventory to find a match
+        foreach (GameObject item in WeaponSwitcher.Instance.weaponInventory)
+        {
+            // Check if the item is not null and has the WeaponSystem component
+            if (item != null && item.GetComponent<WeaponSystem>() != null && item.GetComponent<WeaponSystem>().weaponType == weaponType)
+            {
+                return item; // Return the reference to the existing weapon in the inventory
+            }
+        }
+        return null; // Weapon not found in the inventory
+    }
+
+    // Function to drop the newly purchased weapon
+    private void DropWeapon(GameObject _WeaponType)
+    {
+        Debug.Log("Dropping the newly purchased weapon because you already have this weapon type in the inventory: " + _WeaponType.name);
+
+        GameObject visualDroppedItem = Instantiate(_WeaponType.GetComponent<WeaponSystem>().groundPrefab, WeaponSwitcher.Instance.transform.position, Quaternion.identity);
+        Rigidbody visualDroppedItemRB = visualDroppedItem.GetComponent<Rigidbody>();
+
+        //Add Force
+        visualDroppedItemRB.velocity = WeaponSwitcher.Instance.playerT.GetComponent<Rigidbody>().velocity;
+        visualDroppedItemRB.AddForce(WeaponSwitcher.Instance.cam.transform.forward * WeaponSwitcher.Instance.dropForwardForce, ForceMode.Impulse);
+
+        //Random rotation
+        float random = Random.Range(-1f, 1f);
+        visualDroppedItemRB.AddTorque(new Vector3(random, random, random) * 10);
+    }
+
 }
+

@@ -97,7 +97,6 @@ public class WeaponSystem : MonoBehaviour
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
 
             RaycastHit hit;
-
             if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance))
             {
                 if (hit.transform.gameObject.GetComponent<Health>())
@@ -107,11 +106,18 @@ public class WeaponSystem : MonoBehaviour
                     serverEvents.sendEvent("Damage", new string[] { damage.ToString(), ClientID });
                 }
 
-                Instantiate(bulletHole, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(hit.normal));
+                GameObject shotbulletHole = Instantiate(bulletHole, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(hit.normal));
+                StartCoroutine(RemoveBulletHole(shotbulletHole));
             }
 
             currentAmmo--;
         }
+    }
+    
+    IEnumerator RemoveBulletHole(GameObject _bulletHole)
+    {
+        yield return new WaitForSeconds(6);
+        Destroy(_bulletHole);
     }
 
     void Reload()

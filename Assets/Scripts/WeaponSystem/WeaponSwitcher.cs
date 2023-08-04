@@ -113,6 +113,7 @@ public class WeaponSwitcher : MonoBehaviour
         }
     }
 
+    //Drop function for inventory
     public void DropItem(GameObject itemDrop, GameObject droppedItemPrefab)
     {
         GameObject visualDroppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity);

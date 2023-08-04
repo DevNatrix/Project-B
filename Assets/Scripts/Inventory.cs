@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Add code for weapon switching here (e.g., using number keys)
+        
     }
 
     public void OpenInventory()
@@ -66,6 +66,7 @@ public class Inventory : MonoBehaviour
         UpdateWeaponSlotVisual();
     }
 
+    //Function for inspecting weapons
     private void CreateWeaponSlotVisual()
     {
         weaponSlotInstance = Instantiate(weaponSlotVisual, Vector3.zero, Quaternion.identity);
