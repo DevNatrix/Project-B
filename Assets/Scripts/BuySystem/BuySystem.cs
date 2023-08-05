@@ -54,7 +54,7 @@ public class BuySystem : MonoBehaviour
     public void BuyWeapon(GameObject _WeaponType)
     {
         WeaponSystem.WeaponType currentWeaponType = _WeaponType.GetComponent<WeaponSystem>().weaponType;
-        Debug.Log($"Bought {currentWeaponType.ToString()}");
+        Debug.Log($"Bought {_WeaponType}");
 
         // Check if the item already exists in the inventory
         GameObject existingWeapon = GetWeaponFromInventory(currentWeaponType);
