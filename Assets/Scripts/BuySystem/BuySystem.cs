@@ -62,7 +62,8 @@ public class BuySystem : MonoBehaviour
         if (existingWeapon != null)
         {
             // If the weapon already exists in the inventory, drop the newly purchased weapon
-            DropWeapon(_WeaponType);
+            GameObject weaponGO = Instantiate(_WeaponType, transform);
+            DropWeapon(weaponGO);
         }
         else
         {
@@ -92,16 +93,7 @@ public class BuySystem : MonoBehaviour
     {
         Debug.Log("Dropping the newly purchased weapon because you already have this weapon type in the inventory: " + _WeaponType.name);
 
-        GameObject visualDroppedItem = Instantiate(_WeaponType.GetComponent<WeaponSystem>().groundPrefab, WeaponSwitcher.Instance.transform.position, Quaternion.identity);
-        Rigidbody visualDroppedItemRB = visualDroppedItem.GetComponent<Rigidbody>();
-
-        //Add Force
-        visualDroppedItemRB.velocity = WeaponSwitcher.Instance.playerT.GetComponent<Rigidbody>().velocity;
-        visualDroppedItemRB.AddForce(WeaponSwitcher.Instance.cam.transform.forward * WeaponSwitcher.Instance.dropForwardForce, ForceMode.Impulse);
-
-        //Random rotation
-        float random = Random.Range(-1f, 1f);
-        visualDroppedItemRB.AddTorque(new Vector3(random, random, random) * 10);
+        WeaponSwitcher.Instance.DropItem(_WeaponType, _WeaponType.GetComponent<WeaponSystem>().groundPrefab);
     }
 
 }

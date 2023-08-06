@@ -21,6 +21,7 @@ public class WeaponSwitcher : MonoBehaviour
     [Header("Info")]
     public float pickupDistance = 10f;
     public float dropForwardForce, dropUpwardForce;
+    public float distanceToDrop = 5f;
 
     public Camera cam;
     public Transform playerT;

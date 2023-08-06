@@ -68,7 +68,6 @@ public class PickUpSystem : MonoBehaviour
                 _WeaponTypeWP.maxAmmo = maxAmmo;
                 _WeaponTypeWP.WeaponID = WeaponID;
 
-
                 Destroy(gameObject);
             }
         }
