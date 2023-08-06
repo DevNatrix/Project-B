@@ -262,7 +262,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55aae7a67dbad43448185368f12f1ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceCanPickup: 100
+  distanceCanPickup: 3
+  WeaponID: 
+  AmmoInReserve: 0
+  currentAmmo: 0
+  maxAmmo: 0
   WeaponType: {fileID: 3663234147644531100, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
 --- !u!1 &4400205254071773206
 GameObject:

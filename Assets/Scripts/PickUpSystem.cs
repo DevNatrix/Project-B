@@ -7,7 +7,7 @@ public class PickUpSystem : MonoBehaviour
 {
     [HideInInspector] public static PickUpSystem Instance;
     PlayerControls playerControls;
-    public float distanceCanPickup = 100f;
+    public float distanceCanPickup = 3f;
     private GameObject cam;
 
     [Header("StoreInfo")]

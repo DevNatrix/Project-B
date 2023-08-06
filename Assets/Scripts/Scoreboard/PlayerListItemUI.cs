@@ -9,6 +9,9 @@ public class PlayerListItemUI : MonoBehaviour
     public TextMeshProUGUI PlayerName;
     public RawImage PlayerIcon;
     public TextMeshProUGUI PingText;
+    public TextMeshProUGUI DisplayKills;
+
+    public int playerKills, playerDeaths, playerAssists = 0;
 
     void OnEnable()
     {
@@ -18,6 +21,8 @@ public class PlayerListItemUI : MonoBehaviour
     private void Update()
     {
         PlayerName.text = SteamHandler.usernameSteam;
+
+        DisplayKills.text = playerKills.ToString() + "/" + playerDeaths.ToString() + "/" + playerAssists.ToString();
     }
 
     IEnumerator UpdatePing()
