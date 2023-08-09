@@ -74,7 +74,7 @@ public class BuySystem : MonoBehaviour
     }
 
     // Function to check if a weapon with the given weaponType exists in the inventory
-    private GameObject GetWeaponFromInventory(WeaponSystem.WeaponType weaponType)
+    public GameObject GetWeaponFromInventory(WeaponSystem.WeaponType weaponType)
     {
         // Iterate through the weaponInventory to find a match
         foreach (GameObject item in WeaponSwitcher.Instance.weaponInventory)

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8671258181228170913}
   - component: {fileID: 9189065619871013933}
   - component: {fileID: 5329364898982686389}
-  - component: {fileID: 3290350202625233901}
   m_Layer: 17
   m_Name: Pistol_Body
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3290350202625233901
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2498107437089021452}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5954740952489514880, guid: ffeea7880ebd4134dbbed333331a60e3, type: 3}
 --- !u!1 &3455097349982727002
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +94,6 @@ GameObject:
   - component: {fileID: 5930267594811748177}
   - component: {fileID: 3909136909142892298}
   - component: {fileID: 3182262054404884917}
-  - component: {fileID: 787922191747983382}
   m_Layer: 17
   m_Name: Pistol_Top
   m_TagString: Untagged
@@ -182,20 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &787922191747983382
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3455097349982727002}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1039553992270809276, guid: ffeea7880ebd4134dbbed333331a60e3, type: 3}
 --- !u!1 &3663234147644531100
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +177,7 @@ GameObject:
   - component: {fileID: 9211418466526889789}
   - component: {fileID: 1939226902971866913}
   - component: {fileID: 5818229770469178806}
+  - component: {fileID: 4082127804880898736}
   m_Layer: 17
   m_Name: BerretaModel
   m_TagString: Untagged
@@ -268,6 +239,19 @@ MonoBehaviour:
   currentAmmo: 0
   maxAmmo: 0
   WeaponType: {fileID: 3663234147644531100, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
+--- !u!65 &4082127804880898736
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3663234147644531100}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5.206293, z: 8.406088}
+  m_Center: {x: 3.73195e-16, y: 0.06797122, z: -0.4937176}
 --- !u!1 &4400205254071773206
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +263,6 @@ GameObject:
   - component: {fileID: 5641312156309139325}
   - component: {fileID: 6045144569607138259}
   - component: {fileID: 8286701175710972902}
-  - component: {fileID: 2854200806125155087}
   m_Layer: 17
   m_Name: Pistol_Hammer
   m_TagString: Untagged
@@ -352,20 +335,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2854200806125155087
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4400205254071773206}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8600140383339700239, guid: ffeea7880ebd4134dbbed333331a60e3, type: 3}
 --- !u!1 &8313107007315265672
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +346,6 @@ GameObject:
   - component: {fileID: 3435152526231434353}
   - component: {fileID: 2381416513621188801}
   - component: {fileID: 4561480924493328887}
-  - component: {fileID: 3319390419027081771}
   m_Layer: 17
   m_Name: Pistol_Magazine
   m_TagString: Untagged
@@ -450,20 +418,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3319390419027081771
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8313107007315265672}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1741751439502553357, guid: ffeea7880ebd4134dbbed333331a60e3, type: 3}
 --- !u!1 &8720975492585567833
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +429,6 @@ GameObject:
   - component: {fileID: 4075456690452542074}
   - component: {fileID: 9218625376875186495}
   - component: {fileID: 7712235061443435244}
-  - component: {fileID: 2688272392193535775}
   m_Layer: 17
   m_Name: Pistol_Trigger
   m_TagString: Untagged
@@ -548,17 +501,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2688272392193535775
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8720975492585567833}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8653095917015752954, guid: ffeea7880ebd4134dbbed333331a60e3, type: 3}

@@ -57,18 +57,29 @@ public class PickUpSystem : MonoBehaviour
         {
             if(hit.transform.gameObject == gameObject)
             {
-                GameObject newWeaponPickup = WeaponSwitcher.Instance.AddItem(WeaponType, WeaponType.GetComponent<WeaponSystem>().weaponType);
-                newWeaponPickup.SetActive(false);
+                foreach (GameObject item in WeaponSwitcher.Instance.weaponInventory)
+                {
+                    if (WeaponSwitcher.Instance.weaponInventory[(int)gameObject.GetComponent<PickUpSystem>().WeaponType.GetComponent<WeaponSystem>().weaponType] == null)
+                    {
+                        GameObject newWeaponPickup = WeaponSwitcher.Instance.AddItem(WeaponType, WeaponType.GetComponent<WeaponSystem>().weaponType);
+                        newWeaponPickup.SetActive(false);
 
-                WeaponSystem _WeaponTypeWP = newWeaponPickup.GetComponent<WeaponSystem>();
+                        WeaponSystem _WeaponTypeWP = newWeaponPickup.GetComponent<WeaponSystem>();
 
-                //Apply the stored info
-                _WeaponTypeWP.AmmoInReserve = AmmoInReserve;
-                _WeaponTypeWP.currentAmmo = currentAmmo;
-                _WeaponTypeWP.maxAmmo = maxAmmo;
-                _WeaponTypeWP.WeaponID = WeaponID;
+                        //Apply the stored info
+                        _WeaponTypeWP.AmmoInReserve = AmmoInReserve;
+                        _WeaponTypeWP.currentAmmo = currentAmmo;
+                        _WeaponTypeWP.maxAmmo = maxAmmo;
+                        _WeaponTypeWP.WeaponID = WeaponID;
 
-                Destroy(gameObject);
+                        if(WeaponSwitcher.Instance.currentSelectedWeapon == null)
+                        {
+                            WeaponSwitcher.Instance.SwitchWeapon((int)newWeaponPickup.GetComponent<WeaponSystem>().weaponType);
+                        }
+
+                        Destroy(gameObject);
+                    }
+                }
             }
         }
     }

@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 7430681447846284614}
   - component: {fileID: 6138480104740207635}
   - component: {fileID: 7362236006267846285}
-  - component: {fileID: 3196505116190293747}
   m_Layer: 17
   m_Name: mag
   m_TagString: Untagged
@@ -168,20 +167,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3196505116190293747
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3838616926313423626}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7371548420364037637, guid: 319ce60d8a86c694e916373514c6d1ed, type: 3}
 --- !u!1 &4868972811594427265
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +380,6 @@ GameObject:
   - component: {fileID: 3745349392456534729}
   - component: {fileID: 7492001792646212127}
   - component: {fileID: 8735891398197251660}
-  - component: {fileID: 3415552219239040385}
   m_Layer: 17
   m_Name: base
   m_TagString: Untagged
@@ -468,20 +452,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3415552219239040385
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7221191660591057948}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1388485733357891733, guid: 319ce60d8a86c694e916373514c6d1ed, type: 3}
 --- !u!1 &7237255521753112500
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +463,7 @@ GameObject:
   - component: {fileID: 8008584457254880526}
   - component: {fileID: 1281788304317184905}
   - component: {fileID: 3245249923588147110}
+  - component: {fileID: 612233140034698540}
   m_Layer: 17
   m_Name: AK47Model
   m_TagString: Untagged
@@ -550,6 +521,19 @@ MonoBehaviour:
   currentAmmo: 0
   maxAmmo: 0
   WeaponType: {fileID: 7237255521753112500, guid: 6e68f15179081d642bd11cedd8e38f75, type: 3}
+--- !u!65 &612233140034698540
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237255521753112500}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.035, y: 0.33447286, z: 1.1200992}
+  m_Center: {x: 1.8362136e-16, y: 0.030321132, z: 0.21356794}
 --- !u!1 &8645869599368800180
 GameObject:
   m_ObjectHideFlags: 0

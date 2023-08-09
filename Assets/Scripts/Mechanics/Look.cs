@@ -32,13 +32,13 @@ public class Look : MonoBehaviour
     //outside changes
     [HideInInspector] public float targetXRotOffset;
     [HideInInspector] public float camHeightOffset;
-    [HideInInspector] public float targetFOV = 90f;
+    [HideInInspector] public float targetFOV = 60f;
     [HideInInspector] public float targetCamRoll = 0;
 
     private void Update()
     {
         xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime);
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, FOVChangeSpeed * Time.deltaTime);
+        //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, FOVChangeSpeed * Time.deltaTime);
         cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, Mathf.Lerp(cam.transform.localPosition.y, originalCamHeight + camHeightOffset, camHeightChangeSpeed * Time.deltaTime), cam.transform.localPosition.z);
         //playerCam.eulerAngles = new Vector3(playerCam.eulerAngles.x, playerCam.eulerAngles.y, Mathf.Lerp(playerCam.eulerAngles.z, targetCamRoll, camRollSpeed * Time.deltaTime));
 

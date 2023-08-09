@@ -150,6 +150,7 @@ public class WeaponSwitcher : MonoBehaviour
             if (currentSelectedWeapon != null && currentSelectedWeapon.tag != "Knifes")
             {
                 DropItem(currentSelectedWeapon, currentSelectedWeapon.GetComponent<WeaponSystem>().groundPrefab);
+                Debug.Log("Dropped Current Weapon");
             }
         }
     }
