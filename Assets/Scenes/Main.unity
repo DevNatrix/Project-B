@@ -8211,7 +8211,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   switchonScroll: 1
   currentSelectedWeapon: {fileID: 0}
-  weaponInventory: []
+  weaponInventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   pickupDistance: 10
   dropForwardForce: 8
   dropUpwardForce: 0
