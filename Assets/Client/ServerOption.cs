@@ -18,11 +18,16 @@ public class ServerOption : MonoBehaviour
 	[SerializeField] TextMeshProUGUI versionText;
 	[SerializeField] GameObject serverOffline;
 
-	UdpClient client;
+	UdpClient udpClient;
 	IPEndPoint remoteEndPoint;
 
 	public bool online = false;
 	Lobby lobby;
+
+	public int port;
+	public string ip;
+
+	float startTime;
 
 	private void Start()
 	{
@@ -34,7 +39,25 @@ public class ServerOption : MonoBehaviour
 		lobby.setSelectedServer(this);
 	}
 
-	public async void refreshInfo(int timeoutMS)
+	public void refreshInfo(int timoutMS)
+	{
+		try
+		{
+			initUDP();
+			startTime = Time.time;
+			sendUDPMessage("ping");
+		}
+		catch
+		{
+			serverOffline.SetActive(true);
+			versionText.text = "";
+			playersText.text = "";
+			pingText.text = "";
+			online = false;
+		}
+	}
+
+	/*public async void refreshInfo(int timeoutMS)
 	{
 		try
 		{
@@ -78,8 +101,43 @@ public class ServerOption : MonoBehaviour
 		{
 			Debug.Log("Couldnt join server: " + e);
 		}
+	}*/
+
+	async void udpReciever()
+	{
+		while (true)
+		{
+			byte[] receiveBytes = new byte[0];
+			await Task.Run(() => receiveBytes = udpClient.Receive(ref remoteEndPoint));
+
+			Debug.Log("Start: " + startTime + " Current: " + Time.time);
+			string recieveString = Encoding.ASCII.GetString(receiveBytes);
+			Debug.Log("Recieved Message from " + ip + ": " + recieveString);
+			float ping = (int)((Time.time - startTime) * 1000); //get ping
+			serverOffline.SetActive(false);
+			versionText.text = "?";//"V" + recieveString;
+			playersText.text = "?";
+			pingText.text = ping + "ms";
+			online = true;
+		}
 	}
 
-	public int port;
-	public string ip;
+	void initUDP()
+	{
+		remoteEndPoint = new IPEndPoint(IPAddress.Any, port);
+
+		udpClient = new UdpClient();
+		udpClient.Connect(ip, port);
+
+		udpReciever();
+	}
+
+	public void sendUDPMessage(string message)
+	{
+		//load message
+		byte[] udpData = Encoding.ASCII.GetBytes(message);
+
+		//send message
+		udpClient.Send(udpData, udpData.Length);
+	}
 }
