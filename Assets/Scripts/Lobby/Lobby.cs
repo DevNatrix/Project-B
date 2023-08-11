@@ -63,7 +63,7 @@ public class Lobby : MonoBehaviour
 		print("udpated browser");
 		foreach(ServerOption option in possibleServers)
 		{
-			option.refreshInfo(serverTimoutMS);
+			option.refreshInfo();
 		}
 	}
 

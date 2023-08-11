@@ -40,7 +40,7 @@ public class ServerOption : MonoBehaviour
 		lobby.setSelectedServer(this);
 	}
 
-	public void refreshInfo(int hi)
+	public void refreshInfo()
 	{
 		try
 		{
