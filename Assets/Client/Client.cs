@@ -4,8 +4,6 @@ using System.Text;
 using UnityEngine;
 using System.Threading.Tasks;
 using TMPro;
-using UnityEditor.PackageManager;
-using UnityEngine.UIElements;
 
 public class Client : MonoBehaviour
 {
@@ -13,7 +11,6 @@ public class Client : MonoBehaviour
 	public int UDP_PORT = 6969;
 	public string SERVER_IP = "127.0.0.1";
 
-	public int transformTPS = 20;
 	public static bool lostConnection = false;
 
 	IPEndPoint remoteEndPoint;
@@ -48,6 +45,7 @@ public class Client : MonoBehaviour
 	public static int ID;
 	public static int latency;
 	public static string username = "test username";
+	public static int transformTPS = 64;
 
 	private void Start()
 	{
@@ -63,7 +61,7 @@ public class Client : MonoBehaviour
 
 		InvokeRepeating("Ping", 1, 1f);
 		InvokeRepeating("DebugText", 1, 1f);
-		InvokeRepeating("TransformUpdate", 1.5f, 1f);// .00778f);
+		InvokeRepeating("TransformUpdate", 1.5f, 1/(float)transformTPS);
 	}
 
 	void Ping()

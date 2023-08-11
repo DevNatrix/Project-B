@@ -27,18 +27,6 @@ public class ServerEvents : MonoBehaviour
 		//server.sendMessage("e" + "~" + eventName + "~" + combineStringArray(data, "~"), server.clientE);
 	}
 
-	private void Update()
-	{
-		if (dynamicPlayerLerp)
-		{
-			lerpPercent = (Time.time - pastUpdateTime)/timeBetweenUpdates;
-		}
-		else
-		{
-			lerpPercent = (Time.time - pastUpdateTime) / (1/(float)client.transformTPS);
-		}
-	}
-
 	public void rawEvent(string message)
 	{
 		string[] peices = message.Split('~');
@@ -50,12 +38,6 @@ public class ServerEvents : MonoBehaviour
 		{
 			Debug.LogWarning(e.Message + ", no event for received event: " + message);
 		}
-	}
-
-	public void restartLerpTimer()
-	{
-		timeBetweenUpdates = Time.time - pastUpdateTime;
-		pastUpdateTime = Time.time;
 	}
 
 	//events --------------------------------------------------------------
