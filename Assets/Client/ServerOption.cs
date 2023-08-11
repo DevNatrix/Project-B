@@ -32,6 +32,7 @@ public class ServerOption : MonoBehaviour
 	private void Start()
 	{
 		lobby = GameObject.Find("LobbyHandler").GetComponent<Lobby>();
+		initUDP();
 	}
 
 	public void selectServer()
@@ -39,11 +40,10 @@ public class ServerOption : MonoBehaviour
 		lobby.setSelectedServer(this);
 	}
 
-	public void refreshInfo(int timoutMS)
+	public void refreshInfo(int hi)
 	{
 		try
 		{
-			initUDP();
 			startTime = Time.time;
 			sendUDPMessage("ping");
 		}
@@ -56,52 +56,6 @@ public class ServerOption : MonoBehaviour
 			online = false;
 		}
 	}
-
-	/*public async void refreshInfo(int timeoutMS)
-	{
-		try
-		{
-			//create udp connection
-			client = new UdpClient();
-			client.Connect(ip, port);
-			remoteEndPoint = new IPEndPoint(IPAddress.Any, port);
-
-			//send message
-			byte[] sendBytes = Encoding.ASCII.GetBytes("ping");
-			float startTime = Time.time; //start ping timer
-			client.Send(sendBytes, sendBytes.Length);
-
-			//wait for response or if a timout happens
-			byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
-			Task receiveTask = Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint));
-			Task timeoutTask = Task.Delay(timeoutMS);
-			await Task.WhenAny(receiveTask, timeoutTask);
-
-			string recieveString = Encoding.ASCII.GetString(receiveBytes);
-			if(timeoutTask.IsCompleted || recieveString == "EMPTY")
-			{
-				serverOffline.SetActive(true);
-				versionText.text = "";
-				playersText.text = "";
-				pingText.text = "";
-				online = false;
-			}
-			else
-			{
-				Debug.Log("Recieved Message from " + ip + ": " + recieveString);
-				float ping = (int)((Time.time - startTime)*1000); //get ping
-				serverOffline.SetActive(false);
-				versionText.text = "V" + recieveString;
-				playersText.text = "?";
-				pingText.text = ping + "ms";
-				online = true;
-			}
-		}
-		catch (Exception e)
-		{
-			Debug.Log("Couldnt join server: " + e);
-		}
-	}*/
 
 	async void udpReciever()
 	{
