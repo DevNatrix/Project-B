@@ -59,23 +59,6 @@ public class ServerEvents : MonoBehaviour
 	}
 
 	//events --------------------------------------------------------------
-	/*void u(string[] data)
-	{
-		int clientID = int.Parse(data[0]);
-		Vector3 position = parseVector3(data[1]);
-		Quaternion rotation = parseQuaternion(data[2]);
-
-		if (clientID != UDPServer.ID)
-		{
-			foreach (OtherClient otherClient in otherClientList)
-			{
-				if(otherClient.ID == clientID)
-				{
-					otherClient.setTransform(position, rotation);
-				}
-			}
-		}
-	}*/
 
 	void removeClient(string[] data)
 	{
@@ -103,6 +86,13 @@ public class ServerEvents : MonoBehaviour
 	{
 		int newClientID = int.Parse(data[0]);
 		string newClientUsername = data[1];
+		bool isResponseJoin = bool.Parse(data[2]);
+
+		if(newClientID == Client.ID)
+		{
+			return;
+		}
+
 
 		OtherClient newClientScript = Instantiate(otherClientPrefab).GetComponent<OtherClient>();
 		otherClientList.Add(newClientScript);
@@ -110,6 +100,11 @@ public class ServerEvents : MonoBehaviour
 		sendEvent("serverMessage", new string[] { newClientUsername + " joined the game" });
 
 		this.SendMessage("onPlayerConnect", newClientID);
+
+		if (!isResponseJoin)
+		{
+			sendEvent("newClient", new string[] { Client.ID + "", Client.username, "TRUE" });
+		}
 	}
 
 	public void clientInfo(string[] data)
@@ -117,6 +112,8 @@ public class ServerEvents : MonoBehaviour
 		Debug.Log(data[0]);
 		Client.ID = int.Parse(data[0]);
 		Debug.Log("Client id: " + Client.ID);
+
+		sendEvent("newClient", new string[] { Client.ID + "", Client.username, "FALSE" });
 	}
 
 
@@ -134,9 +131,9 @@ public class ServerEvents : MonoBehaviour
 		return null;
 	}
 
-	public int getIDByOtherClientScript(OtherClient otherClient1)
+	public int getIDByOtherClientScript(OtherClient otherClient)
 	{
-		return otherClient1.ID;
+		return otherClient.ID;
 	}
 
 	public string getUsername(int clientID)

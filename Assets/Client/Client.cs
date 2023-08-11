@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEditor.PackageManager;
+using UnityEngine.UIElements;
 
 public class Client : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class Client : MonoBehaviour
 
 	public static int ID;
 	public static int latency;
+	public static string username = "test username";
 
 	private void Start()
 	{
@@ -175,6 +177,14 @@ public class Client : MonoBehaviour
 		else
 		{
 			Debug.Log("Got UDP message from server:\n" + message);
+
+			string[] peices = message.Split('~');
+			int otherClientID = int.Parse(peices[0]);
+			Vector3 otherClientPos = ServerEvents.parseVector3(peices[1]);
+			Quaternion otherClientRot = ServerEvents.parseQuaternion(peices[2]);
+
+			OtherClient otherClient = events.getOtherClientScriptByID(otherClientID);
+			otherClient.setTransform(otherClientPos, otherClientRot);
 		}
 	}
 
