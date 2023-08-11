@@ -12,6 +12,7 @@ using System.Threading;
 
 public class UDPServer : MonoBehaviour
 {
+	/*
 	[HideInInspector] public UdpClient clientE;
 	[HideInInspector] public UdpClient clientT;
 	IPEndPoint remoteEndPoint;
@@ -268,6 +269,6 @@ public class UDPServer : MonoBehaviour
 		byte[] sendBytes = Encoding.ASCII.GetBytes(message);
 		sendBytesCount += sendBytes.Length;
 		client.Send(sendBytes, sendBytes.Length);
-	}
+	}*/
 
 }

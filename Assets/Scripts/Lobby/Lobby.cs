@@ -45,9 +45,9 @@ public class Lobby : MonoBehaviour
 
 	private void Start()
     {
-		if(UDPServer.lostConnection)
+		if(Client.lostConnection)
 		{
-			UDPServer.lostConnection = false;
+			Client.lostConnection = false;
 			lostConnectionGUI.SetActive(true);
 		}
 		Cursor.lockState = CursorLockMode.None;

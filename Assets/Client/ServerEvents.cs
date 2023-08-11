@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,7 +12,7 @@ public class ServerEvents : MonoBehaviour
 	//change CustomEvents.cs instead, it has examples and everything
 	//ask me if you really want to do it
 
-	[SerializeField] UDPServer server;
+	[SerializeField] Client client;
 	[SerializeField] GameObject otherClientPrefab;
 	List<OtherClient> otherClientList = new List<OtherClient>();
 
@@ -22,7 +23,8 @@ public class ServerEvents : MonoBehaviour
 	
 	public void sendEvent(string eventName, string[] data)
 	{
-		server.sendMessage("e" + "~" + eventName + "~" + combineStringArray(data, "~"), server.clientE);
+		client.sendTCPMessage(eventName + "~" + combineStringArray(data, "~"));
+		//server.sendMessage("e" + "~" + eventName + "~" + combineStringArray(data, "~"), server.clientE);
 	}
 
 	private void Update()
@@ -33,29 +35,20 @@ public class ServerEvents : MonoBehaviour
 		}
 		else
 		{
-			lerpPercent = (Time.time - pastUpdateTime) / (1/(float)server.transformTPS);
+			lerpPercent = (Time.time - pastUpdateTime) / (1/(float)client.transformTPS);
 		}
 	}
-	public void rawEvents(string rawEvents)
+
+	public void rawEvent(string message)
 	{
-		string[] splitRawEvents = rawEvents.Split('|');
-		for (int eventID = 0; eventID < splitRawEvents.Length - 1; eventID++)
+		string[] peices = message.Split('~');
+		try
 		{
-			if (splitRawEvents[eventID] != "")
-			{
-				string[] peices = splitRawEvents[eventID].Split("~");
-				if(this != null) //events get recieved even after exit, showing a ton of annoying errors (this removes that)
-				{
-					try
-					{
-						this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
-					}
-					catch (Exception e)
-					{
-						Debug.LogWarning(e.Message + ", no event for received event: " + splitRawEvents[eventID]);
-					}
-				}
-			}
+			this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
+		}
+		catch (Exception e)
+		{
+			Debug.LogWarning(e.Message + ", no event for received event: " + message);
 		}
 	}
 
@@ -66,7 +59,7 @@ public class ServerEvents : MonoBehaviour
 	}
 
 	//events --------------------------------------------------------------
-	void u(string[] data)
+	/*void u(string[] data)
 	{
 		int clientID = int.Parse(data[0]);
 		Vector3 position = parseVector3(data[1]);
@@ -82,13 +75,13 @@ public class ServerEvents : MonoBehaviour
 				}
 			}
 		}
-	}
+	}*/
 
 	void removeClient(string[] data)
 	{
 		int clientID = int.Parse(data[0]);
 
-		if(clientID == UDPServer.ID)
+		if(clientID == Client.ID)
 		{
 			Debug.LogError("Server sent leave event for this client, closing game");
 			Application.Quit();
@@ -117,6 +110,13 @@ public class ServerEvents : MonoBehaviour
 		sendEvent("serverMessage", new string[] { newClientUsername + " joined the game" });
 
 		this.SendMessage("onPlayerConnect", newClientID);
+	}
+
+	public void clientInfo(string[] data)
+	{
+		Debug.Log(data[0]);
+		Client.ID = int.Parse(data[0]);
+		Debug.Log("Client id: " + Client.ID);
 	}
 
 
