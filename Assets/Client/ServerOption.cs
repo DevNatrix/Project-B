@@ -21,11 +21,12 @@ public class ServerOption : MonoBehaviour
 	UdpClient udpClient;
 	IPEndPoint remoteEndPoint;
 
-	public bool online = false;
 	Lobby lobby;
 
+	public bool online = false;
 	public int port;
 	public string ip;
+	public int latency;
 
 	float startTime;
 
@@ -61,18 +62,16 @@ public class ServerOption : MonoBehaviour
 	{
 		while (true)
 		{
-			byte[] receiveBytes = new byte[0];
-			await Task.Run(() => receiveBytes = udpClient.Receive(ref remoteEndPoint));
+			await Task.Run(() => udpClient.Receive(ref remoteEndPoint));
+			//Debug.Log("Start: " + startTime + " Current: " + Time.time);
 
-			Debug.Log("Start: " + startTime + " Current: " + Time.time);
-			string recieveString = Encoding.ASCII.GetString(receiveBytes);
-			Debug.Log("Recieved Message from " + ip + ": " + recieveString);
-			float ping = (int)((Time.time - startTime) * 1000); //get ping
+			latency = (int)((Time.time - startTime) * 1000); //get ping
+			online = true;
 			serverOffline.SetActive(false);
+
 			versionText.text = "?";//"V" + recieveString;
 			playersText.text = "?";
-			pingText.text = ping + "ms";
-			online = true;
+			pingText.text = latency + "ms";
 		}
 	}
 

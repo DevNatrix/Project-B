@@ -20,7 +20,7 @@ public class Lobby : MonoBehaviour
 
 	public static int bestPort = -1;
 	public static string bestIP;
-	float bestPing;
+	float bestLatency;
 
 	public static string username;
 
@@ -83,76 +83,39 @@ public class Lobby : MonoBehaviour
 
     public void AutoJoin()
     {
-			connectButton.enabled = false;
-			statusText.text = "Pinging Servers...";
-			foreach (ServerOption option in possibleServers)
+		connectButton.enabled = false;
+		statusText.text = "Pinging Servers...";
+
+		bestLatency = -1;
+
+		foreach (ServerOption option in possibleServers)
+		{
+			if(option.online && (option.latency < bestLatency || bestLatency == -1))
 			{
-				testConnection(option.port, option.ip);
+				bestPort = option.port;
+				bestIP = option.ip;
+				bestLatency = option.latency;
 			}
-			Invoke("ChangeScene", ((float)serverTimoutMS + 500) / 1000);
+		}
+		Invoke("ChangeScene", ((float)serverTimoutMS + 500) / 1000);
 	}
 
 	async void ChangeScene()
 	{
-		if (bestPort != -1)
+		if (bestLatency != -1)
 		{
-			Debug.Log("Best Server ----> IP: " + bestIP + ", Port: " + bestPort + ", Ping: " + bestPing);
+			Debug.Log("Best Server ----> IP: " + bestIP + ", Port: " + bestPort + ", Ping: " + bestLatency);
 			statusText.text = "Joining Server...";
-			await Task.Delay(1000);
+			await Task.Delay(750);
 			SceneManager.LoadScene("Main");
 		}
 		else
 		{
 			statusText.text = "No Online Servers";
 			Debug.LogError("No Online Servers");
-			await Task.Delay(2000);
+			await Task.Delay(1500);
 			connectButton.enabled = true;
 			statusText.text = "Try Again";
-		}
-	}
-
-	async void testConnection(int port, string ip)
-	{
-		try
-		{
-			//create udp connection
-			client = new UdpClient();
-			client.Connect(ip, port);
-			remoteEndPoint = new IPEndPoint(IPAddress.Any, port);
-
-			//send message
-			byte[] sendBytes = Encoding.ASCII.GetBytes("ping");
-			float startTime = Time.time; //start ping timer
-			client.Send(sendBytes, sendBytes.Length);
-
-			//wait for response
-			byte[] receiveBytes = new byte[0];
-			await Task.WhenAny(Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint)), Task.Delay(serverTimoutMS));
-			float ping = Time.time - startTime; //get ping
-			string recieveString = Encoding.ASCII.GetString(receiveBytes);
-			Debug.Log("Recieved Message from " + ip + ": " + recieveString);
-
-			//process
-			bool rightVersion = int.Parse(recieveString) == currentServerVersion;
-			if(rejectWrongVersionServer && rightVersion || !rejectWrongVersionServer)
-			{
-				if(ping < bestPing || bestPort == -1)
-				{
-					bestPort = port;
-					bestIP = ip;
-					bestPing = ping;
-				}
-			}
-			else
-			{
-				Debug.LogWarning("Rejected Server: ----> IP: " + ip + ", Port: " + port + ", Ping: " + ping + ", Reason: Wrong Version (current: V" + currentServerVersion + ", Server: V" + recieveString + ")");
-			}
-
-			Debug.Log("Possible Server: ----> IP: " + ip + ", Port: " + port + ", Ping: " + ping);
-		}
-		catch (Exception e)
-		{
-			Debug.Log("Rejected Server: ----> IP: " + ip + ", Port: " + port + ", Reason: " + e);
 		}
 	}
 
