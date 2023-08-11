@@ -18,9 +18,10 @@ public class Lobby : MonoBehaviour
 	UdpClient client;
 	IPEndPoint remoteEndPoint;
 
-	public static int bestPort = -1;
+	public static int bestUDPPort;
+	public static int bestTCPPort;
 	public static string bestIP;
-	float bestLatency;
+	float bestLatency = -1;
 
 	public static string username;
 
@@ -52,9 +53,9 @@ public class Lobby : MonoBehaviour
 		}
 		Cursor.lockState = CursorLockMode.None;
 
-		if(autoUpdateBrowser )
+		if(autoUpdateBrowser)
 		{
-			InvokeRepeating("updateBrowser", 1, browserUpdateInterval);
+			InvokeRepeating("updateBrowser", .1f, browserUpdateInterval);
 		}
 	}
 
@@ -92,7 +93,8 @@ public class Lobby : MonoBehaviour
 		{
 			if(option.online && (option.latency < bestLatency || bestLatency == -1))
 			{
-				bestPort = option.port;
+				bestUDPPort = option.udpPort;
+				bestTCPPort = option.tcpPort;
 				bestIP = option.ip;
 				bestLatency = option.latency;
 			}
@@ -104,7 +106,7 @@ public class Lobby : MonoBehaviour
 	{
 		if (bestLatency != -1)
 		{
-			Debug.Log("Best Server ----> IP: " + bestIP + ", Port: " + bestPort + ", Ping: " + bestLatency);
+			Debug.Log("Best Server ----> IP: " + bestIP + ", UDP Port: " + bestUDPPort + ", TCP Port: " + bestTCPPort + ", Ping: " + bestLatency);
 			statusText.text = "Joining Server...";
 			await Task.Delay(750);
 			SceneManager.LoadScene("Main");
@@ -146,7 +148,8 @@ public class Lobby : MonoBehaviour
 	{
 		if(currentServerInBrowser != null && currentServerInBrowser.online)
 		{
-			bestPort = currentServerInBrowser.port;
+			bestUDPPort = currentServerInBrowser.udpPort;
+			bestTCPPort = currentServerInBrowser.tcpPort;
 			bestIP = currentServerInBrowser.ip;
 			ChangeScene();
 		}

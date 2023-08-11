@@ -24,7 +24,8 @@ public class ServerOption : MonoBehaviour
 	Lobby lobby;
 
 	public bool online = false;
-	public int port;
+	public int udpPort = 6969;
+	public int tcpPort = 4242;
 	public string ip;
 	public int latency;
 
@@ -62,8 +63,9 @@ public class ServerOption : MonoBehaviour
 	{
 		while (true)
 		{
-			await Task.Run(() => udpClient.Receive(ref remoteEndPoint));
-			//Debug.Log("Start: " + startTime + " Current: " + Time.time);
+			byte[] receiveBytes = new byte[0];
+			await Task.Run(() => receiveBytes = udpClient.Receive(ref remoteEndPoint));
+			string recieveString = Encoding.ASCII.GetString(receiveBytes);
 
 			latency = (int)((Time.time - startTime) * 1000); //get ping
 			online = true;
@@ -77,10 +79,10 @@ public class ServerOption : MonoBehaviour
 
 	void initUDP()
 	{
-		remoteEndPoint = new IPEndPoint(IPAddress.Any, port);
+		remoteEndPoint = new IPEndPoint(IPAddress.Any, udpPort);
 
 		udpClient = new UdpClient();
-		udpClient.Connect(ip, port);
+		udpClient.Connect(ip, udpPort);
 
 		udpReciever();
 	}

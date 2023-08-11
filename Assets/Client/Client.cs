@@ -44,11 +44,17 @@ public class Client : MonoBehaviour
 
 	public static int ID;
 	public static int latency;
-	public static string username = "test username";
+	public static string username;
 	public static int transformTPS = 64;
 
 	private void Start()
 	{
+		UDP_PORT = Lobby.bestUDPPort;
+		TCP_PORT = Lobby.bestTCPPort;
+		username = Lobby.username;
+		SERVER_IP = Lobby.bestIP;
+		TCP_PORT = 4242;
+
 		udpPing = advancedDebug.createDebug("UDP Ping");
 		tcpPing = advancedDebug.createDebug("TCP Ping");
 		udpSendBytes = advancedDebug.createDebug("UDP Send Bytes");
