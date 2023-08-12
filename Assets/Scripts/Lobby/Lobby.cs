@@ -18,7 +18,7 @@ public class Lobby : MonoBehaviour
 	UdpClient client;
 	IPEndPoint remoteEndPoint;
 
-	public static int bestUDPPort;
+	public static int bestUDPPort = -1;
 	public static int bestTCPPort;
 	public static string bestIP;
 	float bestLatency = -1;

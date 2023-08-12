@@ -4,6 +4,7 @@ using System.Text;
 using UnityEngine;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Client : MonoBehaviour
 {
@@ -49,6 +50,11 @@ public class Client : MonoBehaviour
 
 	private void Start()
 	{
+		if(Lobby.bestUDPPort == -1)
+		{
+			SceneManager.LoadScene(0);
+		}
+
 		UDP_PORT = Lobby.bestUDPPort;
 		TCP_PORT = Lobby.bestTCPPort;
 		username = Lobby.username;
