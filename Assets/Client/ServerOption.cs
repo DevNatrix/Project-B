@@ -30,12 +30,14 @@ public class ServerOption : MonoBehaviour
 	public string ip;
 	public int latency;
 
+	bool recieverOnline = false;
 	float startTime;
 
 	private void Start()
 	{
 		lobby = GameObject.Find("LobbyHandler").GetComponent<Lobby>();
 		initUDP();
+		udpReciever();
 	}
 
 	public void selectServer()
@@ -64,17 +66,30 @@ public class ServerOption : MonoBehaviour
 	{
 		while (true)
 		{
-			byte[] receiveBytes = new byte[0];
-			await Task.Run(() => receiveBytes = udpClient.Receive(ref remoteEndPoint));
-			string recieveString = Encoding.ASCII.GetString(receiveBytes);
+			try
+			{
+				byte[] receiveBytes = new byte[0];
+				await Task.Run(() => receiveBytes = udpClient.Receive(ref remoteEndPoint));
+				string recieveString = Encoding.ASCII.GetString(receiveBytes);
 
-			latency = (int)((Time.time - startTime) * 1000); //get ping
-			online = true;
-			serverOffline.SetActive(false);
+				latency = (int)((Time.time - startTime) * 1000); //get ping
+				online = true;
+				serverOffline.SetActive(false);
 
-			versionText.text = "?";//"V" + recieveString;
-			playersText.text = "?";
-			pingText.text = latency + "ms";
+				versionText.text = "?";//"V" + recieveString;
+				playersText.text = "?";
+				pingText.text = latency + "ms";
+			}
+			catch
+			{
+				serverOffline.SetActive(true);
+				versionText.text = "";
+				playersText.text = "";
+				pingText.text = "";
+				online = false;
+
+				initUDP();
+			}
 		}
 	}
 
@@ -84,8 +99,6 @@ public class ServerOption : MonoBehaviour
 
 		udpClient = new UdpClient();
 		udpClient.Connect(ip, udpPort);
-
-		udpReciever();
 	}
 
 	public void sendUDPMessage(string message)
