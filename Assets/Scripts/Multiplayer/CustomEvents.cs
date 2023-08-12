@@ -78,11 +78,11 @@ public class CustomEvents : MonoBehaviour
 		int clientID = int.Parse(data[1]);
 		Debug.Log("Damage event");
 
-		if (clientID == UDPServer.ID)
+		if (clientID == Client.ID)
 		{
 			localHealth.TakeDamage(damage);
 
-			string[] sendData = { UDPServer.ID + "", (localHealth.health - damage) + "" };
+			string[] sendData = { Client.ID + "", (localHealth.health - damage) + "" };
 			serverEvents.sendEvent("SetHealth", sendData);
 		}
 		else
@@ -99,7 +99,7 @@ public class CustomEvents : MonoBehaviour
 		int clientID = int.Parse(data[0]);
 		int health = int.Parse(data[1]);
 
-		if (clientID == UDPServer.ID)
+		if (clientID == Client.ID)
 		{
 			//LocalHealth.Instance.health = health;
 		}

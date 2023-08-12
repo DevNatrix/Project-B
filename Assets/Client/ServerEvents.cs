@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,7 +12,7 @@ public class ServerEvents : MonoBehaviour
 	//change CustomEvents.cs instead, it has examples and everything
 	//ask me if you really want to do it
 
-	[SerializeField] UDPServer server;
+	[SerializeField] Client client;
 	[SerializeField] GameObject otherClientPrefab;
 	List<OtherClient> otherClientList = new List<OtherClient>();
 
@@ -22,73 +23,30 @@ public class ServerEvents : MonoBehaviour
 	
 	public void sendEvent(string eventName, string[] data)
 	{
-		server.sendMessage("e" + "~" + eventName + "~" + combineStringArray(data, "~"), server.clientE);
+		client.sendTCPMessage(eventName + "~" + combineStringArray(data, "~"));
+		//server.sendMessage("e" + "~" + eventName + "~" + combineStringArray(data, "~"), server.clientE);
 	}
 
-	private void Update()
+	public void rawEvent(string message)
 	{
-		if (dynamicPlayerLerp)
+		string[] peices = message.Split('~');
+		try
 		{
-			lerpPercent = (Time.time - pastUpdateTime)/timeBetweenUpdates;
+			this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
 		}
-		else
+		catch (Exception e)
 		{
-			lerpPercent = (Time.time - pastUpdateTime) / (1/(float)server.transformTPS);
+			Debug.LogWarning(e.Message + ", no event for received event: " + message);
 		}
-	}
-	public void rawEvents(string rawEvents)
-	{
-		string[] splitRawEvents = rawEvents.Split('|');
-		for (int eventID = 0; eventID < splitRawEvents.Length - 1; eventID++)
-		{
-			if (splitRawEvents[eventID] != "")
-			{
-				string[] peices = splitRawEvents[eventID].Split("~");
-				if(this != null) //events get recieved even after exit, showing a ton of annoying errors (this removes that)
-				{
-					try
-					{
-						this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
-					}
-					catch (Exception e)
-					{
-						Debug.LogWarning(e.Message + ", no event for received event: " + splitRawEvents[eventID]);
-					}
-				}
-			}
-		}
-	}
-
-	public void restartLerpTimer()
-	{
-		timeBetweenUpdates = Time.time - pastUpdateTime;
-		pastUpdateTime = Time.time;
 	}
 
 	//events --------------------------------------------------------------
-	void u(string[] data)
-	{
-		int clientID = int.Parse(data[0]);
-		Vector3 position = parseVector3(data[1]);
-		Quaternion rotation = parseQuaternion(data[2]);
-
-		if (clientID != UDPServer.ID)
-		{
-			foreach (OtherClient otherClient in otherClientList)
-			{
-				if(otherClient.ID == clientID)
-				{
-					otherClient.setTransform(position, rotation);
-				}
-			}
-		}
-	}
 
 	void removeClient(string[] data)
 	{
 		int clientID = int.Parse(data[0]);
 
-		if(clientID == UDPServer.ID)
+		if(clientID == Client.ID)
 		{
 			Debug.LogError("Server sent leave event for this client, closing game");
 			Application.Quit();
@@ -110,6 +68,13 @@ public class ServerEvents : MonoBehaviour
 	{
 		int newClientID = int.Parse(data[0]);
 		string newClientUsername = data[1];
+		bool isResponseJoin = bool.Parse(data[2]);
+
+		if(newClientID == Client.ID)
+		{
+			return;
+		}
+
 
 		OtherClient newClientScript = Instantiate(otherClientPrefab).GetComponent<OtherClient>();
 		otherClientList.Add(newClientScript);
@@ -117,6 +82,20 @@ public class ServerEvents : MonoBehaviour
 		sendEvent("serverMessage", new string[] { newClientUsername + " joined the game" });
 
 		this.SendMessage("onPlayerConnect", newClientID);
+
+		if (!isResponseJoin)
+		{
+			sendEvent("newClient", new string[] { Client.ID + "", Client.username, "TRUE" });
+		}
+	}
+
+	public void clientInfo(string[] data)
+	{
+		Debug.Log(data[0]);
+		Client.ID = int.Parse(data[0]);
+		Debug.Log("Client id: " + Client.ID);
+
+		sendEvent("newClient", new string[] { Client.ID + "", Client.username, "FALSE" });
 	}
 
 
@@ -134,9 +113,9 @@ public class ServerEvents : MonoBehaviour
 		return null;
 	}
 
-	public int getIDByOtherClientScript(OtherClient otherClient1)
+	public int getIDByOtherClientScript(OtherClient otherClient)
 	{
-		return otherClient1.ID;
+		return otherClient.ID;
 	}
 
 	public string getUsername(int clientID)

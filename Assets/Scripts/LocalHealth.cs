@@ -26,7 +26,7 @@ public class LocalHealth : MonoBehaviour
 
 			ChangeHealth(100, true);
 
-			string[] sendData = { UDPServer.ID + "", health + ""};
+			string[] sendData = { Client.ID + "", health + ""};
 			serverEvents.sendEvent("SetHealth", sendData);
 
 			transform.position = new Vector3(0f, 10f, 0f);

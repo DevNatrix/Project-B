@@ -18,15 +18,23 @@ public class ServerOption : MonoBehaviour
 	[SerializeField] TextMeshProUGUI versionText;
 	[SerializeField] GameObject serverOffline;
 
-	UdpClient client;
+	UdpClient udpClient;
 	IPEndPoint remoteEndPoint;
 
-	public bool online = false;
 	Lobby lobby;
+
+	public bool online = false;
+	public int udpPort = 6969;
+	public int tcpPort = 4242;
+	public string ip;
+	public int latency;
+
+	float startTime;
 
 	private void Start()
 	{
 		lobby = GameObject.Find("LobbyHandler").GetComponent<Lobby>();
+		initUDP();
 	}
 
 	public void selectServer()
@@ -34,52 +42,57 @@ public class ServerOption : MonoBehaviour
 		lobby.setSelectedServer(this);
 	}
 
-	public async void refreshInfo(int timeoutMS)
+	public void refreshInfo()
 	{
 		try
 		{
-			//create udp connection
-			client = new UdpClient();
-			client.Connect(ip, port);
-			remoteEndPoint = new IPEndPoint(IPAddress.Any, port);
-
-			//send message
-			byte[] sendBytes = Encoding.ASCII.GetBytes("ping");
-			float startTime = Time.time; //start ping timer
-			client.Send(sendBytes, sendBytes.Length);
-
-			//wait for response or if a timout happens
-			byte[] receiveBytes = Encoding.ASCII.GetBytes("EMPTY");
-			Task receiveTask = Task.Run(() => receiveBytes = client.Receive(ref remoteEndPoint));
-			Task timeoutTask = Task.Delay(timeoutMS);
-			await Task.WhenAny(receiveTask, timeoutTask);
-
-			string recieveString = Encoding.ASCII.GetString(receiveBytes);
-			if(timeoutTask.IsCompleted || recieveString == "EMPTY")
-			{
-				serverOffline.SetActive(true);
-				versionText.text = "";
-				playersText.text = "";
-				pingText.text = "";
-				online = false;
-			}
-			else
-			{
-				Debug.Log("Recieved Message from " + ip + ": " + recieveString);
-				float ping = (int)((Time.time - startTime)*1000); //get ping
-				serverOffline.SetActive(false);
-				versionText.text = "V" + recieveString;
-				playersText.text = "?";
-				pingText.text = ping + "ms";
-				online = true;
-			}
+			startTime = Time.time;
+			sendUDPMessage("ping");
 		}
-		catch (Exception e)
+		catch
 		{
-			Debug.Log("Couldnt join server: " + e);
+			serverOffline.SetActive(true);
+			versionText.text = "";
+			playersText.text = "";
+			pingText.text = "";
+			online = false;
 		}
 	}
 
-	public int port;
-	public string ip;
+	async void udpReciever()
+	{
+		while (true)
+		{
+			byte[] receiveBytes = new byte[0];
+			await Task.Run(() => receiveBytes = udpClient.Receive(ref remoteEndPoint));
+			string recieveString = Encoding.ASCII.GetString(receiveBytes);
+
+			latency = (int)((Time.time - startTime) * 1000); //get ping
+			online = true;
+			serverOffline.SetActive(false);
+
+			versionText.text = "?";//"V" + recieveString;
+			playersText.text = "?";
+			pingText.text = latency + "ms";
+		}
+	}
+
+	void initUDP()
+	{
+		remoteEndPoint = new IPEndPoint(IPAddress.Any, udpPort);
+
+		udpClient = new UdpClient();
+		udpClient.Connect(ip, udpPort);
+
+		udpReciever();
+	}
+
+	public void sendUDPMessage(string message)
+	{
+		//load message
+		byte[] udpData = Encoding.ASCII.GetBytes(message);
+
+		//send message
+		udpClient.Send(udpData, udpData.Length);
+	}
 }

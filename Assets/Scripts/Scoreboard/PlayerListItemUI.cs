@@ -27,7 +27,7 @@ public class PlayerListItemUI : MonoBehaviour
 
     IEnumerator UpdatePing()
     {
-        PingText.text = UDPServer.latency.ToString() + "ms";
+        PingText.text = Client.latency.ToString() + "ms";
         yield return new WaitForSeconds(0.5f);
         Debug.Log("Updated");
         StartCoroutine(UpdatePing());
