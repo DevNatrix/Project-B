@@ -11,6 +11,7 @@ public class MenuController : MonoBehaviour
 	public GameObject startMenu;
 	public GameObject menuParent;
 	public List<GameObject> subMenus;
+	public Client client;
 	bool menu = false;
 
 	private void Awake()
@@ -68,6 +69,7 @@ public class MenuController : MonoBehaviour
 
 	public void leaveServer()
 	{
+		client.sendTCPMessage("quit");
 		SceneManager.LoadScene(0);
 	}
 }

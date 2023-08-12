@@ -7179,7 +7179,6 @@ MonoBehaviour:
   TCP_PORT: 4242
   UDP_PORT: 6969
   SERVER_IP: 127.0.0.1
-  transformTPS: 32
   events: {fileID: 1836363827}
   advancedDebug: {fileID: 1836363835}
   playerTransform: {fileID: 5846882482729803036}
