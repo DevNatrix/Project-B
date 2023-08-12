@@ -53,7 +53,6 @@ public class Client : MonoBehaviour
 		TCP_PORT = Lobby.bestTCPPort;
 		username = Lobby.username;
 		SERVER_IP = Lobby.bestIP;
-		TCP_PORT = 4242;
 
 		udpPing = advancedDebug.createDebug("UDP Ping");
 		tcpPing = advancedDebug.createDebug("TCP Ping");
@@ -139,7 +138,7 @@ public class Client : MonoBehaviour
 
 			getBytesTCP += Encoding.UTF8.GetByteCount(message);
 
-			Debug.Log("Got TCP Message: " + message);
+			//Debug.Log("Got TCP Message: " + message);
 
 			//loop through messages
 			string[] messages = message.Split('|');
@@ -180,7 +179,7 @@ public class Client : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("Got UDP message from server:\n" + message);
+			//Debug.Log("Got UDP message from server:\n" + message);
 
 			string[] peices = message.Split('~');
 			int otherClientID = int.Parse(peices[0]);
