@@ -85,7 +85,7 @@ public class Lobby : MonoBehaviour
     public void AutoJoin()
     {
 		connectButton.enabled = false;
-		statusText.text = "Pinging Servers...";
+		statusText.text = "Finding Server...";
 
 		bestLatency = -1;
 
@@ -99,7 +99,7 @@ public class Lobby : MonoBehaviour
 				bestLatency = option.latency;
 			}
 		}
-		Invoke("ChangeScene", ((float)serverTimoutMS + 500) / 1000);
+		ChangeScene();
 	}
 
 	async void ChangeScene()
@@ -108,7 +108,7 @@ public class Lobby : MonoBehaviour
 		{
 			Debug.Log("Best Server ----> IP: " + bestIP + ", UDP Port: " + bestUDPPort + ", TCP Port: " + bestTCPPort + ", Ping: " + bestLatency);
 			statusText.text = "Joining Server...";
-			await Task.Delay(750);
+			await Task.Delay(500);
 			SceneManager.LoadScene("Main");
 		}
 		else

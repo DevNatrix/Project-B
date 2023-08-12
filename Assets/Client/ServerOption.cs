@@ -30,7 +30,6 @@ public class ServerOption : MonoBehaviour
 	public string ip;
 	public int latency;
 
-	bool recieverOnline = false;
 	float startTime;
 
 	private void Start()
