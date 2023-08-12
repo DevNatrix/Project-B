@@ -131,14 +131,14 @@ public class Lobby : MonoBehaviour
 		}*/ //doesnt let you build
 	}
 
-	public void setSelectedServer(ServerOption selectedServer)
+	public void setSelectedServer(GameObject serverButton, ServerOption serverOption)
 	{
 		if(currentServerInBrowser != null)
 		{
 			currentServerInBrowser.gameObject.GetComponent<Image>().color = new Color(0.69f, 0.69f, 0.69f);
 		}
-		selectedServer.gameObject.GetComponent<Image>().color = new Color(0.47f, 0.61f, 0.43f);
-		currentServerInBrowser = selectedServer;
+		serverButton.GetComponent<Image>().color = new Color(0.47f, 0.61f, 0.43f);
+		currentServerInBrowser = serverOption;
 
 		browserJoinButton.enabled = true;
 		browserJoinButton.gameObject.GetComponent<Image>().color = new Color(248, 248, 248, 255);
@@ -151,6 +151,8 @@ public class Lobby : MonoBehaviour
 			bestUDPPort = currentServerInBrowser.udpPort;
 			bestTCPPort = currentServerInBrowser.tcpPort;
 			bestIP = currentServerInBrowser.ip;
+			bestLatency = currentServerInBrowser.latency;
+
 			ChangeScene();
 		}
 	}

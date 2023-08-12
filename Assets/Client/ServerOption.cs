@@ -17,6 +17,7 @@ public class ServerOption : MonoBehaviour
 	[SerializeField] TextMeshProUGUI playersText;
 	[SerializeField] TextMeshProUGUI versionText;
 	[SerializeField] GameObject serverOffline;
+	[SerializeField] GameObject serverButton;
 
 	UdpClient udpClient;
 	IPEndPoint remoteEndPoint;
@@ -39,7 +40,7 @@ public class ServerOption : MonoBehaviour
 
 	public void selectServer()
 	{
-		lobby.setSelectedServer(this);
+		lobby.setSelectedServer(serverButton, this);
 	}
 
 	public void refreshInfo()
