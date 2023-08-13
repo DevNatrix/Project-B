@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class LocalHealth : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    /*public int health;
-    public TextMeshProUGUI healthText;
+	public int team;
+
+	public int health;
+	public TextMeshProUGUI healthText;
+
 	public ServerEvents serverEvents;
 
 	public void TakeDamage(int damage)
-    {
+	{
 		//Debug.Log("You got damaged: " + damage);
 		SetHealth(health - damage);
-    }
+	}
 
 	public void SetHealth(int _health)
 	{
@@ -32,5 +35,5 @@ public class LocalHealth : MonoBehaviour
 
 		string[] sendData = { Client.ID + "", health + "" };
 		serverEvents.sendEventToOtherClients("setHealth", sendData);
-	}*/
+	}
 }

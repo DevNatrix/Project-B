@@ -12,6 +12,7 @@ public class ServerEvents : MonoBehaviour
 	//change CustomEvents.cs instead, it has examples and everything
 	//ask me if you really want to do it
 
+	[SerializeField] PlayerManager playerManager;
 	[SerializeField] Client client;
 	[SerializeField] GameObject otherClientPrefab;
 	List<OtherClient> otherClientList = new List<OtherClient>();
@@ -92,6 +93,8 @@ public class ServerEvents : MonoBehaviour
 	public void setClientInfo(string[] data)
 	{
 		Client.ID = int.Parse(data[0]);
+		playerManager.team = int.Parse(data[1]);
+
 		Debug.Log("Client id: " + Client.ID);
 
 		sendEventToOtherClients("newClient", new string[] { Client.ID + "", Client.username, "false"});
