@@ -101,9 +101,8 @@ public class WeaponSystem : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<Health>())
                 {
-                    hit.transform.gameObject.GetComponent<Health>().TakeDamage(damage);
-                    string ClientID = hit.transform.gameObject.GetComponent<OtherClient>().ID.ToString();
-                    serverEvents.sendEvent("Damage", new string[] { damage.ToString(), ClientID });
+                    int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
+                    serverEvents.sendDirectEvent("damage", new string[] { damage.ToString() }, clientID);
                 }
 
                 GameObject shotbulletHole = Instantiate(bulletHole, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(hit.normal));

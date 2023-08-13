@@ -58,7 +58,7 @@ public class Chat : MonoBehaviour
         //If client has typed something and pressed enter it'll send message through the network and disables ChatBackground
         else if (ChatBackground.activeSelf == true && !string.IsNullOrWhiteSpace(ChatContainer) && playerControls.ChatVoice.Chat.WasPressedThisFrame())
         {
-            serverEvents.sendEvent("chatMessage", new string[] { Lobby.username, ChatContainer });
+            serverEvents.sendGlobalEvent("chatMessage", new string[] { Lobby.username, ChatContainer });
             InputFieldContainer.text = "";
         }
     }

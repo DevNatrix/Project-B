@@ -20,11 +20,22 @@ public class ServerEvents : MonoBehaviour
 	float pastUpdateTime;
 	float timeBetweenUpdates;
 	[SerializeField] bool dynamicPlayerLerp;
-	
-	public void sendEvent(string eventName, string[] data)
+
+	public void sendGlobalEvent(string eventType, string[] eventInfo)
 	{
-		client.sendTCPMessage(eventName + "~" + combineStringArray(data, "~"));
-		//server.sendMessage("e" + "~" + eventName + "~" + combineStringArray(data, "~"), server.clientE);
+		client.sendTCPMessage("g~" + eventType + "~" + combineStringArray(eventInfo, "~"));
+	}
+	public void sendEventToOtherClients(string eventType, string[] eventInfo)
+	{
+		client.sendTCPMessage("o~" + eventType + "~" + combineStringArray(eventInfo, "~"));
+	}
+	public void sendDirectEvent(string eventType, string[] eventInfo, int targetClient)
+	{
+		client.sendTCPMessage("d~" + eventType + "~" + targetClient + "~" + combineStringArray(eventInfo, "~"));
+	}
+	public void sendServerEvent(string eventType, string[] eventInfo)
+	{
+		client.sendTCPMessage("s~" + eventType + "~" + combineStringArray(eventInfo, "~"));
 	}
 
 	public void rawEvent(string message)
@@ -32,6 +43,7 @@ public class ServerEvents : MonoBehaviour
 		string[] peices = message.Split('~');
 		try
 		{
+			//trigger event (it also goes to custom events if can't find it here)
 			this.SendMessage(peices[0], sliceStringArray(peices, 1, peices.Length));
 		}
 		catch (Exception e)
@@ -46,16 +58,10 @@ public class ServerEvents : MonoBehaviour
 	{
 		int clientID = int.Parse(data[0]);
 
-		if(clientID == Client.ID)
-		{
-			Debug.LogError("Server sent leave event for this client, closing game");
-			Application.Quit();
-		}
 		foreach (OtherClient otherClient in otherClientList)
 		{
 			if (otherClient.ID == clientID)
 			{
-				sendEvent("serverMessage", new string[] { otherClient.username + " left the game" });
 				otherClientList.Remove(otherClient);
 				Destroy(otherClient.gameObject);
 				this.SendMessage("onPlayerDisconnect", clientID);
@@ -66,36 +72,28 @@ public class ServerEvents : MonoBehaviour
 
 	void newClient(string[] data)
 	{
-		int newClientID = int.Parse(data[0]);
+		int clientID = int.Parse(data[0]);
 		string newClientUsername = data[1];
-		bool isResponseJoin = bool.Parse(data[2]);
 
-		if(newClientID == Client.ID)
+		if(clientID == Client.ID)
 		{
 			return;
 		}
 
-
 		OtherClient newClientScript = Instantiate(otherClientPrefab).GetComponent<OtherClient>();
 		otherClientList.Add(newClientScript);
-		newClientScript.setInfo(newClientID, newClientUsername);
-		sendEvent("serverMessage", new string[] { newClientUsername + " joined the game" });
+		newClientScript.setInfo(clientID, newClientUsername);
 
-		this.SendMessage("onPlayerConnect", newClientID);
-
-		if (!isResponseJoin)
-		{
-			sendEvent("newClient", new string[] { Client.ID + "", Client.username, "TRUE" });
-		}
+		this.SendMessage("onPlayerConnect", clientID);
+		sendDirectEvent("newClient", new string[] { Client.ID + "", Client.username}, clientID);
 	}
 
-	public void clientInfo(string[] data)
+	public void setClientInfo(string[] data)
 	{
-		Debug.Log(data[0]);
 		Client.ID = int.Parse(data[0]);
 		Debug.Log("Client id: " + Client.ID);
 
-		sendEvent("newClient", new string[] { Client.ID + "", Client.username, "FALSE" });
+		sendEventToOtherClients("newClient", new string[] { Client.ID + "", Client.username});
 	}
 
 

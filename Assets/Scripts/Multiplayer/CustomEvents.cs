@@ -9,10 +9,30 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] AudioPlayer audioPlayer;
 	[SerializeField] LocalHealth localHealth;
 
-	//function name is the same as event type sent, only perameter is string array
+	//start example
+	public void sendExampleEventExample()
+	{
+		//data has to be in an array of strings (convert all data types to string and put in an array like shown)
+		string[] data = { 1 + "", .54 + "", "bruh" };
+
+		//there are 4 event sending functions:
+		//sendGlobalEvent(eventType, data) - sends an event to everyone, even yourself
+		//sendDirectEvent(eventType, data, targetClientID) - sends an event to the specified client id
+		//sendEventToOtherClients(eventType, data) - sends an event to everyone else excluding yourself
+		//sendServerEvent(eventType, data) - sends an event to the server (you won't be using this)
+
+		//send event
+		//since this is a global event, every other client will get that event
+		serverEvents.sendGlobalEvent("exampleEvent", data);
+
+		//then make a recieve function (example is the function below this one) that gets called when an event is recieved by this client
+		//the data perameter will have the same variables as the data sent using the event send functions
+	}
+
+	//function name is the same as event type sent, only perameter is string array (both rules must be followed for things to work!!!)
 	public void exampleEvent(string[] data)
 	{
-		//set data
+		//you can then parse the data recieved in the string array
 		int exampleData1 = int.Parse(data[0]);
 		float exampleData2 = float.Parse(data[1]);
 		string exampleData3 = data[2];
@@ -21,13 +41,8 @@ public class CustomEvents : MonoBehaviour
 		Debug.Log(exampleData1 + ", " + exampleData2 + ", " + exampleData3);
 	}
 
-	//doesnt have to have it's own function, just do the things inside of the function
-	public void sendExampleEventExample()
-	{
-		//data has to be in an array of strings (convert all data types to string and put in an array like shown)
-		string[] data = { 1 + "", .54 + "", "bruh" };
-		serverEvents.sendEvent("exampleEvent", data);
-	}
+	//end example
+
 
 	public void chatMessage(string[] data)
 	{
@@ -72,43 +87,23 @@ public class CustomEvents : MonoBehaviour
 		Debug.Log(clientID + ", " + weaponName);
 	}
 
-	public void Damage(string[] data)
+	public void damage(string[] data)
 	{
 		int damage = int.Parse(data[0]);
-		int clientID = int.Parse(data[1]);
-		Debug.Log("Damage event");
 
-		if (clientID == Client.ID)
-		{
-			localHealth.TakeDamage(damage);
-
-			string[] sendData = { Client.ID + "", (localHealth.health - damage) + "" };
-			serverEvents.sendEvent("SetHealth", sendData);
-		}
-		else
-        {
-			OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
-			Health otherClientHealth = otherClientScript.gameObject.GetComponent<Health>();
-			
-			otherClientHealth.TakeDamage(damage);
-		}
+		localHealth.TakeDamage(damage);
+		string[] sendData = { Client.ID + "", (localHealth.health - damage) + "" };
+		serverEvents.sendEventToOtherClients("setHealth", sendData);
 	}
 
-	public void SetHealth(string[] data)
+	public void setHealth(string[] data)
 	{
 		int clientID = int.Parse(data[0]);
 		int health = int.Parse(data[1]);
 
-		if (clientID == Client.ID)
-		{
-			//LocalHealth.Instance.health = health;
-		}
-		else
-		{
-			OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
-			Health otherClientHealth = otherClientScript.gameObject.GetComponent<Health>();
+		OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
+		Health otherClientHealth = otherClientScript.gameObject.GetComponent<Health>();
 
-			otherClientHealth.SetHealth(health);
-		}
+		otherClientHealth.SetHealth(health);
 	}
 }

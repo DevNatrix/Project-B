@@ -47,6 +47,7 @@ public class Client : MonoBehaviour
 	public static int latency;
 	public static string username;
 	public static int transformTPS = 64;
+	bool serverOnline = false;
 
 	private void Start()
 	{
@@ -80,7 +81,7 @@ public class Client : MonoBehaviour
 		udpPingStartTime = Time.time;
 		sendUDPMessage("ping");
 		tcpPingStartTime = Time.time;
-		sendTCPMessage("ping");
+		sendTCPMessage("s~ping");
 	}
 
 	void DebugText()
@@ -134,6 +135,7 @@ public class Client : MonoBehaviour
 
 	async void tcpReciever()
 	{
+		serverOnline = true;
 		while (true)
 		{
 			byte[] tcpReceivedData = new byte[1024];
@@ -160,10 +162,13 @@ public class Client : MonoBehaviour
 
 	public void sendTCPMessage(string message)
 	{
-		message += "|";
-		sendBytesTCP += Encoding.UTF8.GetByteCount(message);
-		byte[] tcpData = Encoding.ASCII.GetBytes(message);
-		tcpStream.Write(tcpData, 0, tcpData.Length);
+		if(serverOnline)
+		{
+			message += "|";
+			sendBytesTCP += Encoding.UTF8.GetByteCount(message);
+			byte[] tcpData = Encoding.ASCII.GetBytes(message);
+			tcpStream.Write(tcpData, 0, tcpData.Length);
+		}
 	}
 
 	public void sendUDPMessage(string message)

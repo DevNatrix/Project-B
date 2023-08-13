@@ -26,9 +26,6 @@ public class LocalHealth : MonoBehaviour
 
 			ChangeHealth(100, true);
 
-			string[] sendData = { Client.ID + "", health + ""};
-			serverEvents.sendEvent("SetHealth", sendData);
-
 			transform.position = new Vector3(0f, 10f, 0f);
         }
     }
@@ -44,5 +41,8 @@ public class LocalHealth : MonoBehaviour
 			health += _health;
 		}
 		healthText.text = health.ToString();
+
+		string[] sendData = { Client.ID + "", health + "" };
+		serverEvents.sendEventToOtherClients("SetHealth", sendData);
 	}
 }

@@ -29,12 +29,12 @@ public class AudioPlayer : MonoBehaviour
 	public void sendAudioByClip(AudioClip audioClip, Vector3 position, float volume, float pitch)
 	{
 		string[] data = { getIDByClip(audioClip) + "", position + "", volume + "", pitch + "" };
-		serverEvents.sendEvent("playAudio", data);
+		serverEvents.sendGlobalEvent("playAudio", data);
 	}
 	public void sendAudioByID(int clipID, Vector3 position, float volume, float pitch)
 	{
 		string[] data = { clipID + "", position + "", volume + "", pitch + "" };
-		serverEvents.sendEvent("playAudio", data);
+		serverEvents.sendGlobalEvent("playAudio", data);
 	}
 
 	public AudioClip getClipByID(int id)
