@@ -54,6 +54,7 @@ public class Client : MonoBehaviour
 		if(Lobby.bestUDPPort == -1)
 		{
 			SceneManager.LoadScene(0);
+			return;
 		}
 
 		UDP_PORT = Lobby.bestUDPPort;

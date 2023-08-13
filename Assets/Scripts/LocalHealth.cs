@@ -11,7 +11,7 @@ public class LocalHealth : MonoBehaviour
 
 	public void TakeDamage(int damage)
     {
-		Debug.Log("You got damaged: " + damage);
+		//Debug.Log("You got damaged: " + damage);
 		SetHealth(health - damage);
     }
 
