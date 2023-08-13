@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
+	[HideInInspector] public static AudioPlayer Instance;
 	[SerializeField] GameObject audioSourcePrefab;
 	[SerializeField] List<AudioClip> clips;
 	[SerializeField] ServerEvents serverEvents;
-	
-	public void createAudio(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f, Transform parent = null)
+
+    private void Start()
+    {
+		Instance = this;
+    }
+
+    public void createAudio(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f, Transform parent = null)
 	{
 		AudioSource newAudioSource;
 		if(parent == null)

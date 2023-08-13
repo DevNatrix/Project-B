@@ -13645,6 +13645,7 @@ MonoBehaviour:
   audioSourcePrefab: {fileID: 9123408507271955232, guid: bb0ffa56f4719dc4b9abe9055c07890b, type: 3}
   clips:
   - {fileID: 8300000, guid: 9a47b64b8d432b94eb7317d268127b1d, type: 3}
+  - {fileID: 8300000, guid: 79bae7ea43354c441909dba4cd71eb42, type: 3}
   serverEvents: {fileID: 1836363827}
 --- !u!114 &1836363832
 MonoBehaviour:
