@@ -4112,6 +4112,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7656093453415565074, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+      propertyPath: minYPos
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656093453415565074, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
       propertyPath: maxSpeed
       value: 100
       objectReference: {fileID: 0}

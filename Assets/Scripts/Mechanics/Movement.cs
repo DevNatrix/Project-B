@@ -21,6 +21,7 @@ public class Movement : MonoBehaviour
 	[SerializeField] float jumpPower = 3.5f;
 	[HideInInspector] public bool jump;
 	[SerializeField] float maxSpeed;
+	[SerializeField] float minYPos = -10f;
 	bool isGrounded;
 	
 
@@ -88,6 +89,12 @@ public class Movement : MonoBehaviour
 
 	private void Update()
 	{
+		//kill if falling
+		if(transform.position.y < minYPos)
+		{
+			transform.position = new Vector3(0, 0, 0);
+		}
+
         //wallrunning
         float horizontalSpeed = new Vector3(playerRB.velocity.x, 0f, playerRB.velocity.z).magnitude;
         nearbyWall = Physics.CheckSphere(transform.position + Vector3.up * wallDetectionHeight, wallDetectionRadius, groundMask);
