@@ -13,16 +13,6 @@ public class LocalHealth : MonoBehaviour
     {
 		Debug.Log("You got damaged");
 		ChangeHealth(-_damage);
-
-
-		if (health <= 0)
-        {
-			Debug.Log("You Died");
-
-			ChangeHealth(100, true);
-
-			transform.position = new Vector3(0f, 10f, 0f);
-        }
     }
 
 	public void ChangeHealth(int _health, bool set = false)
@@ -35,6 +25,16 @@ public class LocalHealth : MonoBehaviour
 		{
 			health += _health;
 		}
+
+		if (health <= 0)
+		{
+			Debug.Log("You Died");
+
+			health = 0;
+
+			transform.position = new Vector3(0f, 10f, 0f);
+		}
+
 		healthText.text = health.ToString();
 
 		string[] sendData = { Client.ID + "", health + "" };
