@@ -47,7 +47,7 @@ public class WeaponSystem : MonoBehaviour
 
         cam = GameReferences.Instance.MainCam;
         AmmoAndMagText = GameReferences.Instance.AmmoAndMagText;
-
+		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
     }
 
     private void OnEnable()
@@ -58,11 +58,6 @@ public class WeaponSystem : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
-    }
-
-    void Start()
-    {
-
     }
 
     public enum WeaponType { Primary, Secondary, Melee}
