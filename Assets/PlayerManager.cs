@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
 	public int team;
+	public List<Transform> spawnPoints;
 
 	public int health;
 	public TextMeshProUGUI healthText;
@@ -28,12 +29,17 @@ public class PlayerManager : MonoBehaviour
 
 			health = 100;
 
-			transform.position = new Vector3(0f, 10f, 0f);
+			respawn();
 		}
 
 		healthText.text = health.ToString();
 
 		string[] sendData = { Client.ID + "", health + "" };
 		serverEvents.sendEventToOtherClients("setHealth", sendData);
+	}
+
+	public void respawn()
+	{
+		transform.position = spawnPoints[team].position;
 	}
 }

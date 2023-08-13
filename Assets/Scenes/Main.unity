@@ -4591,7 +4591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 536884608}
   m_Layer: 3
-  m_Name: team 1
+  m_Name: team 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9011,7 +9011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1126243454}
   m_Layer: 3
-  m_Name: team 2
+  m_Name: team 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14636,6 +14636,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
+  spawnPoints:
+  - {fileID: 536884608}
+  - {fileID: 1126243454}
   health: 100
   healthText: {fileID: 2117224161}
   serverEvents: {fileID: 1836363827}
