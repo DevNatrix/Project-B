@@ -5,7 +5,7 @@ using TMPro;
 
 public class LocalHealth : MonoBehaviour
 {
-    /*public int health;
+    public int health;
     public TextMeshProUGUI healthText;
 	public ServerEvents serverEvents;
 
@@ -32,5 +32,5 @@ public class LocalHealth : MonoBehaviour
 
 		string[] sendData = { Client.ID + "", health + "" };
 		serverEvents.sendEventToOtherClients("setHealth", sendData);
-	}*/
+	}
 }

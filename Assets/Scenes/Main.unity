@@ -4586,7 +4586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 536884608}
   m_Layer: 3
-  m_Name: team 0
+  m_Name: team 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6389,11 +6389,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &764996900 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8552368880977798431, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
-  m_PrefabInstance: {fileID: 493430281}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &808821160
 Mesh:
   m_ObjectHideFlags: 0
@@ -9011,7 +9006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1126243454}
   m_Layer: 3
-  m_Name: team 1
+  m_Name: team 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13604,7 +13599,6 @@ MonoBehaviour:
   otherClientPrefab: {fileID: 9001124583556111622, guid: 636f344e4258307418f1fab4ef0b7e5b, type: 3}
   lerpPercent: 0
   dynamicPlayerLerp: 0
-  playerManager: {fileID: 7656093453908861215}
 --- !u!4 &1836363829
 Transform:
   m_ObjectHideFlags: 0
@@ -13635,6 +13629,7 @@ MonoBehaviour:
   serverEvents: {fileID: 1836363827}
   chat: {fileID: 643860526}
   audioPlayer: {fileID: 1836363831}
+  localHealth: {fileID: 7656093453908861213}
 --- !u!114 &1836363831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13650,11 +13645,6 @@ MonoBehaviour:
   audioSourcePrefab: {fileID: 9123408507271955232, guid: bb0ffa56f4719dc4b9abe9055c07890b, type: 3}
   clips:
   - {fileID: 8300000, guid: 9a47b64b8d432b94eb7317d268127b1d, type: 3}
-<<<<<<< HEAD
-  - {fileID: 8300000, guid: 79bae7ea43354c441909dba4cd71eb42, type: 3}
-=======
-  - {fileID: 8300000, guid: 9a47b64b8d432b94eb7317d268127b1d, type: 3}
->>>>>>> d033d2224ae97381ebf7a3239c4a3b24090198fa
   serverEvents: {fileID: 1836363827}
 --- !u!114 &1836363832
 MonoBehaviour:
@@ -14553,7 +14543,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2924846311637992457, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
   m_PrefabInstance: {fileID: 493430281}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764996900}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6817709d12fdbaf41bb14b193a1727a9, type: 3}
@@ -14608,28 +14598,20 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7656093453415565074, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
   m_PrefabInstance: {fileID: 493430281}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764996900}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c024826dca2a8e64baacb485fd40a0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7656093453908861215
+--- !u!114 &7656093453908861213 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4993737252273829260, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+  m_PrefabInstance: {fileID: 493430281}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764996900}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc282f9520287384588d7eba17ae0447, type: 3}
+  m_Script: {fileID: 11500000, guid: 37f4261d3b06ca340b3b434bcdd364c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
-  spawnPoints:
-  - {fileID: 536884608}
-  - {fileID: 1126243454}
-  health: 100
-  healthText: {fileID: 2117224161}
-  serverEvents: {fileID: 1836363827}

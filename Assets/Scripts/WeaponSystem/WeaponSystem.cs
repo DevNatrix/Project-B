@@ -15,7 +15,6 @@ public class WeaponSystem : MonoBehaviour
     public GameObject groundPrefab;
     public GameObject bulletHole;
     [HideInInspector] public ServerEvents serverEvents;
-    AudioPlayer audioPlayer;
 
     [Header("Info")]
     public string WeaponID;
@@ -49,7 +48,6 @@ public class WeaponSystem : MonoBehaviour
         cam = GameReferences.Instance.MainCam;
         AmmoAndMagText = GameReferences.Instance.AmmoAndMagText;
 		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
-        audioPlayer = GameObject.Find("game manager").GetComponent<AudioPlayer>();
     }
 
     private void OnEnable()
@@ -107,7 +105,6 @@ public class WeaponSystem : MonoBehaviour
             }
 
             currentAmmo--;
-            audioPlayer.sendAudioByID(1, gameObject.transform.position, .5f, 1);
         }
     }
     

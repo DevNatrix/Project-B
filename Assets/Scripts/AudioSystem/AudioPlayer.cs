@@ -26,12 +26,12 @@ public class AudioPlayer : MonoBehaviour
 		Destroy(newAudioSource.gameObject, clip.length);
 	}
 
-	public void sendAudioByClip(AudioClip audioClip, Vector3 position, float volume = 1, float pitch = 1)
+	public void sendAudioByClip(AudioClip audioClip, Vector3 position, float volume, float pitch)
 	{
 		string[] data = { getIDByClip(audioClip) + "", position + "", volume + "", pitch + "" };
 		serverEvents.sendGlobalEvent("playAudio", data);
 	}
-	public void sendAudioByID(int clipID, Vector3 position, float volume = 1, float pitch = 1)
+	public void sendAudioByID(int clipID, Vector3 position, float volume, float pitch)
 	{
 		string[] data = { clipID + "", position + "", volume + "", pitch + "" };
 		serverEvents.sendGlobalEvent("playAudio", data);
