@@ -7,7 +7,7 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] ServerEvents serverEvents;
 	[SerializeField] Chat chat;
 	[SerializeField] AudioPlayer audioPlayer;
-	[SerializeField] LocalHealth localHealth;
+	PlayerManager playerManager;
 
 	//example:
 	public void sendExampleEventExample()
@@ -83,7 +83,7 @@ public class CustomEvents : MonoBehaviour
 	{
 		int damage = int.Parse(data[0]);
 
-		localHealth.TakeDamage(damage);
+		playerManager.TakeDamage(damage);
 	}
 
 	public void setHealth(string[] data)
