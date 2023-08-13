@@ -11,7 +11,7 @@ public class LocalHealth : MonoBehaviour
 
 	public void TakeDamage(int _damage)
     {
-		Debug.Log("You got damaged");
+		Debug.Log("You got damaged: " + _damage);
 		ChangeHealth(-_damage);
     }
 
@@ -30,7 +30,7 @@ public class LocalHealth : MonoBehaviour
 		{
 			Debug.Log("You Died");
 
-			health = 0;
+			health = 100;
 
 			transform.position = new Vector3(0f, 10f, 0f);
 		}
