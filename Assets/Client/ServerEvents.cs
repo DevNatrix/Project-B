@@ -93,7 +93,7 @@ public class ServerEvents : MonoBehaviour
 		Client.ID = int.Parse(data[0]);
 		Debug.Log("Client id: " + Client.ID);
 
-		sendEventToOtherClients("newClient", new string[] { Client.ID + "", Client.username});
+		sendEventToOtherClients("newClient", new string[] { Client.ID + "", Client.username, "false"});
 	}
 
 
