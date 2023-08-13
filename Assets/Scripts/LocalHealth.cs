@@ -43,6 +43,6 @@ public class LocalHealth : MonoBehaviour
 		healthText.text = health.ToString();
 
 		string[] sendData = { Client.ID + "", health + "" };
-		serverEvents.sendEventToOtherClients("SetHealth", sendData);
+		serverEvents.sendEventToOtherClients("setHealth", sendData);
 	}
 }
