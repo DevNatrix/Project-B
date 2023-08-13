@@ -21,12 +21,14 @@ public class OtherClient : MonoBehaviour
 	float lerpPercent = 0;
 	float pastUpdateTime = 0;
 
+	float yOffset = 0; //for making the client not visible
+
 	private void Update()
 	{
 		lerpPercent = (Time.time - pastUpdateTime) / (1 / (float)Client.transformTPS);
 
 		//position
-		transform.position = Vector3.Lerp(pastPosition, targetPosition, lerpPercent);
+		transform.position = Vector3.Lerp(pastPosition, targetPosition, lerpPercent) + new Vector3(0f, yOffset, 0f);
 
 		//rotation
 		Quaternion currentRotation = Quaternion.Slerp(pastRotation, targetRotation, lerpPercent);
@@ -59,5 +61,17 @@ public class OtherClient : MonoBehaviour
 		targetRotation = rotation;
 
 		pastUpdateTime = Time.time;
+	}
+
+	public void setVisibility(bool visible)
+	{
+		if(visible)
+		{
+			yOffset = 0f;
+		}
+		else
+		{
+			yOffset = 1000f;
+		}
 	}
 }

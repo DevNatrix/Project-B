@@ -46,8 +46,9 @@ public class Client : MonoBehaviour
 	public static int ID;
 	public static int latency;
 	public static string username;
-	public static int transformTPS = 64;
+	public static int transformTPS = 32;
 	bool serverOnline = false;
+	public bool showClient = true;
 
 	private void Start()
 	{
@@ -72,9 +73,9 @@ public class Client : MonoBehaviour
 		initUDP();
 		initTCP();
 
-		InvokeRepeating("Ping", 1, 1f);
+		InvokeRepeating("Ping", 0, 1f);
 		InvokeRepeating("DebugText", 1, 1f);
-		InvokeRepeating("TransformUpdate", 1.5f, 1/(float)transformTPS);
+		InvokeRepeating("TransformUpdate", .5f, 1/(float)transformTPS);
 	}
 
 	void Ping()
@@ -100,7 +101,7 @@ public class Client : MonoBehaviour
 
 	void TransformUpdate()
 	{
-		sendUDPMessage(Client.ID + "~" + playerTransform.position + "~" + camTransform.rotation);
+		sendUDPMessage(Client.ID + "~" + playerTransform.position + "~" + camTransform.rotation + "~" + showClient);
 	}
 
 	void initUDP()
@@ -191,15 +192,15 @@ public class Client : MonoBehaviour
 		}
 		else
 		{
-			//Debug.Log("Got UDP message from server:\n" + message);
-
 			string[] peices = message.Split('~');
 			int otherClientID = int.Parse(peices[0]);
 			Vector3 otherClientPos = ServerEvents.parseVector3(peices[1]);
 			Quaternion otherClientRot = ServerEvents.parseQuaternion(peices[2]);
+			bool showOtherClient = bool.Parse(peices[3]);
 
 			OtherClient otherClient = events.getOtherClientScriptByID(otherClientID);
 			otherClient.setTransform(otherClientPos, otherClientRot);
+			otherClient.setVisibility(showOtherClient);
 		}
 	}
 

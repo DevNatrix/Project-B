@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -9,14 +10,24 @@ public class MenuController : MonoBehaviour
 {
 	PlayerControls playerControls;
 	public GameObject startMenu;
+	public GameObject teamMenu;
 	public GameObject menuParent;
 	public List<GameObject> subMenus;
 	public Client client;
 	bool menu = false;
+	public PlayerManager playerManager;
+
+	public Camera spectateCam;
 
 	private void Awake()
 	{
-		Cursor.lockState = CursorLockMode.Locked;
+		setSpectate(true);
+		toggleMenu();
+		startMenu.SetActive(false);
+		teamMenu.SetActive(true);
+		client.showClient = false;
+
+		Cursor.lockState = CursorLockMode.None;
 		playerControls = new PlayerControls();
 
 		playerControls.UI.toggleMenu.performed += OnKeyPerformed;
@@ -65,6 +76,20 @@ public class MenuController : MonoBehaviour
 	public void disableGameObject(GameObject objectToDisable)
 	{
 		objectToDisable.SetActive(false);
+	}
+
+	public void setTeam(int team)
+	{
+		playerManager.setTeam(team);
+
+		setSpectate(false);
+		toggleMenu();
+	}
+
+	public void setSpectate(bool isEnabled)
+	{
+		client.showClient = !isEnabled;
+		spectateCam.enabled = isEnabled;
 	}
 
 	public void leaveServer()

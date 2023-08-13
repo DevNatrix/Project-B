@@ -93,8 +93,6 @@ public class CustomEvents : MonoBehaviour
 		int clientID = int.Parse(data[0]);
 		int health = int.Parse(data[1]);
 
-		//Debug.Log("Set client " +  clientID + " health to: " + health);
-
 		OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
 		Health otherClientHealth = otherClientScript.gameObject.GetComponent<Health>();
 

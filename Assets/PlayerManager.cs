@@ -15,7 +15,6 @@ public class PlayerManager : MonoBehaviour
 
 	public void TakeDamage(int damage)
 	{
-		//Debug.Log("You got damaged: " + damage);
 		SetHealth(health - damage);
 	}
 
@@ -41,5 +40,13 @@ public class PlayerManager : MonoBehaviour
 	public void respawn()
 	{
 		transform.position = spawnPoints[team].position;
+	}
+
+	public void setTeam(int _team)
+	{
+		team = _team;
+		Debug.Log("Joined team " + team);
+
+		//send event (for later)
 	}
 }

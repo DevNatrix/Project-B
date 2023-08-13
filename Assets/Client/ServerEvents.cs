@@ -93,7 +93,6 @@ public class ServerEvents : MonoBehaviour
 	public void setClientInfo(string[] data)
 	{
 		Client.ID = int.Parse(data[0]);
-		playerManager.team = int.Parse(data[1]);
 
 		Debug.Log("Client id: " + Client.ID);
 
