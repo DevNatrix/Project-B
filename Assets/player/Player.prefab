@@ -241,13 +241,13 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 90
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 63
+    m_Bits: 262079
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -268,6 +268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8428473956365506184}
+  - component: {fileID: 4589314064938907210}
   m_Layer: 0
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -290,6 +291,30 @@ Transform:
   m_Father: {fileID: 8439984633616416873}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4589314064938907210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589314065117614145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 014e5a33576f0294fbea01ba345fc5a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switchonScroll: 1
+  currentSelectedWeapon: {fileID: 0}
+  weaponInventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  pickupDistance: 10
+  dropForwardForce: 8
+  dropUpwardForce: 0
+  distanceToDrop: 5
+  cam: {fileID: 4068278970138739623}
+  playerT: {fileID: 5846882482686360341}
 --- !u!1 &7446284596128828776
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +411,7 @@ GameObject:
   - component: {fileID: 2924846311637992457}
   - component: {fileID: 6228382424146448460}
   - component: {fileID: 4993737252273829260}
+  - component: {fileID: 7656093453908861214}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -426,13 +452,15 @@ MonoBehaviour:
   playerRB: {fileID: 6228382424146448460}
   playerCam: {fileID: 2673439467726268577}
   look: {fileID: 2924846311637992457}
+  playerManager: {fileID: 7656093453908861214}
   acceleration: 100
   inAirAcceleration: 5
   decceleration: 0.8
   inAirDecceleration: 0.99
-  jumpPower: 300
+  jumpPower: 600
   jump: 0
-  maxSpeed: 50
+  maxSpeed: 100
+  minYPos: -40
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -465,11 +493,11 @@ MonoBehaviour:
   slidingFOVChange: 10
   speedBoostOnSlide: 3
   audioPlayer: {fileID: 0}
-  distanceForFootstep: 0
-  footstepClip: {fileID: 0}
-  footstepVolume: 0
+  distanceForFootstep: 2.6
+  footstepClip: {fileID: 8300000, guid: 9a47b64b8d432b94eb7317d268127b1d, type: 3}
+  footstepVolume: 0.2
   showClosestWallCasts: 0
-  showGroundCheck: 0
+  showGroundCheck: 1
   showWallRadius: 0
   jumping: 0
 --- !u!114 &2924846311637992457
@@ -527,6 +555,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f4261d3b06ca340b3b434bcdd364c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7656093453908861214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552368880977798431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc282f9520287384588d7eba17ae0447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   health: 100
   healthText: {fileID: 0}
   serverEvents: {fileID: 0}

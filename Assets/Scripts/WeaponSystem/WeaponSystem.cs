@@ -27,7 +27,7 @@ public class WeaponSystem : MonoBehaviour
 
     private float nextFire;
 
-    public WeaponType weaponType;
+	public WeaponType weaponType;
 
     [Header("Ammo")]
     public int AmmoInReserve;
@@ -84,7 +84,7 @@ public class WeaponSystem : MonoBehaviour
 
     private void Shoot()
     {
-       if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false)
+       if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false && !MenuController.menu)
         {
             nextFire = 1 / fireRate;
 

@@ -10,22 +10,19 @@ public class MenuController : MonoBehaviour
 {
 	PlayerControls playerControls;
 	public GameObject startMenu;
-	public GameObject teamMenu;
 	public GameObject menuParent;
 	public List<GameObject> subMenus;
 	public Client client;
-	bool menu = false;
+	[HideInInspector] public static bool menu = true;
 	public PlayerManager playerManager;
 
 	public Camera spectateCam;
+	public Camera gunCam;
+	public GameObject InGameGUI;
 
 	private void Awake()
 	{
 		setSpectate(true);
-		toggleMenu();
-		startMenu.SetActive(false);
-		teamMenu.SetActive(true);
-		client.showClient = false;
 
 		Cursor.lockState = CursorLockMode.None;
 		playerControls = new PlayerControls();
@@ -88,6 +85,9 @@ public class MenuController : MonoBehaviour
 
 	public void setSpectate(bool isEnabled)
 	{
+		gunCam.enabled = !isEnabled;
+		InGameGUI.SetActive(!isEnabled);
+
 		client.showClient = !isEnabled;
 		spectateCam.enabled = isEnabled;
 	}

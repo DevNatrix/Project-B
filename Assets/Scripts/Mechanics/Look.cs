@@ -37,23 +37,26 @@ public class Look : MonoBehaviour
 
     private void Update()
     {
-        xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime);
-        //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, FOVChangeSpeed * Time.deltaTime);
-        cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, Mathf.Lerp(cam.transform.localPosition.y, originalCamHeight + camHeightOffset, camHeightChangeSpeed * Time.deltaTime), cam.transform.localPosition.z);
-        //playerCam.eulerAngles = new Vector3(playerCam.eulerAngles.x, playerCam.eulerAngles.y, Mathf.Lerp(playerCam.eulerAngles.z, targetCamRoll, camRollSpeed * Time.deltaTime));
+		if (!MenuController.menu)
+		{
+			xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime);
+			//cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, FOVChangeSpeed * Time.deltaTime);
+			cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, Mathf.Lerp(cam.transform.localPosition.y, originalCamHeight + camHeightOffset, camHeightChangeSpeed * Time.deltaTime), cam.transform.localPosition.z);
+			//playerCam.eulerAngles = new Vector3(playerCam.eulerAngles.x, playerCam.eulerAngles.y, Mathf.Lerp(playerCam.eulerAngles.z, targetCamRoll, camRollSpeed * Time.deltaTime));
 
 
-        rb.MoveRotation(Quaternion.Euler(Vector3.up * yRotation));
-        //transform.Rotate(Vector3.up, mouseX);
+			rb.MoveRotation(Quaternion.Euler(Vector3.up * yRotation));
+			//transform.Rotate(Vector3.up, mouseX);
 
-        xRotation -= mouseY;
-        yRotation += mouseX;
-        xRotation = Mathf.Clamp(xRotation - mouseY, -xClamp, xClamp);
-        zRotation = Mathf.Lerp(zRotation, targetCamRoll, camRollSpeed * Time.deltaTime);
-        Vector3 targetRotation = transform.eulerAngles;
-        targetRotation.x = xRotation + xRotOffset;
-        targetRotation.z = zRotation;
-        playerCam.eulerAngles = targetRotation;
+			xRotation -= mouseY;
+			yRotation += mouseX;
+			xRotation = Mathf.Clamp(xRotation - mouseY, -xClamp, xClamp);
+			zRotation = Mathf.Lerp(zRotation, targetCamRoll, camRollSpeed * Time.deltaTime);
+			Vector3 targetRotation = transform.eulerAngles;
+			targetRotation.x = xRotation + xRotOffset;
+			targetRotation.z = zRotation;
+			playerCam.eulerAngles = targetRotation;
+		}
     }
 
     private void Awake()

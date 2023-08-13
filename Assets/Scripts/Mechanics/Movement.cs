@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
 	[SerializeField] Rigidbody playerRB;
 	[SerializeField] GameObject playerCam;
 	[SerializeField] Look look;
+	[SerializeField] PlayerManager playerManager;
 
 	[Header("Basic Movement Settings:")]
 	[SerializeField] float acceleration = 11f;
@@ -92,7 +93,7 @@ public class Movement : MonoBehaviour
 		//kill if falling
 		if(transform.position.y < minYPos)
 		{
-			transform.position = new Vector3(0, 0, 0);
+			playerManager.respawn();
 		}
 
         //wallrunning
@@ -179,7 +180,6 @@ public class Movement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-
 		//ground check
         isGrounded = Physics.CheckSphere(transform.position + Vector3.up * groundCheckHeight, groundCheckRadius, groundMask);
 
@@ -207,33 +207,36 @@ public class Movement : MonoBehaviour
 		sliding = newSliding;
 
 		//movement
-		if (isGrounded)
+		if (!MenuController.menu)
 		{
-			//footsteps
-			if(Vector3.Distance(pastStepPosition, transform.position) >= distanceForFootstep)
+			if (isGrounded)
 			{
-				pastStepPosition = transform.position;
-				audioPlayer.sendAudioByClip(footstepClip, transform.position, footstepVolume, 1);
-			}
+				//footsteps
+				if(Vector3.Distance(pastStepPosition, transform.position) >= distanceForFootstep)
+				{
+					pastStepPosition = transform.position;
+					audioPlayer.sendAudioByClip(footstepClip, transform.position, footstepVolume, 1);
+				}
 
-			if (!sliding)
-			{
-				playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * acceleration);
+				if (!sliding)
+				{
+					playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * acceleration);
+				}
 			}
-		}
-		else if (wallRunning)
-		{
-			playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * wallRunningAcceleration);
-			playerRB.velocity += -Vector3.up * wallRunningGravity;
-		}
-		else
-		{
-			playerRB.velocity += -Vector3.up * addedGravity;
-			playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * inAirAcceleration);
+			else if (wallRunning)
+			{
+				playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * wallRunningAcceleration);
+				playerRB.velocity += -Vector3.up * wallRunningGravity;
+			}
+			else
+			{
+				playerRB.velocity += -Vector3.up * addedGravity;
+				playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * inAirAcceleration);
+			}
 		}
 
 		//jumping
-		if(jump && isGrounded)
+		if(jump && isGrounded && !MenuController.menu)
 		{
 			playerRB.AddForce(Vector3.up * jumpPower);// += new Vector3(0f, jumpPower, 0f);
 		}
