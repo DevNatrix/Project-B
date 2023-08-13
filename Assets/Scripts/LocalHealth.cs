@@ -9,22 +9,15 @@ public class LocalHealth : MonoBehaviour
     public TextMeshProUGUI healthText;
 	public ServerEvents serverEvents;
 
-	public void TakeDamage(int _damage)
+	public void TakeDamage(int damage)
     {
-		Debug.Log("You got damaged: " + _damage);
-		ChangeHealth(-_damage);
+		Debug.Log("You got damaged: " + damage);
+		SetHealth(health - damage);
     }
 
-	public void ChangeHealth(int _health, bool set = false)
+	public void SetHealth(int _health)
 	{
-		if (set)
-		{
-			health = _health;
-		}
-		else
-		{
-			health += _health;
-		}
+		health = _health;
 
 		if (health <= 0)
 		{
