@@ -31,7 +31,7 @@ public class ServerEvents : MonoBehaviour
 	}
 	public void sendDirectEvent(string eventType, string[] eventInfo, int targetClient)
 	{
-		client.sendTCPMessage("d~" + eventType + "~" + targetClient + "~" + combineStringArray(eventInfo, "~"));
+		client.sendTCPMessage("d~" + targetClient + "~" + eventType + "~" + combineStringArray(eventInfo, "~"));
 	}
 	public void sendServerEvent(string eventType, string[] eventInfo)
 	{
