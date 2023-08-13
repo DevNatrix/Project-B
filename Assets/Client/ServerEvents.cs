@@ -21,6 +21,8 @@ public class ServerEvents : MonoBehaviour
 	float timeBetweenUpdates;
 	[SerializeField] bool dynamicPlayerLerp;
 
+	[SerializeField] PlayerManager playerManager;
+
 	public void sendGlobalEvent(string eventType, string[] eventInfo)
 	{
 		client.sendTCPMessage("g~" + eventType + "~" + combineStringArray(eventInfo, "~"));
@@ -92,6 +94,8 @@ public class ServerEvents : MonoBehaviour
 	public void setClientInfo(string[] data)
 	{
 		Client.ID = int.Parse(data[0]);
+		playerManager.team = int.Parse(data[1]);
+		
 		Debug.Log("Client id: " + Client.ID);
 
 		sendEventToOtherClients("newClient", new string[] { Client.ID + "", Client.username, "false"});
