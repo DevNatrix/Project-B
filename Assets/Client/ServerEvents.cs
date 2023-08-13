@@ -74,18 +74,18 @@ public class ServerEvents : MonoBehaviour
 	{
 		int clientID = int.Parse(data[0]);
 		string newClientUsername = data[1];
-
-		if(clientID == Client.ID)
-		{
-			return;
-		}
+		bool isResponseMessage = bool.Parse(data[2]);
 
 		OtherClient newClientScript = Instantiate(otherClientPrefab).GetComponent<OtherClient>();
 		otherClientList.Add(newClientScript);
 		newClientScript.setInfo(clientID, newClientUsername);
 
 		this.SendMessage("onPlayerConnect", clientID);
-		sendDirectEvent("newClient", new string[] { Client.ID + "", Client.username}, clientID);
+
+		if (!isResponseMessage)
+		{
+			sendDirectEvent("newClient", new string[] { Client.ID + "", Client.username, "true"}, clientID);
+		}
 	}
 
 	public void setClientInfo(string[] data)
