@@ -9,7 +9,7 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] AudioPlayer audioPlayer;
 	[SerializeField] LocalHealth localHealth;
 
-	PlayerManager playerManager;
+	[SerializeField] PlayerManager playerManager;
 
 	//example:
 	public void sendExampleEventExample()

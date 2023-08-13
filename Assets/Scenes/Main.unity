@@ -13636,6 +13636,7 @@ MonoBehaviour:
   chat: {fileID: 643860526}
   audioPlayer: {fileID: 1836363831}
   localHealth: {fileID: 7656093453908861213}
+  playerManager: {fileID: 7656093453908861214}
 --- !u!114 &1836363831
 MonoBehaviour:
   m_ObjectHideFlags: 0
