@@ -9,7 +9,7 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] AudioPlayer audioPlayer;
 	[SerializeField] LocalHealth localHealth;
 
-	//start example
+	//example:
 	public void sendExampleEventExample()
 	{
 		//data has to be in an array of strings (convert all data types to string and put in an array like shown)
@@ -41,8 +41,6 @@ public class CustomEvents : MonoBehaviour
 		Debug.Log(exampleData1 + ", " + exampleData2 + ", " + exampleData3);
 	}
 
-	//end example
-
 
 	public void chatMessage(string[] data)
 	{
@@ -50,12 +48,6 @@ public class CustomEvents : MonoBehaviour
 		string message = data[1];
 
 		chat.newMessage(username, message);
-	}
-
-	public void serverMessage(string[] data)
-	{
-		string message = data[0];
-		chat.serverMessage(message);
 	}
 
 	public void playAudio(string[] data)
@@ -70,13 +62,13 @@ public class CustomEvents : MonoBehaviour
 
 	public void onPlayerConnect(int clientID)
 	{
-		//get client username using serverEvents.getUsername
-		print("join");
+		string clientUsername = serverEvents.getUsername(clientID);
+		chat.serverMessage(clientUsername + " has joined the game");
 	}
 
-	public void onPlayerDisconnect(int clientID)
+	public void onPlayerDisconnect(string clientUsername)
 	{
-		print("leave");
+		chat.serverMessage(clientUsername + " has left the game");
 	}
 
 	public void switchGun(string[] data)

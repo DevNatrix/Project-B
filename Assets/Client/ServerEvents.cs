@@ -57,6 +57,7 @@ public class ServerEvents : MonoBehaviour
 	void removeClient(string[] data)
 	{
 		int clientID = int.Parse(data[0]);
+		string clientUsername = getUsername(clientID);
 
 		foreach (OtherClient otherClient in otherClientList)
 		{
@@ -64,7 +65,7 @@ public class ServerEvents : MonoBehaviour
 			{
 				otherClientList.Remove(otherClient);
 				Destroy(otherClient.gameObject);
-				this.SendMessage("onPlayerDisconnect", clientID);
+				this.SendMessage("onPlayerDisconnect", clientUsername);
 				return;
 			}
 		}
