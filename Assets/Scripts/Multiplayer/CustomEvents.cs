@@ -92,8 +92,6 @@ public class CustomEvents : MonoBehaviour
 		int damage = int.Parse(data[0]);
 
 		localHealth.TakeDamage(damage);
-		string[] sendData = { Client.ID + "", (localHealth.health - damage) + "" };
-		serverEvents.sendEventToOtherClients("setHealth", sendData);
 	}
 
 	public void setHealth(string[] data)
