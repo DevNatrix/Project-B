@@ -15,8 +15,13 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-		SetHealth(100);
+		Invoke("initializeHealth", 1f);
     }
+
+	void initializeHealth(int _health)
+	{
+		SetHealth(100);
+	}
 
     public void TakeDamage(int damage)
 	{
