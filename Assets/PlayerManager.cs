@@ -13,7 +13,12 @@ public class PlayerManager : MonoBehaviour
 
 	public ServerEvents serverEvents;
 
-	public void TakeDamage(int damage)
+    private void Start()
+    {
+		SetHealth(100);
+    }
+
+    public void TakeDamage(int damage)
 	{
 		SetHealth(health - damage);
 	}
