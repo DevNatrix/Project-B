@@ -68,7 +68,7 @@ public class Movement : MonoBehaviour
 	[SerializeField] float slidingHeightChange = .5f;
 	[SerializeField] float slidingFOVChange;
 	[SerializeField] float speedBoostOnSlide;
-	bool sliding = false;
+	public static bool sliding = false;
 
 	[Header("Audio Settings")]
 	[SerializeField] AudioPlayer audioPlayer;

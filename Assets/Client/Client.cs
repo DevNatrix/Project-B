@@ -101,7 +101,7 @@ public class Client : MonoBehaviour
 
 	void TransformUpdate()
 	{
-		sendUDPMessage(Client.ID + "~" + playerTransform.position + "~" + camTransform.rotation + "~" + showClient);
+		sendUDPMessage(Client.ID + "~" + playerTransform.position + "~" + camTransform.rotation + "~" + showClient + "~" + Movement.sliding);
 	}
 
 	void initUDP()
@@ -197,9 +197,10 @@ public class Client : MonoBehaviour
 			Vector3 otherClientPos = ServerEvents.parseVector3(peices[1]);
 			Quaternion otherClientRot = ServerEvents.parseQuaternion(peices[2]);
 			bool showOtherClient = bool.Parse(peices[3]);
+			bool clientIsSliding = bool.Parse(peices[3]);
 
 			OtherClient otherClient = events.getOtherClientScriptByID(otherClientID);
-			otherClient.setTransform(otherClientPos, otherClientRot);
+			otherClient.setTransform(otherClientPos, otherClientRot, clientIsSliding);
 			otherClient.setVisibility(showOtherClient);
 		}
 	}

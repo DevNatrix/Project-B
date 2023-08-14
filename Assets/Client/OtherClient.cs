@@ -37,6 +37,10 @@ public class OtherClient : MonoBehaviour
 	int maxHealth = 100;
 	public Slider slider;
 
+	public float slideAngle;
+	bool isSliding = false;
+	public float rotSpeed;
+
 	public void SetHealth(int _health)
 	{
 		health = _health;
@@ -57,6 +61,17 @@ public class OtherClient : MonoBehaviour
 
 		//make info canvas face towards player cam
 		infoCanvas.LookAt(playerCam);
+
+		Vector3 targetViewModelRot = transform.eulerAngles;
+		if(isSliding)
+		{
+			targetViewModelRot.x = slideAngle;
+		}
+		else
+		{
+			targetViewModelRot.x = 0;
+		}
+		transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetViewModelRot, rotSpeed * Time.deltaTime);
 	}
 
 	private void Start()
@@ -72,7 +87,7 @@ public class OtherClient : MonoBehaviour
 		usernameText.text = username;
 	}
 
-	public void setTransform(Vector3 position, Quaternion rotation)
+	public void setTransform(Vector3 position, Quaternion rotation, bool _isSliding)
 	{
 		pastPosition = targetPosition;
 		targetPosition = position;
@@ -81,6 +96,7 @@ public class OtherClient : MonoBehaviour
 		targetRotation = rotation;
 
 		pastUpdateTime = Time.time;
+		isSliding = _isSliding;
 	}
 
 	public void setVisibility(bool visible)

@@ -795,6 +795,8 @@ MonoBehaviour:
   friendlyUI: {fileID: 5157469271020991357}
   health: 100
   slider: {fileID: 4331380896993931253}
+  slideAngle: -45
+  rotSpeed: 10
 --- !u!136 &901857762020102457
 CapsuleCollider:
   m_ObjectHideFlags: 0
