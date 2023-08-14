@@ -67,7 +67,7 @@ public class CustomEvents : MonoBehaviour
 		}
 		else if(parentClientID != -1) //another client is parent
 		{
-			audioPlayer.spawnAudio(audioPlayer.getClipByID(clipID), position, volume, pitch, serverEvents.getOtherClientScriptByID(parentClientID).transform);
+			audioPlayer.spawnAudio(audioPlayer.getClipByID(clipID), position, volume, pitch);
 		}
 		else //no parent
 		{
