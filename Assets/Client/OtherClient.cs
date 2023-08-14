@@ -66,12 +66,10 @@ public class OtherClient : MonoBehaviour
 		float targetX;
 		if (isSliding)
 		{
-			Debug.Log("IS SLIDING");
 			targetX = slideAngle;
 		}
 		else
 		{
-			Debug.Log("IS NOT SLIDING");
 			targetX = 0;
 		}
 
