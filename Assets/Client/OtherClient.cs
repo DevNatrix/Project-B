@@ -115,4 +115,12 @@ public class OtherClient : MonoBehaviour
 			friendlyUI.SetActive(false);
 		}
 	}
+
+	public void setEquippedWeapon(int newWeapon)
+	{
+		//weapons[equippedWeapon].SetActive(false);
+		//weapons[newWeapon].SetActive(true);
+
+		//equippedWeapon = newWeapon;
+	}
 }

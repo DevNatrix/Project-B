@@ -88,9 +88,12 @@ public class CustomEvents : MonoBehaviour
 	public void switchGun(string[] data)
 	{
 		int clientID = int.Parse(data[0]);
-		string weaponName = data[1];
+		int weaponID = int.Parse(data[1]);
 
-		Debug.Log(clientID + ", " + weaponName);
+		Debug.Log("client " + clientID + " equipped " + weaponID);
+
+		OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
+		otherClientScript.setEquippedWeapon(weaponID);
 	}
 
 	public void damage(string[] data)
