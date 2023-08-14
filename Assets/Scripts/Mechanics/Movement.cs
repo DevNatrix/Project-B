@@ -68,7 +68,8 @@ public class Movement : MonoBehaviour
 	[SerializeField] float slidingHeightChange = .5f;
 	[SerializeField] float slidingFOVChange;
 	[SerializeField] float speedBoostOnSlide;
-	public static bool sliding = false;
+	bool sliding = false;
+	public static bool crouching = false;
 
 	[Header("Audio Settings")]
 	[SerializeField] AudioPlayer audioPlayer;
@@ -184,6 +185,7 @@ public class Movement : MonoBehaviour
         isGrounded = Physics.CheckSphere(transform.position + Vector3.up * groundCheckHeight, groundCheckRadius, groundMask);
 
 		//sliding
+		crouching = slidingRequested;
 		bool newSliding = !wallRunning && isGrounded && slidingRequested;
 		if(!sliding && newSliding) //start
 		{

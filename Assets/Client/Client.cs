@@ -101,7 +101,7 @@ public class Client : MonoBehaviour
 
 	void TransformUpdate()
 	{
-		sendUDPMessage(Client.ID + "~" + playerTransform.position + "~" + camTransform.rotation + "~" + showClient + "~" + Movement.sliding);
+		sendUDPMessage(Client.ID + "~" + playerTransform.position + "~" + camTransform.rotation + "~" + showClient + "~" + Movement.crouching);
 	}
 
 	void initUDP()
