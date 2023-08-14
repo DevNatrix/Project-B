@@ -131,7 +131,7 @@ public class CustomEvents : MonoBehaviour
 		}
 	}
 
-	public void spawnBullet(string[] data)
+	public void spawnBulletEvent(string[] data)
 	{
 		Vector3 bulletPos = ServerEvents.parseVector3(data[0]);
 		Vector3 bulletVel = ServerEvents.parseVector3(data[1]);

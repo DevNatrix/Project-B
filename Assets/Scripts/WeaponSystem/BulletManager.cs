@@ -19,7 +19,7 @@ public class BulletManager : MonoBehaviour
 
 	public void createBullet(Vector3 position, Vector3 velocity)
 	{
-		serverEvents.sendEventToOtherClients("spawnBullet", new string[] { position + "", velocity + "" });
+		serverEvents.sendEventToOtherClients("spawnBulletEvent", new string[] { position + "", velocity + "" });
 
 		spawnBullet(position, velocity);
 	}
