@@ -22,6 +22,7 @@ public class ServerEvents : MonoBehaviour
 	float timeBetweenUpdates;
 	[SerializeField] bool dynamicPlayerLerp;
 
+	//events
 	public void sendGlobalEvent(string eventType, string[] eventInfo)
 	{
 		client.sendTCPMessage("g~" + eventType + "~" + combineStringArray(eventInfo, "~"));
@@ -111,6 +112,8 @@ public class ServerEvents : MonoBehaviour
 				return otherClient;
 			}
 		}
+
+		Debug.LogError("Couldn't find client " + clientID);
 		return null;
 	}
 

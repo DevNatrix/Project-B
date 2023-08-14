@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-	public int team;
+	public static int team;
 	public List<Transform> spawnPoints;
 
 	public int health;
@@ -47,6 +47,6 @@ public class PlayerManager : MonoBehaviour
 		team = _team;
 		Debug.Log("Joined team " + team);
 
-		//send event (for later)
+		serverEvents.sendEventToOtherClients("setClientTeam", new string[] { Client.ID + "", team + "", "false" });
 	}
 }

@@ -18,7 +18,7 @@ public class Look : MonoBehaviour
     [Header("Smoothing Settings:")]
     [SerializeField] float xRotOffsetChangeSpeed;
     [SerializeField] float camHeightChangeSpeed;
-    [SerializeField] float FOVChangeSpeed = 1;
+    //[SerializeField] float FOVChangeSpeed = 1;
     [SerializeField] float camRollSpeed = 1;
 
     float xRotation = 0;

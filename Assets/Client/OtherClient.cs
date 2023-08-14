@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OtherClient : MonoBehaviour
 {
@@ -22,6 +23,25 @@ public class OtherClient : MonoBehaviour
 	float pastUpdateTime = 0;
 
 	float yOffset = 0; //for making the client not visible
+
+	public int team = 0;
+
+	public Material friendlyMaterial;
+	public Material opponentMaterial;
+
+	public Renderer clientRenderer;
+
+	public GameObject friendlyUI;
+
+	public int health;
+	int maxHealth = 100;
+	public Slider slider;
+
+	public void SetHealth(int _health)
+	{
+		health = _health;
+		slider.value = (float)health / (float)maxHealth;
+	}
 
 	private void Update()
 	{
@@ -72,6 +92,27 @@ public class OtherClient : MonoBehaviour
 		else
 		{
 			yOffset = 1000f;
+		}
+	}
+
+	public void setTeam(int _team)
+	{
+		team = _team;
+
+		updateTeamThings(PlayerManager.team == team);
+	}
+
+	public void updateTeamThings(bool friendly)
+	{
+		if (friendly)
+		{
+			clientRenderer.material = friendlyMaterial;
+			friendlyUI.SetActive(true);
+		}
+		else
+		{
+			clientRenderer.material = opponentMaterial;
+			friendlyUI.SetActive(false);
 		}
 	}
 }

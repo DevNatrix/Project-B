@@ -94,8 +94,22 @@ public class CustomEvents : MonoBehaviour
 		int health = int.Parse(data[1]);
 
 		OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
-		Health otherClientHealth = otherClientScript.gameObject.GetComponent<Health>();
 
-		otherClientHealth.SetHealth(health);
+		otherClientScript.SetHealth(health);
+	}
+
+	public void setClientTeam(string[] data)
+	{
+		int clientID = int.Parse(data[0]);
+		int team = int.Parse(data[1]);
+		bool isResponse = bool.Parse(data[2]);
+
+		OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
+		otherClientScript.setTeam(team);
+
+		if(!isResponse)
+		{
+			serverEvents.sendDirectEvent("setClientTeam", new string[] { Client.ID + "", PlayerManager.team + "", "true" }, clientID);
+		}
 	}
 }
