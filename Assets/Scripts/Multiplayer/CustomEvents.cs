@@ -10,6 +10,8 @@ public class CustomEvents : MonoBehaviour
 
 	[SerializeField] PlayerManager playerManager;
 
+	[SerializeField] BulletManager bulletManager;
+
 	//example:
 	public void sendExampleEventExample()
 	{
@@ -87,6 +89,7 @@ public class CustomEvents : MonoBehaviour
 
 	public void switchGun(string[] data)
 	{
+		//not implimented
 		int clientID = int.Parse(data[0]);
 		int weaponID = int.Parse(data[1]);
 
@@ -126,5 +129,13 @@ public class CustomEvents : MonoBehaviour
 		{
 			serverEvents.sendDirectEvent("setClientTeam", new string[] { Client.ID + "", PlayerManager.team + "", "true" }, clientID);
 		}
+	}
+
+	public void spawnBullet(string[] data)
+	{
+		Vector3 bulletPos = ServerEvents.parseVector3(data[0]);
+		Vector3 bulletVel = ServerEvents.parseVector3(data[1]);
+
+		bulletManager.spawnBullet(bulletPos, bulletVel);
 	}
 }

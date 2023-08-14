@@ -27,6 +27,8 @@ public class WeaponSystem : MonoBehaviour
 
     private float nextFire;
 
+	public float bulletSpeed;
+
 	public WeaponType weaponType;
 
     [Header("Ammo")]
@@ -40,6 +42,9 @@ public class WeaponSystem : MonoBehaviour
     [Header("Other")]
     public float dropForce = 0.5f;
 
+	BulletManager bulletManager;
+	public Transform  shootPoint;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -48,7 +53,8 @@ public class WeaponSystem : MonoBehaviour
         cam = GameReferences.Instance.MainCam;
         AmmoAndMagText = GameReferences.Instance.AmmoAndMagText;
 		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
-    }
+		bulletManager = GameObject.Find("game manager").GetComponent<BulletManager>();
+	}
 
     private void OnEnable()
     {
@@ -91,7 +97,10 @@ public class WeaponSystem : MonoBehaviour
             //Shoot raycast
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
 
-            RaycastHit hit;
+			//send event
+			bulletManager.createBullet(shootPoint.position, cam.transform.forward * bulletSpeed);
+
+			RaycastHit hit;
             if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance))
             {
                 if (hit.transform.gameObject.GetComponent<OtherClient>())
