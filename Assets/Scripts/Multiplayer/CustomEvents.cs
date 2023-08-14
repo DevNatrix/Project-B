@@ -7,7 +7,6 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] ServerEvents serverEvents;
 	[SerializeField] Chat chat;
 	[SerializeField] AudioPlayer audioPlayer;
-	[SerializeField] LocalHealth localHealth;
 
 	[SerializeField] PlayerManager playerManager;
 
