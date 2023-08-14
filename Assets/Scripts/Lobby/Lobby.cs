@@ -55,7 +55,7 @@ public class Lobby : MonoBehaviour
 
 		if(autoUpdateBrowser)
 		{
-			InvokeRepeating("updateBrowser", .1f, browserUpdateInterval);
+			InvokeRepeating("updateBrowser", 0, browserUpdateInterval);
 		}
 	}
 
