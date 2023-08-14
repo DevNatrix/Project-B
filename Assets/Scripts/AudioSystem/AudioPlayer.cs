@@ -8,13 +8,14 @@ public class AudioPlayer : MonoBehaviour
 	[SerializeField] GameObject audioSourcePrefab;
 	[SerializeField] List<AudioClip> clips;
 	[SerializeField] ServerEvents serverEvents;
+	[SerializeField] Transform playerTransform;
 
     private void Start()
     {
 		Instance = this;
     }
 
-    public void createAudio(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f, Transform parent = null)
+    public void spawnAudio(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f, Transform parent = null)
 	{
 		AudioSource newAudioSource;
 		if(parent == null)
@@ -32,15 +33,27 @@ public class AudioPlayer : MonoBehaviour
 		Destroy(newAudioSource.gameObject, clip.length);
 	}
 
-	public void sendAudioByClip(AudioClip audioClip, Vector3 position, float volume, float pitch)
+	public void createAudio(AudioClip audioClip, Vector3 position, float volume = 1, float pitch = 1, int parentClientID = -1)
 	{
-		string[] data = { getIDByClip(audioClip) + "", position + "", volume + "", pitch + "" };
-		serverEvents.sendGlobalEvent("playAudio", data);
+		createAudio(getIDByClip(audioClip), position, volume, pitch, parentClientID);
 	}
-	public void sendAudioByID(int clipID, Vector3 position, float volume, float pitch)
+	public void createAudio(int clipID, Vector3 position, float volume = 1, float pitch = 1, int parentClientID = -1)
 	{
-		string[] data = { clipID + "", position + "", volume + "", pitch + "" };
-		serverEvents.sendGlobalEvent("playAudio", data);
+		string[] data = { clipID + "", position + "", volume + "", pitch + "", parentClientID + ""};
+		serverEvents.sendEventToOtherClients("playAudio", data);
+
+		if(parentClientID == -1)
+		{
+			spawnAudio(getClipByID(clipID), position, volume, pitch);
+		}
+		else if(parentClientID == Client.ID)
+		{
+			spawnAudio(getClipByID(clipID), position, volume, pitch, playerTransform);
+		}
+		else
+		{
+			spawnAudio(getClipByID(clipID), position, volume, pitch, serverEvents.getOtherClientScriptByID(parentClientID).transform);
+		}
 	}
 
 	public AudioClip getClipByID(int id)

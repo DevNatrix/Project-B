@@ -4525,8 +4525,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2466282980514943785, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+--- !u!1 &493430282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 847162859472326818, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+  m_PrefabInstance: {fileID: 493430281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &493430283
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493430282}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000002
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &494551108
 GameObject:
   m_ObjectHideFlags: 0
@@ -14255,6 +14275,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9a47b64b8d432b94eb7317d268127b1d, type: 3}
   - {fileID: 8300000, guid: 79bae7ea43354c441909dba4cd71eb42, type: 3}
   serverEvents: {fileID: 1836363827}
+  playerTransform: {fileID: 5846882482729803036}
 --- !u!114 &1836363832
 MonoBehaviour:
   m_ObjectHideFlags: 0

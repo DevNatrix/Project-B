@@ -215,7 +215,7 @@ public class Movement : MonoBehaviour
 				if(Vector3.Distance(pastStepPosition, transform.position) >= distanceForFootstep)
 				{
 					pastStepPosition = transform.position;
-					audioPlayer.sendAudioByClip(footstepClip, transform.position, footstepVolume, 1);
+					audioPlayer.createAudio(footstepClip, transform.position, footstepVolume, 1, Client.ID);
 				}
 
 				if (!sliding)

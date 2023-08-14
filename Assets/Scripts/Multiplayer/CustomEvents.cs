@@ -58,8 +58,21 @@ public class CustomEvents : MonoBehaviour
 		Vector3 position = ServerEvents.parseVector3(data[1]);
 		float volume = float.Parse(data[2]);
 		float pitch = float.Parse(data[3]);
+		int parentClientID = int.Parse(data[4]);
 
-		audioPlayer.createAudio(audioPlayer.getClipByID(clipID), position, volume, pitch);
+		if(parentClientID == Client.ID) //this client is parent
+		{
+			audioPlayer.spawnAudio(audioPlayer.getClipByID(clipID), position, volume, pitch, playerManager.transform);
+		}
+		else if(parentClientID != -1) //another client is parent
+		{
+			audioPlayer.spawnAudio(audioPlayer.getClipByID(clipID), position, volume, pitch, serverEvents.getOtherClientScriptByID(parentClientID).transform);
+		}
+		else //no parent
+		{
+			audioPlayer.spawnAudio(audioPlayer.getClipByID(clipID), position, volume, pitch);
+		}
+
 	}
 
 	public void onPlayerConnect(int clientID)
