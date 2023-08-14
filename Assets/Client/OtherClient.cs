@@ -56,13 +56,13 @@ public class OtherClient : MonoBehaviour
 
 		//rotation
 		Quaternion currentRotation = Quaternion.Slerp(pastRotation, targetRotation, lerpPercent);
-		transform.rotation = Quaternion.Euler(new Vector3(0f, currentRotation.eulerAngles.y, 0f));
+		transform.rotation = Quaternion.Euler(new Vector3(currentRotation.eulerAngles.x, currentRotation.eulerAngles.y, 0f));
 		lookIndicator.localRotation = Quaternion.Euler(new Vector3(currentRotation.eulerAngles.x, 0f, currentRotation.eulerAngles.z));
 
 		//make info canvas face towards player cam
 		infoCanvas.LookAt(playerCam);
 
-		float targetX;
+		/*float targetX;
 		float currentX = transform.eulerAngles.x;
 		if (isSliding)
 		{
@@ -75,7 +75,7 @@ public class OtherClient : MonoBehaviour
 			targetX = 0;
 		}
 
-		transform.eulerAngles = new Vector3(Mathf.Lerp(currentX, targetX, rotSpeed * Time.deltaTime), transform.eulerAngles.y, transform.eulerAngles.z);
+		transform.eulerAngles = new Vector3(Mathf.Lerp(currentX, targetX, rotSpeed * Time.deltaTime), transform.eulerAngles.y, transform.eulerAngles.z);*/
 	}
 
 	private void Start()
