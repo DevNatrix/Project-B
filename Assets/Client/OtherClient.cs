@@ -62,16 +62,20 @@ public class OtherClient : MonoBehaviour
 		//make info canvas face towards player cam
 		infoCanvas.LookAt(playerCam);
 
-		Vector3 targetViewModelRot = transform.eulerAngles;
-		if(isSliding)
+		float targetX;
+		float currentX = transform.eulerAngles.x;
+		if (isSliding)
 		{
-			targetViewModelRot.x = slideAngle;
+			Debug.Log("IS SLIDING");
+			targetX = slideAngle;
 		}
 		else
 		{
-			targetViewModelRot.x = 0;
+			Debug.Log("IS NOT SLIDING");
+			targetX = 0;
 		}
-		transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetViewModelRot, rotSpeed * Time.deltaTime);
+
+		transform.eulerAngles = new Vector3(Mathf.Lerp(currentX, targetX, rotSpeed * Time.deltaTime), transform.eulerAngles.y, transform.eulerAngles.z);
 	}
 
 	private void Start()
