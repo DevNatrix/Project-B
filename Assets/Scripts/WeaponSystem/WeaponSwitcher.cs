@@ -32,6 +32,10 @@ public class WeaponSwitcher : MonoBehaviour
         Instance = this;
 
         AmmoDisplayGOS = GameReferences.Instance.AmmoDisplayGO;
+
+        weaponInventory = new GameObject[3];
+        AmmoDisplayGOS.SetActive(false);
+        LoadWeapons();
     }
 
     private void OnEnable()
@@ -43,14 +47,6 @@ public class WeaponSwitcher : MonoBehaviour
     {
         playerControls.Disable();
     }
-
-    private void Start()
-    {
-        weaponInventory = new GameObject[3];
-        AmmoDisplayGOS.SetActive(false);
-        LoadWeapons();
-    }
-
 
     void Update()
     {

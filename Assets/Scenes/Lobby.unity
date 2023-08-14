@@ -1426,7 +1426,7 @@ MonoBehaviour:
   online: 0
   udpPort: 6969
   tcpPort: 4242
-  ip: 192.36.176.139
+  ip: 31.208.117.105
   latency: 0
 --- !u!1 &581917096 stripped
 GameObject:

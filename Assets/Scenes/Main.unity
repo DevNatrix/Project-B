@@ -4785,6 +4785,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4589314064938907210, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+      propertyPath: AmmoDisplayGOS
+      value: 
+      objectReference: {fileID: 592215168}
     - target: {fileID: 5846882482686360341, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -4853,29 +4857,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2466282980514943785, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
-    - {fileID: 4993737252273829260, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
---- !u!1 &493430282 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 847162859472326818, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
-  m_PrefabInstance: {fileID: 493430281}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &493430283
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493430282}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000002
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &494551108
 GameObject:
   m_ObjectHideFlags: 0
@@ -5564,7 +5547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &592215169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5583,7 +5566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 60.58}
+  m_AnchoredPosition: {x: 0, y: 60.579956}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &615634313
@@ -10869,7 +10852,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187853343}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24, y: -5.5, z: -16.9}
+  m_LocalPosition: {x: -24, y: -5.2, z: -16.9}
   m_LocalScale: {x: 14, y: 1.4, z: 14}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15069,7 +15052,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh69688
+  m_Name: pb_Mesh43322
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17286,7 +17269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -39.9, y: 31.55}
+  m_AnchoredPosition: {x: -39.900024, y: 31.550049}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &2117224161

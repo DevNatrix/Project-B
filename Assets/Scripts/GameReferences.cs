@@ -5,7 +5,7 @@ using TMPro;
 
 public class GameReferences : MonoBehaviour
 {
-    public static GameReferences Instance { get; private set; }
+    public static GameReferences Instance;
 
     [Header("References")]
     [SerializeField] public GameObject MainCam;
@@ -13,7 +13,7 @@ public class GameReferences : MonoBehaviour
     [SerializeField] public TextMeshProUGUI AmmoAndMagText;
     [SerializeField] public GameObject AmmoDisplayGO;
 
-    void Awake()
+    public void Awake()
     {
         Instance = this;
     }
