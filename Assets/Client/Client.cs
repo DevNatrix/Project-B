@@ -197,7 +197,7 @@ public class Client : MonoBehaviour
 			Vector3 otherClientPos = ServerEvents.parseVector3(peices[1]);
 			Quaternion otherClientRot = ServerEvents.parseQuaternion(peices[2]);
 			bool showOtherClient = bool.Parse(peices[3]);
-			bool clientIsSliding = bool.Parse(peices[3]);
+			bool clientIsSliding = bool.Parse(peices[4]);
 
 			OtherClient otherClient = events.getOtherClientScriptByID(otherClientID);
 			otherClient.setTransform(otherClientPos, otherClientRot, clientIsSliding);
