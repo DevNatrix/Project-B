@@ -25,7 +25,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     public Camera cam;
     public Transform playerT;
-	ServerEvents serverEvents;
+	public ServerEvents serverEvents;
 
 	private void Start()
     {
