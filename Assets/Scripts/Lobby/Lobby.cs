@@ -44,6 +44,10 @@ public class Lobby : MonoBehaviour
 
 	ServerOption currentServerInBrowser;
 
+	[SerializeField] TMP_InputField udpPortInput;
+	[SerializeField] TMP_InputField tcpPortInput;
+	[SerializeField] TMP_InputField ipInput;
+
 	private void Start()
     {
 		if(Client.lostConnection)
@@ -155,5 +159,15 @@ public class Lobby : MonoBehaviour
 
 			ChangeScene();
 		}
+	}
+
+	public void joinCustom()
+	{
+		bestUDPPort = int.Parse(udpPortInput.text);
+		bestTCPPort = int.Parse(tcpPortInput.text);
+		bestIP = ipInput.text;
+		bestLatency = 0;
+
+		ChangeScene();
 	}
 }

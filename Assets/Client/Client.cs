@@ -75,7 +75,7 @@ public class Client : MonoBehaviour
 
 		InvokeRepeating("Ping", 0, 1f);
 		InvokeRepeating("DebugText", 1, 1f);
-		InvokeRepeating("TransformUpdate", .5f, 1/(float)transformTPS);
+		InvokeRepeating("TransformUpdate", 0, 1/(float)transformTPS);
 	}
 
 	void Ping()
