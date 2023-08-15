@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 6050124657309907}
   - component: {fileID: 7605038006272914550}
   - component: {fileID: 4682558093539416992}
-  - component: {fileID: 493430283}
-  - component: {fileID: 8336635710238786409}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -85,34 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &493430283
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847162859472326818}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000002
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &8336635710238786409
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847162859472326818}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000002
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1669390542135919205
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +291,6 @@ MonoBehaviour:
   switchonScroll: 1
   currentSelectedWeapon: {fileID: 0}
   weaponInventory: []
-  AmmoDisplayGOS: {fileID: 0}
   pickupDistance: 10
   dropForwardForce: 8
   dropUpwardForce: 0
@@ -424,6 +393,7 @@ GameObject:
   - component: {fileID: 2924846311637992457}
   - component: {fileID: 6228382424146448460}
   - component: {fileID: 7656093453908861214}
+  - component: {fileID: 7113974625124714600}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -572,3 +542,17 @@ MonoBehaviour:
   health: 100
   healthText: {fileID: 0}
   serverEvents: {fileID: 0}
+--- !u!136 &7113974625124714600
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552368880977798431}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

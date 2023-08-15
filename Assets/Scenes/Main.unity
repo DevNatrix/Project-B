@@ -4785,10 +4785,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4589314064938907210, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
-      propertyPath: AmmoDisplayGOS
-      value: 
-      objectReference: {fileID: 592215168}
     - target: {fileID: 5846882482686360341, guid: a97e20e3f8906224c868860ab421ef41, type: 3}
       propertyPath: m_RootOrder
       value: 5
