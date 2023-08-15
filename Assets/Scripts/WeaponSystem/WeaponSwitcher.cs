@@ -25,8 +25,9 @@ public class WeaponSwitcher : MonoBehaviour
 
     public Camera cam;
     public Transform playerT;
+	ServerEvents serverEvents;
 
-    private void Start()
+	private void Start()
     {
         Instance = this;
 
@@ -98,7 +99,7 @@ public class WeaponSwitcher : MonoBehaviour
         {
             SwitchWeapon(2);
         }
-    }
+	}
 
     public void SwitchWeapon(int newIndex)
     {
@@ -111,7 +112,10 @@ public class WeaponSwitcher : MonoBehaviour
 
             currentSelectedWeapon = weaponInventory[newIndex];
             currentSelectedWeapon.SetActive(true); // Equip the new weapon
-        }
+
+			int newID = currentSelectedWeapon.GetComponent<WeaponSystem>().WeaponID;
+			serverEvents.sendEventToOtherClients("switchGun", new string[] { Client.ID + "", newID + "" });
+		}
     }
 
     //Drop function for inventory
