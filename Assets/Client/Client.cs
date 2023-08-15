@@ -36,6 +36,7 @@ public class Client : MonoBehaviour
 	TextMeshProUGUI udpSendBytes;
 	TextMeshProUGUI tcpGetBytes;
 	TextMeshProUGUI udpGetBytes;
+	TextMeshProUGUI udpProcessErrorText;
 
 	public ServerEvents events;
 	public AdvancedDebug advancedDebug;
@@ -49,6 +50,7 @@ public class Client : MonoBehaviour
 	public static int transformTPS = 32;
 	bool serverOnline = false;
 	public bool showClient = true;
+	int udpProcessErrors = 0;
 
 	private void Start()
 	{
@@ -69,13 +71,14 @@ public class Client : MonoBehaviour
 		tcpSendBytes = advancedDebug.createDebug("TCP Send Bytes");
 		udpGetBytes = advancedDebug.createDebug("UDP Get Bytes");
 		tcpGetBytes = advancedDebug.createDebug("TCP Get Bytes");
+		udpProcessErrorText = advancedDebug.createDebug("UDP Process Errors");
 
 		initUDP();
 		initTCP();
 
 		InvokeRepeating("Ping", 0, 1f);
 		InvokeRepeating("DebugText", 1, 1f);
-		InvokeRepeating("TransformUpdate", .5f, 1/(float)transformTPS);
+		InvokeRepeating("TransformUpdate", 0, 1/(float)transformTPS);
 	}
 
 	void Ping()
@@ -92,11 +95,13 @@ public class Client : MonoBehaviour
 		udpSendBytes.text = "UDP send b/s: " + sendBytesUDP;
 		tcpGetBytes.text = "TCP get b/s: " + getBytesTCP;
 		udpGetBytes.text = "UDP get b/s: " + getBytesUDP;
+		udpProcessErrorText.text = "UDP Prc Errs: " + udpProcessErrors;
 
 		sendBytesTCP = 0;
 		sendBytesUDP = 0;
 		getBytesTCP = 0;
 		getBytesUDP = 0;
+		udpProcessErrors = 0;
 	}
 
 	void TransformUpdate()
@@ -138,7 +143,7 @@ public class Client : MonoBehaviour
 			}
 			catch
 			{
-				Debug.LogError("Errors processing UDP message");
+				udpProcessErrors++;
 			}
 		}
 	}
