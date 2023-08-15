@@ -138,9 +138,6 @@ public class OtherClient : MonoBehaviour
 
 	public void setEquippedWeapon(int newWeapon)
 	{
-		//weapons[equippedWeapon].SetActive(false);
-		//weapons[newWeapon].SetActive(true);
-
-		//equippedWeapon = newWeapon;
+		newWeapon = WeaponSwitcher.Instance.currentSelectedWeapon.GetComponent<WeaponSystem>().WeaponID;
 	}
 }

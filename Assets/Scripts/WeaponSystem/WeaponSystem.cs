@@ -17,7 +17,7 @@ public class WeaponSystem : MonoBehaviour
     [HideInInspector] public ServerEvents serverEvents;
 
     [Header("Info")]
-    public string WeaponID;
+    public int WeaponID;
 
     public int damage;
 

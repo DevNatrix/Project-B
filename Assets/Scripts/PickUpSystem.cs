@@ -11,7 +11,7 @@ public class PickUpSystem : MonoBehaviour
     private GameObject cam;
 
     [Header("StoreInfo")]
-    [HideInInspector] public string WeaponID;
+    [HideInInspector] public int WeaponID;
     [HideInInspector] public int AmmoInReserve;
     [HideInInspector] public int currentAmmo;
     [HideInInspector] public int maxAmmo;
