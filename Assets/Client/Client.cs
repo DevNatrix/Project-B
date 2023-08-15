@@ -131,7 +131,15 @@ public class Client : MonoBehaviour
 			await Task.Run(() => receiveBytes = udpClient.Receive(ref remoteEndPoint));
 			string message = Encoding.ASCII.GetString(receiveBytes);
 			getBytesUDP += Encoding.UTF8.GetByteCount(message);
-			processUDPMessage(message);
+
+			try
+			{
+				processUDPMessage(message);
+			}
+			catch
+			{
+				Debug.LogError("Errors processing UDP message");
+			}
 		}
 	}
 
@@ -192,23 +200,16 @@ public class Client : MonoBehaviour
 		}
 		else
 		{
-			try
-			{
-				string[] peices = message.Split('~');
-				int otherClientID = int.Parse(peices[0]);
-				Vector3 otherClientPos = ServerEvents.parseVector3(peices[1]);
-				Quaternion otherClientRot = ServerEvents.parseQuaternion(peices[2]);
-				bool showOtherClient = bool.Parse(peices[3]);
-				bool clientIsSliding = bool.Parse(peices[4]);
+			string[] peices = message.Split('~');
+			int otherClientID = int.Parse(peices[0]);
+			Vector3 otherClientPos = ServerEvents.parseVector3(peices[1]);
+			Quaternion otherClientRot = ServerEvents.parseQuaternion(peices[2]);
+			bool showOtherClient = bool.Parse(peices[3]);
+			bool clientIsSliding = bool.Parse(peices[4]);
 
-				OtherClient otherClient = events.getOtherClientScriptByID(otherClientID);
-				otherClient.setTransform(otherClientPos, otherClientRot, clientIsSliding);
-				otherClient.setVisibility(showOtherClient);
-			}
-			catch
-			{
-				Debug.LogError("Client does not exist yet");
-			}
+			OtherClient otherClient = events.getOtherClientScriptByID(otherClientID);
+			otherClient.setTransform(otherClientPos, otherClientRot, clientIsSliding);
+			otherClient.setVisibility(showOtherClient);
 		}
 	}
 
