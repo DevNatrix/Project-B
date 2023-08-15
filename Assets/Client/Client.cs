@@ -37,6 +37,7 @@ public class Client : MonoBehaviour
 	TextMeshProUGUI tcpGetBytes;
 	TextMeshProUGUI udpGetBytes;
 	TextMeshProUGUI udpProcessErrorText;
+	TextMeshProUGUI tcpProcessErrorText;
 
 	public ServerEvents events;
 	public AdvancedDebug advancedDebug;
@@ -51,6 +52,7 @@ public class Client : MonoBehaviour
 	bool serverOnline = false;
 	public bool showClient = true;
 	int udpProcessErrors = 0;
+	int tcpProcessErrors = 0;
 
 	private void Start()
 	{
@@ -72,6 +74,7 @@ public class Client : MonoBehaviour
 		udpGetBytes = advancedDebug.createDebug("UDP Get Bytes");
 		tcpGetBytes = advancedDebug.createDebug("TCP Get Bytes");
 		udpProcessErrorText = advancedDebug.createDebug("UDP Process Errors");
+		tcpProcessErrorText = advancedDebug.createDebug("TCP Process Errors");
 
 		initUDP();
 		initTCP();
@@ -95,13 +98,15 @@ public class Client : MonoBehaviour
 		udpSendBytes.text = "UDP send b/s: " + sendBytesUDP;
 		tcpGetBytes.text = "TCP get b/s: " + getBytesTCP;
 		udpGetBytes.text = "UDP get b/s: " + getBytesUDP;
-		udpProcessErrorText.text = "UDP Prc Errs: " + udpProcessErrors;
+		udpProcessErrorText.text = "UDP Proc Errs: " + udpProcessErrors;
+		tcpProcessErrorText.text = "TCP Proc Errs: " + tcpProcessErrors;
 
 		sendBytesTCP = 0;
 		sendBytesUDP = 0;
 		getBytesTCP = 0;
 		getBytesUDP = 0;
 		udpProcessErrors = 0;
+		tcpProcessErrors = 0;
 	}
 
 	void TransformUpdate()
@@ -169,7 +174,14 @@ public class Client : MonoBehaviour
 			{
 				if (finalMessage != "") //to get rid of final message
 				{
-					processTCPMessage(finalMessage);
+					try
+					{
+						processTCPMessage(finalMessage);
+					}
+					catch
+					{
+						tcpProcessErrors++;
+					}
 				}
 			}
 		}
