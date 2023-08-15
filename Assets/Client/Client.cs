@@ -192,16 +192,23 @@ public class Client : MonoBehaviour
 		}
 		else
 		{
-			string[] peices = message.Split('~');
-			int otherClientID = int.Parse(peices[0]);
-			Vector3 otherClientPos = ServerEvents.parseVector3(peices[1]);
-			Quaternion otherClientRot = ServerEvents.parseQuaternion(peices[2]);
-			bool showOtherClient = bool.Parse(peices[3]);
-			bool clientIsSliding = bool.Parse(peices[4]);
+			try
+			{
+				string[] peices = message.Split('~');
+				int otherClientID = int.Parse(peices[0]);
+				Vector3 otherClientPos = ServerEvents.parseVector3(peices[1]);
+				Quaternion otherClientRot = ServerEvents.parseQuaternion(peices[2]);
+				bool showOtherClient = bool.Parse(peices[3]);
+				bool clientIsSliding = bool.Parse(peices[4]);
 
-			OtherClient otherClient = events.getOtherClientScriptByID(otherClientID);
-			otherClient.setTransform(otherClientPos, otherClientRot, clientIsSliding);
-			otherClient.setVisibility(showOtherClient);
+				OtherClient otherClient = events.getOtherClientScriptByID(otherClientID);
+				otherClient.setTransform(otherClientPos, otherClientRot, clientIsSliding);
+				otherClient.setVisibility(showOtherClient);
+			}
+			catch
+			{
+				Debug.LogError("Client does not exist yet");
+			}
 		}
 	}
 
