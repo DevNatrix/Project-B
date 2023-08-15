@@ -8,7 +8,7 @@ public class WeaponSwitcher : MonoBehaviour
 {
     public static WeaponSwitcher Instance;
 
-    PlayerControls playerControls;
+    private PlayerControls playerControls;
     public bool switchonScroll = true;
     private Animator anim;
     public GameObject currentSelectedWeapon;
@@ -26,9 +26,8 @@ public class WeaponSwitcher : MonoBehaviour
     public Camera cam;
     public Transform playerT;
 
-    private void Awake()
+    private void Start()
     {
-        playerControls = new PlayerControls();
         Instance = this;
 
         AmmoDisplayGOS = GameReferences.Instance.AmmoDisplayGO;
@@ -38,12 +37,17 @@ public class WeaponSwitcher : MonoBehaviour
         LoadWeapons();
     }
 
-    private void OnEnable()
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
+
+    void OnEnable()
     {
         playerControls.Enable();
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         playerControls.Disable();
     }
