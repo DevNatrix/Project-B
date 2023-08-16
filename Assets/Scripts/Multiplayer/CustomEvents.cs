@@ -93,8 +93,6 @@ public class CustomEvents : MonoBehaviour
 		int clientID = int.Parse(data[0]);
 		int weaponID = int.Parse(data[1]);
 
-		Debug.Log("client " + clientID + " equipped " + weaponID);
-
 		OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
 		otherClientScript.setEquippedWeapon(weaponID);
 	}
