@@ -42,9 +42,11 @@ public class OtherClient : MonoBehaviour
 	public float rotSpeed;
 	public float xRot = 0f;
 
-	GameObject currentWeapon;
+	public GameObject currentWeapon;
 
 	[HideInInspector] public Vector3 direction;
+
+	public List<GameObject> weapons;
 
 	public void SetHealth(int _health)
 	{
@@ -145,9 +147,13 @@ public class OtherClient : MonoBehaviour
 	{
 		Debug.Log("Client " + ID + " equipped weapon " + newWeapon);
 
-		GameObject newWeaponPrefab = WeaponSwitcher.Instance.GetItemThroughID(newWeapon);
+		currentWeapon.SetActive(false);
+		currentWeapon = weapons[newWeapon];
+		currentWeapon.SetActive(true);
 
-		Destroy(currentWeapon);
-		currentWeapon = Instantiate(newWeaponPrefab, transform.position + Vector3.right, Quaternion.identity, transform);
+		//GameObject newWeaponPrefab = WeaponSwitcher.Instance.GetItemThroughID(newWeapon);
+
+		//Destroy(currentWeapon);
+		//currentWeapon = Instantiate(newWeaponPrefab, transform.position + Vector3.right, Quaternion.identity, transform);
 	}
 }

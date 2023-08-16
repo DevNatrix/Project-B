@@ -83,7 +83,7 @@ public class Chat : MonoBehaviour
 			if(!ChatBackground.activeSelf)
 			{
 				ChatBackground.SetActive(true);
-				InputFieldContainer.ActivateInputField();
+				//InputFieldContainer.ActivateInputField();
 			}
 		}
 		else
