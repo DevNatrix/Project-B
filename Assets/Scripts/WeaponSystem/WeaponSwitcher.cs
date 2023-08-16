@@ -78,6 +78,19 @@ public class WeaponSwitcher : MonoBehaviour
         return weaponGO;
     }
 
+    public GameObject GetItemThroughID(int _ID)
+    {
+        foreach (GameObject weaponPrefab in weaponInventory)
+        {
+            if (weaponPrefab != null && weaponPrefab.GetComponent<WeaponSystem>().WeaponID == _ID)
+            {
+                GameObject instantiatedWeapon = Instantiate(weaponPrefab, Vector3.zero, Quaternion.identity);
+                return instantiatedWeapon;
+            }
+        }
+        return null;
+    }
+
     public void RemoveItem(int index)
     {
         weaponInventory[index] = null;
