@@ -42,6 +42,8 @@ public class OtherClient : MonoBehaviour
 	public float rotSpeed;
 	public float xRot = 0f;
 
+	GameObject currentWeapon;
+
 	[HideInInspector] public Vector3 direction;
 
 	public void SetHealth(int _health)
@@ -142,5 +144,10 @@ public class OtherClient : MonoBehaviour
 	public void setEquippedWeapon(int newWeapon)
 	{
 		Debug.Log("Client " + ID + " equipped weapon " + newWeapon);
+
+		//GameObject newWeaponPrefab = WeaponSwitcher.Instance.GetItemThroughID(newWeapon);
+
+		Destroy(currentWeapon);
+		currentWeapon = Instantiate(newWeaponPrefab, transform.position + Vector3.right, Quaternion.identity, transform);
 	}
 }
