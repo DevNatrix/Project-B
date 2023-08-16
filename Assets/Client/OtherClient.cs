@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +42,8 @@ public class OtherClient : MonoBehaviour
 	bool isSliding = false;
 	public float rotSpeed;
 	public float xRot = 0f;
+
+	[HideInInspector] public Vector3 direction;
 
 	public void SetHealth(int _health)
 	{
@@ -101,6 +104,8 @@ public class OtherClient : MonoBehaviour
 
 		pastUpdateTime = Time.time;
 		isSliding = _isSliding;
+
+		direction = pastPosition - targetPosition;
 	}
 
 	public void setVisibility(bool visible)

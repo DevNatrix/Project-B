@@ -149,6 +149,7 @@ public class Client : MonoBehaviour
 			catch
 			{
 				udpProcessErrors++;
+				Debug.LogWarning("UDP process error: " + message);
 			}
 		}
 	}
@@ -181,6 +182,7 @@ public class Client : MonoBehaviour
 					catch
 					{
 						tcpProcessErrors++;
+						Debug.LogWarning("TCP process error: " + finalMessage);
 					}
 				}
 			}

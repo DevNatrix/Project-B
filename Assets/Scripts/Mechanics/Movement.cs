@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour
 	
 
 	[Header("Advanced Movement Settings:")]
-	[SerializeField] LayerMask groundMask;
+	public LayerMask groundMask;
 	[SerializeField] float groundCheckRadius;
 	[SerializeField] float groundCheckHeight;
 	[SerializeField] float addedGravity;
