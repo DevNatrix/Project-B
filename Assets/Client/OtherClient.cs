@@ -145,7 +145,7 @@ public class OtherClient : MonoBehaviour
 	{
 		Debug.Log("Client " + ID + " equipped weapon " + newWeapon);
 
-		//GameObject newWeaponPrefab = WeaponSwitcher.Instance.GetItemThroughID(newWeapon);
+		GameObject newWeaponPrefab = WeaponSwitcher.Instance.GetItemThroughID(newWeapon);
 
 		Destroy(currentWeapon);
 		currentWeapon = Instantiate(newWeaponPrefab, transform.position + Vector3.right, Quaternion.identity, transform);
