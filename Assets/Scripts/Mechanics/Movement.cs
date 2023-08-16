@@ -163,7 +163,7 @@ public class Movement : MonoBehaviour
 	public IEnumerator dash()
 	{
 		Vector2 direction = horizontalInput;
-		if (dashTimer <= 0)
+		if (dashTimer <= 0 && !MenuController.typing && !MenuController.menu)
 		{
 			dashTimer = dashCooldown + dashSeconds;
 			float timer = dashSeconds;
@@ -187,7 +187,7 @@ public class Movement : MonoBehaviour
 		//isGrounded = Physics.CheckSphere(transform.position + Vector3.up * groundCheckHeight, groundCheckRadius, groundMask);
 		RaycastHit hit;
 		isGrounded = Physics.Raycast(transform.position + Vector3.up * groundCheckHeight, -Vector3.up, out hit, groundDistance, groundMask);
-		Debug.Log(isGrounded);
+		
 		if(isGrounded && hit.collider.gameObject.layer == 18) //if on stairs
 		{
 			playerRB.useGravity = false;
@@ -223,7 +223,7 @@ public class Movement : MonoBehaviour
 		sliding = newSliding;
 
 		//movement
-		if (!MenuController.menu)
+		if (!MenuController.menu && !MenuController.typing)
 		{
 			if (isGrounded)
 			{
@@ -252,7 +252,7 @@ public class Movement : MonoBehaviour
 		}
 
 		//jumping
-		if(jump && isGrounded && !MenuController.menu)
+		if(jump && isGrounded && !MenuController.menu && !MenuController.typing)
 		{
 			playerRB.AddForce(Vector3.up * jumpPower);// += new Vector3(0f, jumpPower, 0f);
 		}

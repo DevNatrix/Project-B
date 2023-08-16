@@ -14,6 +14,7 @@ public class MenuController : MonoBehaviour
 	public List<GameObject> subMenus;
 	public Client client;
 	[HideInInspector] public static bool menu = true;
+	[HideInInspector] public static bool typing = false;
 	public PlayerManager playerManager;
 
 	public Camera spectateCam;

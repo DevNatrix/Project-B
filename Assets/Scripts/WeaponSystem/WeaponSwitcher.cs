@@ -85,20 +85,23 @@ public class WeaponSwitcher : MonoBehaviour
 
     public void EquipWeapon()
     {
-        if (playerControls.Weapon.PrimaryWeapon.WasPerformedThisFrame())
-        {
-            SwitchWeapon(0);
-        }
+		if(!MenuController.typing)
+		{
+			if (playerControls.Weapon.PrimaryWeapon.WasPerformedThisFrame())
+			{
+				SwitchWeapon(0);
+			}
 
-        if (playerControls.Weapon.SecondaryWeapon.WasPerformedThisFrame())
-        {
-            SwitchWeapon(1);
-        }
+			if (playerControls.Weapon.SecondaryWeapon.WasPerformedThisFrame())
+			{
+				SwitchWeapon(1);
+			}
 
-        if (playerControls.Weapon.Knife.WasPerformedThisFrame())
-        {
-            SwitchWeapon(2);
-        }
+			if (playerControls.Weapon.Knife.WasPerformedThisFrame())
+			{
+				SwitchWeapon(2);
+			}
+		}
 	}
 
     public void SwitchWeapon(int newIndex)
@@ -149,7 +152,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     public void DropCurrentWeapon()
     {
-        if (playerControls.Weapon.Drop.WasPerformedThisFrame())
+        if (playerControls.Weapon.Drop.WasPerformedThisFrame() && !MenuController.typing)
         {
             if (currentSelectedWeapon != null && currentSelectedWeapon.tag != "Knifes")
             {

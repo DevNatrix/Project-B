@@ -37,18 +37,21 @@ public class BuySystem : MonoBehaviour
 
     void BuyScreen()
     {
-        if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && !BuyScreenVisual)
-        {
-            BuyScreenGO.SetActive(true);
-            BuyScreenVisual = true;
-			Cursor.lockState = CursorLockMode.None;
+		if (!MenuController.typing)
+		{
+			if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && !BuyScreenVisual)
+			{
+				BuyScreenGO.SetActive(true);
+				BuyScreenVisual = true;
+				Cursor.lockState = CursorLockMode.None;
+			}
+			else if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && BuyScreenVisual)
+			{
+				Cursor.lockState = CursorLockMode.Locked;
+				BuyScreenGO.SetActive(false);
+				BuyScreenVisual = false;
+			}
 		}
-        else if(playerControls.Weapon.BuyScreen.WasPressedThisFrame() && BuyScreenVisual)
-        {
-			Cursor.lockState = CursorLockMode.Locked;
-            BuyScreenGO.SetActive(false);
-            BuyScreenVisual = false;
-        }
     }
 
     public void BuyWeapon(GameObject _WeaponType)

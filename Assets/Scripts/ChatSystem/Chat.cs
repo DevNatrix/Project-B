@@ -17,6 +17,9 @@ public class Chat : MonoBehaviour
 
     PlayerControls playerControls;
 
+	[SerializeField] float chatTimer;
+	[SerializeField] float timeBeforeClose = 2;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -40,27 +43,53 @@ public class Chat : MonoBehaviour
 
     private void Update()
     {
+		chatTimer -= Time.deltaTime;
+
         //String needed to see if client typed something in chat
         string ChatContainer = InputFieldContainer.text;
 
         //Get input to enable ChatBackground
         if (playerControls.ChatVoice.Chat.WasPressedThisFrame() && ChatBackground.activeSelf == false)
         {
-            ChatBackground.SetActive(true);
+			MenuController.typing = true;
+			ChatBackground.SetActive(true);
             InputFieldContainer.ActivateInputField();
-            //To do: disable all inputs such as movement, firing etc.
         }
         //If nothing is typed and client has clicked enter it disables ChatBackground
         else if (ChatBackground.activeSelf == true && string.IsNullOrWhiteSpace(ChatContainer) && playerControls.ChatVoice.Chat.WasPressedThisFrame())
         {
-            ChatBackground.SetActive(false);
-        }
+			if(MenuController.typing == false) //start chatting again while it's open
+			{
+				MenuController.typing = true;
+			}
+			else //close chat
+			{
+				MenuController.typing = false;
+				ChatBackground.SetActive(false);
+			}
+		}
         //If client has typed something and pressed enter it'll send message through the network and disables ChatBackground
         else if (ChatBackground.activeSelf == true && !string.IsNullOrWhiteSpace(ChatContainer) && playerControls.ChatVoice.Chat.WasPressedThisFrame())
         {
             serverEvents.sendGlobalEvent("chatMessage", new string[] { Lobby.username, ChatContainer });
             InputFieldContainer.text = "";
+			chatTimer = timeBeforeClose;
+
+			MenuController.typing = false;
         }
+
+		if(MenuController.typing || chatTimer > 0)
+		{
+			if(!ChatBackground.activeSelf)
+			{
+				ChatBackground.SetActive(true);
+				InputFieldContainer.ActivateInputField();
+			}
+		}
+		else
+		{
+			ChatBackground.SetActive(false);
+		}
     }
 
 	public void newMessage(string username, string message)
@@ -69,7 +98,7 @@ public class Chat : MonoBehaviour
 		TextMeshProUGUI textObject = messageObject.GetComponent<TextMeshProUGUI>();
 		textObject.text = username + ": " + message;
 
-        Debug.Log("Message Recieved Or Sent");
+		chatTimer = timeBeforeClose;
 	}
 
 	public void serverMessage(string message)
@@ -78,5 +107,7 @@ public class Chat : MonoBehaviour
 		TextMeshProUGUI textObject = messageObject.GetComponent<TextMeshProUGUI>();
 		textObject.color = Color.red;
 		textObject.text = message;
+
+		chatTimer = timeBeforeClose;
 	}
 }
