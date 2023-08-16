@@ -113,14 +113,16 @@ public class WeaponSystem : MonoBehaviour
 					hitMarker.hitPlayer(isHeadshot);
 					int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
 
+					int moddedDamage;
 					if (isHeadshot)
 					{
-						serverEvents.sendDirectEvent("damage", new string[] { (damage * headshotMultiplier).ToString() }, clientID);
+						moddedDamage = (int) ((float) damage * headshotMultiplier);
 					}
 					else
 					{
-						serverEvents.sendDirectEvent("damage", new string[] { damage.ToString() }, clientID);
+						moddedDamage = damage;
 					}
+					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString() }, clientID);
                 }
 				else
 				{
