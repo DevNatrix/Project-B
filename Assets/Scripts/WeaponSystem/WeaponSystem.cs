@@ -8,8 +8,10 @@ public class WeaponSystem : MonoBehaviour
 {
     [HideInInspector] public static WeaponSystem Instance;
     PlayerControls playerControls;
+	float headshotHeight = .6f;
+	public float headshotMultiplier = 1.5f;
 
-    [Header("References")]
+	[Header("References")]
     private GameObject cam;
     public Animator anim;
     public GameObject groundPrefab;
@@ -44,6 +46,7 @@ public class WeaponSystem : MonoBehaviour
 
 	BulletManager bulletManager;
 	public Transform  shootPoint;
+	HitMarker hitMarker;
 
     private void Awake()
     {
@@ -54,6 +57,7 @@ public class WeaponSystem : MonoBehaviour
         AmmoAndMagText = GameReferences.Instance.AmmoAndMagText;
 		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
 		bulletManager = GameObject.Find("game manager").GetComponent<BulletManager>();
+		hitMarker = GameObject.Find("game manager").GetComponent<HitMarker>();
 	}
 
     private void OnEnable()
@@ -105,23 +109,29 @@ public class WeaponSystem : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<OtherClient>())
                 {
-                    int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
-                    serverEvents.sendDirectEvent("damage", new string[] { damage.ToString() }, clientID);
-                }
+					bool isHeadshot = hit.point.y > hit.transform.position.y + headshotHeight;
+					hitMarker.hitPlayer(isHeadshot);
+					int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
 
-                GameObject shotbulletHole = Instantiate(bulletHole, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(hit.normal));
-                StartCoroutine(RemoveBulletHole(shotbulletHole));
+					if (isHeadshot)
+					{
+						serverEvents.sendDirectEvent("damage", new string[] { (damage * headshotMultiplier).ToString() }, clientID);
+					}
+					else
+					{
+						serverEvents.sendDirectEvent("damage", new string[] { damage.ToString() }, clientID);
+					}
+                }
+				else
+				{
+					GameObject shotbulletHole = Instantiate(bulletHole, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(hit.normal));
+					Destroy(shotbulletHole, 6);
+				}
             }
 
             currentAmmo--;
             AudioPlayer.Instance.createAudio(1, gameObject.transform.position, .2f, 1, Client.ID);
         }
-    }
-    
-    IEnumerator RemoveBulletHole(GameObject _bulletHole)
-    {
-        yield return new WaitForSeconds(6);
-        Destroy(_bulletHole);
     }
 
     void Reload()

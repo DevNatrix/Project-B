@@ -2047,6 +2047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccdf218077a910a40a56ac2be4ff8a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headshotMultiplier: 1.5
   anim: {fileID: 3786422439672198964}
   groundPrefab: {fileID: 7237255521753112500, guid: dad9163b6042395409910dfde062f288, type: 3}
   bulletHole: {fileID: 3980126314146801182, guid: 10602d8e273ed3140a812277765964cf, type: 3}

@@ -9,7 +9,6 @@ public class OtherClient : MonoBehaviour
 {
 	public int ID;
 	public string username;
-	[SerializeField] Transform lookIndicator;
 	[SerializeField] Transform infoCanvas;
 	[SerializeField] TextMeshProUGUI usernameText;
 	Transform playerCam;
@@ -61,7 +60,6 @@ public class OtherClient : MonoBehaviour
 		//rotation
 		Quaternion currentRotation = Quaternion.Slerp(pastRotation, targetRotation, lerpPercent);
 		transform.rotation = Quaternion.Euler(new Vector3(transform.eulerAngles.x, currentRotation.eulerAngles.y, 0f));
-		lookIndicator.localRotation = Quaternion.Euler(new Vector3(currentRotation.eulerAngles.x, 0f, currentRotation.eulerAngles.z));
 
 		//make info canvas face towards player cam
 		infoCanvas.LookAt(playerCam);
