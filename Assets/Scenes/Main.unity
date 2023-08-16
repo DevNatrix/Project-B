@@ -23943,8 +23943,8 @@ MonoBehaviour:
   headshotAudioClip: {fileID: 8300000, guid: 85a5cb853103f704abfd8d1e5ae1c31f, type: 3}
   playerTransform: {fileID: 5846882482729803036}
   hitMarkerPitch: 1
-  hitMarkerVolume: 1
-  headshotVolume: 1
+  hitMarkerVolume: 0.5
+  headshotVolume: 0.5
   headshotPitch: 1.5
 --- !u!1 &1837425071
 GameObject:
