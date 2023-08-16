@@ -895,13 +895,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8232472399071427845}
     m_Modifications:
+    - target: {fileID: 348331252490337474, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2498107437089021452, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3455097349982727002, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3663234147644531100, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
       propertyPath: m_Name
       value: Beretta Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 3663234147644531100, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3663234147644531100, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400205254071773206, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8313107007315265672, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720975492585567833, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9211418466526889789, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
       propertyPath: m_RootOrder
@@ -1030,6 +1058,10 @@ PrefabInstance:
       value: AK47(Clone) (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8752090834392312159, guid: 6269766009e9f814e907c7283ba00b0f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8752090834392312159, guid: 6269766009e9f814e907c7283ba00b0f, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1105,7 +1137,19 @@ PrefabInstance:
       value: knife_test
       objectReference: {fileID: 0}
     - target: {fileID: 910030901060662416, guid: f037bb1918d78ca4988b2505f23e6a7f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 910030901060662416, guid: f037bb1918d78ca4988b2505f23e6a7f, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968754155415549501, guid: f037bb1918d78ca4988b2505f23e6a7f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888598154180074494, guid: f037bb1918d78ca4988b2505f23e6a7f, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
