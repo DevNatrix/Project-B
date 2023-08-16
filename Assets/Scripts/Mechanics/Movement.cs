@@ -24,13 +24,15 @@ public class Movement : MonoBehaviour
 	[SerializeField] float maxSpeed;
 	[SerializeField] float minYPos = -10f;
 	bool isGrounded;
-	
+	[SerializeField] float groundDistance = 1f;
+
 
 	[Header("Advanced Movement Settings:")]
 	public LayerMask groundMask;
 	[SerializeField] float groundCheckRadius;
 	[SerializeField] float groundCheckHeight;
 	[SerializeField] float addedGravity;
+	[SerializeField] float stairFriction = .8f;
 
 	[Header("Wallrunning settings:")]
 	[SerializeField] float wallDetectionHeight;
@@ -92,7 +94,7 @@ public class Movement : MonoBehaviour
 	private void Update()
 	{
 		//kill if falling
-		if(transform.position.y < minYPos)
+		if (transform.position.y < minYPos)
 		{
 			playerManager.respawn();
 		}
@@ -182,7 +184,19 @@ public class Movement : MonoBehaviour
 	private void FixedUpdate()
 	{
 		//ground check
-        isGrounded = Physics.CheckSphere(transform.position + Vector3.up * groundCheckHeight, groundCheckRadius, groundMask);
+		//isGrounded = Physics.CheckSphere(transform.position + Vector3.up * groundCheckHeight, groundCheckRadius, groundMask);
+		RaycastHit hit;
+		isGrounded = Physics.Raycast(transform.position + Vector3.up * groundCheckHeight, -Vector3.up, out hit, groundDistance, groundMask);
+		Debug.Log(isGrounded);
+		if(isGrounded && hit.collider.gameObject.layer == 18) //if on stairs
+		{
+			playerRB.useGravity = false;
+			playerRB.velocity = playerRB.velocity * stairFriction;
+		}
+		else
+		{
+			playerRB.useGravity = true;
+		}
 
 		//sliding
 		crouching = slidingRequested;
