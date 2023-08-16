@@ -14,6 +14,7 @@ public class WeaponSwitcher : MonoBehaviour
     public GameObject currentSelectedWeapon;
 
     public GameObject[] weaponInventory;
+    public List<GameObject> Weapons;
 
     [Header("UI Weapon")]
     private GameObject AmmoDisplayGOS;
@@ -80,7 +81,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     public GameObject GetItemThroughID(int _ID)
     {
-        foreach (GameObject weaponPrefab in weaponInventory)
+        foreach (GameObject weaponPrefab in Weapons)
         {
             if (weaponPrefab != null && weaponPrefab.GetComponent<WeaponSystem>().WeaponID == _ID)
             {

@@ -30009,6 +30009,9 @@ MonoBehaviour:
   switchonScroll: 1
   currentSelectedWeapon: {fileID: 0}
   weaponInventory: []
+  Weapons:
+  - {fileID: 7237255521753112500, guid: 6e68f15179081d642bd11cedd8e38f75, type: 3}
+  - {fileID: 3663234147644531100, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
   pickupDistance: 10
   dropForwardForce: 8
   dropUpwardForce: 0
