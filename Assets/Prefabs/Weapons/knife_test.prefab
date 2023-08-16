@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccdf218077a910a40a56ac2be4ff8a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headshotMultiplier: 0
+  headshotMultiplier: 1.5
   anim: {fileID: 0}
   groundPrefab: {fileID: 0}
   bulletHole: {fileID: 0}
