@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using TMPro;
 using UnityEngine;
 
@@ -14,7 +15,9 @@ public class PlayerManager : MonoBehaviour
 	public ServerEvents serverEvents;
 	public KillFeed killFeed;
 
-    private void Start()
+	public int currentLife;
+
+	private void Start()
     {
 		Invoke("initializeHealth", 1f);
     }
@@ -24,9 +27,16 @@ public class PlayerManager : MonoBehaviour
 		SetHealth(100);
 	}
 
-    public void TakeDamage(int damage, int attackerID)
+    public void TakeDamage(int damage, int attackedLife, int attackerID)
 	{
-		SetHealth(health - damage, attackerID);
+		if(currentLife == attackedLife)
+		{
+			SetHealth(health - damage, attackerID);
+		}
+		else
+		{
+			Debug.LogWarning("Client " + attackerID + " did damage in the past life " + attackedLife + " (current life is " + currentLife + ")");
+		}
 	}
 
 	public void SetHealth(int _health, int attackerID = -1)
@@ -35,19 +45,19 @@ public class PlayerManager : MonoBehaviour
 
 		if (health <= 0)
 		{
-			Debug.Log("You Died");
 			Debug.Log(attackerID);
 			OtherClient otherClient = serverEvents.getOtherClientScriptByID(attackerID);
 			killFeed.createNewFeed(otherClient.username, Client.username);
 
 			health = 100;
+			currentLife++;
 
 			respawn();
 		}
 
 		healthText.text = health.ToString();
 
-		string[] sendData = { Client.ID + "", health + "" };
+		string[] sendData = { Client.ID + "", health + "", currentLife + "" };
 		serverEvents.sendEventToOtherClients("setHealth", sendData);
 	}
 

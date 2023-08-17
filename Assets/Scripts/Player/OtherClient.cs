@@ -38,6 +38,7 @@ public class OtherClient : MonoBehaviour
 	public int health;
 	int maxHealth = 100;
 	public Slider slider;
+	public int currentLife; //for keeping track of if a damage event is current or not
 
 	public float slideAngle;
 	bool isSliding = false;
@@ -56,10 +57,12 @@ public class OtherClient : MonoBehaviour
 	[SerializeField] Transform weaponLeftTarget;
 	[SerializeField] Transform weaponRightTarget;
 
-	public void SetHealth(int _health)
+	public void SetHealth(int _health, int newCurrentLife)
 	{
 		health = _health;
 		slider.value = (float)health / (float)maxHealth;
+
+		currentLife = newCurrentLife;
 	}
 
 	private void Update()

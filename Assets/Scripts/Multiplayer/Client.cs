@@ -262,7 +262,6 @@ public class Client : MonoBehaviour
 
 	private void Update()
 	{
-		Debug.Log(lastGottenPingTime);
 		if(Time.time - lastGottenPingTime > maxSecondsBeforeDisconnect)
 		{
 			lostConnection = true;
