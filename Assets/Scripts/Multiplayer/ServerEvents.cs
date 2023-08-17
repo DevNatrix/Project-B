@@ -81,7 +81,8 @@ public class ServerEvents : MonoBehaviour
 		string newClientUsername = data[1];
 		bool isResponseMessage = bool.Parse(data[2]);
 
-		OtherClient newClientScript = Instantiate(otherClientPrefab).GetComponent<OtherClient>();
+		//make the new client with y=-100 so it doesnt pop in
+		OtherClient newClientScript = Instantiate(otherClientPrefab, -Vector3.up * 100, Quaternion.identity).GetComponent<OtherClient>();
 		otherClientList.Add(newClientScript);
 		newClientScript.setInfo(clientID, newClientUsername);
 
