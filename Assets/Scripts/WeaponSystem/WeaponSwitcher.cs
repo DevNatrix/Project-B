@@ -6,7 +6,7 @@ using TMPro;
 
 public class WeaponSwitcher : MonoBehaviour
 {
-    public static WeaponSwitcher Instance;
+	public static WeaponSwitcher Instance;
 
     private PlayerControls playerControls;
     public bool switchonScroll = true;

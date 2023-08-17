@@ -6,7 +6,11 @@ using TMPro;
 
 public class WeaponSystem : MonoBehaviour
 {
-    [HideInInspector] public static WeaponSystem Instance;
+	[TextArea]
+	[Tooltip("Doesn't do anything. Just important info")]
+	public string Info = "When adding another weapon, dont forget to make sure the ";
+
+	[HideInInspector] public static WeaponSystem Instance;
     PlayerControls playerControls;
 	float headshotHeight = .6f;
 	public float headshotMultiplier = 1.5f;
