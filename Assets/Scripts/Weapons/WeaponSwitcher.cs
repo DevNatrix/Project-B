@@ -168,7 +168,7 @@ public class WeaponSwitcher : MonoBehaviour
     {
         if (playerControls.Weapon.Drop.WasPerformedThisFrame() && !MenuController.typing)
         {
-            if (currentSelectedWeapon != null && currentSelectedWeapon.tag != "Knifes")
+            if (currentSelectedWeapon != null && currentSelectedWeapon.GetComponent<WeaponSystem>().weaponType != WeaponSystem.WeaponType.Melee)
             {
                 DropItem(currentSelectedWeapon, currentSelectedWeapon.GetComponent<WeaponSystem>().groundPrefab);
                 Debug.Log("Dropped Current Weapon");
@@ -178,7 +178,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     public void UpdateUI()
     {
-        if(currentSelectedWeapon != null && currentSelectedWeapon.tag != "Knifes")
+        if(currentSelectedWeapon != null && currentSelectedWeapon.GetComponent<WeaponSystem>().weaponType != WeaponSystem.WeaponType.Melee)
         {
             AmmoDisplayGOS.SetActive(true);
         }

@@ -78,24 +78,38 @@ public class WeaponSystem : MonoBehaviour
 
     void Update()
     {
-        Shoot();
-        Reload();
-        Debug.DrawRay(cam.transform.position, cam.transform.forward);
-
-        if(nextFire > 0)
+        if(weaponType == WeaponType.Melee)
         {
-            nextFire -= Time.deltaTime;
+            Melee();
         }
-
-
-        AmmoAndMagText.text = currentAmmo.ToString() + "/" + AmmoInReserve.ToString();
-
-        if(playerControls.Weapon.Drop.WasPerformedThisFrame())
+        else
         {
-            //DropItem();
+            Shoot();
+            Reload();
+            Debug.DrawRay(cam.transform.position, cam.transform.forward);
+
+            if(nextFire > 0)
+            {
+                nextFire -= Time.deltaTime;
+            }
+
+
+            AmmoAndMagText.text = currentAmmo.ToString() + "/" + AmmoInReserve.ToString();
+
+            if(playerControls.Weapon.Drop.WasPerformedThisFrame())
+            {
+                //DropItem();
+            }
         }
     }
 
+    private void Melee()
+    {
+        if(playerControls.Weapon.Fire.WasPerformedThisFrame())
+        {
+            Debug.Log("Knife Attack");
+        }
+    }
     private void Shoot()
     {
        if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false && !MenuController.menu)
