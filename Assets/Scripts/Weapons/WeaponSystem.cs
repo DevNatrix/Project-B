@@ -116,6 +116,7 @@ public class WeaponSystem : MonoBehaviour
 					bool isHeadshot = hit.point.y > hit.transform.position.y + headshotHeight;
 					hitMarker.hitPlayer(isHeadshot);
 					int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
+					OtherClient hitClientScript = serverEvents.getOtherClientScriptByID(clientID);
 
 					int moddedDamage;
 					if (isHeadshot)
@@ -126,7 +127,8 @@ public class WeaponSystem : MonoBehaviour
 					{
 						moddedDamage = damage;
 					}
-					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(), Client.ID + ""}, clientID);
+
+					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(), hitClientScript.currentLife + "",  Client.ID + ""}, clientID);
                 }
 				else
 				{

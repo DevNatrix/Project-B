@@ -110,19 +110,21 @@ public class CustomEvents : MonoBehaviour
 	public void damage(string[] data)
 	{
 		int damage = int.Parse(data[0]);
-		int attackerID = int.Parse(data[1]);
+		int attackedLife = int.Parse(data[1]);
+		int attackerID = int.Parse(data[2]);
 
-		playerManager.TakeDamage(damage, attackerID);
+		playerManager.TakeDamage(damage, attackedLife, attackerID);
 	}
 
 	public void setHealth(string[] data)
 	{
 		int clientID = int.Parse(data[0]);
 		int health = int.Parse(data[1]);
+		int currentLife = int.Parse(data[2]);
 
 		OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
 
-		otherClientScript.SetHealth(health);
+		otherClientScript.SetHealth(health, currentLife);
 	}
 
 	public void setClientTeam(string[] data)
