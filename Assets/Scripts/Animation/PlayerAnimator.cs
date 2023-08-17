@@ -13,9 +13,6 @@ public class PlayerAnimator : MonoBehaviour
 	public float maxSpeed;
 	LayerMask groundMask;
 
-	public Transform leftHandTarget;
-	public Transform rightHandTarget;
-
 	private void Start()
 	{
 		groundMask = GameObject.Find("Player").GetComponent<Movement>().groundMask;

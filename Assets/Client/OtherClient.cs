@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
@@ -49,9 +50,11 @@ public class OtherClient : MonoBehaviour
 
 	public List<GameObject> weapons;
 
-	[SerializeField] TwoBoneIKConstraint leftConstraint;
-	[SerializeField] TwoBoneIKConstraint rightConstraint;
-	[SerializeField] RigBuilder rigBuilder;
+	[SerializeField] Transform leftTarget;
+	[SerializeField] Transform rightTarget;
+
+	[SerializeField] Transform weaponLeftTarget;
+	[SerializeField] Transform weaponRightTarget;
 
 	public void SetHealth(int _health)
 	{
@@ -61,6 +64,15 @@ public class OtherClient : MonoBehaviour
 
 	private void Update()
 	{
+		//set targets to hand positions in guns
+		leftTarget.position = weaponLeftTarget.position;
+		rightTarget.position = weaponRightTarget.position;
+		
+		leftTarget.rotation = weaponLeftTarget.rotation;
+		rightTarget.rotation = weaponRightTarget.rotation;
+
+
+
 		lerpPercent = (Time.time - pastUpdateTime) / (1 / (float)Client.transformTPS);
 
 		//position
@@ -157,10 +169,8 @@ public class OtherClient : MonoBehaviour
 		currentWeapon = weapons[newWeapon];
 		currentWeapon.SetActive(true);
 
-		//set hand positions
 		OtherClientWeapon currentWeaponScript = currentWeapon.GetComponent<OtherClientWeapon>();
-		leftConstraint.data.target = currentWeaponScript.leftHandPos;
-		rightConstraint.data.target = currentWeaponScript.rightHandPos;
-		rigBuilder.Build();
+		weaponLeftTarget = currentWeaponScript.leftHandPos;
+		weaponRightTarget = currentWeaponScript.rightHandPos;
 	}
 }
