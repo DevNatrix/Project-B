@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 
 public class ServerEvents : MonoBehaviour
 {
+	[HideInInspector] public static ServerEvents Instance;
+
 	//DO NOT CHANGE THIS FILE TO ADD EVENTS
 	//change CustomEvents.cs instead, it has examples and everything
 	//ask me if you really want to do it

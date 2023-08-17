@@ -126,7 +126,7 @@ public class WeaponSystem : MonoBehaviour
 					{
 						moddedDamage = damage;
 					}
-					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString() }, clientID);
+					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(), Client.ID + ""}, clientID);
                 }
 				else
 				{

@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
 	public TextMeshProUGUI healthText;
 
 	public ServerEvents serverEvents;
+	public KillFeed killFeed;
 
     private void Start()
     {
@@ -23,18 +24,21 @@ public class PlayerManager : MonoBehaviour
 		SetHealth(100);
 	}
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, int attackerID)
 	{
-		SetHealth(health - damage);
+		SetHealth(health - damage, attackerID);
 	}
 
-	public void SetHealth(int _health)
+	public void SetHealth(int _health, int attackerID = -1)
 	{
 		health = _health;
 
 		if (health <= 0)
 		{
 			Debug.Log("You Died");
+			Debug.Log(attackerID);
+			OtherClient otherClient = serverEvents.getOtherClientScriptByID(attackerID);
+			killFeed.createNewFeed(otherClient.username, Client.username);
 
 			health = 100;
 

@@ -11,6 +11,7 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] PlayerManager playerManager;
 
 	[SerializeField] BulletManager bulletManager;
+	[SerializeField] KillFeed killFeed;
 
 	//example:
 	public void sendExampleEventExample()
@@ -44,6 +45,14 @@ public class CustomEvents : MonoBehaviour
 		Debug.Log(exampleData1 + ", " + exampleData2 + ", " + exampleData3);
 	}
 
+	public void newKillFeed(string[] data)
+	{
+		string attacker = data[0];
+		string attacked = data[1];
+		int wayToKillIndex = int.Parse(data[2]);
+
+		killFeed.newFeed(attacker, attacked, wayToKillIndex);
+	}
 
 	public void chatMessage(string[] data)
 	{
@@ -100,8 +109,9 @@ public class CustomEvents : MonoBehaviour
 	public void damage(string[] data)
 	{
 		int damage = int.Parse(data[0]);
+		int attackerID = int.Parse(data[1]);
 
-		playerManager.TakeDamage(damage);
+		playerManager.TakeDamage(damage, attackerID);
 	}
 
 	public void setHealth(string[] data)
