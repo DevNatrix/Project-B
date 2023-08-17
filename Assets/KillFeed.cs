@@ -12,28 +12,34 @@ public class KillFeed : MonoBehaviour
 	[SerializeField] float killFeedLife;
 	[SerializeField] ServerEvents serverEvents;
 
-	public List<string> waysToKill;
+	public List<string> verbs;
+	public List<string> adverbs;
 
-	public void newFeed(string killer, string killed, int wayToKillIndex = -1)
+	public void newFeed(string killer, string killed, int verbIndex, int adverbIndex)
 	{
 		//create kill feed child
 		TextMeshProUGUI newChild = Instantiate(killFeedPrefab, killFeedParent).GetComponent<TextMeshProUGUI>();
 
 		//set message
-		newChild.text = killer + " " + waysToKill[wayToKillIndex] + " " + killed;
+		newChild.text = killer + " " + verbs[verbIndex] + " " + killed + " " + adverbs[adverbIndex];
 
 		//destroy
 		Destroy(newChild.gameObject, killFeedLife);
 
 	}
 
-	public void createNewFeed(string killer, string killed, int wayToKillIndex = -1)
+	public void createNewFeed(string killer, string killed, int verbIndex = -1, int adverbIndex = -1)
 	{
-		if (wayToKillIndex == -1)
+		if (verbIndex == -1)
 		{
-			wayToKillIndex = Random.Range(0, waysToKill.Count);
+			verbIndex = Random.Range(0, verbs.Count);
+		}
+		
+		if (adverbIndex == -1)
+		{
+			adverbIndex = Random.Range(0, adverbs.Count);
 		}
 
-		serverEvents.sendGlobalEvent("newKillFeed", new string[] { killer, killed, wayToKillIndex + "" });
+		serverEvents.sendGlobalEvent("newKillFeed", new string[] { killer, killed, verbIndex + "", adverbIndex + "" });
 	}
 }

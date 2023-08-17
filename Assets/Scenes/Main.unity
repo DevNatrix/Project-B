@@ -9377,15 +9377,15 @@ MonoBehaviour:
   killFeedParent: {fileID: 978714893}
   killFeedLife: 5
   serverEvents: {fileID: 1836363827}
-  waysToKill:
+  verbs:
   - beat off
-  - stroked
   - slapped
+  - stroked
   - hit
   - popped
-  - twerked on
+  - choked
   - destroyed
-  - stealthily smooched
+  - destroyed
   - ravaged
   - spanked
   - suffocated
@@ -9396,6 +9396,21 @@ MonoBehaviour:
   - elongated
   - penatrated
   - knocked up
+  - BDSM'd
+  adverbs:
+  - a little too hard
+  - steathily
+  - joyfully
+  - concensually
+  - happily
+  - gently
+  - loudly
+  - silently
+  - tenderly
+  - eatiently
+  - enthusiastically
+  - rudely
+  - unexpectedly
 --- !u!1 &665320337
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,9 +49,10 @@ public class CustomEvents : MonoBehaviour
 	{
 		string attacker = data[0];
 		string attacked = data[1];
-		int wayToKillIndex = int.Parse(data[2]);
+		int verbIndex = int.Parse(data[2]);
+		int adverbIndex = int.Parse(data[3]);
 
-		killFeed.newFeed(attacker, attacked, wayToKillIndex);
+		killFeed.newFeed(attacker, attacked, verbIndex, adverbIndex);
 	}
 
 	public void chatMessage(string[] data)
