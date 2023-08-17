@@ -8,7 +8,7 @@ public class WeaponSystem : MonoBehaviour
 {
 	[TextArea]
 	[Tooltip("Doesn't do anything. Just important info")]
-	public string Info = "When adding another weapon, dont forget to make sure the ";
+	public string ImportantInfo = "When adding another weapon, dont forget to make sure the weapon ID is right, you add it to the weapon switcher list, add it to the other client visual model (along with positioning the ik points), and assign it to the other client weapon list.";
 
 	[HideInInspector] public static WeaponSystem Instance;
     PlayerControls playerControls;
