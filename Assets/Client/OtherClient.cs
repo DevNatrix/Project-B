@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
 
 public class OtherClient : MonoBehaviour
@@ -47,6 +48,10 @@ public class OtherClient : MonoBehaviour
 	[HideInInspector] public Vector3 direction;
 
 	public List<GameObject> weapons;
+
+	[SerializeField] TwoBoneIKConstraint leftConstraint;
+	[SerializeField] TwoBoneIKConstraint rightConstraint;
+	[SerializeField] RigBuilder rigBuilder;
 
 	public void SetHealth(int _health)
 	{
@@ -147,13 +152,15 @@ public class OtherClient : MonoBehaviour
 	{
 		Debug.Log("Client " + ID + " equipped weapon " + newWeapon);
 
+		//set only new weapon active
 		currentWeapon.SetActive(false);
 		currentWeapon = weapons[newWeapon];
 		currentWeapon.SetActive(true);
 
-		//GameObject newWeaponPrefab = WeaponSwitcher.Instance.GetItemThroughID(newWeapon);
-
-		//Destroy(currentWeapon);
-		//currentWeapon = Instantiate(newWeaponPrefab, transform.position + Vector3.right, Quaternion.identity, transform);
+		//set hand positions
+		OtherClientWeapon currentWeaponScript = currentWeapon.GetComponent<OtherClientWeapon>();
+		leftConstraint.data.target = currentWeaponScript.leftHandPos;
+		rightConstraint.data.target = currentWeaponScript.rightHandPos;
+		rigBuilder.Build();
 	}
 }
