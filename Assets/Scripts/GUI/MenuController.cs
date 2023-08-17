@@ -95,7 +95,14 @@ public class MenuController : MonoBehaviour
 
 	public void leaveServer()
 	{
-		client.sendTCPMessage("quit");
+		try
+		{
+			client.sendTCPMessage("quit");
+		}
+		catch
+		{
+			Debug.Log("Couldn't send leave message");
+		}
 		SceneManager.LoadScene(0);
 	}
 }

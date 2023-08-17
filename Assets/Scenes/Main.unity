@@ -24023,6 +24023,7 @@ MonoBehaviour:
   playerTransform: {fileID: 5846882482729803036}
   camTransform: {fileID: 4193270394687202011}
   showClient: 1
+  maxSecondsBeforeDisconnect: 3
 --- !u!114 &1836363835
 MonoBehaviour:
   m_ObjectHideFlags: 0

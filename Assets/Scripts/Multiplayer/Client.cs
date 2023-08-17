@@ -22,6 +22,7 @@ public class Client : MonoBehaviour
 
 	float udpPingStartTime;
 	float tcpPingStartTime;
+	float lastGottenPingTime;
 
 	int udpLatency;
 	int tcpLatency;
@@ -53,10 +54,14 @@ public class Client : MonoBehaviour
 	public bool showClient = true;
 	int udpProcessErrors = 0;
 	int tcpProcessErrors = 0;
+	public float maxSecondsBeforeDisconnect = 3f;
 
 	private void Start()
 	{
-		if(Lobby.bestUDPPort == -1)
+		lastGottenPingTime = Time.time;
+		lostConnection = false;
+
+		if (Lobby.bestUDPPort == -1)
 		{
 			SceneManager.LoadScene(0);
 			return;
@@ -212,24 +217,23 @@ public class Client : MonoBehaviour
 
 	void processUDPMessage(string message)
 	{
-
 		if (message == "pong")
 		{
 			udpPing.text = "UDP Latency: " + (int)((Time.time - udpPingStartTime) * 1000) + "ms";
+			lastGottenPingTime = Time.time;
+			return;
 		}
-		else
-		{
-			string[] peices = message.Split('~');
-			int otherClientID = int.Parse(peices[0]);
-			Vector3 otherClientPos = ServerEvents.parseVector3(peices[1]);
-			Quaternion otherClientRot = ServerEvents.parseQuaternion(peices[2]);
-			bool showOtherClient = bool.Parse(peices[3]);
-			bool clientIsSliding = bool.Parse(peices[4]);
 
-			OtherClient otherClient = events.getOtherClientScriptByID(otherClientID);
-			otherClient.setTransform(otherClientPos, otherClientRot, clientIsSliding);
-			otherClient.setVisibility(showOtherClient);
-		}
+		string[] peices = message.Split('~');
+		int otherClientID = int.Parse(peices[0]);
+		Vector3 otherClientPos = ServerEvents.parseVector3(peices[1]);
+		Quaternion otherClientRot = ServerEvents.parseQuaternion(peices[2]);
+		bool showOtherClient = bool.Parse(peices[3]);
+		bool clientIsSliding = bool.Parse(peices[4]);
+
+		OtherClient otherClient = events.getOtherClientScriptByID(otherClientID);
+		otherClient.setTransform(otherClientPos, otherClientRot, clientIsSliding);
+		otherClient.setVisibility(showOtherClient);
 	}
 
 	void processTCPMessage(string message)
@@ -239,6 +243,7 @@ public class Client : MonoBehaviour
 		if (message == "pong")
 		{
 			tcpPing.text = "TCP Latency: " + (int)((Time.time - tcpPingStartTime) * 1000) + "ms";
+			lastGottenPingTime = Time.time;
 			return;
 		}
 
@@ -253,5 +258,15 @@ public class Client : MonoBehaviour
 
 		//close udp
 		udpClient.Close();*/ //just makes error rn
+	}
+
+	private void Update()
+	{
+		Debug.Log(lastGottenPingTime);
+		if(Time.time - lastGottenPingTime > maxSecondsBeforeDisconnect)
+		{
+			lostConnection = true;
+			SceneManager.LoadScene(0);
+		}
 	}
 }
