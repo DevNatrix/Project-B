@@ -168,6 +168,7 @@ public class WeaponSystem : MonoBehaviour
             }
 
             currentAmmo--;
+            Recoil.Instance.FireRecoil();
             AudioPlayer.Instance.createAudio(1, gameObject.transform.position, .2f, 1, Client.ID);
         }
     }
