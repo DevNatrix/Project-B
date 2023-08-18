@@ -32,9 +32,13 @@ public class PlayerManager : MonoBehaviour
 		if(currentLife == attackedLife)
 		{
 			SetHealth(health - damage, attackerID);
+
+			//set current life
 		}
 		else
 		{
+			string[] sendData = { Client.ID + "", health + "", currentLife + "" };
+			serverEvents.sendDirectEvent("setHealth", sendData, attackerID);
 			Debug.LogWarning("Client " + attackerID + " did damage in the past life " + attackedLife + " (current life is " + currentLife + ")");
 		}
 	}
