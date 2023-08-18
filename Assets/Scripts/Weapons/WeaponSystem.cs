@@ -107,7 +107,23 @@ public class WeaponSystem : MonoBehaviour
     {
         if(playerControls.Weapon.Fire.WasPerformedThisFrame())
         {
-            Debug.Log("Knife Attack");
+            float knifeDistance = 2f;
+            float knifeDamage = 80f;
+
+
+            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+            RaycastHit hit;
+
+            if(Physics.Raycast(ray.origin, ray.direction, out hit, knifeDistance))
+            {
+                if(hit.transform.gameObject.GetComponent<OtherClient>())
+                {
+                    int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
+                    OtherClient hitClientScript = serverEvents.getOtherClientScriptByID(clientID);
+                    serverEvents.sendDirectEvent("damage", new string[] { knifeDamage.ToString(), hitClientScript.currentLife + "", Client.ID + "" }, clientID);
+                }
+            }
+            
         }
     }
     private void Shoot()
