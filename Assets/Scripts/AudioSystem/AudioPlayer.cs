@@ -9,6 +9,7 @@ public class AudioPlayer : MonoBehaviour
 	[SerializeField] List<AudioClip> clips;
 	[SerializeField] ServerEvents serverEvents;
 	[SerializeField] Transform playerTransform;
+	public static float volumeMult = 1f;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class AudioPlayer : MonoBehaviour
 			newAudioSource = Instantiate(audioSourcePrefab, position, Quaternion.identity, parent).GetComponent<AudioSource>();
 		}
 		newAudioSource.clip = clip;
-		newAudioSource.volume = volume;
+		newAudioSource.volume = volume * volumeMult;
 		newAudioSource.pitch = pitch;
 		newAudioSource.Play();
 		Destroy(newAudioSource.gameObject, clip.length);
