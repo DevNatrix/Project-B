@@ -110,11 +110,11 @@ public class WeaponSystem : MonoBehaviour
 		headshotMultiplier = float.Parse(settings[1]);
 		damage = int.Parse(settings[2]);
 		maxDistance = int.Parse(settings[3]);
-		fireRate = settings[4];
-		bulletSpeed = settings[5];
-		AmmoInReserve = settings[6];
-		maxAmmo = settings[7];
-		currentAmmo = settings[8];
+		fireRate = int.Parse(settings[4]);
+		bulletSpeed = int.Parse(settings[5]);
+		AmmoInReserve = int.Parse(settings[6]);
+		maxAmmo = int.Parse(settings[7]);
+		currentAmmo = int.Parse(settings[8]);
 	}
 
 

@@ -31,13 +31,12 @@ public class Recoil : MonoBehaviour
 		snapBackTimer -= Time.deltaTime;
 		if(snapBackTimer < 0f)
 		{
-			targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
+			currentRotation = Vector3.Lerp(currentRotation, Vector3.zero, returnSpeed * Time.deltaTime);
 		}
 		else
 		{
-			targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeedSlow * Time.deltaTime);
+			currentRotation = Vector3.Lerp(currentRotation, Vector3.zero, returnSpeedSlow * Time.deltaTime);
 		}
-		currentRotation = Vector3.Lerp(currentRotation, targetRotation, snappiness * Time.deltaTime);
 		look.xRotRecoil = currentRotation.x;
 		look.yRotRecoil = currentRotation.y;
 	}
