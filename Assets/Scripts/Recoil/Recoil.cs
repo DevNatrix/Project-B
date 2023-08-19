@@ -31,8 +31,9 @@ public class Recoil : MonoBehaviour
     public void RecoilVal()
     {
         targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
-        currentRotation = Vector3.Slerp(currentRotation, targetRotation, snappiness * Time.deltaTime);
-        look.xRotOffset = currentRotation.x;
+        currentRotation = Vector3.Lerp(currentRotation, targetRotation, snappiness * Time.deltaTime);
+        look.xRotRecoil = currentRotation.x;
+        look.yRotRecoil = currentRotation.y;
     }
 
     public void FireRecoil()

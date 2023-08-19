@@ -21,9 +21,12 @@ public class Look : MonoBehaviour
     //[SerializeField] float FOVChangeSpeed = 1;
     [SerializeField] float camRollSpeed = 1;
 
-    [HideInInspector] public float xRotOffset = 0;
+    float xRotOffset = 0;
 	float yRotOffset = 0;
 	float zRotOffset = 0;
+
+	[HideInInspector] public float xRotRecoil;
+	[HideInInspector] public float yRotRecoil;
 
     [HideInInspector] public float xRotation = 0;
 	[HideInInspector] public float yRotation = 0;
@@ -42,8 +45,8 @@ public class Look : MonoBehaviour
     {
 		if (!MenuController.menu)
 		{
-			xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime);
-			yRotOffset = 0;
+			xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime) + xRotRecoil;
+			yRotOffset = yRotRecoil;
 			zRotOffset = 0;
 
 			//cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, FOVChangeSpeed * Time.deltaTime);
