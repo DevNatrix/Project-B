@@ -44,6 +44,6 @@ public class Recoil : MonoBehaviour
     public void FireRecoil()
     {
 		snapBackTimer = timeBeforeSnapBack;
-		targetRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
+		currentRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
     }
 }
