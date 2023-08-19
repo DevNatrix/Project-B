@@ -29989,6 +29989,8 @@ MonoBehaviour:
   xRotOffsetChangeSpeed: 20
   camHeightChangeSpeed: 13
   camRollSpeed: 13
+  xRotation: 0
+  yRotation: 0
   targetXRotOffset: 0
   camHeightOffset: 0
   targetFOV: 90
@@ -30122,11 +30124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f65f0fd76dc314c90c672269564b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilX: -2
-  recoilY: 2
-  recoilZ: 0.35
-  snappiness: 6
-  returnSpeed: 2
+  recoilX: 2
+  recoilY: 0.4
+  look: {fileID: 2924846311551427072}
 --- !u!1 &4589314064938907208
 GameObject:
   m_ObjectHideFlags: 0

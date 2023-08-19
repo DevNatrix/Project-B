@@ -21,9 +21,12 @@ public class Look : MonoBehaviour
     //[SerializeField] float FOVChangeSpeed = 1;
     [SerializeField] float camRollSpeed = 1;
 
-    float xRotation = 0;
     float xRotOffset = 0;
-    float yRotation = 0;
+	float yRotOffset = 0;
+	float zRotOffset = 0;
+
+    [HideInInspector] public float xRotation = 0;
+	[HideInInspector] public float yRotation = 0;
     float zRotation = 0;
 
     float originalCamHeight;
@@ -40,12 +43,15 @@ public class Look : MonoBehaviour
 		if (!MenuController.menu)
 		{
 			xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime);
+			yRotOffset = 0;
+			zRotOffset = 0;
+
 			//cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, FOVChangeSpeed * Time.deltaTime);
 			cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, Mathf.Lerp(cam.transform.localPosition.y, originalCamHeight + camHeightOffset, camHeightChangeSpeed * Time.deltaTime), cam.transform.localPosition.z);
 			//playerCam.eulerAngles = new Vector3(playerCam.eulerAngles.x, playerCam.eulerAngles.y, Mathf.Lerp(playerCam.eulerAngles.z, targetCamRoll, camRollSpeed * Time.deltaTime));
 
 
-			rb.MoveRotation(Quaternion.Euler(Vector3.up * yRotation));
+			rb.MoveRotation(Quaternion.Euler(Vector3.up * (yRotation + yRotOffset)));
 			//transform.Rotate(Vector3.up, mouseX);
 
 			xRotation -= mouseY;
@@ -54,7 +60,7 @@ public class Look : MonoBehaviour
 			zRotation = Mathf.Lerp(zRotation, targetCamRoll, camRollSpeed * Time.deltaTime);
 			Vector3 targetRotation = transform.eulerAngles;
 			targetRotation.x = xRotation + xRotOffset;
-			targetRotation.z = zRotation;
+			targetRotation.z = zRotation + zRotOffset;
 			playerCam.eulerAngles = targetRotation;
 		}
     }
