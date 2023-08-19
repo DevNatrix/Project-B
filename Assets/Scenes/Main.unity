@@ -9828,7 +9828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killFeedPrefab: {fileID: 8529127089327920964, guid: f7a9a01398c14774fbd332c6785f5443, type: 3}
   killFeedParent: {fileID: 978714893}
-  killFeedLife: 0
+  killFeedLife: 2
   serverEvents: {fileID: 1836363827}
   verbs:
   - beat off
