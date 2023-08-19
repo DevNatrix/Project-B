@@ -105,4 +105,10 @@ public class MenuController : MonoBehaviour
 		}
 		SceneManager.LoadScene(0);
 	}
+
+	public void setVolume(float volume)
+	{
+		Debug.Log(volume);
+		AudioPlayer.volumeMult = volume;
+	}
 }
