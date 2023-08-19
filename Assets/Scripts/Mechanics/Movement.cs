@@ -8,6 +8,21 @@ public class Movement : MonoBehaviour
 	//input
 	Vector2 horizontalInput;
 
+	//controlled by server:
+	[HideInInspector] public float acceleration = 11f;
+	[HideInInspector] public float inAirAcceleration = 1f;
+	[HideInInspector] public float decceleration = .95f;
+	[HideInInspector] public float inAirDecceleration = .03f;
+	[HideInInspector] public float jumpPower = 3.5f;
+	[HideInInspector] public float maxSpeed;
+	[HideInInspector] public float minYPos = -10f;
+	[HideInInspector] public float addedGravity;
+	[HideInInspector] public float dashSeconds;
+	[HideInInspector] public float dashSpeed;
+	[HideInInspector] public float dashCooldown;
+	[HideInInspector] public float slidingDecceleration;
+	[HideInInspector] public float speedBoostOnSlide;
+
 	[Header("References:")]
 	[SerializeField] Rigidbody playerRB;
 	[SerializeField] GameObject playerCam;
@@ -15,14 +30,7 @@ public class Movement : MonoBehaviour
 	[SerializeField] PlayerManager playerManager;
 
 	[Header("Basic Movement Settings:")]
-	[SerializeField] float acceleration = 11f;
-	[SerializeField] float inAirAcceleration = 1f;
-	[SerializeField] float decceleration = .95f;
-	[SerializeField] float inAirDecceleration = .03f;
-	[SerializeField] float jumpPower = 3.5f;
 	[HideInInspector] public bool jump;
-	[SerializeField] float maxSpeed;
-	[SerializeField] float minYPos = -10f;
 	bool isGrounded;
 	[SerializeField] float groundDistance = 1f;
 
@@ -31,7 +39,6 @@ public class Movement : MonoBehaviour
 	public LayerMask groundMask;
 	[SerializeField] float groundCheckRadius;
 	[SerializeField] float groundCheckHeight;
-	[SerializeField] float addedGravity;
 	[SerializeField] float stairFriction = .8f;
 
 	[Header("Wallrunning settings:")]
@@ -58,18 +65,13 @@ public class Movement : MonoBehaviour
 	[SerializeField] float wallJumpForceCam;
 
 	[Header("Dash Settings:")]
-	[SerializeField] float dashSeconds;
-	[SerializeField] float dashSpeed;
-	[SerializeField] float dashCooldown;
-	[SerializeField] float dashTimer = 0f;
+	float dashTimer = 0f;
 
 	[Header("Slide Settings:")]
-	[SerializeField] float slidingDecceleration;
 	[HideInInspector] public bool slidingRequested = false;
 	[SerializeField] float slidingLean = 10;
 	[SerializeField] float slidingHeightChange = .5f;
 	[SerializeField] float slidingFOVChange;
-	[SerializeField] float speedBoostOnSlide;
 	bool sliding = false;
 	public static bool crouching = false;
 

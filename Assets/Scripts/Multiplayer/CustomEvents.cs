@@ -45,6 +45,28 @@ public class CustomEvents : MonoBehaviour
 		Debug.Log(exampleData1 + ", " + exampleData2 + ", " + exampleData3);
 	}
 
+	public void quickSettings(string[] data)
+	{
+		Debug.Log("Got settings request: " + ServerEvents.combineStringArray(data));
+		foreach(string settings in data)
+		{
+			if(!string.IsNullOrWhiteSpace(settings))
+			{
+				string[] settingsPeices = settings.Split(';');
+				int settingsTarget = int.Parse(settingsPeices[0]);
+				if(settingsTarget == -1)
+				{
+					playerManager.newSettings(settingsPeices);
+				}
+				else
+				{
+					WeaponSystem weaponBeingChanged = WeaponSwitcher.Instance.GetItemThroughID(settingsTarget).GetComponent<WeaponSystem>();
+					weaponBeingChanged.newSettings(settingsPeices);
+				}
+			}
+		}
+	}
+
 	public void newKillFeed(string[] data)
 	{
 		string attacker = data[0];

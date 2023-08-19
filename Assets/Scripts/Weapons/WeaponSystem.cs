@@ -103,7 +103,22 @@ public class WeaponSystem : MonoBehaviour
         }
     }
 
-    private void Melee()
+	public void newSettings(string[] settings)
+	{
+		Debug.Log("New settings for gun " + WeaponID + ": " + ServerEvents.combineStringArray(settings));
+
+		headshotMultiplier = float.Parse(settings[1]);
+		damage = int.Parse(settings[2]);
+		maxDistance = int.Parse(settings[3]);
+		fireRate = settings[4];
+		bulletSpeed = settings[5];
+		AmmoInReserve = settings[6];
+		maxAmmo = settings[7];
+		currentAmmo = settings[8];
+	}
+
+
+	private void Melee()
     {
         if(playerControls.Weapon.Fire.WasPerformedThisFrame())
         {

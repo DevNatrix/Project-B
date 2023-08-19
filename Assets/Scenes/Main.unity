@@ -31366,11 +31366,11 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 536884608}
   - {fileID: 1126243454}
-  health: 100
   healthText: {fileID: 2117224161}
   serverEvents: {fileID: 1836363827}
   killFeed: {fileID: 643860530}
   currentLife: 0
+  movement: {fileID: 7656093453908861211}
 --- !u!114 &7656093453908861211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31383,25 +31383,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c024826dca2a8e64baacb485fd40a0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRB: {fileID: 6228382423699174981}
-  playerCam: {fileID: 2673439467942727336}
-  look: {fileID: 2924846311551427072}
-  playerManager: {fileID: 7656093453415565079}
   acceleration: 100
   inAirAcceleration: 5
   decceleration: 0.8
   inAirDecceleration: 0.99
   jumpPower: 600
-  jump: 0
   maxSpeed: 100
   minYPos: -40
+  addedGravity: 0.1
+  dashSeconds: 0.1
+  dashSpeed: 20
+  dashCooldown: 0.2
+  slidingDecceleration: 0.97
+  speedBoostOnSlide: 0
+  playerRB: {fileID: 6228382423699174981}
+  playerCam: {fileID: 2673439467942727336}
+  look: {fileID: 2924846311551427072}
+  playerManager: {fileID: 7656093453415565079}
+  jump: 0
   groundDistance: 1
   groundMask:
     serializedVersion: 2
     m_Bits: 262152
   groundCheckRadius: 0.49
   groundCheckHeight: -0.58
-  addedGravity: 0.1
   stairFriction: 0.8
   wallDetectionHeight: 0
   wallDetectionRadius: 0.9
@@ -31418,16 +31423,10 @@ MonoBehaviour:
   wallJumpForceAway: 10
   wallJumpForceUp: 250
   wallJumpForceCam: 600
-  dashSeconds: 0.1
-  dashSpeed: 20
-  dashCooldown: 0.2
-  dashTimer: 0
-  slidingDecceleration: 0.97
   slidingRequested: 0
   slidingLean: -10
   slidingHeightChange: -0.5
   slidingFOVChange: 10
-  speedBoostOnSlide: 0
   audioPlayer: {fileID: 1836363831}
   distanceForFootstep: 2.6
   footstepClip: {fileID: 8300000, guid: 9a47b64b8d432b94eb7317d268127b1d, type: 3}
