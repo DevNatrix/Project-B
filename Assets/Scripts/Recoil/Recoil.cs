@@ -7,13 +7,17 @@ public class Recoil : MonoBehaviour
     [HideInInspector] public static Recoil Instance;
 
     [Header("Recoil")]
-    //Vector3 currentRotation;
-    //Vector3 targetRotation;
+    Vector3 currentRotation;
+    Vector3 targetRotation;
     [SerializeField] float recoilX;
     [SerializeField] float recoilY;
-    //[SerializeField] float snappiness;
-    //[SerializeField] float returnSpeed;
-	[SerializeField] Look look;
+    [SerializeField] float recoilZ;
+    [SerializeField] float snappiness;
+    [SerializeField] float returnSpeed;
+    [SerializeField] float returnSpeedSlow;
+    public Look look;
+	public float timeBeforeSnapBack = .4f;
+	public float snapBackTimer = 0f;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,24 +28,23 @@ public class Recoil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //RecoilVal();
-    }
+		snapBackTimer -= Time.deltaTime;
+		if(snapBackTimer < 0f)
+		{
+			targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
+		}
+		else
+		{
+			targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeedSlow * Time.deltaTime);
+		}
+		currentRotation = Vector3.Lerp(currentRotation, targetRotation, snappiness * Time.deltaTime);
+		look.xRotRecoil = currentRotation.x;
+		look.yRotRecoil = currentRotation.y;
+	}
 
-    public void RecoilVal()
+    public void FireRecoil()
     {
-        //targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
-        //currentRotation = Vector3.Slerp(currentRotation, targetRotation, snappiness * Time.deltaTime);
-        
-    }
-
-    public void FireRecoil(float xMult = 1f, float yMult = 1f)
-    {
-		float newX = xMult * recoilX;
-		float newY = yMult * recoilY;
-
-		look.xRotation -= newX;
-		look.yRotation += Random.Range(-newY, newY);
-
-		//targetRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY));
+		snapBackTimer = timeBeforeSnapBack;
+		targetRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
     }
 }

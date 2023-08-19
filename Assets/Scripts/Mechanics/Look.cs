@@ -25,6 +25,9 @@ public class Look : MonoBehaviour
 	float yRotOffset = 0;
 	float zRotOffset = 0;
 
+	[HideInInspector] public float xRotRecoil;
+	[HideInInspector] public float yRotRecoil;
+
     [HideInInspector] public float xRotation = 0;
 	[HideInInspector] public float yRotation = 0;
     float zRotation = 0;
@@ -42,8 +45,8 @@ public class Look : MonoBehaviour
     {
 		if (!MenuController.menu)
 		{
-			xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime);
-			yRotOffset = 0;
+			xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime) + xRotRecoil;
+			yRotOffset = yRotRecoil;
 			zRotOffset = 0;
 
 			//cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, FOVChangeSpeed * Time.deltaTime);
