@@ -21,7 +21,7 @@ public class Look : MonoBehaviour
     //[SerializeField] float FOVChangeSpeed = 1;
     [SerializeField] float camRollSpeed = 1;
 
-    float xRotOffset = 0;
+    [HideInInspector] public float xRotOffset = 0;
 	float yRotOffset = 0;
 	float zRotOffset = 0;
 
