@@ -57,6 +57,11 @@ public class OtherClient : MonoBehaviour
 	[SerializeField] Transform weaponLeftTarget;
 	[SerializeField] Transform weaponRightTarget;
 
+	[SerializeField] Transform weaponContainer;
+	[SerializeField] Transform shoulder;
+	[SerializeField] float minXRot;
+	[SerializeField] float maxXRot;
+
 	public void SetHealth(int _health, int newCurrentLife)
 	{
 		health = _health;
@@ -84,6 +89,23 @@ public class OtherClient : MonoBehaviour
 		//rotation
 		Quaternion currentRotation = Quaternion.Slerp(pastRotation, targetRotation, lerpPercent);
 		transform.rotation = Quaternion.Euler(new Vector3(transform.eulerAngles.x, currentRotation.eulerAngles.y, 0f));
+
+		//super scuffed, but there isnt another way (I hate quaternion to euler)
+		float clampedX = currentRotation.eulerAngles.x;
+		float actualMinX = 360 + minXRot;
+		if (clampedX < actualMinX && clampedX > maxXRot)
+		{
+			if(clampedX > 200)
+			{
+				clampedX = actualMinX;
+			}
+			else
+			{
+				clampedX = maxXRot;
+			}
+		}
+		weaponContainer.localRotation = Quaternion.Euler(new Vector3(clampedX, 0f, currentRotation.eulerAngles.z));
+		weaponContainer.position = shoulder.position;
 
 		//make info canvas face towards player cam
 		infoCanvas.LookAt(playerCam);
