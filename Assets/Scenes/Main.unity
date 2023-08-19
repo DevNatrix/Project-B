@@ -9823,7 +9823,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 643860521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 926a1f6b12c022445abb87498ce3d85a, type: 3}
+  m_Script: {fileID: 11500000, guid: 237a82bbace5c7b4cb8c04e4d9031c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   killFeedPrefab: {fileID: 8529127089327920964, guid: f7a9a01398c14774fbd332c6785f5443, type: 3}
@@ -9843,6 +9843,7 @@ MonoBehaviour:
   - suffocated
   - penatrated
   - knocked up
+  - bonked
   adverbs:
   - a little too hard
   - steathily
@@ -9856,6 +9857,7 @@ MonoBehaviour:
   - enthusiastically
   - rudely
   - unexpectedly
+  - fast
 --- !u!1 &665320337
 GameObject:
   m_ObjectHideFlags: 0
