@@ -6,6 +6,17 @@ using TMPro;
 
 public class WeaponSystem : MonoBehaviour
 {
+	//controlled by server:
+	[HideInInspector] public float headshotMultiplier = 1.5f;
+	[HideInInspector] public int damage;
+	[HideInInspector] public int maxDistance;
+	[HideInInspector] public float fireRate;
+	[HideInInspector] public float bulletSpeed;
+	[HideInInspector] public int AmmoInReserve;
+	[HideInInspector] public int maxAmmo;
+	[HideInInspector] public int currentAmmo;
+
+
 	[TextArea]
 	[Tooltip("Doesn't do anything. Just important info")]
 	public string ImportantInfo = "When adding another weapon, dont forget to make sure the weapon ID is right, you add it to the weapon switcher list, add it to the other client visual model (along with positioning the ik points), and assign it to the other client weapon list.";
@@ -13,7 +24,6 @@ public class WeaponSystem : MonoBehaviour
 	[HideInInspector] public static WeaponSystem Instance;
     PlayerControls playerControls;
 	float headshotHeight = .6f;
-	public float headshotMultiplier = 1.5f;
 
 	[Header("References")]
     private GameObject cam;
@@ -25,22 +35,11 @@ public class WeaponSystem : MonoBehaviour
     [Header("Info")]
     public int WeaponID;
 
-    public int damage;
-
-    public int maxDistance;
-
-    public float fireRate;
 
     private float nextFire;
 
-	public float bulletSpeed;
 
 	public WeaponType weaponType;
-
-    [Header("Ammo")]
-    public int AmmoInReserve;
-    public int currentAmmo;
-    public int maxAmmo;
 
     [Header("UI")]
     private TextMeshProUGUI AmmoAndMagText;
@@ -110,8 +109,8 @@ public class WeaponSystem : MonoBehaviour
 		headshotMultiplier = float.Parse(settings[1]);
 		damage = int.Parse(settings[2]);
 		maxDistance = int.Parse(settings[3]);
-		fireRate = int.Parse(settings[4]);
-		bulletSpeed = int.Parse(settings[5]);
+		fireRate = float.Parse(settings[4]);
+		bulletSpeed = float.Parse(settings[5]);
 		AmmoInReserve = int.Parse(settings[6]);
 		maxAmmo = int.Parse(settings[7]);
 		currentAmmo = int.Parse(settings[8]);

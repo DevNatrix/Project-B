@@ -85,8 +85,7 @@ public class WeaponSwitcher : MonoBehaviour
         {
             if (weaponPrefab != null && weaponPrefab.GetComponent<WeaponSystem>().WeaponID == _ID)
             {
-                GameObject instantiatedWeapon = Instantiate(weaponPrefab, Vector3.zero, Quaternion.identity);
-                return instantiatedWeapon;
+                return weaponPrefab;
             }
         }
         return null;
