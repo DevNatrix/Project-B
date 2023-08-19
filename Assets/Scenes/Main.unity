@@ -3846,12 +3846,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f65f0fd76dc314c90c672269564b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilX: -2
-  recoilY: 2
+  recoilX: -1.2
+  recoilY: 3
   recoilZ: 0
-  snappiness: 6
-  returnSpeed: 40
-  look: {fileID: 2924846311551427072}
+  snappiness: 20
+  returnSpeed: 400
+  returnSpeedSlow: 20
+  look: {fileID: 0}
+  timeBeforeSnapBack: 0.1
+  snapBackTimer: -21.697071
 --- !u!1 &380521782
 GameObject:
   m_ObjectHideFlags: 0
