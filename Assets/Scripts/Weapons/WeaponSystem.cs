@@ -7,14 +7,14 @@ using TMPro;
 public class WeaponSystem : MonoBehaviour
 {
 	//controlled by server:
-	[HideInInspector] public float headshotMultiplier = 1.5f;
-	[HideInInspector] public int damage;
-	[HideInInspector] public int maxDistance;
-	[HideInInspector] public float fireRate;
-	[HideInInspector] public float bulletSpeed;
-	[HideInInspector] public int AmmoInReserve;
-	[HideInInspector] public int maxAmmo;
-	[HideInInspector] public int currentAmmo;
+	public float headshotMultiplier = 1.5f;
+    public int damage;
+	public int maxDistance;
+	public float fireRate;
+    public float bulletSpeed;
+	public int AmmoInReserve;
+	public int maxAmmo;
+	public int currentAmmo;
 
 	public LayerMask hitMask;
 

@@ -20,6 +20,7 @@ public class MenuController : MonoBehaviour
 	public Camera spectateCam;
 	public Camera gunCam;
 	public GameObject InGameGUI;
+	public GameObject TeamSelection;
 
 	private void Awake()
 	{
@@ -31,7 +32,12 @@ public class MenuController : MonoBehaviour
 		playerControls.UI.toggleMenu.performed += OnKeyPerformed;
 	}
 
-	private void OnEnable()
+    private void Start()
+    {
+		TeamSelection.SetActive(true);
+	}
+
+    private void OnEnable()
 	{
 		playerControls.Enable();
 	}
