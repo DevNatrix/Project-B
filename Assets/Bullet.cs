@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-	public LayerMask groundMask;
-
 	private void OnTriggerEnter(Collider otherColl)
 	{
 		if(otherColl.gameObject.isStatic)
