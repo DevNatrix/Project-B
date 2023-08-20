@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+	public int playerLayer;
+
 	private void OnTriggerEnter(Collider otherColl)
 	{
-		if(otherColl.gameObject.isStatic)
+		if (otherColl.gameObject.isStatic || otherColl.gameObject.layer == playerLayer)
 		{
 			Destroy(this.gameObject);
 		}
