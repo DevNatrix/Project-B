@@ -16,6 +16,8 @@ public class WeaponSystem : MonoBehaviour
 	[HideInInspector] public int maxAmmo;
 	[HideInInspector] public int currentAmmo;
 
+	public LayerMask hitMask;
+
 
 	[TextArea]
 	[Tooltip("Doesn't do anything. Just important info")]
@@ -128,7 +130,7 @@ public class WeaponSystem : MonoBehaviour
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             RaycastHit hit;
 
-            if(Physics.Raycast(ray.origin, ray.direction, out hit, knifeDistance))
+            if(Physics.Raycast(ray.origin, ray.direction, out hit, knifeDistance, hitMask))
             {
                 if(hit.transform.gameObject.GetComponent<OtherClient>())
                 {
@@ -149,11 +151,8 @@ public class WeaponSystem : MonoBehaviour
             //Shoot raycast
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
 
-			//send event
-			bulletManager.createBullet(shootPoint.position, cam.transform.forward * bulletSpeed);
-
 			RaycastHit hit;
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance))
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))
             {
                 if (hit.transform.gameObject.GetComponent<OtherClient>())
                 {
@@ -180,6 +179,9 @@ public class WeaponSystem : MonoBehaviour
 					Destroy(shotbulletHole, 6);
 				}
             }
+
+			//create visual bullet
+			bulletManager.createBullet(shootPoint.position, cam.transform.forward * bulletSpeed);
 
             currentAmmo--;
             Recoil.Instance.FireRecoil();

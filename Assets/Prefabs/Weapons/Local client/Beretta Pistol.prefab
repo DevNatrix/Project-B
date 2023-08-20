@@ -264,19 +264,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headshotMultiplier: 1.5
+  damage: 22
+  maxDistance: 100
+  fireRate: 11.6
+  bulletSpeed: 250
+  AmmoInReserve: 54
+  maxAmmo: 18
+  currentAmmo: 18
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 262280
+  ImportantInfo: When adding another weapon, dont forget to make sure the weapon
+    ID is right, you add it to the weapon switcher list, add it to the other client
+    visual model (along with positioning the ik points), and assign it to the other
+    client weapon list.
   anim: {fileID: 6941212380962120196}
   groundPrefab: {fileID: 3663234147644531100, guid: 3b03eac6265432340bb848d90b314811, type: 3}
   bulletHole: {fileID: 3980126314146801182, guid: 10602d8e273ed3140a812277765964cf, type: 3}
   serverEvents: {fileID: 0}
   WeaponID: 1
-  damage: 22
-  maxDistance: 100
-  fireRate: 11.6
-  bulletSpeed: 250
   weaponType: 1
-  AmmoInReserve: 54
-  currentAmmo: 18
-  maxAmmo: 18
   dropForce: 1
   shootPoint: {fileID: 7922418088205916299}
 --- !u!95 &6941212380962120196
