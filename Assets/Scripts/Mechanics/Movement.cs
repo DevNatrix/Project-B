@@ -167,8 +167,8 @@ public class Movement : MonoBehaviour
 		Vector2 direction = horizontalInput;
 		if (dashTimer <= 0 && !MenuController.typing && !MenuController.menu)
 		{
-			dashTimer = dashCooldown + dashSeconds;
-			float timer = dashSeconds;
+			dashTimer = dashCooldown + dashSeconds * AbilityManager.dashMult;
+			float timer = dashSeconds * AbilityManager.dashMult;
 			while(timer > 0)
 			{
 				timer -= Time.deltaTime;
@@ -238,7 +238,7 @@ public class Movement : MonoBehaviour
 
 				if (!sliding)
 				{
-					playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * acceleration);
+					playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * acceleration * AbilityManager.speedMult);
 				}
 			}
 			else if (wallRunning)

@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
 	public List<Transform> spawnPoints;
 
 	int health = 100;
-	int maxHealth;
+	int maxHealth = 100;
 	public TextMeshProUGUI healthText;
 
 	public ServerEvents serverEvents;
@@ -18,6 +18,8 @@ public class PlayerManager : MonoBehaviour
 
 	public int currentLife;
 	public Movement movement;
+
+	public MenuController menuController;
 
 	public void newSettings(string[] settings)
 	{
@@ -46,7 +48,7 @@ public class PlayerManager : MonoBehaviour
 
 	void initializeHealth()
 	{
-		SetHealth(100);
+		SetHealth(maxHealth);
 	}
 
     public void TakeDamage(int damage, int attackedLife, int attackerID)
@@ -75,10 +77,10 @@ public class PlayerManager : MonoBehaviour
 			OtherClient otherClient = serverEvents.getOtherClientScriptByID(attackerID);
 			killFeed.createNewFeed(otherClient.username, Client.username);
 
-			health = 100;
+			health = maxHealth * AbilityManager.healthMult;
 			currentLife++;
 
-			respawn();
+			menuController.triggerDeathMenu();
 		}
 
 		healthText.text = health.ToString();

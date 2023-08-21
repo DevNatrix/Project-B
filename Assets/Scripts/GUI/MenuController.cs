@@ -22,14 +22,36 @@ public class MenuController : MonoBehaviour
 	public GameObject InGameGUI;
 	public GameObject TeamSelection;
 
+	public GameObject deathScreen;
+
+	public void triggerDeathMenu()
+	{
+		setSpectate(true);
+		deathScreen.SetActive(true);
+		menu = true;
+		Cursor.lockState = CursorLockMode.None;
+	}
+
+	public void closeDeathScreen()
+	{
+		setSpectate(false);
+		deathScreen.SetActive(false);
+		menu = false;
+		Cursor.lockState = CursorLockMode.Locked;
+	}
+
+
 	private void Awake()
 	{
+		deathScreen.SetActive(false);
+		menuParent.SetActive(true);
 		setSpectate(true);
 
 		Cursor.lockState = CursorLockMode.None;
 		playerControls = new PlayerControls();
 
 		playerControls.UI.toggleMenu.performed += OnKeyPerformed;
+		playerControls.UI.kms.performed += KMS;
 	}
 
     private void Start()
@@ -50,6 +72,10 @@ public class MenuController : MonoBehaviour
 	private void OnKeyPerformed(InputAction.CallbackContext context)
 	{
 		toggleMenu();
+	}
+	private void KMS(InputAction.CallbackContext context)
+	{
+		triggerDeathMenu();
 	}
 
 	public void toggleMenu()

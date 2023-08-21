@@ -123,20 +123,18 @@ public class WeaponSystem : MonoBehaviour
     {
         if(playerControls.Weapon.Fire.WasPerformedThisFrame())
         {
-            float knifeDistance = 2f;
-            float knifeDamage = 80f;
-
-
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             RaycastHit hit;
 
-            if(Physics.Raycast(ray.origin, ray.direction, out hit, knifeDistance, hitMask))
+            if(Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))
             {
                 if(hit.transform.gameObject.GetComponent<OtherClient>())
                 {
+					int moddedDamage = damage * AbilityManager.damageMult;
+
                     int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
                     OtherClient hitClientScript = serverEvents.getOtherClientScriptByID(clientID);
-                    serverEvents.sendDirectEvent("damage", new string[] { knifeDamage.ToString(), hitClientScript.currentLife + "", Client.ID + "" }, clientID);
+                    serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(), hitClientScript.currentLife + "", Client.ID + "" }, clientID);
                 }
             }
             
@@ -146,7 +144,7 @@ public class WeaponSystem : MonoBehaviour
     {
        if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false && !MenuController.menu)
         {
-            nextFire = 1 / fireRate;
+            nextFire = 1 / fireRate / AbilityManager.fireRateMult;
 
             //Shoot raycast
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
@@ -170,6 +168,7 @@ public class WeaponSystem : MonoBehaviour
 					{
 						moddedDamage = damage;
 					}
+					moddedDamage *= AbilityManager.damageMult;
 
 					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(), hitClientScript.currentLife + "",  Client.ID + ""}, clientID);
                 }
@@ -193,7 +192,7 @@ public class WeaponSystem : MonoBehaviour
     {
         if(playerControls.Weapon.Reload.WasPressedThisFrame())
         {
-            if (currentAmmo < maxAmmo && AmmoInReserve > 0)
+            if (currentAmmo < maxAmmo * AbilityManager.clipSizeMult && AmmoInReserve > 0)
             {
                 //Play Reload Animation
                 anim.SetBool("Reloading", true);
@@ -203,7 +202,7 @@ public class WeaponSystem : MonoBehaviour
 
     public void ReloadAmmo()
     {
-        int ammoToAdd = maxAmmo - currentAmmo;
+        int ammoToAdd = maxAmmo * AbilityManager.clipSizeMult - currentAmmo;
         int clamped = Mathf.Min(ammoToAdd, AmmoInReserve);
         AmmoInReserve -= clamped;
         currentAmmo += clamped;
