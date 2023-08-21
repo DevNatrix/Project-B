@@ -14,7 +14,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject defaultPrimary;
     [SerializeField] private GameObject defaultSecondary;
     [SerializeField] private GameObject defaultMelee;
-    [SerializeField] private GameObject weaponSlotVisual; // Prefab for visual representation of selected weapon
 
     void Start()
     {
