@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class CustomEvents : MonoBehaviour
@@ -13,6 +14,7 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] BulletManager bulletManager;
 	[SerializeField] KillFeed killFeed;
 	[SerializeField] AbilityManager abilityManager;
+	[SerializeField] WeaponSwitcher weaponSwitcher;
 
 	//example:
 	public void sendExampleEventExample()
@@ -179,5 +181,18 @@ public class CustomEvents : MonoBehaviour
 
 		abilityManager.resetUpgrades();
 		chat.serverMessage(resetter + " reset multipliers");
+	}
+
+	public void newDroppedWeapon(string[] data)
+	{
+		int weaponID = int.Parse(data[0]);
+		Vector3 position = ServerEvents.parseVector3(data[1]);
+		Vector3 velocity = ServerEvents.parseVector3(data[2]);
+		Vector3 rotationalVelocity = ServerEvents.parseVector3(data[3]);
+		int ammoInReserve = int.Parse(data[4]);
+		int currentAmmo = int.Parse(data[5]);
+		int maxAmmo = int.Parse(data[6]);
+
+		weaponSwitcher.createDropItem(weaponID, position, velocity, rotationalVelocity, ammoInReserve, currentAmmo, maxAmmo);
 	}
 }

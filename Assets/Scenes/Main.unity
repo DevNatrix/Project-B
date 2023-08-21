@@ -830,7 +830,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159310
+  m_Name: pb_Mesh281856
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1442,7 +1442,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159864
+  m_Name: pb_Mesh282448
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1858,7 +1858,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh158820
+  m_Name: pb_Mesh281334
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6320,7 +6320,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159058
+  m_Name: pb_Mesh281588
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11979,7 +11979,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159202
+  m_Name: pb_Mesh281748
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12289,7 +12289,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159488
+  m_Name: pb_Mesh282034
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12699,7 +12699,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159594
+  m_Name: pb_Mesh282154
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14861,7 +14861,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159528
+  m_Name: pb_Mesh282074
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16144,7 +16144,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159120
+  m_Name: pb_Mesh281658
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20595,7 +20595,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159002
+  m_Name: pb_Mesh281532
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22562,7 +22562,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh158962
+  m_Name: pb_Mesh281492
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27290,7 +27290,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159774
+  m_Name: pb_Mesh282358
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -28037,7 +28037,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159456
+  m_Name: pb_Mesh282002
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -28238,7 +28238,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159390
+  m_Name: pb_Mesh281936
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -28606,6 +28606,7 @@ MonoBehaviour:
   bulletManager: {fileID: 1836363836}
   killFeed: {fileID: 643860530}
   abilityManager: {fileID: 1836363838}
+  weaponSwitcher: {fileID: 0}
 --- !u!114 &1836363831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34052,7 +34053,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh159824
+  m_Name: pb_Mesh282408
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -35287,6 +35288,12 @@ MonoBehaviour:
   - {fileID: 7237255521753112500, guid: 6e68f15179081d642bd11cedd8e38f75, type: 3}
   - {fileID: 3663234147644531100, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
   - {fileID: 910030901060662416, guid: f037bb1918d78ca4988b2505f23e6a7f, type: 3}
+  - {fileID: 0}
+  DropWeapons:
+  - {fileID: 7237255521753112500, guid: dad9163b6042395409910dfde062f288, type: 3}
+  - {fileID: 3663234147644531100, guid: 3b03eac6265432340bb848d90b314811, type: 3}
+  - {fileID: 0}
+  - {fileID: 8846423848380024899, guid: 4ebdb11e9b67e8e48978e6330525a6b6, type: 3}
   pickupDistance: 10
   dropForwardForce: 8
   dropUpwardForce: 0

@@ -15,6 +15,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     public GameObject[] weaponInventory;
     public List<GameObject> Weapons;
+    public List<GameObject> DropWeapons;
 
     [Header("UI Weapon")]
     private GameObject AmmoDisplayGOS;
@@ -136,17 +137,16 @@ public class WeaponSwitcher : MonoBehaviour
 
     //Drop function for inventory
     public void DropItem(GameObject itemDrop, GameObject droppedItemPrefab)
-    {
-        GameObject visualDroppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity);
-        Rigidbody visualDroppedItemRB = visualDroppedItem.GetComponent<Rigidbody>();
+	{
+		GameObject visualDroppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity);
+		Rigidbody visualDroppedItemRB = visualDroppedItem.GetComponent<Rigidbody>();
 
         //Add Force
         visualDroppedItemRB.velocity = playerT.GetComponent<Rigidbody>().velocity;
         visualDroppedItemRB.AddForce(cam.transform.forward * dropForwardForce, ForceMode.Impulse);
 
         //Random rotation
-        float random = Random.Range(-1f, 1f);
-        visualDroppedItemRB.AddTorque(new Vector3(random, random, random) * 10);
+        visualDroppedItemRB.AddTorque(randomVector3() * 10);
 
         //Store data on groundPrefab
         WeaponSystem itemDropWP = itemDrop.GetComponent<WeaponSystem>();
@@ -157,11 +157,32 @@ public class WeaponSwitcher : MonoBehaviour
         droppedItemPrefabPS.maxAmmo = itemDropWP.maxAmmo;
         droppedItemPrefabPS.WeaponID = itemDropWP.WeaponID;
 
-        Destroy(itemDrop);
+		string[] dataToSend = new string[] { itemDropWP.WeaponID + "", transform.position + "", visualDroppedItemRB.velocity + "", visualDroppedItemRB.angularVelocity + "", itemDropWP.AmmoInReserve + "", itemDropWP.currentAmmo + "", itemDropWP.maxAmmo + "" };
 
-        //Selects closest item
-        
+		serverEvents.sendEventToOtherClients("newDroppedWeapon", dataToSend);
+
+        Destroy(itemDrop);
     }
+
+	public void createDropItem(int weaponID, Vector3 position, Vector3 velocity, Vector3 rotationVelocity, int ammoInReserve, int currentAmmo, int maxAmmo)
+	{
+		GameObject droppedWeapon = Instantiate(DropWeapons[weaponID], position, Quaternion.identity);
+		Rigidbody droppedWeaponRB = droppedWeapon.GetComponent<Rigidbody>();
+		PickUpSystem droppedWeaponPS = droppedWeapon.GetComponent<PickUpSystem>();
+
+		droppedWeaponRB.velocity = velocity;
+		droppedWeaponRB.angularVelocity = rotationVelocity;
+
+		droppedWeaponPS.AmmoInReserve = ammoInReserve;
+		droppedWeaponPS.currentAmmo = ammoInReserve;
+		droppedWeaponPS.maxAmmo = maxAmmo;
+		droppedWeaponPS.WeaponID = weaponID;
+	}
+
+	public static Vector3 randomVector3()
+	{
+		return new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+	}
 
     public void DropCurrentWeapon()
     {
