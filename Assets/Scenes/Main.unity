@@ -10900,6 +10900,7 @@ MonoBehaviour:
   chatMessagesContainer: {fileID: 1030109957}
   chatMessagePrefab: {fileID: 6701070514052639706, guid: fde569dad6ac3f04ab99fb6255da09dd, type: 3}
   serverEvents: {fileID: 1836363827}
+  commandChar: /
   chatTimer: 0
   timeBeforeClose: 2
 --- !u!114 &643860527
@@ -28555,6 +28556,7 @@ MonoBehaviour:
   playerManager: {fileID: 7656093453415565079}
   bulletManager: {fileID: 1836363836}
   killFeed: {fileID: 643860530}
+  abilityManager: {fileID: 1836363838}
 --- !u!114 &1836363831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28714,6 +28716,7 @@ MonoBehaviour:
   - {fileID: 2011753093}
   - {fileID: 1981551749}
   upgradesToChooseFrom: 2
+  playerManager: {fileID: 7656093453415565079}
 --- !u!1 &1837425071
 GameObject:
   m_ObjectHideFlags: 0

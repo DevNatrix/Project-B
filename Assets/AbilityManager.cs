@@ -14,6 +14,7 @@ public class AbilityManager : MonoBehaviour
 	public List<TextMeshProUGUI> stepInfoText;
 	public List<Button> multitplierButtons;
 	public int upgradesToChooseFrom;
+	[SerializeField] PlayerManager playerManager;
 
 	private void Start()
 	{
@@ -35,7 +36,7 @@ public class AbilityManager : MonoBehaviour
 	{
 		for(int index = 0; index < multipliers.Count; index++)
 		{
-			stepInfoText[index].text = (multipliers[index] - 1) * 100 + "% + " + steps[index] * 100 + "%";
+			stepInfoText[index].text = (int)((multipliers[index] - 1) * 100) + "% + " + (int)(steps[index] * 100) + "%";
 		}
 	}
 
@@ -78,6 +79,9 @@ public class AbilityManager : MonoBehaviour
 		{
 			multipliers[index] = 1;
 		}
+
+		updateKillMenu();
+		playerManager.respawn();
 	}
 
 	public float getMultiplier(string name)
