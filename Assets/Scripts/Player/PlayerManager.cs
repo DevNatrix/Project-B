@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -20,6 +22,22 @@ public class PlayerManager : MonoBehaviour
 	public Movement movement;
 
 	public MenuController menuController;
+
+	public PostProcessVolume postVolume;
+	Vignette vignette;
+	public float bloodFadeSpeed;
+	public float hitBloodIntensity;
+
+	void Start()
+	{
+		Invoke("initializeHealth", 1f);
+		postVolume.profile.TryGetSettings(out vignette);
+	}
+
+	private void Update()
+	{
+		vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, 0, bloodFadeSpeed * Time.deltaTime);
+	}
 
 	public void newSettings(string[] settings)
 	{
@@ -41,11 +59,6 @@ public class PlayerManager : MonoBehaviour
 		movement.dashCooldown = float.Parse(settings[15]);
 	}
 
-	private void Start()
-    {
-		Invoke("initializeHealth", 1f);
-    }
-
 	void initializeHealth()
 	{
 		SetHealth(maxHealth);
@@ -56,7 +69,7 @@ public class PlayerManager : MonoBehaviour
 		if(currentLife == attackedLife)
 		{
 			SetHealth(health - damage, attackerID);
-
+			vignette.intensity.value = hitBloodIntensity;
 			//set current life
 		}
 		else
