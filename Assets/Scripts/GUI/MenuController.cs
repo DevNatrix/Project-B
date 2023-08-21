@@ -23,6 +23,7 @@ public class MenuController : MonoBehaviour
 	public GameObject TeamSelection;
 
 	public GameObject deathScreen;
+	public AbilityManager abilityManager;
 
 	public void triggerDeathMenu()
 	{
@@ -30,6 +31,7 @@ public class MenuController : MonoBehaviour
 		deathScreen.SetActive(true);
 		menu = true;
 		Cursor.lockState = CursorLockMode.None;
+		abilityManager.chooseSelectable();
 	}
 
 	public void closeDeathScreen()
@@ -38,6 +40,7 @@ public class MenuController : MonoBehaviour
 		deathScreen.SetActive(false);
 		menu = false;
 		Cursor.lockState = CursorLockMode.Locked;
+		playerManager.respawn();
 	}
 
 
@@ -120,8 +123,8 @@ public class MenuController : MonoBehaviour
 	{
 		gunCam.enabled = !isEnabled;
 		InGameGUI.SetActive(!isEnabled);
-
 		client.showClient = !isEnabled;
+
 		spectateCam.enabled = isEnabled;
 	}
 

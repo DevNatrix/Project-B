@@ -65,7 +65,6 @@ public class Lobby : MonoBehaviour
 
 	public void updateBrowser()
 	{
-		print("udpated browser");
 		foreach(ServerOption option in possibleServers)
 		{
 			option.refreshInfo();

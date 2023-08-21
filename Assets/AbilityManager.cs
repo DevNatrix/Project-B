@@ -1,62 +1,95 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AbilityManager : MonoBehaviour
 {
-	public static float damageMult = 1;
-	public static float healthMult = 1;
-	public static float fireRateMult = 1;
-	public static float speedMult = 1;
-	public static float dashMult = 1;
-	public static float reloadMult = 1;
-	public static float clipSizeMult = 1;
+	public static AbilityManager Instance;
 
-	public float damageStep = 1;
-	public float healthStep = 1;
-	public float fireRateStep = 1;
-	public float speedStep = 1;
-	public float dashStep = 1;
-	public float reloadStep = 1;
-	public float clipSizeStep = 1;
+	[HideInInspector] public List<float> multipliers;
+	public List<float> steps;
+	public List<string> multiplierNames;
+	public List<TextMeshProUGUI> stepInfoText;
+	public List<Button> multitplierButtons;
+	public int upgradesToChooseFrom;
 
-    public void damage()
+	private void Start()
 	{
-		damageMult += damageStep;
+		Instance = this;
+
+		//set up multipliers list
+		multipliers = new List<float>();
+		foreach(float step in steps)
+		{
+			multipliers.Add(1);
+		}
+		Debug.Log(multipliers.Count);
+
+		resetUpgrades();
+		updateKillMenu();
 	}
-	public void health()
+
+	public void updateKillMenu()
 	{
-		healthMult += healthStep;
+		for(int index = 0; index < multipliers.Count; index++)
+		{
+			stepInfoText[index].text = (multipliers[index] - 1) * 100 + "% + " + steps[index] * 100 + "%";
+		}
 	}
-	public void fireRate()
+
+	public void chooseSelectable()
 	{
-		fireRateMult += fireRateStep;
+		foreach(Button button in multitplierButtons)
+		{
+			button.interactable = false;
+		}
+
+		for(int i = 0; i < upgradesToChooseFrom; i++)
+		{
+			int index = Random.Range(0, multipliers.Count - 1);
+			if (multitplierButtons[index].interactable)
+			{
+				i--;
+			}
+			else
+			{
+				multitplierButtons[index].interactable = true;
+			}
+		}
 	}
-	public void speed()
+
+	public void step(TextMeshProUGUI callerText)
 	{
-		speedMult += speedStep;
-	}
-	public void dash()
-	{
-		dashMult += dashStep;
-	}
-	public void reload()//do later
-	{
-		reloadMult += reloadStep;
-	}
-	public void clipSize()
-	{
-		clipSizeMult += clipSizeStep;
+		for (int index = 0; index < multipliers.Count; index++)
+		{
+			if (stepInfoText[index] == callerText)
+			{
+				multipliers[index] += steps[index];
+				updateKillMenu();
+			}
+		}
 	}
 
 	public void resetUpgrades()
 	{
-		damageMult = 1;
-		healthMult = 1;
-		fireRateMult = 1;
-		speedMult = 1;
-		dashMult = 1;
-		reloadMult = 1;
-		clipSizeMult = 1;
+		for (int index = 0; index < multipliers.Count; index++)
+		{
+			multipliers[index] = 1;
+		}
+	}
+
+	public float getMultiplier(string name)
+	{
+		for (int index = 0; index < multipliers.Count; index++)
+		{
+			if (multiplierNames[index] == name)
+			{
+				return multipliers[index];
+			}
+		}
+		Debug.LogError("Couldnt find multiplier " + name);
+		return 1;
 	}
 }

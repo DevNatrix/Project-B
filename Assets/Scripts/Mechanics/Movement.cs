@@ -167,15 +167,15 @@ public class Movement : MonoBehaviour
 		Vector2 direction = horizontalInput;
 		if (dashTimer <= 0 && !MenuController.typing && !MenuController.menu)
 		{
-			dashTimer = dashCooldown + dashSeconds * AbilityManager.dashMult;
-			float timer = dashSeconds * AbilityManager.dashMult;
+			dashTimer = dashCooldown + dashSeconds;
+			float timer = dashSeconds;
 			while(timer > 0)
 			{
 				timer -= Time.deltaTime;
 				//wall detection
 				if (!Physics.Raycast(playerRB.position + Vector3.up * wallDetectionHeight, playerRB.transform.forward * direction.y + playerRB.transform.right * direction.x, wallDetectionRadius))
 				{
-					playerRB.MovePosition(playerRB.position + playerRB.transform.forward * direction.y * dashSpeed * Time.deltaTime + playerRB.transform.right * direction.x * dashSpeed * Time.deltaTime);
+					playerRB.MovePosition(playerRB.position + playerRB.transform.forward * direction.y * dashSpeed * Time.deltaTime * AbilityManager.Instance.getMultiplier("dash") + playerRB.transform.right * direction.x * dashSpeed * Time.deltaTime * AbilityManager.Instance.getMultiplier("dash"));
 				}
 				yield return new WaitForEndOfFrame();
 			}
@@ -238,7 +238,7 @@ public class Movement : MonoBehaviour
 
 				if (!sliding)
 				{
-					playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * acceleration * AbilityManager.speedMult);
+					playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * acceleration * AbilityManager.Instance.getMultiplier("speed"));
 				}
 			}
 			else if (wallRunning)

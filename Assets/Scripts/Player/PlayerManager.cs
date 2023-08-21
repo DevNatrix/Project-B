@@ -73,13 +73,13 @@ public class PlayerManager : MonoBehaviour
 
 		if (health <= 0)
 		{
-			Debug.Log(attackerID);
-			OtherClient otherClient = serverEvents.getOtherClientScriptByID(attackerID);
-			killFeed.createNewFeed(otherClient.username, Client.username);
+			if(attackerID != -1)
+			{
+				OtherClient otherClient = serverEvents.getOtherClientScriptByID(attackerID);
+				killFeed.createNewFeed(otherClient.username, Client.username);
+			}
 
-			health = maxHealth * AbilityManager.healthMult;
 			currentLife++;
-
 			menuController.triggerDeathMenu();
 		}
 
@@ -92,6 +92,7 @@ public class PlayerManager : MonoBehaviour
 	public void respawn()
 	{
 		transform.position = spawnPoints[team].position;
+		SetHealth((int)(maxHealth * AbilityManager.Instance.getMultiplier("health")));
 	}
 
 	public void setTeam(int _team)
