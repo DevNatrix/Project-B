@@ -28606,7 +28606,7 @@ MonoBehaviour:
   bulletManager: {fileID: 1836363836}
   killFeed: {fileID: 643860530}
   abilityManager: {fileID: 1836363838}
-  weaponSwitcher: {fileID: 0}
+  weaponSwitcher: {fileID: 4589314065117614147}
 --- !u!114 &1836363831
 MonoBehaviour:
   m_ObjectHideFlags: 0
