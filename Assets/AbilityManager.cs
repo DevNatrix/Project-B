@@ -4,43 +4,49 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
-	public static int damageMult = 1;
-	public static int healthMult = 1;
-	public static int fireRateMult = 1;
-	public static int speedMult = 1;
-	public static int dashMult = 1;
-	public static int reloadMult = 1;
-	public static int clipSizeMult = 1;
+	public static float damageMult = 1;
+	public static float healthMult = 1;
+	public static float fireRateMult = 1;
+	public static float speedMult = 1;
+	public static float dashMult = 1;
+	public static float reloadMult = 1;
+	public static float clipSizeMult = 1;
 
-	public int step = 1;
+	public float damageStep = 1;
+	public float healthStep = 1;
+	public float fireRateStep = 1;
+	public float speedStep = 1;
+	public float dashStep = 1;
+	public float reloadStep = 1;
+	public float clipSizeStep = 1;
 
     public void damage()
 	{
-		damageMult += step;
+		damageMult += damageStep;
 	}
 	public void health()
 	{
-		healthMult += step;
+		healthMult += healthStep;
 	}
 	public void fireRate()
 	{
-		fireRateMult += step;
+		fireRateMult += fireRateStep;
 	}
 	public void speed()
 	{
-		speedMult += step;
+		speedMult += speedStep;
 	}
 	public void dash()
 	{
-		dashMult += step;
+		dashMult += dashStep;
 	}
 	public void reload()//do later
 	{
-		reloadMult += step;
+		reloadMult += reloadStep;
 	}
 	public void clipSize()
 	{
-		clipSizeMult += step;
+		clipSizeMult += clipSizeStep;
 	}
 
 	public void resetUpgrades()
