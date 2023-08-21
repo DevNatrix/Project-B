@@ -35288,7 +35288,7 @@ MonoBehaviour:
   - {fileID: 7237255521753112500, guid: 6e68f15179081d642bd11cedd8e38f75, type: 3}
   - {fileID: 3663234147644531100, guid: b8caf21517e5c144fbde5c3857525a5a, type: 3}
   - {fileID: 910030901060662416, guid: f037bb1918d78ca4988b2505f23e6a7f, type: 3}
-  - {fileID: 0}
+  - {fileID: 8846423848380024899, guid: 60da507dadbf8aa419b3e54f80ea3da3, type: 3}
   DropWeapons:
   - {fileID: 7237255521753112500, guid: dad9163b6042395409910dfde062f288, type: 3}
   - {fileID: 3663234147644531100, guid: 3b03eac6265432340bb848d90b314811, type: 3}
