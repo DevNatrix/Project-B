@@ -63,6 +63,9 @@ public class WeaponSystem : MonoBehaviour
 		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
 		bulletManager = GameObject.Find("game manager").GetComponent<BulletManager>();
 		hitMarker = GameObject.Find("game manager").GetComponent<HitMarker>();
+
+		Physics.IgnoreLayerCollision(17, 20);
+		Physics.IgnoreLayerCollision(17, 7);
 	}
 
     private void OnEnable()
