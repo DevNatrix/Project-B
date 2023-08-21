@@ -142,8 +142,8 @@ public class WeaponSwitcher : MonoBehaviour
 		Rigidbody visualDroppedItemRB = visualDroppedItem.GetComponent<Rigidbody>();
 
         //Add Force
-        visualDroppedItemRB.velocity = playerT.GetComponent<Rigidbody>().velocity;
-        visualDroppedItemRB.AddForce(cam.transform.forward * dropForwardForce, ForceMode.Impulse);
+        visualDroppedItemRB.velocity = playerT.GetComponent<Rigidbody>().velocity + cam.transform.forward * dropForwardForce;
+        //visualDroppedItemRB.AddForce(cam.transform.forward * dropForwardForce, ForceMode.Impulse);
 
         //Random rotation
         visualDroppedItemRB.AddTorque(randomVector3() * 10);
@@ -170,6 +170,7 @@ public class WeaponSwitcher : MonoBehaviour
 		Rigidbody droppedWeaponRB = droppedWeapon.GetComponent<Rigidbody>();
 		PickUpSystem droppedWeaponPS = droppedWeapon.GetComponent<PickUpSystem>();
 
+		Debug.Log(velocity);
 		droppedWeaponRB.velocity = velocity;
 		droppedWeaponRB.angularVelocity = rotationVelocity;
 
