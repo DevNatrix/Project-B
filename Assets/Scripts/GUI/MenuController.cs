@@ -22,14 +22,39 @@ public class MenuController : MonoBehaviour
 	public GameObject InGameGUI;
 	public GameObject TeamSelection;
 
+	public GameObject deathScreen;
+	public AbilityManager abilityManager;
+
+	public void triggerDeathMenu()
+	{
+		setSpectate(true);
+		deathScreen.SetActive(true);
+		menu = true;
+		Cursor.lockState = CursorLockMode.None;
+		abilityManager.chooseSelectable();
+	}
+
+	public void closeDeathScreen()
+	{
+		setSpectate(false);
+		deathScreen.SetActive(false);
+		menu = false;
+		Cursor.lockState = CursorLockMode.Locked;
+		playerManager.respawn();
+	}
+
+
 	private void Awake()
 	{
+		deathScreen.SetActive(false);
+		menuParent.SetActive(true);
 		setSpectate(true);
 
 		Cursor.lockState = CursorLockMode.None;
 		playerControls = new PlayerControls();
 
 		playerControls.UI.toggleMenu.performed += OnKeyPerformed;
+		playerControls.UI.kms.performed += KMS;
 	}
 
     private void Start()
@@ -50,6 +75,10 @@ public class MenuController : MonoBehaviour
 	private void OnKeyPerformed(InputAction.CallbackContext context)
 	{
 		toggleMenu();
+	}
+	private void KMS(InputAction.CallbackContext context)
+	{
+		triggerDeathMenu();
 	}
 
 	public void toggleMenu()
@@ -94,8 +123,8 @@ public class MenuController : MonoBehaviour
 	{
 		gunCam.enabled = !isEnabled;
 		InGameGUI.SetActive(!isEnabled);
-
 		client.showClient = !isEnabled;
+
 		spectateCam.enabled = isEnabled;
 	}
 

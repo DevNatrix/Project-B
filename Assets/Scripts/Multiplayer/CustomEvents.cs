@@ -12,6 +12,7 @@ public class CustomEvents : MonoBehaviour
 
 	[SerializeField] BulletManager bulletManager;
 	[SerializeField] KillFeed killFeed;
+	[SerializeField] AbilityManager abilityManager;
 
 	//example:
 	public void sendExampleEventExample()
@@ -170,5 +171,13 @@ public class CustomEvents : MonoBehaviour
 		Vector3 bulletVel = ServerEvents.parseVector3(data[1]);
 
 		bulletManager.spawnBullet(bulletPos, bulletVel);
+	}
+
+	public void resetAbilities(string[] data)
+	{
+		string resetter = data[0];
+
+		abilityManager.resetUpgrades();
+		chat.serverMessage(resetter + " reset multipliers");
 	}
 }

@@ -15,7 +15,9 @@ public class Chat : MonoBehaviour
 	[SerializeField] GameObject chatMessagePrefab;
 	[SerializeField] ServerEvents serverEvents;
 
-    PlayerControls playerControls;
+	public string commandChar = "/";
+
+	PlayerControls playerControls;
 
 	[SerializeField] float chatTimer;
 	[SerializeField] float timeBeforeClose = 2;
@@ -71,7 +73,7 @@ public class Chat : MonoBehaviour
         //If client has typed something and pressed enter it'll send message through the network and disables ChatBackground
         else if (ChatBackground.activeSelf == true && !string.IsNullOrWhiteSpace(ChatContainer) && playerControls.ChatVoice.Chat.WasPressedThisFrame())
         {
-            serverEvents.sendGlobalEvent("chatMessage", new string[] { Lobby.username, ChatContainer });
+			sendMessage(ChatContainer);
             InputFieldContainer.text = "";
 			chatTimer = timeBeforeClose;
 
@@ -91,6 +93,23 @@ public class Chat : MonoBehaviour
 			ChatBackground.SetActive(false);
 		}
     }
+
+	public void sendMessage(string message)
+	{
+		if(message.Substring(0, 1) != commandChar)
+		{
+			serverEvents.sendGlobalEvent("chatMessage", new string[] { Lobby.username, message });
+		}
+		else//process commands
+		{
+			string command = message.Substring(1, message.Length - 1);
+			if(command == "resetAbilities")
+			{
+				serverEvents.sendGlobalEvent("resetAbilities", new string[] { Lobby.username } );
+			}
+		}
+
+	}
 
 	public void newMessage(string username, string message)
 	{

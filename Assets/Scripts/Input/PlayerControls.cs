@@ -216,6 +216,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""kms"",
+                    ""type"": ""Button"",
+                    ""id"": ""68d7fc04-2c45-410d-a25e-8959a4701b84"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -238,6 +247,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Scoreboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92792568-e7ca-4fbf-ace8-5bde315993eb"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""kms"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -514,6 +534,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_toggleMenu = m_UI.FindAction("toggleMenu", throwIfNotFound: true);
         m_UI_Scoreboard = m_UI.FindAction("Scoreboard", throwIfNotFound: true);
+        m_UI_kms = m_UI.FindAction("kms", throwIfNotFound: true);
         // Chat/Voice
         m_ChatVoice = asset.FindActionMap("Chat/Voice", throwIfNotFound: true);
         m_ChatVoice_Chat = m_ChatVoice.FindAction("Chat", throwIfNotFound: true);
@@ -679,12 +700,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_toggleMenu;
     private readonly InputAction m_UI_Scoreboard;
+    private readonly InputAction m_UI_kms;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
         public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @toggleMenu => m_Wrapper.m_UI_toggleMenu;
         public InputAction @Scoreboard => m_Wrapper.m_UI_Scoreboard;
+        public InputAction @kms => m_Wrapper.m_UI_kms;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -700,6 +723,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Scoreboard.started += instance.OnScoreboard;
             @Scoreboard.performed += instance.OnScoreboard;
             @Scoreboard.canceled += instance.OnScoreboard;
+            @kms.started += instance.OnKms;
+            @kms.performed += instance.OnKms;
+            @kms.canceled += instance.OnKms;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -710,6 +736,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Scoreboard.started -= instance.OnScoreboard;
             @Scoreboard.performed -= instance.OnScoreboard;
             @Scoreboard.canceled -= instance.OnScoreboard;
+            @kms.started -= instance.OnKms;
+            @kms.performed -= instance.OnKms;
+            @kms.canceled -= instance.OnKms;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -912,6 +941,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnToggleMenu(InputAction.CallbackContext context);
         void OnScoreboard(InputAction.CallbackContext context);
+        void OnKms(InputAction.CallbackContext context);
     }
     public interface IChatVoiceActions
     {
