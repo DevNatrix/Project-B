@@ -29,6 +29,8 @@ public class WeaponSwitcher : MonoBehaviour
     public Transform playerT;
 	public ServerEvents serverEvents;
 
+	int currentDropID = 0;
+
 	private void Start()
     {
         Instance = this;
@@ -157,15 +159,20 @@ public class WeaponSwitcher : MonoBehaviour
         droppedItemPrefabPS.WeaponID = itemDropWP.WeaponID;*/
 
         WeaponSystem itemDropWP = itemDrop.GetComponent<WeaponSystem>();
-		string[] dataToSend = new string[] { itemDropWP.WeaponID + "", transform.position + "", playerT.GetComponent<Rigidbody>().velocity + "", cam.transform.forward * dropForwardForce + "", randomVector3() * 10 + "", itemDropWP.AmmoInReserve + "", itemDropWP.currentAmmo + "", itemDropWP.maxAmmo + "" };
+		string[] dataToSend = new string[] { itemDropWP.WeaponID + "", currentDropID + "", transform.position + "", playerT.GetComponent<Rigidbody>().velocity + "", cam.transform.forward * dropForwardForce + "", randomVector3() * 10 + "", itemDropWP.AmmoInReserve + "", itemDropWP.currentAmmo + "", itemDropWP.maxAmmo + "" };
 
 		serverEvents.sendGlobalEvent("newDroppedWeapon", dataToSend);
 
         Destroy(itemDrop);
     }
 
-	public void createDropItem(int weaponID, Vector3 position, Vector3 velocity, Vector3 forceAdded, Vector3 torqueAdded, int ammoInReserve, int currentAmmo, int maxAmmo)
+	public void createDropItem(int weaponID, int dropID, Vector3 position, Vector3 velocity, Vector3 forceAdded, Vector3 torqueAdded, int ammoInReserve, int currentAmmo, int maxAmmo)
 	{
+		if(dropID >= currentDropID)
+		{
+			currentDropID = dropID + 1;
+		}
+
 		GameObject droppedWeapon = Instantiate(DropWeapons[weaponID], position, Quaternion.identity);
 		Rigidbody droppedWeaponRB = droppedWeapon.GetComponent<Rigidbody>();
 
@@ -179,6 +186,9 @@ public class WeaponSwitcher : MonoBehaviour
 		droppedWeaponPS.currentAmmo = ammoInReserve;
 		droppedWeaponPS.maxAmmo = maxAmmo;
 		droppedWeaponPS.WeaponID = weaponID;
+		droppedWeaponPS.dropID = dropID;
+
+		droppedWeaponList.Add(droppedWeaponPS);
 	}
 
 	public static Vector3 randomVector3()

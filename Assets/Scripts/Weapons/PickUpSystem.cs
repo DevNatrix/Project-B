@@ -19,7 +19,10 @@ public class PickUpSystem : MonoBehaviour
 
     private GameObject AmmoDisplayGOS;
 
-    void Awake()
+	[HideInInspector] public int dropID;
+
+
+	void Awake()
     {
         playerControls = new PlayerControls();
 
