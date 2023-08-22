@@ -50,7 +50,6 @@ public class CustomEvents : MonoBehaviour
 
 	public void quickSettings(string[] data)
 	{
-		Debug.Log("Got settings request: " + ServerEvents.combineStringArray(data));
 		foreach(string settings in data)
 		{
 			if(!string.IsNullOrWhiteSpace(settings))

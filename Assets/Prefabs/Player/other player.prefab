@@ -1161,6 +1161,7 @@ MonoBehaviour:
   - {fileID: 2537676391893469908}
   - {fileID: 4333573583587590804}
   - {fileID: 9152279689918709351}
+  - {fileID: 7983896021714257562}
   leftTarget: {fileID: 3265536127006759501}
   rightTarget: {fileID: 5129682003198976221}
   weaponLeftTarget: {fileID: 6841261796556155119}
@@ -1488,6 +1489,11 @@ PrefabInstance:
 --- !u!4 &7316009139868441632 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8182793348596896505, guid: 6ff50ab4c99c2964d81a9189c642f9bb, type: 3}
+  m_PrefabInstance: {fileID: 1443598016011472601}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7983896021714257562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8846423848380024899, guid: 6ff50ab4c99c2964d81a9189c642f9bb, type: 3}
   m_PrefabInstance: {fileID: 1443598016011472601}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2515252791755892223

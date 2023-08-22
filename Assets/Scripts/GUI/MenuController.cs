@@ -54,7 +54,6 @@ public class MenuController : MonoBehaviour
 		playerControls = new PlayerControls();
 
 		playerControls.UI.toggleMenu.performed += OnKeyPerformed;
-		playerControls.UI.kms.performed += KMS;
 	}
 
     private void Start()

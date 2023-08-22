@@ -41,7 +41,6 @@ public class PlayerManager : MonoBehaviour
 
 	public void newSettings(string[] settings)
 	{
-		Debug.Log(ServerEvents.combineStringArray(settings, ", "));
 		maxHealth = int.Parse(settings[1]);
 		movement.acceleration = float.Parse(settings[2]);
 		movement.inAirAcceleration = float.Parse(settings[3]);

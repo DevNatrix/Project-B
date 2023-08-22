@@ -192,7 +192,6 @@ public class WeaponSwitcher : MonoBehaviour
 		GameObject droppedWeapon = Instantiate(DropWeapons[weaponID], position, Quaternion.identity);
 		Rigidbody droppedWeaponRB = droppedWeapon.GetComponent<Rigidbody>();
 
-		Debug.Log(velocity);
 		droppedWeaponRB.velocity = velocity;
 		droppedWeaponRB.AddForce(forceAdded, ForceMode.Impulse);
 		droppedWeaponRB.AddTorque(torqueAdded);
@@ -204,7 +203,6 @@ public class WeaponSwitcher : MonoBehaviour
 		droppedWeaponPS.WeaponID = weaponID;
 		droppedWeaponPS.dropID = dropID;
 
-		Debug.Log(droppedWeaponPS);
 		droppedWeaponList.Add(droppedWeaponPS);
 	}
 
@@ -221,6 +219,8 @@ public class WeaponSwitcher : MonoBehaviour
             {
                 DropItem(currentSelectedWeapon, currentSelectedWeapon.GetComponent<WeaponSystem>().groundPrefab);
                 Debug.Log("Dropped Current Weapon");
+
+				SwitchWeapon(2);
             }
         }
     }

@@ -99,6 +99,7 @@ public class PickUpSystem : MonoBehaviour
                     WeaponSwitcher.Instance.SwitchWeapon((int)newWeaponPickup.GetComponent<WeaponSystem>().weaponType);
                     Destroy(gameObject);
                 }
+				WeaponSwitcher.Instance.SwitchWeapon((int)WeaponType.GetComponent<WeaponSystem>().weaponType);
             }
         }
     }
