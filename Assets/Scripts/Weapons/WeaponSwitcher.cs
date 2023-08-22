@@ -16,6 +16,7 @@ public class WeaponSwitcher : MonoBehaviour
     public GameObject[] weaponInventory;
     public List<GameObject> Weapons;
     public List<GameObject> DropWeapons;
+	List<PickUpSystem> droppedWeaponList = new List<PickUpSystem>();
 
     [Header("UI Weapon")]
     private GameObject AmmoDisplayGOS;
@@ -166,6 +167,21 @@ public class WeaponSwitcher : MonoBehaviour
         Destroy(itemDrop);
     }
 
+	public void otherPlayerPickedUpWeapon(int dropID)
+	{
+		foreach(PickUpSystem droppedWeapon in droppedWeaponList)
+		{
+			if(droppedWeapon.dropID == dropID)
+			{
+				Destroy(droppedWeapon.gameObject);
+				return;
+			}
+		}
+
+		Debug.LogError("Couldnt find weapon other player picked up: " + dropID);
+		return;
+	}
+
 	public void createDropItem(int weaponID, int dropID, Vector3 position, Vector3 velocity, Vector3 forceAdded, Vector3 torqueAdded, int ammoInReserve, int currentAmmo, int maxAmmo)
 	{
 		if(dropID >= currentDropID)
@@ -183,11 +199,12 @@ public class WeaponSwitcher : MonoBehaviour
 
 		PickUpSystem droppedWeaponPS = droppedWeapon.GetComponent<PickUpSystem>();
 		droppedWeaponPS.AmmoInReserve = ammoInReserve;
-		droppedWeaponPS.currentAmmo = ammoInReserve;
+		droppedWeaponPS.currentAmmo = currentAmmo;
 		droppedWeaponPS.maxAmmo = maxAmmo;
 		droppedWeaponPS.WeaponID = weaponID;
 		droppedWeaponPS.dropID = dropID;
 
+		Debug.Log(droppedWeaponPS);
 		droppedWeaponList.Add(droppedWeaponPS);
 	}
 

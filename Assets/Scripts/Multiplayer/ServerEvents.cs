@@ -24,6 +24,11 @@ public class ServerEvents : MonoBehaviour
 	float timeBetweenUpdates;
 	[SerializeField] bool dynamicPlayerLerp;
 
+	private void Start()
+	{
+		Instance = this;
+	}
+
 	//events
 	public void sendGlobalEvent(string eventType, string[] eventInfo)
 	{

@@ -109,7 +109,7 @@ public class WeaponSystem : MonoBehaviour
 
 	public void newSettings(string[] settings)
 	{
-		Debug.Log("New settings for gun " + WeaponID + ": " + ServerEvents.combineStringArray(settings));
+		//Debug.Log("New settings for gun " + WeaponID + ": " + ServerEvents.combineStringArray(settings));
 
 		headshotMultiplier = float.Parse(settings[1]);
 		damage = int.Parse(settings[2]);

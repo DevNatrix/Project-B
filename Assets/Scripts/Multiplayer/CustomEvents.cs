@@ -186,14 +186,21 @@ public class CustomEvents : MonoBehaviour
 	public void newDroppedWeapon(string[] data)
 	{
 		int weaponID = int.Parse(data[0]);
-		Vector3 position = ServerEvents.parseVector3(data[1]);
-		Vector3 velocity = ServerEvents.parseVector3(data[2]);
-		Vector3 forceAdded = ServerEvents.parseVector3(data[3]);
-		Vector3 torqueAdded = ServerEvents.parseVector3(data[4]);
-		int ammoInReserve = int.Parse(data[5]);
-		int currentAmmo = int.Parse(data[6]);
-		int maxAmmo = int.Parse(data[7]);
+		int dropID = int.Parse(data[1]);
+		Vector3 position = ServerEvents.parseVector3(data[2]);
+		Vector3 velocity = ServerEvents.parseVector3(data[3]);
+		Vector3 forceAdded = ServerEvents.parseVector3(data[4]);
+		Vector3 torqueAdded = ServerEvents.parseVector3(data[5]);
+		int ammoInReserve = int.Parse(data[6]);
+		int currentAmmo = int.Parse(data[7]);
+		int maxAmmo = int.Parse(data[8]);
 
-		weaponSwitcher.createDropItem(weaponID, position, velocity, forceAdded, torqueAdded, ammoInReserve, currentAmmo, maxAmmo);
+		weaponSwitcher.createDropItem(weaponID, dropID, position, velocity, forceAdded, torqueAdded, ammoInReserve, currentAmmo, maxAmmo);
+	}
+
+	public void pickedUpWeapon(string[] data)
+	{
+		int dropID = int.Parse(data[0]);
+		weaponSwitcher.otherPlayerPickedUpWeapon(dropID);
 	}
 }
