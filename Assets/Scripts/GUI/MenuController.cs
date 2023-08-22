@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour
 	public GameObject menuParent;
 	public List<GameObject> subMenus;
 	public Client client;
-	[HideInInspector] public static bool menu = true;
+	[HideInInspector] public static bool menu;
 	[HideInInspector] public static bool typing = false;
 	public PlayerManager playerManager;
 
@@ -25,24 +25,42 @@ public class MenuController : MonoBehaviour
 	public GameObject deathScreen;
 	public AbilityManager abilityManager;
 
+	public bool buyMenu = false;
+	public bool deathMenu = false;
+	public bool mainMenu = true;
+
+	public GameObject buyScreenObject;
+
+
+	private void Update()
+	{
+		menu = buyMenu || deathMenu || mainMenu;
+
+		if (menu)
+		{
+			Cursor.lockState = CursorLockMode.None;
+		}
+		else
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+		}
+	}
+
 	public void triggerDeathMenu()
 	{
+		abilityManager.chooseSelectable();
 		setSpectate(true);
 		deathScreen.SetActive(true);
-		menu = true;
-		Cursor.lockState = CursorLockMode.None;
-		abilityManager.chooseSelectable();
+		deathMenu = true;
 	}
 
 	public void closeDeathScreen()
 	{
 		setSpectate(false);
 		deathScreen.SetActive(false);
-		menu = false;
-		Cursor.lockState = CursorLockMode.Locked;
+		deathMenu = false;
 		playerManager.respawn();
 	}
-
 
 	private void Awake()
 	{
@@ -53,11 +71,8 @@ public class MenuController : MonoBehaviour
 		Cursor.lockState = CursorLockMode.None;
 		playerControls = new PlayerControls();
 
-		playerControls.UI.toggleMenu.performed += OnKeyPerformed;
-	}
-
-    private void Start()
-    {
+		playerControls.UI.toggleMenu.performed += mainMenuKey;
+		playerControls.Weapon.BuyScreen.performed += buyMenuKey;
 		TeamSelection.SetActive(true);
 	}
 
@@ -71,21 +86,25 @@ public class MenuController : MonoBehaviour
 		playerControls.Disable();
 	}
 
-	private void OnKeyPerformed(InputAction.CallbackContext context)
+	private void mainMenuKey(InputAction.CallbackContext context)
 	{
-		toggleMenu();
+		toggleMainMenu();
 	}
-	private void KMS(InputAction.CallbackContext context)
+	
+	private void buyMenuKey(InputAction.CallbackContext context)
 	{
-		triggerDeathMenu();
+		if(!typing && !mainMenu && !deathMenu)
+		{
+			buyScreenObject.SetActive(!buyScreenObject.activeSelf);
+			buyMenu = buyScreenObject.activeSelf;
+		}
 	}
 
-	public void toggleMenu()
+	public void toggleMainMenu()
 	{
-		menu = !menu;
-		if (menu)
+		mainMenu = !mainMenu;
+		if (mainMenu)
 		{
-			Cursor.lockState = CursorLockMode.None;
 			menuParent.SetActive(true);
 			foreach (GameObject subMenu in subMenus)
 			{
@@ -95,7 +114,6 @@ public class MenuController : MonoBehaviour
 		}
 		else
 		{
-			Cursor.lockState = CursorLockMode.Locked;
 			menuParent.SetActive(false);
 		}
 	}
@@ -115,7 +133,7 @@ public class MenuController : MonoBehaviour
 		playerManager.setTeam(team);
 
 		setSpectate(false);
-		toggleMenu();
+		toggleMainMenu();
 	}
 
 	public void setSpectate(bool isEnabled)

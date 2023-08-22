@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5899482170718852563}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 5053255005520469340}
   - component: {fileID: 7044812816851921302}
   - component: {fileID: 5321531355697963735}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: sawed-off
   m_TagString: Untagged
   m_Icon: {fileID: 0}

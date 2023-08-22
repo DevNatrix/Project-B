@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 77685477555350370}
   - component: {fileID: 415908529806193946}
   - component: {fileID: 4665566731478070145}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: ak47 lowpoly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
