@@ -240,10 +240,13 @@ public class WeaponSwitcher : MonoBehaviour
     //Loads Selected weapons, skins and such from Inventory.cs
     public void LoadWeapons()
     {
-        GameObject _MeleeWeapon = AddItem(Inventory.Instance.meleeWeapon, WeaponSystem.WeaponType.Melee);
-        _MeleeWeapon.SetActive(false);
+		if(Inventory.Instance != null) //if main was started before lobby
+		{
+			GameObject _MeleeWeapon = AddItem(Inventory.Instance.meleeWeapon, WeaponSystem.WeaponType.Melee);
+			_MeleeWeapon.SetActive(false);
 
-        GameObject _SecondaryWeapon = AddItem(Inventory.Instance.secondaryWeapon, WeaponSystem.WeaponType.Secondary);
-        SwitchWeapon((int)WeaponSystem.WeaponType.Secondary);
+			GameObject _SecondaryWeapon = AddItem(Inventory.Instance.secondaryWeapon, WeaponSystem.WeaponType.Secondary);
+			SwitchWeapon((int)WeaponSystem.WeaponType.Secondary);
+		}
     }
 }
