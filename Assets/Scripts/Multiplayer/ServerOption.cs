@@ -49,9 +49,9 @@ public class ServerOption : MonoBehaviour
 		try
 		{
 			startTime = Time.time;
-			sendUDPMessage("ping");
+			sendUDPMessage("Iping");
 		}
-		catch
+		catch //is offline
 		{
 			serverOffline.SetActive(true);
 			versionText.text = "";
@@ -75,11 +75,13 @@ public class ServerOption : MonoBehaviour
 				online = true;
 				serverOffline.SetActive(false);
 
-				versionText.text = "?";//"V" + recieveString;
-				playersText.text = "?";
+				string[] recieveParts = recieveString.Split("~");
+
+				versionText.text = "V" + recieveParts[1];
+				playersText.text = recieveParts[2];
 				pingText.text = latency + "ms";
 			}
-			catch
+			catch //is offline
 			{
 				serverOffline.SetActive(true);
 				versionText.text = "";
@@ -87,7 +89,7 @@ public class ServerOption : MonoBehaviour
 				pingText.text = "";
 				online = false;
 
-				initUDP();
+				initUDP(); //try to open another socket
 			}
 		}
 	}

@@ -59,7 +59,7 @@ public class Lobby : MonoBehaviour
 
 		if(autoUpdateBrowser)
 		{
-			InvokeRepeating("updateBrowser", .1f, browserUpdateInterval);
+			InvokeRepeating("updateBrowser", 0, browserUpdateInterval);
 		}
 	}
 
@@ -109,7 +109,7 @@ public class Lobby : MonoBehaviour
 	{
 		if (bestLatency != -1)
 		{
-			Debug.Log("Best Server ----> IP: " + bestIP + ", UDP Port: " + bestUDPPort + ", TCP Port: " + bestTCPPort + ", Ping: " + bestLatency);
+			//Debug.Log("Best Server ----> IP: " + bestIP + ", UDP Port: " + bestUDPPort + ", TCP Port: " + bestTCPPort + ", Ping: " + bestLatency);
 			statusText.text = "Joining Server...";
 			await Task.Delay(500);
 			SceneManager.LoadScene("Main");
