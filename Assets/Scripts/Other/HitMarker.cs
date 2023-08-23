@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HitMarker : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class HitMarker : MonoBehaviour
 	[SerializeField] Color headShotColor;
 	[SerializeField] Color hitMarkerColor;
 	[SerializeField] Color baseColor;
-	[SerializeField] TextMeshProUGUI hitMarker;
+	[SerializeField] Image hitMarker;
 	[SerializeField] AudioPlayer audioPlayer;
 	[SerializeField] AudioClip hitAudioClip;
 	[SerializeField] AudioClip headshotAudioClip;

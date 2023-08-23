@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
 
 public class WeaponSwitcher : MonoBehaviour
 {
@@ -40,7 +41,12 @@ public class WeaponSwitcher : MonoBehaviour
 
         weaponInventory = new GameObject[3];
         AmmoDisplayGOS.SetActive(false);
-        LoadWeapons();
+
+		if(Lobby.bestUDPPort != -1)
+		{
+			LoadWeapons();
+		}
+
     }
 
     private void Awake()
@@ -240,13 +246,10 @@ public class WeaponSwitcher : MonoBehaviour
     //Loads Selected weapons, skins and such from Inventory.cs
     public void LoadWeapons()
     {
-		if(Inventory.Instance != null) //if main was started before lobby
-		{
-			GameObject _MeleeWeapon = AddItem(Inventory.Instance.meleeWeapon, WeaponSystem.WeaponType.Melee);
-			_MeleeWeapon.SetActive(false);
+		GameObject _MeleeWeapon = AddItem(Inventory.Instance.meleeWeapon, WeaponSystem.WeaponType.Melee);
+		_MeleeWeapon.SetActive(false);
 
-			GameObject _SecondaryWeapon = AddItem(Inventory.Instance.secondaryWeapon, WeaponSystem.WeaponType.Secondary);
-			SwitchWeapon((int)WeaponSystem.WeaponType.Secondary);
-		}
+		GameObject _SecondaryWeapon = AddItem(Inventory.Instance.secondaryWeapon, WeaponSystem.WeaponType.Secondary);
+		SwitchWeapon((int)WeaponSystem.WeaponType.Secondary);
     }
 }
