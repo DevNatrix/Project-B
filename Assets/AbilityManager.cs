@@ -27,7 +27,6 @@ public class AbilityManager : MonoBehaviour
 
 		steps[ability] = float.Parse(settings[2]);
 		maxMultpliers[ability] = float.Parse(settings[3]);
-		Debug.Log("Set " + multiplierNames[ability]);
 		return;
 	}
 
