@@ -55,15 +55,24 @@ public class CustomEvents : MonoBehaviour
 			if(!string.IsNullOrWhiteSpace(settings))
 			{
 				string[] settingsPeices = settings.Split(';');
-				int settingsTarget = int.Parse(settingsPeices[0]);
-				if(settingsTarget == -1)
+				string settingsTarget = settingsPeices[0];
+				if(settingsTarget == "ability")
+				{
+					abilityManager.newSettings(settingsPeices);
+				}
+				else if(settingsTarget == "player")
 				{
 					playerManager.newSettings(settingsPeices);
 				}
+				else if(settingsTarget == "weapon")
+				{
+					int targetID = int.Parse(settingsPeices[1]);
+					WeaponSystem weaponBeingChanged = WeaponSwitcher.Instance.GetItemThroughID(targetID).GetComponent<WeaponSystem>();
+					weaponBeingChanged.newSettings(settingsPeices);
+				}
 				else
 				{
-					WeaponSystem weaponBeingChanged = WeaponSwitcher.Instance.GetItemThroughID(settingsTarget).GetComponent<WeaponSystem>();
-					weaponBeingChanged.newSettings(settingsPeices);
+					Debug.LogError("Could not find settings target: " + settingsTarget);
 				}
 			}
 		}

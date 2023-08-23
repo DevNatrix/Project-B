@@ -9,12 +9,27 @@ public class AbilityManager : MonoBehaviour
 	public static AbilityManager Instance;
 
 	[HideInInspector] public List<float> multipliers;
-	public List<float> steps;
+	List<float> steps;
+	List<float> maxMultpliers; //not actually doing anything yet 
+
+	public int upgradesToChooseFrom;
 	public List<string> multiplierNames;
 	public List<TextMeshProUGUI> stepInfoText;
 	public List<Button> multitplierButtons;
-	public int upgradesToChooseFrom;
 	[SerializeField] PlayerManager playerManager;
+
+	public float defaultStep = 0.1f;
+	public float defaultMaxMult = 999f;
+
+	public void newSettings(string[] settings)
+	{
+		int ability = int.Parse(settings[1]);
+
+		steps[ability] = float.Parse(settings[2]);
+		maxMultpliers[ability] = float.Parse(settings[3]);
+		Debug.Log("Set " + multiplierNames[ability]);
+		return;
+	}
 
 	private void Start()
 	{
@@ -22,11 +37,14 @@ public class AbilityManager : MonoBehaviour
 
 		//set up multipliers list
 		multipliers = new List<float>();
-		foreach(float step in steps)
+		steps = new List<float>();
+		maxMultpliers = new List<float>();
+		foreach(string multiplier in multiplierNames)
 		{
 			multipliers.Add(1);
+			steps.Add(defaultStep);
+			maxMultpliers.Add(defaultMaxMult);
 		}
-		Debug.Log(multipliers.Count);
 
 		resetUpgrades();
 		updateKillMenu();

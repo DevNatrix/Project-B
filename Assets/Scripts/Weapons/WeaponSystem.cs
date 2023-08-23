@@ -111,14 +111,14 @@ public class WeaponSystem : MonoBehaviour
 	{
 		//Debug.Log("New settings for gun " + WeaponID + ": " + ServerEvents.combineStringArray(settings));
 
-		headshotMultiplier = float.Parse(settings[1]);
-		damage = int.Parse(settings[2]);
-		maxDistance = int.Parse(settings[3]);
-		fireRate = float.Parse(settings[4]);
-		bulletSpeed = float.Parse(settings[5]);
-		AmmoInReserve = int.Parse(settings[6]);
-		maxAmmo = int.Parse(settings[7]);
-		currentAmmo = int.Parse(settings[8]);
+		headshotMultiplier = float.Parse(settings[2]);
+		damage = int.Parse(settings[3]);
+		maxDistance = int.Parse(settings[4]);
+		fireRate = float.Parse(settings[5]);
+		bulletSpeed = float.Parse(settings[6]);
+		AmmoInReserve = int.Parse(settings[7]);
+		maxAmmo = int.Parse(settings[8]);
+		currentAmmo = int.Parse(settings[9]);
 	}
 
 
