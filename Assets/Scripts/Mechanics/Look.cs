@@ -41,8 +41,13 @@ public class Look : MonoBehaviour
     [HideInInspector] public float targetFOV = 60f;
     [HideInInspector] public float targetCamRoll = 0;
 
+	public Transform camBone;
+	public Vector3 camOffset;
+
     private void Update()
     {
+		cam.transform.position = camBone.position + camOffset;
+
 		if (!MenuController.menu)
 		{
 			xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime) + xRotRecoil;
@@ -50,7 +55,7 @@ public class Look : MonoBehaviour
 			zRotOffset = 0;
 
 			//cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, FOVChangeSpeed * Time.deltaTime);
-			cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, Mathf.Lerp(cam.transform.localPosition.y, originalCamHeight + camHeightOffset, camHeightChangeSpeed * Time.deltaTime), cam.transform.localPosition.z);
+			// uncomment for sliding cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, Mathf.Lerp(cam.transform.localPosition.y, originalCamHeight + camHeightOffset, camHeightChangeSpeed * Time.deltaTime), cam.transform.localPosition.z);
 			//playerCam.eulerAngles = new Vector3(playerCam.eulerAngles.x, playerCam.eulerAngles.y, Mathf.Lerp(playerCam.eulerAngles.z, targetCamRoll, camRollSpeed * Time.deltaTime));
 
 
@@ -66,6 +71,7 @@ public class Look : MonoBehaviour
 			targetRotation.z = zRotation + zRotOffset;
 			playerCam.eulerAngles = targetRotation;
 		}
+
     }
 
     private void Awake()
