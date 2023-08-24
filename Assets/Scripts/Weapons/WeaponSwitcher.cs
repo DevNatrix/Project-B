@@ -30,6 +30,7 @@ public class WeaponSwitcher : MonoBehaviour
     public Camera cam;
     public Transform playerT;
 	public ServerEvents serverEvents;
+	public PlayerManager playerManager;
 
 	int currentDropID = 0;
 
@@ -138,6 +139,11 @@ public class WeaponSwitcher : MonoBehaviour
 
             currentSelectedWeapon = weaponInventory[newIndex];
             currentSelectedWeapon.SetActive(true); // Equip the new weapon
+
+			WeaponSystem currentWeaponSystem = currentSelectedWeapon.GetComponent<WeaponSystem>();
+			Debug.Log(currentWeaponSystem);
+			playerManager.leftHandTarget = currentWeaponSystem.leftHandTarget;
+			playerManager.rightHandTarget = currentWeaponSystem.rightHandTarget;
 
 			int newID = currentSelectedWeapon.GetComponent<WeaponSystem>().WeaponID;
 			serverEvents.sendEventToOtherClients("switchGun", new string[] { Client.ID + "", newID + "" });
