@@ -6,6 +6,8 @@ public class PlayerAnimator : MonoBehaviour
 {
 	public Animator animator;
 	public OtherClient otherClient;
+	public Rigidbody playerRB;
+	public bool localPlayer = false;
 	public float directionChangeSpeedVertical;
 	public float directionChangeSpeedHorizontal;
 	public Vector2 direction;
@@ -22,7 +24,15 @@ public class PlayerAnimator : MonoBehaviour
 	{
 		if (Physics.CheckSphere(transform.position + new Vector3(0f, -.6f, 0f), .45f, groundMask))
 		{
-			direction = new Vector2(Mathf.Lerp(direction.x, otherClient.direction.x * speedToAnimMult, Time.deltaTime * directionChangeSpeedHorizontal), Mathf.Lerp(direction.y, otherClient.direction.z * speedToAnimMult, Time.deltaTime * directionChangeSpeedVertical));
+			Debug.Log("howdy");
+			if (localPlayer)
+			{
+				direction = new Vector2(Mathf.Lerp(direction.x, playerRB.velocity.x * speedToAnimMult, Time.deltaTime * directionChangeSpeedHorizontal), Mathf.Lerp(direction.y, playerRB.velocity.z * speedToAnimMult, Time.deltaTime * directionChangeSpeedVertical));
+			}
+			else
+			{
+				direction = new Vector2(Mathf.Lerp(direction.x, otherClient.direction.x * speedToAnimMult, Time.deltaTime * directionChangeSpeedHorizontal), Mathf.Lerp(direction.y, otherClient.direction.z * speedToAnimMult, Time.deltaTime * directionChangeSpeedVertical));
+			}
 		}
 		else
 		{

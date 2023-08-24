@@ -6,7 +6,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 	//input
-	Vector2 horizontalInput;
+	[HideInInspector] public Vector2 horizontalInput;
 
 	//controlled by server:
 	[HideInInspector] public float acceleration = 11f;
