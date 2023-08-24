@@ -175,7 +175,7 @@ MonoBehaviour:
   online: 0
   udpPort: 6969
   tcpPort: 4242
-  ip: 192.168.0.50
+  ip: 192.168.0.100
   latency: 0
 --- !u!1 &24043380
 GameObject:
