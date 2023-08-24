@@ -34,10 +34,11 @@ public class OtherClient : MonoBehaviour
 	public Renderer clientRenderer;
 
 	public GameObject friendlyUI;
-	public Transform universalUI;
+	public GameObject enemyUI;
 
 	public int health;
 	public TextMeshProUGUI healthText;
+	public TextMeshProUGUI healthText2;
 	public int currentLife; //for keeping track of if a damage event is current or not
 
 	public float slideAngle;
@@ -66,6 +67,7 @@ public class OtherClient : MonoBehaviour
 	{
 		health = _health;
 		healthText.text = health + "";
+		healthText2.text = health + "";
 
 		currentLife = newCurrentLife;
 	}
@@ -109,7 +111,7 @@ public class OtherClient : MonoBehaviour
 
 		//make info canvas face towards player cam
 		infoCanvas.LookAt(playerCam);
-		universalUI.LookAt(playerCam);
+		enemyUI.transform.LookAt(playerCam);
 
 		float targetX;
 		if (isSliding)
@@ -178,10 +180,12 @@ public class OtherClient : MonoBehaviour
 		{
 			clientRenderer.material = friendlyMaterial;
 			friendlyUI.SetActive(true);
+			enemyUI.SetActive(false);
 		}
 		else
 		{
 			clientRenderer.material = opponentMaterial;
+			enemyUI.SetActive(true);
 			friendlyUI.SetActive(false);
 		}
 	}

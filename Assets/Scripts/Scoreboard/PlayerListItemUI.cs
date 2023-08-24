@@ -29,7 +29,6 @@ public class PlayerListItemUI : MonoBehaviour
     {
         PingText.text = Client.latency.ToString() + "ms";
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("Updated");
         StartCoroutine(UpdatePing());
     }
 
