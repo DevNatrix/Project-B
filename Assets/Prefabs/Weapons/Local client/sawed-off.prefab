@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8846423848380024899}
   m_LocalRotation: {x: -0.048094165, y: -0.7054693, z: -0.7054693, w: 0.048094165}
-  m_LocalPosition: {x: 0.18, y: -0.173, z: 0.445}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6.040503, y: 6.040503, z: 6.040503}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -145,6 +145,8 @@ MonoBehaviour:
   AmmoInReserve: 20
   maxAmmo: 5
   currentAmmo: 5
+  leftHandTarget: {fileID: 0}
+  rightHandTarget: {fileID: 0}
   hitMask:
     serializedVersion: 2
     m_Bits: 262280

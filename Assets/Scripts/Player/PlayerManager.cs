@@ -38,6 +38,7 @@ public class PlayerManager : MonoBehaviour
 	public Transform weaponContainer;
 	public Transform rightShoulder;
 	public Vector3 weaponContainerOffset;
+	public Transform weaponHolder;
 
 	public Transform playerCam;
 
@@ -50,8 +51,8 @@ public class PlayerManager : MonoBehaviour
 	private void Update()
 	{
 		weaponContainer.position = rightShoulder.position;
-		weaponContainer.rotation = rightShoulder.rotation;
-		//weaponContainer.localRotation *= playerCam.localRotation;
+		//weaponContainer.rotation = rightShoulder.rotation;
+		weaponHolder.rotation = playerCam.rotation;
 
 		if(leftHandTarget != null)
 		{
