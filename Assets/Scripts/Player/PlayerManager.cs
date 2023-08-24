@@ -28,6 +28,19 @@ public class PlayerManager : MonoBehaviour
 	public float bloodFadeSpeed;
 	public float hitBloodIntensity;
 
+
+	public Transform leftHand;
+	public Transform rightHand;
+
+	[HideInInspector] public Transform leftHandTarget;
+	[HideInInspector] public Transform rightHandTarget;
+
+	public Transform weaponContainer;
+	public Transform rightShoulder;
+	public Vector3 weaponContainerOffset;
+
+	public Transform playerCam;
+
 	void Start()
 	{
 		Invoke("initializeHealth", 1f);
@@ -36,6 +49,19 @@ public class PlayerManager : MonoBehaviour
 
 	private void Update()
 	{
+		weaponContainer.position = rightShoulder.position;
+		weaponContainer.rotation = rightShoulder.rotation;
+		//weaponContainer.localRotation *= playerCam.localRotation;
+
+		if(leftHandTarget != null)
+		{
+			leftHand.position = leftHandTarget.position;
+			leftHand.rotation = leftHandTarget.rotation;
+
+			rightHand.position = rightHandTarget.position;
+			rightHand.rotation = rightHandTarget.rotation;
+		}
+
 		vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, 0, bloodFadeSpeed * Time.deltaTime);
 	}
 

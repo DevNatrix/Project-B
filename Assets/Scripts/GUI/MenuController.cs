@@ -18,7 +18,6 @@ public class MenuController : MonoBehaviour
 	public PlayerManager playerManager;
 
 	public Camera spectateCam;
-	public Camera gunCam;
 	public GameObject InGameGUI;
 	public GameObject TeamSelection;
 
@@ -138,7 +137,6 @@ public class MenuController : MonoBehaviour
 
 	public void setSpectate(bool isEnabled)
 	{
-		gunCam.enabled = !isEnabled;
 		InGameGUI.SetActive(!isEnabled);
 		client.showClient = !isEnabled;
 

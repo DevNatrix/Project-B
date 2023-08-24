@@ -24,7 +24,6 @@ public class PlayerAnimator : MonoBehaviour
 	{
 		if (Physics.CheckSphere(transform.position + new Vector3(0f, -.6f, 0f), .45f, groundMask))
 		{
-			Debug.Log("howdy");
 			if (localPlayer)
 			{
 				direction = new Vector2(Mathf.Lerp(direction.x, playerRB.velocity.x * speedToAnimMult, Time.deltaTime * directionChangeSpeedHorizontal), Mathf.Lerp(direction.y, playerRB.velocity.z * speedToAnimMult, Time.deltaTime * directionChangeSpeedVertical));

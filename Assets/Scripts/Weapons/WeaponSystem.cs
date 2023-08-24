@@ -16,6 +16,9 @@ public class WeaponSystem : MonoBehaviour
 	public int maxAmmo;
 	public int currentAmmo;
 
+	public Transform leftHandTarget;
+	public Transform rightHandTarget;
+
 	public LayerMask hitMask;
 
 
