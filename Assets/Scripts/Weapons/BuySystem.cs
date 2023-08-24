@@ -18,6 +18,20 @@ public class BuySystem : MonoBehaviour
 
     public void BuyWeapon(GameObject _WeaponType)
     {
+        GameObject wpnType = WeaponSwitcher.Instance.GetItemThroughID(_WeaponType.GetComponent<WeaponSystem>().WeaponID);
+        if(wpnType.GetComponent<WeaponSystem>().WeaponID == 0)
+        {
+            wpnType = Inventory.Instance.primaryWeapon;
+        }
+        else if(wpnType.GetComponent<WeaponSystem>().WeaponID == 1)
+        {
+            wpnType = Inventory.Instance.secondaryWeapon;
+        }
+        else if(wpnType.GetComponent <WeaponSystem>().WeaponID == 2)
+        {
+            wpnType = Inventory.Instance.meleeWeapon;
+        }
+        _WeaponType = wpnType;
         WeaponSystem.WeaponType currentWeaponType = _WeaponType.GetComponent<WeaponSystem>().weaponType;
         Debug.Log($"Bought {_WeaponType}");
 
