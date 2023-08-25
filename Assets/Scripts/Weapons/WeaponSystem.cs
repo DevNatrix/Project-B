@@ -105,7 +105,6 @@ public class WeaponSystem : MonoBehaviour
 		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity, hitMask)){
 			Gizmos.color = Color.green;
 			Gizmos.DrawSphere(hit.point, .1f);
-			Debug.Log("Recoil: " + Vector3.Distance(shootPos, hit.point));
 		}
 
 	}
