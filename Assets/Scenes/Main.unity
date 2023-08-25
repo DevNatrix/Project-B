@@ -38744,6 +38744,7 @@ MonoBehaviour:
   aimMask:
     serializedVersion: 2
     m_Bits: 262280
+  aimPointOffset: {x: -0.02, y: 0.312, z: 0}
 --- !u!114 &7656093453908861211
 MonoBehaviour:
   m_ObjectHideFlags: 0

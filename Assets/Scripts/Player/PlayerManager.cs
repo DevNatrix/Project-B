@@ -45,6 +45,8 @@ public class PlayerManager : MonoBehaviour
 	public float yRotRecoil;
 	public LayerMask aimMask;
 
+	public Vector3 aimPointOffset;
+
 	void Start()
 	{
 		Invoke("initializeHealth", 1f);
@@ -57,7 +59,7 @@ public class PlayerManager : MonoBehaviour
 
 		RaycastHit hit;
 		Physics.Raycast(playerCam.position, playerCam.forward, out hit, Mathf.Infinity, aimMask);
-		weaponContainer.LookAt(hit.point);
+		weaponContainer.LookAt(hit.point - aimPointOffset);
 		weaponContainer.rotation *= Quaternion.Euler(new Vector3(xRotRecoil, yRotRecoil, 0));
 
 		if (leftHandTarget != null)
