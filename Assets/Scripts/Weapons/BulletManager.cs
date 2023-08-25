@@ -5,15 +5,21 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    public GameObject muzzleFlashPrefab;
 	public float secondsAlive;
 	public ServerEvents serverEvents;
+	public float muzzleFlashTime;
 
-	public void spawnBullet(Vector3 position, Vector3 velocity)
+	public Transform player;
+
+	public void spawnBullet(Vector3 position, Vector3 velocity, Transform flashParent = null)
 	{
-		GameObject newBullet;
-		newBullet = Instantiate(bulletPrefab, position, Quaternion.identity);
+		GameObject newBullet = Instantiate(bulletPrefab, position, Quaternion.identity);
 		newBullet.GetComponent<Rigidbody>().velocity = velocity;
 
+		GameObject flash = Instantiate(muzzleFlashPrefab, position, Quaternion.identity, player);
+
+		Destroy(flash, muzzleFlashTime);
 		Destroy(newBullet, secondsAlive);
 	}
 
@@ -21,6 +27,6 @@ public class BulletManager : MonoBehaviour
 	{
 		serverEvents.sendEventToOtherClients("spawnBulletEvent", new string[] { position + "", velocity + "" });
 
-		spawnBullet(position, velocity);
+		spawnBullet(position, velocity, player);
 	}
 }
