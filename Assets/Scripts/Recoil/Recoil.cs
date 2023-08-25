@@ -12,10 +12,8 @@ public class Recoil : MonoBehaviour
     [SerializeField] float recoilX;
     [SerializeField] float recoilY;
     [SerializeField] float recoilZ;
-    [SerializeField] float snappiness;
     [SerializeField] float returnSpeed;
-    [SerializeField] float returnSpeedSlow;
-    public Look look;
+    public PlayerManager playerManager;
 	public float timeBeforeSnapBack = .4f;
 	public float snapBackTimer = 0f;
 
@@ -28,17 +26,9 @@ public class Recoil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		snapBackTimer -= Time.deltaTime;
-		if(snapBackTimer < 0f)
-		{
-			currentRotation = Vector3.Lerp(currentRotation, Vector3.zero, returnSpeed * Time.deltaTime);
-		}
-		else
-		{
-			currentRotation = Vector3.Lerp(currentRotation, Vector3.zero, returnSpeedSlow * Time.deltaTime);
-		}
-		look.xRotRecoil = currentRotation.x;
-		look.yRotRecoil = currentRotation.y;
+		currentRotation = Vector3.Lerp(currentRotation, Vector3.zero, returnSpeed * Time.deltaTime);
+		playerManager.xRotRecoil = currentRotation.x;
+		playerManager.yRotRecoil = currentRotation.y;
 	}
 
     public void FireRecoil()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
 
 public class WeaponSystem : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class WeaponSystem : MonoBehaviour
 
 	[Header("References")]
     private GameObject cam;
+	PlayerManager playerManager;
     public Animator anim;
     public GameObject groundPrefab;
     public GameObject bulletHole;
@@ -66,6 +68,7 @@ public class WeaponSystem : MonoBehaviour
 		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
 		bulletManager = GameObject.Find("game manager").GetComponent<BulletManager>();
 		hitMarker = GameObject.Find("game manager").GetComponent<HitMarker>();
+		playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
 
 		Physics.IgnoreLayerCollision(17, 20);
 		Physics.IgnoreLayerCollision(17, 7);
@@ -83,7 +86,27 @@ public class WeaponSystem : MonoBehaviour
 
     public enum WeaponType { Primary, Secondary, Melee}
 
-    void Update()
+	private void OnDrawGizmos()
+	{
+		RaycastHit hit;
+		Vector3 shootPos = Vector3.zero;
+
+		if (Physics.Raycast(cam.transform.position, playerManager.weaponContainerLookVector, out hit, maxDistance, hitMask))
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawSphere(hit.point, .1f);
+			shootPos = hit.point;
+
+		}
+		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity, hitMask)){
+			Gizmos.color = Color.green;
+			Gizmos.DrawSphere(hit.point, .1f);
+			Debug.Log("Recoil: " + Vector3.Distance(shootPos, hit.point));
+		}
+
+	}
+
+	void Update()
     {
         if(weaponType == WeaponType.Melee)
         {
@@ -93,7 +116,7 @@ public class WeaponSystem : MonoBehaviour
         {
             Shoot();
             Reload();
-            Debug.DrawRay(cam.transform.position, cam.transform.forward);
+            Debug.DrawRay(cam.transform.position, playerManager.weaponContainerLookVector);
 
             if(nextFire > 0)
             {
@@ -129,7 +152,7 @@ public class WeaponSystem : MonoBehaviour
     {
         if(playerControls.Weapon.Fire.WasPerformedThisFrame())
         {
-            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+            Ray ray = new Ray(cam.transform.position, playerManager.weaponContainerLookVector);
             RaycastHit hit;
 
             if(Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))
@@ -153,7 +176,7 @@ public class WeaponSystem : MonoBehaviour
             nextFire = 1 / fireRate / AbilityManager.Instance.getMultiplier("fireRate");
 
             //Shoot raycast
-            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+            Ray ray = new Ray(cam.transform.position, playerManager.weaponContainerLookVector);
 
 			RaycastHit hit;
             if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))
@@ -185,7 +208,7 @@ public class WeaponSystem : MonoBehaviour
             }
 
 			//create visual bullet
-			bulletManager.createBullet(shootPoint.position, cam.transform.forward * bulletSpeed);
+			bulletManager.createBullet(shootPoint.position, playerManager.weaponContainerLookVector * bulletSpeed);
 
             currentAmmo--;
             Recoil.Instance.FireRecoil();
