@@ -8,10 +8,9 @@ public class Recoil : MonoBehaviour
 
     [Header("Recoil")]
     Vector3 currentRotation;
-    Vector3 targetRotation;
-    [SerializeField] float recoilX;
+    [SerializeField] float minRecoilX;
+    [SerializeField] float maxRecoilX;
     [SerializeField] float recoilY;
-    [SerializeField] float recoilZ;
     [SerializeField] float returnSpeed;
     public PlayerManager playerManager;
 	public float timeBeforeSnapBack = .4f;
@@ -34,6 +33,6 @@ public class Recoil : MonoBehaviour
     public void FireRecoil()
     {
 		snapBackTimer = timeBeforeSnapBack;
-		currentRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
+		currentRotation += new Vector3(Random.Range(-minRecoilX, -maxRecoilX), Random.Range(-recoilY, recoilY), 0);
     }
 }

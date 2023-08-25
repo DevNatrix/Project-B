@@ -37,17 +37,13 @@ public class PlayerManager : MonoBehaviour
 
 	public Transform weaponContainer;
 	public Transform rightShoulder;
-	public Vector3 weaponContainerOffset;
 	public Transform weaponHolder;
-	public Vector3 weaponRotOffset;
 
 	public Transform playerCam;
 
-	[HideInInspector] public float xRotRecoil;
-	[HideInInspector] public float yRotRecoil;
+	public float xRotRecoil;
+	public float yRotRecoil;
 	public LayerMask aimMask;
-
-	public Vector3 weaponContainerLookVector;
 
 	void Start()
 	{
@@ -61,14 +57,8 @@ public class PlayerManager : MonoBehaviour
 
 		RaycastHit hit;
 		Physics.Raycast(playerCam.position, playerCam.forward, out hit, Mathf.Infinity, aimMask);
-		Vector3 lookPos = hit.point;
-		weaponContainer.LookAt(lookPos);
+		weaponContainer.LookAt(hit.point);
 		weaponContainer.rotation *= Quaternion.Euler(new Vector3(xRotRecoil, yRotRecoil, 0));
-		weaponContainerLookVector = weaponContainer.forward;
-		weaponContainer.rotation *= Quaternion.Euler(weaponRotOffset);
-		
-		//rotation = playerCam.rotation * Quaternion.Euler(weaponRotOffset) * Quaternion.Euler(new Vector3(xRotRecoil, yRotRecoil, 0));
-		//weaponContainer.rotation = rightShoulder.rotation;
 
 		if (leftHandTarget != null)
 		{

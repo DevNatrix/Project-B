@@ -58,6 +58,8 @@ public class WeaponSystem : MonoBehaviour
 	public Transform  shootPoint;
 	HitMarker hitMarker;
 
+	Transform weaponContainer;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -72,6 +74,8 @@ public class WeaponSystem : MonoBehaviour
 
 		Physics.IgnoreLayerCollision(17, 20);
 		Physics.IgnoreLayerCollision(17, 7);
+
+		weaponContainer = transform.parent.parent;
 	}
 
     private void OnEnable()
@@ -91,7 +95,7 @@ public class WeaponSystem : MonoBehaviour
 		RaycastHit hit;
 		Vector3 shootPos = Vector3.zero;
 
-		if (Physics.Raycast(cam.transform.position, playerManager.weaponContainerLookVector, out hit, maxDistance, hitMask))
+		if (Physics.Raycast(cam.transform.position, weaponContainer.forward, out hit, maxDistance, hitMask))
 		{
 			Gizmos.color = Color.red;
 			Gizmos.DrawSphere(hit.point, .1f);
@@ -116,7 +120,7 @@ public class WeaponSystem : MonoBehaviour
         {
             Shoot();
             Reload();
-            Debug.DrawRay(cam.transform.position, playerManager.weaponContainerLookVector);
+            Debug.DrawRay(cam.transform.position, weaponContainer.forward);
 
             if(nextFire > 0)
             {
@@ -152,7 +156,7 @@ public class WeaponSystem : MonoBehaviour
     {
         if(playerControls.Weapon.Fire.WasPerformedThisFrame())
         {
-            Ray ray = new Ray(cam.transform.position, playerManager.weaponContainerLookVector);
+            Ray ray = new Ray(cam.transform.position, weaponContainer.forward);
             RaycastHit hit;
 
             if(Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))
@@ -176,7 +180,7 @@ public class WeaponSystem : MonoBehaviour
             nextFire = 1 / fireRate / AbilityManager.Instance.getMultiplier("fireRate");
 
             //Shoot raycast
-            Ray ray = new Ray(cam.transform.position, playerManager.weaponContainerLookVector);
+            Ray ray = new Ray(cam.transform.position, weaponContainer.forward);
 
 			RaycastHit hit;
             if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))
@@ -208,7 +212,7 @@ public class WeaponSystem : MonoBehaviour
             }
 
 			//create visual bullet
-			bulletManager.createBullet(shootPoint.position, playerManager.weaponContainerLookVector * bulletSpeed);
+			bulletManager.createBullet(shootPoint.position, weaponContainer.forward * bulletSpeed);
 
             currentAmmo--;
             Recoil.Instance.FireRecoil();

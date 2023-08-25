@@ -10402,14 +10402,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f65f0fd76dc314c90c672269564b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilX: -3
-  recoilY: 0
-  recoilZ: 0
-  snappiness: 0
+  minRecoilX: 2
+  maxRecoilX: 4
+  recoilY: 2
   returnSpeed: 5
   playerManager: {fileID: 7656093453415565079}
   timeBeforeSnapBack: 0.2
-  snapBackTimer: 0
+  snapBackTimer: 0.2
 --- !u!1 &377913619
 GameObject:
   m_ObjectHideFlags: 0
@@ -38738,16 +38737,13 @@ MonoBehaviour:
   rightHandTarget: {fileID: 0}
   weaponContainer: {fileID: 1334749380}
   rightShoulder: {fileID: 2496596445827005668}
-  weaponContainerOffset: {x: 0, y: 0, z: 0}
   weaponHolder: {fileID: 8428473956681724033}
-  weaponRotOffset: {x: -90, y: -109.6, z: 56.1}
   playerCam: {fileID: 4193270394687202011}
   xRotRecoil: 0
   yRotRecoil: 0
   aimMask:
     serializedVersion: 2
     m_Bits: 262280
-  weaponContainerLookVector: {x: 0, y: 0, z: 0}
 --- !u!114 &7656093453908861211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38945,8 +38941,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4589314064938907208}
-  m_LocalRotation: {x: 0.6363527, y: 0.3083103, z: 0.3083103, w: 0.6363527}
-  m_LocalPosition: {x: 0.456, y: -0.247, z: 0.11}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.106, y: -0.023, z: 0.557}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
