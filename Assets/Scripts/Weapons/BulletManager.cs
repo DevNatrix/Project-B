@@ -6,6 +6,7 @@ public class BulletManager : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public GameObject muzzleFlashPrefab;
+    public GameObject smokePrefab;
 	public float secondsAlive;
 	public ServerEvents serverEvents;
 	public float muzzleFlashTime;
@@ -17,7 +18,8 @@ public class BulletManager : MonoBehaviour
 		GameObject newBullet = Instantiate(bulletPrefab, position, Quaternion.identity);
 		newBullet.GetComponent<Rigidbody>().velocity = velocity;
 
-		GameObject flash = Instantiate(muzzleFlashPrefab, position, Quaternion.identity, player);
+		GameObject flash = Instantiate(muzzleFlashPrefab, position, Quaternion.identity, flashParent);
+		GameObject smoke = Instantiate(smokePrefab, position, Quaternion.identity, flashParent);
 
 		Destroy(flash, muzzleFlashTime);
 		Destroy(newBullet, secondsAlive);
