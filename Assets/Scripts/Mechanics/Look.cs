@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Look : MonoBehaviour
@@ -46,7 +47,7 @@ public class Look : MonoBehaviour
 
     private void Update()
     {
-		cam.transform.position = camBone.position + camOffset;
+		cam.transform.position = camBone.position + cam.transform.up * camOffset.y + cam.transform.right * camOffset.x + cam.transform.forward * camOffset.z;
 
 		if (!MenuController.menu)
 		{

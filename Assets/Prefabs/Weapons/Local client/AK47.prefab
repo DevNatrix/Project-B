@@ -2033,7 +2033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc9539cf50ee29498e505d87a2ed0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smooth: 8
+  smooth: 0
   multiplier: 1.5
 --- !u!114 &8514653662229663245
 MonoBehaviour:

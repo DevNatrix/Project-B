@@ -39,8 +39,10 @@ public class PlayerManager : MonoBehaviour
 	public Transform rightShoulder;
 	public Vector3 weaponContainerOffset;
 	public Transform weaponHolder;
+	public Vector3 weaponRotOffset;
 
 	public Transform playerCam;
+
 
 	void Start()
 	{
@@ -51,8 +53,8 @@ public class PlayerManager : MonoBehaviour
 	private void Update()
 	{
 		weaponContainer.position = rightShoulder.position;
+		weaponContainer.rotation = playerCam.rotation * Quaternion.Euler(weaponRotOffset);
 		//weaponContainer.rotation = rightShoulder.rotation;
-		weaponHolder.rotation = playerCam.rotation;
 
 		if(leftHandTarget != null)
 		{

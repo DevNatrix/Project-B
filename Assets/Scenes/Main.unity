@@ -209,7 +209,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1792
+  m_Name: pb_Mesh-43452
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -510,7 +510,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28256
+  m_Name: pb_Mesh108988
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4612,7 +4612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 173745002}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: leftHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4627,7 +4627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173745001}
   m_LocalRotation: {x: -0, y: 0.78362906, z: -0, w: 0.6212291}
-  m_LocalPosition: {x: -1.92, y: 8.33, z: 1.24}
+  m_LocalPosition: {x: -1.92, y: 7, z: 1.24}
   m_LocalScale: {x: 0.97222185, y: 0.97222203, z: 0.97222185}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7926,7 +7926,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27766
+  m_Name: pb_Mesh108498
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9058,7 +9058,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28242
+  m_Name: pb_Mesh108974
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13350,7 +13350,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28548
+  m_Name: pb_Mesh109280
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13514,7 +13514,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1776
+  m_Name: pb_Mesh-43436
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14337,7 +14337,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1732
+  m_Name: pb_Mesh-43392
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17009,7 +17009,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1806
+  m_Name: pb_Mesh-43466
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17173,7 +17173,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28582
+  m_Name: pb_Mesh109314
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17601,7 +17601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 811759263}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17764,7 +17764,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27532
+  m_Name: pb_Mesh108264
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18130,7 +18130,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27918
+  m_Name: pb_Mesh108650
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19246,7 +19246,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27602
+  m_Name: pb_Mesh108334
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21735,7 +21735,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28766
+  m_Name: pb_Mesh109498
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22301,7 +22301,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1762
+  m_Name: pb_Mesh-43422
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23821,7 +23821,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1718
+  m_Name: pb_Mesh-43378
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -24254,7 +24254,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1820
+  m_Name: pb_Mesh-43480
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -24555,7 +24555,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1748
+  m_Name: pb_Mesh-43408
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -25076,7 +25076,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1704
+  m_Name: pb_Mesh-43364
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -25521,7 +25521,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1836
+  m_Name: pb_Mesh-43496
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -25891,7 +25891,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27868
+  m_Name: pb_Mesh108600
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26624,7 +26624,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1597728348}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: rightHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33110,7 +33110,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28116
+  m_Name: pb_Mesh108848
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33274,7 +33274,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28752
+  m_Name: pb_Mesh109484
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33562,7 +33562,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1864
+  m_Name: pb_Mesh-43524
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -34142,7 +34142,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1850
+  m_Name: pb_Mesh-43510
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -34444,7 +34444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2101856365}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37017,7 +37017,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8209544512573028205}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-forearm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37064,7 +37064,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7393896333109508912}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-shin.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37098,7 +37098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2925694020028021038}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: rig_deform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37115,7 +37115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6400756958604432509}
   - component: {fileID: 4044973278285714105}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37145,7 +37145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4994257438092730583}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-spine.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37210,7 +37210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1749125157151847383}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-upper_arm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37228,7 +37228,7 @@ GameObject:
   - component: {fileID: 4554276767616077973}
   - component: {fileID: 73461592139309024}
   - component: {fileID: 4915156897581923224}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: visualBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37245,7 +37245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7674936955828453947}
   - component: {fileID: 1390232834676761541}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-hand.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37309,7 +37309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8421163827410798961}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-toe.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37325,7 +37325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2959318525279993727}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-thigh.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37342,7 +37342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2176881993071869736}
   - component: {fileID: 6466685902144236778}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: leftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37389,7 +37389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2456705880013399170}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-shin.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37493,7 +37493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3087988270749620598}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-thigh.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37518,7 +37518,7 @@ MonoBehaviour:
   sensitivityX: 0.27
   sensitivityY: 0.2
   generalSense: 0.3
-  xClamp: 45
+  xClamp: 55
   xRotOffsetChangeSpeed: 20
   camHeightChangeSpeed: 13
   camRollSpeed: 13
@@ -37531,7 +37531,7 @@ MonoBehaviour:
   targetFOV: 90
   targetCamRoll: 0
   camBone: {fileID: 5978634017043306659}
-  camOffset: {x: 0.03, y: 0.18, z: 0.03}
+  camOffset: {x: 0, y: 0.12, z: 0.14}
 --- !u!4 &2925694020028021038
 Transform:
   m_ObjectHideFlags: 0
@@ -37668,7 +37668,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6125172556471333878}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-spine.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37684,7 +37684,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2249684532974088330}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-foot.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37804,13 +37804,13 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 3670015
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -37831,7 +37831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5830326557568175414}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-forearm.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37990,7 +37990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5066854341064769155}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-pelvis.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38063,7 +38063,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5833343885153403044}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-upper_arm.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38127,7 +38127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 532633592885339914}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-toe.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38143,7 +38143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7775568810545535173}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-spine.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38159,7 +38159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4789798259342846949}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-breast.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38175,7 +38175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9159821983624770614}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-foot.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38258,7 +38258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 607149054590455727}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-forearm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38339,7 +38339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2568473074700485910}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-shin.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38394,7 +38394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1390884304901419799}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-spine.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38410,7 +38410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8844621412054901521}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-forearm.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38426,7 +38426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3321748545999887413}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-thigh.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38442,7 +38442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3057267401085732162}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-pelvis.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38473,7 +38473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 258723261271425730}
   - component: {fileID: 1789385708426761116}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: rightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38489,7 +38489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8519351723562957612}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-shoulder.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38664,7 +38664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2653710401726636316}
   - component: {fileID: 1016975880346837188}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: rigLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38680,7 +38680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5978634017043306659}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-spine.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38704,7 +38704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8434165680912105712}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-upper_arm.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38743,6 +38743,7 @@ MonoBehaviour:
   rightShoulder: {fileID: 2496596445827005668}
   weaponContainerOffset: {x: 0, y: 0, z: 0}
   weaponHolder: {fileID: 8428473956681724033}
+  weaponRotOffset: {x: -90, y: -109.6, z: 56.1}
   playerCam: {fileID: 4193270394687202011}
 --- !u!114 &7656093453908861211
 MonoBehaviour:
@@ -38833,7 +38834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3141072112242713987}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-hand.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38865,7 +38866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1333380425213287735}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38912,7 +38913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8166729863256665377}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-breast.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38941,8 +38942,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4589314064938907208}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.6363527, y: 0.3083103, z: 0.3083103, w: 0.6363527}
+  m_LocalPosition: {x: 0.456, y: -0.247, z: 0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38974,7 +38975,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3073805206241184243}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-upper_arm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39058,7 +39059,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5873796550482075583}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-spine.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39074,7 +39075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3169272356025977626}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-thigh.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39090,7 +39091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5771914124101238345}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-shin.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39122,7 +39123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2496596445827005668}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: DEF-shoulder.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
