@@ -10,25 +10,34 @@ public class BulletManager : MonoBehaviour
 	public float secondsAlive;
 	public ServerEvents serverEvents;
 	public float muzzleFlashTime;
+	public Transform weaponHolder;
 
-	public Transform player;
-
-	public void spawnBullet(Vector3 position, Vector3 velocity, Transform flashParent = null)
+	public void spawnBullet(Vector3 position, Vector3 velocity, Transform effectParent = null)
 	{
 		GameObject newBullet = Instantiate(bulletPrefab, position, Quaternion.identity);
 		newBullet.GetComponent<Rigidbody>().velocity = velocity;
-
-		GameObject flash = Instantiate(muzzleFlashPrefab, position, Quaternion.identity, flashParent);
-		GameObject smoke = Instantiate(smokePrefab, position, Quaternion.identity, flashParent);
-
-		Destroy(flash, muzzleFlashTime);
 		Destroy(newBullet, secondsAlive);
+
+		if(effectParent != null)
+		{
+			GameObject flash = Instantiate(muzzleFlashPrefab, position, Quaternion.identity, effectParent);
+			Instantiate(smokePrefab, position, Quaternion.identity, effectParent);
+
+			Destroy(flash, muzzleFlashTime);
+		}
+		else
+		{
+			GameObject flash = Instantiate(muzzleFlashPrefab, position, Quaternion.identity);
+			Instantiate(smokePrefab, position, Quaternion.identity);
+
+			Destroy(flash, muzzleFlashTime);
+		}
 	}
 
 	public void createBullet(Vector3 position, Vector3 velocity)
 	{
 		serverEvents.sendEventToOtherClients("spawnBulletEvent", new string[] { position + "", velocity + "" });
 
-		spawnBullet(position, velocity, player);
+		spawnBullet(position, velocity, weaponHolder);
 	}
 }

@@ -71,6 +71,7 @@ public class WeaponSystem : MonoBehaviour
 		bulletManager = GameObject.Find("game manager").GetComponent<BulletManager>();
 		hitMarker = GameObject.Find("game manager").GetComponent<HitMarker>();
 		playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
+		cam = GameObject.Find("Main Camera");
 
 		Physics.IgnoreLayerCollision(17, 20);
 		Physics.IgnoreLayerCollision(17, 7);

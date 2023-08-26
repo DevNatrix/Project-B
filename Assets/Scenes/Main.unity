@@ -32633,10 +32633,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3544313613385438810, guid: 59e6d4caeeefae8479ff7f5cfa9dbc18, type: 3}
   muzzleFlashPrefab: {fileID: 7929430173201683651, guid: fded18932dff99747940fc61cf2ed0f9, type: 3}
+  smokePrefab: {fileID: 8593087744188713197, guid: d65fe145168f20a40ba531af71fa1246, type: 3}
   secondsAlive: 1
   serverEvents: {fileID: 1836363827}
   muzzleFlashTime: 0.07
-  player: {fileID: 5846882482729803036}
+  weaponHolder: {fileID: 8428473956681724033}
 --- !u!114 &1836363837
 MonoBehaviour:
   m_ObjectHideFlags: 0
