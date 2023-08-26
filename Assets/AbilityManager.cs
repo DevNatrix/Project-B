@@ -53,7 +53,7 @@ public class AbilityManager : MonoBehaviour
 	{
 		for(int index = 0; index < multipliers.Count; index++)
 		{
-			stepInfoText[index].text = (int)((multipliers[index] - 1) * 100) + "% + " + (int)(steps[index] * 100) + "%";
+			stepInfoText[index].text = Mathf.Round(((multipliers[index] - 1) * 100)) + "% + " + Mathf.Round((steps[index] * 100)) + "%";
 		}
 	}
 

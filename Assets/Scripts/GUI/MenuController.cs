@@ -47,6 +47,7 @@ public class MenuController : MonoBehaviour
 
 	public void triggerDeathMenu()
 	{
+		abilityManager.updateKillMenu();
 		abilityManager.chooseSelectable();
 		setSpectate(true);
 		deathScreen.SetActive(true);

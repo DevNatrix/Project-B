@@ -14,6 +14,7 @@ public class Chat : MonoBehaviour
 	[SerializeField] Transform chatMessagesContainer;
 	[SerializeField] GameObject chatMessagePrefab;
 	[SerializeField] ServerEvents serverEvents;
+	[SerializeField] PlayerManager playerManager;
 
 	public string commandChar = "/";
 
@@ -106,6 +107,15 @@ public class Chat : MonoBehaviour
 			if(command == "resetAbilities")
 			{
 				serverEvents.sendGlobalEvent("resetAbilities", new string[] { Lobby.username } );
+			}
+			if(command == "die")
+			{
+				playerManager.SetHealth(0);
+				serverMessage("ok lolz");
+			}
+			else
+			{
+				serverMessage("Err: Uknown command");
 			}
 		}
 

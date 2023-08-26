@@ -13348,7 +13348,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh139222
+  m_Name: pb_Mesh27482
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15630,6 +15630,7 @@ MonoBehaviour:
   chatMessagesContainer: {fileID: 1030109957}
   chatMessagePrefab: {fileID: 6701070514052639706, guid: fde569dad6ac3f04ab99fb6255da09dd, type: 3}
   serverEvents: {fileID: 1836363827}
+  playerManager: {fileID: 7656093453415565079}
   commandChar: /
   chatTimer: 0
   timeBeforeClose: 2
