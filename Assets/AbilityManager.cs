@@ -64,12 +64,18 @@ public class AbilityManager : MonoBehaviour
 			button.interactable = false;
 		}
 
-		for(int i = 0; i < upgradesToChooseFrom; i++)
+		int missed = 0;
+		for (int i = 0; i - missed < upgradesToChooseFrom; i++)
 		{
 			int index = Random.Range(0, multipliers.Count - 1);
-			if (multitplierButtons[index].interactable)
+			if (multitplierButtons[index].interactable || multipliers[index] >= maxMultpliers[index])
 			{
-				i--;
+				missed++;
+				if(missed > 100) //just in case most abilities are maxed
+				{
+					Debug.LogWarning("Ended selecting multipliers early: not enough");
+					return;
+				}
 			}
 			else
 			{
