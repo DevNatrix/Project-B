@@ -48,6 +48,12 @@ public class CustomEvents : MonoBehaviour
 		Debug.Log(exampleData1 + ", " + exampleData2 + ", " + exampleData3);
 	}
 
+	public void changeCoins(string[] data)
+	{
+		int coinsGotten = int.Parse(data[0]);
+		playerManager.addCoins(coinsGotten);
+	}
+
 	public void quickSettings(string[] data)
 	{
 		foreach(string settings in data)

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
@@ -47,10 +48,20 @@ public class PlayerManager : MonoBehaviour
 
 	public Vector3 aimPointOffset;
 
+	public int coins = 0;
+	public float coinsGivenOnDeath = 1;
+	public TextMeshProUGUI coinText;
+
 	void Start()
 	{
 		Invoke("initializeHealth", 1f);
 		postVolume.profile.TryGetSettings(out vignette);
+	}
+
+	public void addCoins(int _coins)
+	{
+		coins += _coins;
+		coinText.text = "$" + coins;
 	}
 
 	private void Update()
@@ -87,7 +98,6 @@ public class PlayerManager : MonoBehaviour
 		movement.maxSpeed = float.Parse(settings[9]);
 		movement.minYPos = float.Parse(settings[10]);
 		movement.addedGravity = float.Parse(settings[11]);
-		//movement.canWalljump = bool.Parse(settings[12]);
 		movement.dashSpeed = float.Parse(settings[13]);
 		movement.dashSeconds = float.Parse(settings[14]);
 		movement.dashCooldown = float.Parse(settings[15]);
@@ -124,6 +134,8 @@ public class PlayerManager : MonoBehaviour
 			{
 				OtherClient otherClient = serverEvents.getOtherClientScriptByID(attackerID);
 				killFeed.createNewFeed(otherClient.username, Client.username);
+				
+				serverEvents.sendDirectEvent("changeCoins", new string[] { coinsGivenOnDeath + "" }, attackerID);
 			}
 
 			currentLife++;
