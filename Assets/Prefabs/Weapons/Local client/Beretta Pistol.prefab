@@ -321,6 +321,7 @@ MonoBehaviour:
   weaponType: 1
   dropForce: 1
   shootPoint: {fileID: 7922418088205916299}
+  crntAmmoReset: 0
 --- !u!95 &6941212380962120196
 Animator:
   serializedVersion: 5

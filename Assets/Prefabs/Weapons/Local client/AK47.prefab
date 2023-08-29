@@ -2136,6 +2136,7 @@ MonoBehaviour:
   weaponType: 0
   dropForce: 0.5
   shootPoint: {fileID: 1096295421842983122}
+  crntAmmoReset: 0
 --- !u!1 &7242753359116564557
 GameObject:
   m_ObjectHideFlags: 0
