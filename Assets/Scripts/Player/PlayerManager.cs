@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
@@ -130,22 +130,8 @@ public class PlayerManager : MonoBehaviour
 
 		if (health <= 0)
 		{
-			if(attackerID != -1)
-			{
-				OtherClient otherClient = serverEvents.getOtherClientScriptByID(attackerID);
-				killFeed.createNewFeed(otherClient.username, Client.username);
-				
-				serverEvents.sendDirectEvent("changeCoins", new string[] { coinsGivenOnDeath + "" }, attackerID);
-			}
-
-			currentLife++;
-			menuController.triggerDeathMenu();
+			Death(_health, attackerID);
 		}
-
-		healthText.text = health.ToString();
-
-		string[] sendData = { Client.ID + "", health + "", currentLife + "" };
-		serverEvents.sendEventToOtherClients("setHealth", sendData);
 	}
 
 	public void respawn()
@@ -162,5 +148,33 @@ public class PlayerManager : MonoBehaviour
 		serverEvents.sendEventToOtherClients("setClientTeam", new string[] { Client.ID + "", team + "", "false" });
 		
 		respawn();
+	}
+
+	public void Death(int health, int attackerID)
+	{
+		if (attackerID != -1)
+		{
+			OtherClient otherClient = serverEvents.getOtherClientScriptByID(attackerID);
+			killFeed.createNewFeed(otherClient.username, Client.username);
+
+			serverEvents.sendDirectEvent("changeCoins", new string[] { coinsGivenOnDeath + "" }, attackerID);
+		}
+
+		currentLife++;
+		menuController.triggerDeathMenu();
+
+		foreach (GameObject weapon in WeaponSwitcher.Instance.weaponInventory)
+		{
+			if (weapon.GetComponent<WeaponSystem>() != null)
+			{
+				weapon.GetComponent<WeaponSystem>().currentAmmo = WeaponSystem.Instance.crntAmmoReset;
+			}
+		}
+
+
+		healthText.text = health.ToString();
+
+		string[] sendData = { Client.ID + "", health + "", currentLife + "" };
+		serverEvents.sendEventToOtherClients("setHealth", sendData);
 	}
 }

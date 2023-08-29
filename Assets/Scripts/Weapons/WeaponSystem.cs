@@ -60,6 +60,13 @@ public class WeaponSystem : MonoBehaviour
 
 	Transform weaponContainer;
 
+    [HideInInspector] public int crntAmmoReset;
+
+    private void Start()
+    {
+        crntAmmoReset = currentAmmo;
+    }
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -244,5 +251,10 @@ public class WeaponSystem : MonoBehaviour
     public void SetReloadFalse()
     {
         anim.SetBool("Reloading", false);
+    }
+
+    public void ResetWeapon()
+    {
+
     }
 }
