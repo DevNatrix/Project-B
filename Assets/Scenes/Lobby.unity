@@ -1566,7 +1566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1448672092114638561, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 940.00006
+      value: 939.99994
       objectReference: {fileID: 0}
     - target: {fileID: 1448672092114638561, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1685,7 +1685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1448672092114638561, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 940.00006
+      value: 939.99994
       objectReference: {fileID: 0}
     - target: {fileID: 1448672092114638561, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1706,6 +1706,10 @@ PrefabInstance:
     - target: {fileID: 1448672092114638562, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_Name
       value: browser server prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448672092114638562, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1448672092323186481, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_text
@@ -5713,7 +5717,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 14.533447, y: -109.490005}
+  m_AnchoredPosition: {x: 14.533325, y: -109.490005}
   m_SizeDelta: {x: 597.6, y: 99.3}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1422112663
@@ -6028,7 +6032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1448672092114638561, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 940.00006
+      value: 939.99994
       objectReference: {fileID: 0}
     - target: {fileID: 1448672092114638561, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6291,7 +6295,7 @@ GameObject:
   - component: {fileID: 1641399291}
   - component: {fileID: 1641399290}
   m_Layer: 5
-  m_Name: browser
+  m_Name: 'open browser '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7084,7 +7088,7 @@ MonoBehaviour:
   online: 0
   udpPort: 6969
   tcpPort: 4242
-  ip: localhost
+  ip: 127.0.0.1
   latency: 0
 --- !u!114 &1732280378 stripped
 MonoBehaviour:
@@ -7307,7 +7311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1448672092114638561, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 940.00006
+      value: 939.99994
       objectReference: {fileID: 0}
     - target: {fileID: 1448672092114638561, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7328,6 +7332,10 @@ PrefabInstance:
     - target: {fileID: 1448672092114638562, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_Name
       value: browser server prefab (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448672092114638562, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1448672092323186481, guid: cab83dddd9d25ef4ba411e5d6cc5a68c, type: 3}
       propertyPath: m_text
@@ -7386,7 +7394,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 641.2001, y: -109.490005}
+  m_AnchoredPosition: {x: 641.19995, y: -109.490005}
   m_SizeDelta: {x: 597.6, y: 99.3}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1833644225
@@ -7709,7 +7717,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1267.8667, y: -109.490005}
+  m_AnchoredPosition: {x: 1267.8666, y: -109.490005}
   m_SizeDelta: {x: 597.6, y: 99.3}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1918520482
