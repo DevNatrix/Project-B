@@ -80,7 +80,6 @@ public class PlayerManager : MonoBehaviour
 		//Physics.Raycast(weaponContainer.position, weaponContainer.forward, out hit, Mathf.Infinity, aimMask);
 		float accuracy = Mathf.Abs(xRotRecoil) + Mathf.Abs(yRotRecoil);//Vector3.Distance(camPoint, hit.point);
 		crosshair.targetAccuracy = accuracy;
-		Debug.Log(accuracy);
 
 		if (leftHandTarget != null)
 		{
