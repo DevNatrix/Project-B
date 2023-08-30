@@ -39,6 +39,9 @@ public class Look : MonoBehaviour
     [HideInInspector] public float targetFOV = 60f;
     [HideInInspector] public float targetCamRoll = 0;
 
+	public PlayerManager playerManager;
+	public float camRecoilPercent;
+
 	public Transform camBone;
 	public Vector3 camOffset;
 
@@ -48,8 +51,8 @@ public class Look : MonoBehaviour
 
 		if (!MenuController.menu)
 		{
-			xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime);
-			yRotOffset = 0;
+			xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime) + playerManager.xRotRecoil * camRecoilPercent;
+			yRotOffset = playerManager.yRotRecoil * camRecoilPercent;
 			zRotOffset = 0;
 
 			//cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, FOVChangeSpeed * Time.deltaTime);

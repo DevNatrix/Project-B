@@ -37741,6 +37741,8 @@ MonoBehaviour:
   camHeightOffset: 0
   targetFOV: 90
   targetCamRoll: 0
+  playerManager: {fileID: 7656093453415565079}
+  camRecoilPercent: 0.1
   camBone: {fileID: 5978634017043306659}
   camOffset: {x: 0, y: 0.12, z: 0.07}
 --- !u!4 &2925694020028021038
@@ -39283,9 +39285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f65f0fd76dc314c90c672269564b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minRecoilX: 2
-  maxRecoilX: 4
-  recoilY: 2
+  minRecoilX: 1.5
+  maxRecoilX: 3
+  recoilY: 1.5
   returnSpeed: 5
   playerManager: {fileID: 7656093453415565079}
   timeBeforeSnapBack: 0.2
