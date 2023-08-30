@@ -45,6 +45,7 @@ public class PlayerManager : MonoBehaviour
 	public float xRotRecoil;
 	public float yRotRecoil;
 	public LayerMask aimMask;
+	public Crosshair crosshair;
 
 	public Vector3 aimPointOffset;
 
@@ -70,8 +71,16 @@ public class PlayerManager : MonoBehaviour
 
 		RaycastHit hit;
 		Physics.Raycast(playerCam.position, playerCam.forward, out hit, Mathf.Infinity, aimMask);
-		weaponContainer.LookAt(hit.point - aimPointOffset);
+		Vector3 camPoint = hit.point;
+
+		weaponContainer.LookAt(camPoint);
 		weaponContainer.rotation *= Quaternion.Euler(new Vector3(xRotRecoil, yRotRecoil, 0));
+
+		//get accuracy
+		//Physics.Raycast(weaponContainer.position, weaponContainer.forward, out hit, Mathf.Infinity, aimMask);
+		float accuracy = Mathf.Abs(xRotRecoil) + Mathf.Abs(yRotRecoil);//Vector3.Distance(camPoint, hit.point);
+		crosshair.targetAccuracy = accuracy;
+		Debug.Log(accuracy);
 
 		if (leftHandTarget != null)
 		{

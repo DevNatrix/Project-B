@@ -101,14 +101,11 @@ public class WeaponSystem : MonoBehaviour
 	private void OnDrawGizmos()
 	{
 		RaycastHit hit;
-		Vector3 shootPos = Vector3.zero;
 
-		if (Physics.Raycast(cam.transform.position, weaponContainer.forward, out hit, maxDistance, hitMask))
+		if (Physics.Raycast(weaponContainer.position, weaponContainer.forward, out hit, maxDistance, hitMask))
 		{
 			Gizmos.color = Color.red;
 			Gizmos.DrawSphere(hit.point, .1f);
-			shootPos = hit.point;
-
 		}
 		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity, hitMask)){
 			Gizmos.color = Color.green;
@@ -127,7 +124,8 @@ public class WeaponSystem : MonoBehaviour
         {
             Shoot();
             Reload();
-            Debug.DrawRay(cam.transform.position, weaponContainer.forward);
+            Debug.DrawRay(cam.transform.position, cam.transform.forward);
+            Debug.DrawRay(weaponContainer.position, weaponContainer.forward);
 
             if(nextFire > 0)
             {
@@ -163,7 +161,7 @@ public class WeaponSystem : MonoBehaviour
     {
         if(playerControls.Weapon.Fire.WasPerformedThisFrame())
         {
-            Ray ray = new Ray(cam.transform.position, weaponContainer.forward);
+            Ray ray = new Ray(weaponContainer.position, weaponContainer.forward);
             RaycastHit hit;
 
             if(Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))
@@ -187,7 +185,7 @@ public class WeaponSystem : MonoBehaviour
             nextFire = 1 / fireRate / AbilityManager.Instance.getMultiplier("fireRate");
 
             //Shoot raycast
-            Ray ray = new Ray(cam.transform.position, weaponContainer.forward);
+            Ray ray = new Ray(weaponContainer.position, weaponContainer.forward);
 
 			RaycastHit hit;
             if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))

@@ -13,8 +13,6 @@ public class Recoil : MonoBehaviour
     [SerializeField] float recoilY;
     [SerializeField] float returnSpeed;
     public PlayerManager playerManager;
-	public float timeBeforeSnapBack = .4f;
-	public float snapBackTimer = 0f;
 
     // Start is called before the first frame update
     void Awake()
@@ -32,7 +30,6 @@ public class Recoil : MonoBehaviour
 
     public void FireRecoil()
     {
-		snapBackTimer = timeBeforeSnapBack;
 		currentRotation += new Vector3(Random.Range(-minRecoilX, -maxRecoilX), Random.Range(-recoilY, recoilY), 0);
     }
 }
