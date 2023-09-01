@@ -49,7 +49,7 @@ public class Look : MonoBehaviour
     {
 		cam.transform.position = camBone.position + cam.transform.up * camOffset.y + cam.transform.right * camOffset.x + cam.transform.forward * camOffset.z;
 
-		if (!MenuController.menu)
+		if (!MenuController.menu || MenuController.countdown)
 		{
 			xRotOffset = Mathf.Lerp(xRotOffset, targetXRotOffset, xRotOffsetChangeSpeed * Time.deltaTime) + playerManager.xRotRecoil * camRecoilPercent;
 			yRotOffset = playerManager.yRotRecoil * camRecoilPercent;

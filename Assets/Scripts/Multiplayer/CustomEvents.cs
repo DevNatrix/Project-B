@@ -50,11 +50,33 @@ public class CustomEvents : MonoBehaviour
 		Debug.Log(exampleData1 + ", " + exampleData2 + ", " + exampleData3);
 	}
 
-	public void changeCoins(string[] data)
+	public void startGame(string[] data)
 	{
-		int coinsGotten = int.Parse(data[0]);
-		playerManager.addCoins(coinsGotten);
+		GameManager.rounds = int.Parse(data[0]);
+
+		if (Client.owner)
+		{
+			serverEvents.sendGlobalEvent("startRound", new string[] { GameManager.matches + "" });
+		}
+		Debug.Log("started game");
 	}
+	public void startRound(string[] data)
+	{
+		Debug.Log("started round");
+		GameManager.matches = int.Parse(data[0]);
+		if (Client.owner)
+		{
+			serverEvents.sendGlobalEvent("startMatch", new string[] { GameManager.matchTimerStart + "" });
+		}
+	}
+	public void startMatch(string[] data)
+	{
+		Debug.Log("started match");
+		GameManager.matchTimer = int.Parse(data[0]);
+		playerManager.respawn();
+	}
+
+
 
 	public void quickSettings(string[] data)
 	{
