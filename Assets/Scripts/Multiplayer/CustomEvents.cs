@@ -16,6 +16,8 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] AbilityManager abilityManager;
 	[SerializeField] WeaponSwitcher weaponSwitcher;
 
+
+
 	//example:
 	public void sendExampleEventExample()
 	{
@@ -129,11 +131,34 @@ public class CustomEvents : MonoBehaviour
 	{
 		string clientUsername = serverEvents.getUsername(clientID);
 		chat.serverMessage(clientUsername + " has joined the game");
+
+		if(clientID < Client.ID)
+		{
+			Client.owner = false;
+			Debug.Log(clientID + " is the new owner");
+		}
 	}
 
 	public void onPlayerDisconnect(string clientUsername)
 	{
 		chat.serverMessage(clientUsername + " has left the game");
+	}
+
+	public void onPlayerDisconnectID(int clientID)
+	{
+		if (clientID < Client.ID)
+		{
+			Client.owner = true;
+			foreach (OtherClient otherClient in serverEvents.otherClientList)
+			{
+				if (otherClient.ID < Client.ID)
+				{
+					Client.owner = false;
+					return;
+				}
+			}
+			Debug.Log("You are new owner");
+		}
 	}
 
 	public void switchGun(string[] data)

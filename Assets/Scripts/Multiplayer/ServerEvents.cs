@@ -17,7 +17,7 @@ public class ServerEvents : MonoBehaviour
 	[SerializeField] PlayerManager playerManager;
 	[SerializeField] Client client;
 	[SerializeField] GameObject otherClientPrefab;
-	List<OtherClient> otherClientList = new List<OtherClient>();
+	[HideInInspector] public List<OtherClient> otherClientList = new List<OtherClient>();
 
 	[HideInInspector] public float lerpPercent = 0;
 	float pastUpdateTime;
@@ -75,6 +75,7 @@ public class ServerEvents : MonoBehaviour
 				otherClientList.Remove(otherClient);
 				Destroy(otherClient.gameObject);
 				this.SendMessage("onPlayerDisconnect", clientUsername);
+				this.SendMessage("onPlayerDisconnectID", clientID);
 				return;
 			}
 		}

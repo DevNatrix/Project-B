@@ -56,8 +56,12 @@ public class Client : MonoBehaviour
 	int tcpProcessErrors = 0;
 	public float maxSecondsBeforeDisconnect = 3f;
 
+	public static bool owner = true;
+
 	private void Start()
 	{
+		Debug.Log("You are the server owner");
+
 		lastGottenPingTime = Time.time;
 		lostConnection = false;
 

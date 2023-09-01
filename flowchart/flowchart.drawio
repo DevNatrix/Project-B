@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-09-01T17:38:15.483Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="6t126BaZBDqjfOgLjC3h" version="21.6.8" type="device" pages="3">
+<mxfile host="Electron" modified="2023-09-01T17:43:29.964Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="WfdIDfywEZEsShPmzScp" version="21.6.8" type="device" pages="3">
   <diagram name="Basic Game" id="i9_aZD54_i-yfMJwzAAt">
     <mxGraphModel dx="1687" dy="1040" grid="1" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
       <root>
@@ -251,7 +251,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="xc4f--6I6FvxF6E2YtUQ" name="Todo">
-    <mxGraphModel dx="2980" dy="1607" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1156" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -273,10 +273,7 @@
         <mxCell id="-fxA7N3p4k_JHusp1gLG-1" value="Rounds" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#F2CC8F;strokeColor=#E07A5F;fontColor=#393C56;" vertex="1" parent="1">
           <mxGeometry x="-70" y="400" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="GR8O8xxOWt5hsjlVnDyQ-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#E07A5F;fontColor=#393C56;fillColor=#F2CC8F;" edge="1" parent="1" source="GR8O8xxOWt5hsjlVnDyQ-1" target="GR8O8xxOWt5hsjlVnDyQ-24">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="GR8O8xxOWt5hsjlVnDyQ-1" value="first player is owner" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#F2CC8F;strokeColor=#E07A5F;fontColor=#393C56;" vertex="1" parent="1">
+        <mxCell id="GR8O8xxOWt5hsjlVnDyQ-1" value="Player with the lowest ID is owner" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#F2CC8F;strokeColor=#E07A5F;fontColor=#393C56;" vertex="1" parent="1">
           <mxGeometry x="130" y="140" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="GR8O8xxOWt5hsjlVnDyQ-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;strokeColor=#E07A5F;fontColor=default;" edge="1" parent="1" source="GR8O8xxOWt5hsjlVnDyQ-3" target="GR8O8xxOWt5hsjlVnDyQ-7">
@@ -319,9 +316,6 @@
         </mxCell>
         <mxCell id="GR8O8xxOWt5hsjlVnDyQ-18" value="Only start with 2 or more people" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#F2CC8F;strokeColor=#E07A5F;fontColor=#393C56;" vertex="1" parent="1">
           <mxGeometry x="330" y="270" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="GR8O8xxOWt5hsjlVnDyQ-24" value="Transfer on leave (lowest ID)" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#F2CC8F;strokeColor=#E07A5F;fontColor=#393C56;" vertex="1" parent="1">
-          <mxGeometry x="330" y="140" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="GR8O8xxOWt5hsjlVnDyQ-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;strokeColor=#E07A5F;fontColor=default;" edge="1" parent="1" source="GR8O8xxOWt5hsjlVnDyQ-26">
           <mxGeometry relative="1" as="geometry">
