@@ -26,6 +26,7 @@ public class MenuController : MonoBehaviour
 	public GameObject deathScreen;
 	public GameObject lobbyScreen;
 	public GameObject lobbyStartButton;
+	public GameObject waitMessage;
 	public TextMeshProUGUI matchTimerText;
 	public AbilityManager abilityManager;
 
@@ -56,6 +57,7 @@ public class MenuController : MonoBehaviour
 		}
 
 		lobbyStartButton.SetActive(Client.owner);
+		waitMessage.SetActive(!Client.owner);
 
 		if (GameManager.matchTimer > 0)
 		{
