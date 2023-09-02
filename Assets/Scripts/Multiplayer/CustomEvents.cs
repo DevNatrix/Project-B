@@ -241,7 +241,6 @@ public class CustomEvents : MonoBehaviour
 	{
 		int clientID = int.Parse(data[0]);
 		int health = int.Parse(data[1]);
-		int currentLife = int.Parse(data[2]);
 
 		OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
 

@@ -122,6 +122,9 @@ public class PlayerManager : MonoBehaviour
 		{
 			Death(attackerID);
 		}
+
+		healthText.text = health + "";
+		serverEvents.sendEventToOtherClients("setHealth", new string[] {Client.ID + "", health + "" });
 	}
 
 	public void respawn()
@@ -151,7 +154,6 @@ public class PlayerManager : MonoBehaviour
 		healthText.text = health.ToString();
 		menuController.death();
 
-		//string[] sendData = { Client.ID + "", health + "", currentLife + "" };
 		serverEvents.sendEventToOtherClients("otherPlayerDied", new string[] { Client.ID + "" });
 		gameManager.checkMatchStatus();
 	}
