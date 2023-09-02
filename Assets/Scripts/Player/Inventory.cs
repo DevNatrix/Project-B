@@ -15,6 +15,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject defaultSecondary;
     [SerializeField] private GameObject defaultMelee;
 
+    public Material ak47Skin;
+
     void Start()
     {
         InventoryVisual.SetActive(false);
@@ -47,6 +49,7 @@ public class Inventory : MonoBehaviour
     public void SelectPrimary(GameObject _PrimaryPrefab)
     {
         primaryWeapon = _PrimaryPrefab;
+        primaryWeapon.GetComponent<MeshRenderer>().material = ak47Skin;
     }
 
     public void SelectSecondary(GameObject _SecondaryPrefab)
