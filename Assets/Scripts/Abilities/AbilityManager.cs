@@ -17,9 +17,12 @@ public class AbilityManager : MonoBehaviour
 	public List<TextMeshProUGUI> stepInfoText;
 	public List<Button> multitplierButtons;
 	[SerializeField] PlayerManager playerManager;
+	[SerializeField] MenuController menuController;
 
 	public float defaultStep = 0.1f;
 	public float defaultMaxMult = 999f;
+
+
 
 	public void newSettings(string[] settings)
 	{
@@ -94,6 +97,7 @@ public class AbilityManager : MonoBehaviour
 				updateKillMenu();
 			}
 		}
+		menuController.setDeathMenu(false);
 	}
 
 	public void resetUpgrades()
@@ -104,7 +108,6 @@ public class AbilityManager : MonoBehaviour
 		}
 
 		updateKillMenu();
-		playerManager.respawn();
 	}
 
 	public float getMultiplier(string name)

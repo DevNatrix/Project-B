@@ -15,6 +15,8 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] KillFeed killFeed;
 	[SerializeField] AbilityManager abilityManager;
 	[SerializeField] WeaponSwitcher weaponSwitcher;
+	[SerializeField] MenuController menuController;
+	[SerializeField] GameManager gameManager;
 
 
 
@@ -50,10 +52,66 @@ public class CustomEvents : MonoBehaviour
 		Debug.Log(exampleData1 + ", " + exampleData2 + ", " + exampleData3);
 	}
 
-	public void changeCoins(string[] data)
+	public void startGame(string[] data)
 	{
-		int coinsGotten = int.Parse(data[0]);
-		playerManager.addCoins(coinsGotten);
+		GameManager.rounds = int.Parse(data[0]);
+
+		if (Client.owner)
+		{
+			serverEvents.sendGlobalEvent("startRound", new string[] { GameManager.matches + "" });
+		}
+		else//lobby menu is turned off for the owner locally for no delay
+		{
+			menuController.setLobbyMenu(false); 
+		}
+		Debug.Log("started game");
+	}
+	public void startRound(string[] data)
+	{
+		Debug.Log("started round");
+		GameManager.matches = int.Parse(data[0]);
+		if (Client.owner)
+		{
+			serverEvents.sendGlobalEvent("startMatch", new string[] { GameManager.matchTimerStart + "", 0 + "", 0 + ""});
+		}
+		GameManager.team0MatchCount = 0;
+		GameManager.team1MatchCount = 0;
+	}
+	public void startMatch(string[] data)
+	{
+		GameManager.matchTimer = int.Parse(data[0]);
+		GameManager.team0MatchCount = int.Parse(data[1]);
+		GameManager.team1MatchCount = int.Parse(data[2]);
+		Debug.Log("started match: " + GameManager.team0MatchCount + " to " + GameManager.team1MatchCount);
+		StartCoroutine(setMatchActive());
+		playerManager.respawn();
+
+		foreach(OtherClient otherClient in serverEvents.otherClientList)
+		{
+			otherClient.dead = false;
+		}
+	}
+
+	IEnumerator setMatchActive()
+	{
+		yield return new WaitForSeconds(GameManager.matchTimer);
+		GameManager.matchInProgress = true;
+
+		yield return null;
+	}
+
+	public void otherPlayerDied(string[] data)
+	{
+		int otherClientID = int.Parse(data[0]);
+		serverEvents.getOtherClientScriptByID(otherClientID).dead = true;
+
+		gameManager.checkMatchStatus();
+	}
+
+	public void teamWon(string[] data)
+	{
+		int winningTeam = int.Parse(data[0]);
+		Debug.Log("Match over, team " + winningTeam + " won");
 	}
 
 	public void quickSettings(string[] data)

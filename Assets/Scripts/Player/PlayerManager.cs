@@ -49,20 +49,12 @@ public class PlayerManager : MonoBehaviour
 
 	public Vector3 aimPointOffset;
 
-	public int coins = 0;
-	public float coinsGivenOnDeath = 1;
-	public TextMeshProUGUI coinText;
+	[SerializeField] GameManager gameManager;
 
 	void Start()
 	{
 		Invoke("initializeHealth", 1f);
 		postVolume.profile.TryGetSettings(out vignette);
-	}
-
-	public void addCoins(int _coins)
-	{
-		coins += _coins;
-		coinText.text = "$" + coins;
 	}
 
 	private void Update()
@@ -146,6 +138,7 @@ public class PlayerManager : MonoBehaviour
 	{
 		transform.position = spawnPoints[team].position;
 		SetHealth((int)(maxHealth * AbilityManager.Instance.getMultiplier("health")));
+		menuController.spawn();
 	}
 
 	public void setTeam(int _team)
@@ -164,25 +157,23 @@ public class PlayerManager : MonoBehaviour
 		{
 			OtherClient otherClient = serverEvents.getOtherClientScriptByID(attackerID);
 			killFeed.createNewFeed(otherClient.username, Client.username);
-
-			serverEvents.sendDirectEvent("changeCoins", new string[] { coinsGivenOnDeath + "" }, attackerID);
 		}
 
 		currentLife++;
-		menuController.triggerDeathMenu();
 
-		foreach (GameObject weapon in WeaponSwitcher.Instance.weaponInventory)
+		/*foreach (GameObject weapon in WeaponSwitcher.Instance.weaponInventory)
 		{
 			if (weapon.GetComponent<WeaponSystem>() != null)
 			{
 				weapon.GetComponent<WeaponSystem>().currentAmmo = WeaponSystem.Instance.crntAmmoReset;
 			}
-		}
-
+		}*/
 
 		healthText.text = health.ToString();
+		menuController.death();
 
-		string[] sendData = { Client.ID + "", health + "", currentLife + "" };
-		serverEvents.sendEventToOtherClients("setHealth", sendData);
+		//string[] sendData = { Client.ID + "", health + "", currentLife + "" };
+		serverEvents.sendEventToOtherClients("otherPlayerDied", new string[] { Client.ID + "" });
+		gameManager.checkMatchStatus();
 	}
 }

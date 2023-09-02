@@ -1,6 +1,8 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,20 +24,26 @@ public class MenuController : MonoBehaviour
 	public GameObject TeamSelection;
 
 	public GameObject deathScreen;
+	public GameObject lobbyScreen;
+	public GameObject lobbyStartButton;
+	public TextMeshProUGUI matchTimerText;
 	public AbilityManager abilityManager;
 
-	public bool buyMenu = false;
-	public bool deathMenu = false;
-	public bool mainMenu = true;
+	public static bool buyMenu = false;
+	public static bool deathMenu = false;
+	public static bool mainMenu = false;
+	public static bool lobby = false;
+	public static bool countdown = false;
+	public static bool dead = false;
 
 	public GameObject buyScreenObject;
-
+	public ServerEvents serverEvents;
 
 	private void Update()
 	{
-		menu = buyMenu || deathMenu || mainMenu;
+		menu = buyMenu || deathMenu || mainMenu || lobby || countdown || dead;
 
-		if (menu)
+		if (menu && !countdown)
 		{
 			Cursor.lockState = CursorLockMode.None;
 		}
@@ -43,37 +51,70 @@ public class MenuController : MonoBehaviour
 		{
 			Cursor.lockState = CursorLockMode.Locked;
 		}
+
+		lobbyStartButton.SetActive(Client.owner);
+
+		if (GameManager.matchTimer > 0)
+		{
+			matchTimerText.gameObject.SetActive(true);
+			matchTimerText.text = Mathf.Round(GameManager.matchTimer * 10) / 10 + "";
+			GameManager.matchTimer -= Time.deltaTime;
+			countdown = true;
+		}
+		else
+		{
+			countdown = false;
+			matchTimerText.gameObject.SetActive(false);
+		}
 	}
 
-	public void triggerDeathMenu()
+	public void setLobbyMenu(bool enable)
+	{
+		setSpectate(enable);
+		lobby = enable;
+		lobbyScreen.SetActive(enable);
+	}
+
+	public void sendStartGameEvent()
+	{
+		serverEvents.sendGlobalEvent("startGame", new string[] { GameManager.rounds + ""});	
+
+		setLobbyMenu(false);
+		
+		//put some checks to make sure that there is 2 or more players
+		//also check for team balance
+	}
+
+	public void death()
+	{
+		setSpectate(true);
+		dead = true;
+	}
+	public void spawn()
+	{
+		setSpectate(false);
+		dead = false;
+	}
+
+	public void setDeathMenu(bool enable)
 	{
 		abilityManager.updateKillMenu();
 		abilityManager.chooseSelectable();
-		setSpectate(true);
-		deathScreen.SetActive(true);
-		deathMenu = true;
-	}
-
-	public void closeDeathScreen()
-	{
-		setSpectate(false);
-		deathScreen.SetActive(false);
-		deathMenu = false;
-		playerManager.respawn();
+		deathScreen.SetActive(enable);
+		deathMenu = enable;
 	}
 
 	private void Awake()
 	{
 		deathScreen.SetActive(false);
-		menuParent.SetActive(true);
-		setSpectate(true);
+		menuParent.SetActive(false);
+		TeamSelection.SetActive(false);
+		setLobbyMenu(true);
 
-		Cursor.lockState = CursorLockMode.None;
 		playerControls = new PlayerControls();
 
 		playerControls.UI.toggleMenu.performed += mainMenuKey;
 		playerControls.Weapon.BuyScreen.performed += buyMenuKey;
-		TeamSelection.SetActive(true);
 	}
 
     private void OnEnable()

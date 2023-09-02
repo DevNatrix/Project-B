@@ -60,7 +60,6 @@ public class Client : MonoBehaviour
 
 	private void Start()
 	{
-		Debug.Log("You are the server owner");
 
 		lastGottenPingTime = Time.time;
 		lostConnection = false;
@@ -70,6 +69,7 @@ public class Client : MonoBehaviour
 			SceneManager.LoadScene(0);
 			return;
 		}
+		Debug.Log("You are the server owner");
 
 		UDP_PORT = Lobby.bestUDPPort;
 		TCP_PORT = Lobby.bestTCPPort;
