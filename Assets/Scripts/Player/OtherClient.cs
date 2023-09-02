@@ -71,6 +71,8 @@ public class OtherClient : MonoBehaviour
 	Transform friendlyScoreboardParent;
 	Transform enemyScoreboardParent;
 
+	public int defaultTeam = 0;
+
 	public void SetHealth(int _health, int newCurrentLife)
 	{
 		health = _health;
@@ -142,7 +144,7 @@ public class OtherClient : MonoBehaviour
 		enemyScoreboardParent = GameObject.Find("EnemyTeam").transform;
 		friendlyScoreboardParent = GameObject.Find("YourTeam").transform;
 
-		scoreboardPeice = Instantiate(scoreboardPrefab).GetComponent<PlayerListItemUI>();
+		setTeam(defaultTeam);
 	}
 
 	public void setInfo(int _ID, string _username)
@@ -151,6 +153,7 @@ public class OtherClient : MonoBehaviour
 		username = _username;
 		usernameText.text = username;
 
+		scoreboardPeice = Instantiate(scoreboardPrefab).GetComponent<PlayerListItemUI>();
 		scoreboardPeice.setStartInfo(username);
 	}
 

@@ -147,8 +147,6 @@ public class PlayerManager : MonoBehaviour
 		Debug.Log("Joined team " + team);
 
 		serverEvents.sendEventToOtherClients("setClientTeam", new string[] { Client.ID + "", team + "", "false" });
-		
-		respawn();
 	}
 
 	public void Death(int health, int attackerID)

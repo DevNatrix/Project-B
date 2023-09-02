@@ -56,7 +56,7 @@ public class Client : MonoBehaviour
 	int tcpProcessErrors = 0;
 	public float maxSecondsBeforeDisconnect = 3f;
 
-	public static bool owner = true;
+	public static bool owner;
 
 	private void Start()
 	{
@@ -69,6 +69,7 @@ public class Client : MonoBehaviour
 			SceneManager.LoadScene(0);
 			return;
 		}
+		owner = true;
 		Debug.Log("You are the server owner");
 
 		UDP_PORT = Lobby.bestUDPPort;
