@@ -43,6 +43,9 @@ public class MenuController : MonoBehaviour
 	public Image team0ButtonImage;
 	public Image team1ButtonImage;
 
+	public Transform enemyScoreboardParent;
+	public Transform friendlyScoreboardParent;
+
 	private void Update()
 	{
 		menu = buyMenu || deathMenu || mainMenu || lobby || countdown || dead;

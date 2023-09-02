@@ -138,8 +138,8 @@ public class OtherClient : MonoBehaviour
 		playerCam = GameObject.Find("Main Camera").transform;
 		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
 
-		enemyScoreboardParent = GameObject.Find("EnemyTeam").transform;
-		friendlyScoreboardParent = GameObject.Find("YourTeam").transform;
+		enemyScoreboardParent = GameObject.Find("Canvas").GetComponent<MenuController>().enemyScoreboardParent;
+		friendlyScoreboardParent = GameObject.Find("Canvas").GetComponent<MenuController>().friendlyScoreboardParent;
 
 		setTeam(defaultTeam);
 	}
@@ -182,6 +182,7 @@ public class OtherClient : MonoBehaviour
 
 	public void setTeam(int _team)
 	{
+		Debug.Log("Other player team is now " + _team);
 		team = _team;
 
 		updateTeamThings(PlayerManager.team == team);
@@ -195,7 +196,8 @@ public class OtherClient : MonoBehaviour
 			friendlyUI.SetActive(true);
 			enemyUI.SetActive(false);
 
-			scoreboardPeice.transform.SetParent(friendlyScoreboardParent);
+			scoreboardPeice.gameObject.transform.SetParent(friendlyScoreboardParent);
+			Debug.Log(enemyScoreboardParent);
 		}
 		else
 		{
@@ -203,7 +205,8 @@ public class OtherClient : MonoBehaviour
 			enemyUI.SetActive(true);
 			friendlyUI.SetActive(false);
 
-			scoreboardPeice.transform.SetParent(enemyScoreboardParent);
+			scoreboardPeice.gameObject.transform.SetParent(enemyScoreboardParent);
+			Debug.Log(enemyScoreboardParent);
 		}
 	}
 
