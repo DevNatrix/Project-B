@@ -110,8 +110,11 @@ public class PlayerManager : MonoBehaviour
 
     public void TakeDamage(int damage, int attackerID)
 	{
-		SetHealth(health - damage, attackerID);
-		vignette.intensity.value = hitBloodIntensity;
+		if (!GameManager.dead)
+		{
+			SetHealth(health - damage, attackerID);
+			vignette.intensity.value = hitBloodIntensity;
+		}
 	}
 
 	public void SetHealth(int _health, int attackerID = -1)

@@ -35,7 +35,7 @@ public class MenuController : MonoBehaviour
 	public static bool mainMenu = false;
 	public static bool lobby = false;
 	public static bool countdown = false;
-	public static bool dead = false;
+	//public static bool dead = false;
 
 	public GameObject buyScreenObject;
 	public ServerEvents serverEvents;
@@ -50,7 +50,7 @@ public class MenuController : MonoBehaviour
 
 	private void Update()
 	{
-		menu = buyMenu || deathMenu || mainMenu || lobby || countdown || dead;
+		menu = buyMenu || deathMenu || mainMenu || lobby || countdown || GameManager.dead;
 
 		if (menu && !countdown)
 		{
@@ -108,12 +108,12 @@ public class MenuController : MonoBehaviour
 	public void death()
 	{
 		setSpectate(true);
-		dead = true;
+		GameManager.dead = true;
 	}
 	public void spawn()
 	{
 		setSpectate(false);
-		dead = false;
+		GameManager.dead = false;
 	}
 
 	public void setDeathMenu(bool enable)

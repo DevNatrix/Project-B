@@ -11,13 +11,14 @@ public class GameManager : MonoBehaviour
 	public static float team0MatchCount = 0;
 	public static float team1MatchCount = 0;
 	public static bool matchInProgress = false;
+	public static bool dead = false;
 
 	[SerializeField] ServerEvents serverEvents;
 
 	public void checkMatchStatus()
 	{
 		int aliveTeam = -1;
-		if (!MenuController.dead)
+		if (!GameManager.dead)
 		{
 			aliveTeam = PlayerManager.team;
 		}
