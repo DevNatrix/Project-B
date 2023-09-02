@@ -61,10 +61,12 @@ public class WeaponSystem : MonoBehaviour
 	Transform weaponContainer;
 
     [HideInInspector] public int crntAmmoReset;
+    [HideInInspector] public int ammoReserve;
 
     private void Start()
     {
         crntAmmoReset = currentAmmo;
+        ammoReserve = AmmoInReserve;
     }
 
     private void Awake()

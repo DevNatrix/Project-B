@@ -148,13 +148,14 @@ public class PlayerManager : MonoBehaviour
 
 		currentLife++;
 
-		/*foreach (GameObject weapon in WeaponSwitcher.Instance.weaponInventory)
+		foreach (GameObject weapon in WeaponSwitcher.Instance.weaponInventory)
 		{
-			if (weapon.GetComponent<WeaponSystem>() != null)
-			{
-				weapon.GetComponent<WeaponSystem>().currentAmmo = WeaponSystem.Instance.crntAmmoReset;
+			if(weapon != null && weapon.GetComponent<WeaponSystem>() != null)
+            {
+				weapon.GetComponent<WeaponSystem>().currentAmmo = weapon.GetComponent<WeaponSystem>().crntAmmoReset;
+				weapon.GetComponent<WeaponSystem>().AmmoInReserve = weapon.GetComponent<WeaponSystem>().ammoReserve;
 			}
-		}*/
+		}
 
 		healthText.text = health.ToString();
 		menuController.death();
