@@ -6,35 +6,16 @@ using TMPro;
 
 public class PlayerListItemUI : MonoBehaviour
 {
-    public TextMeshProUGUI PlayerName;
-    public RawImage PlayerIcon;
-    public TextMeshProUGUI PingText;
-    public TextMeshProUGUI DisplayKills;
+    public TextMeshProUGUI usernameText;
+    public TextMeshProUGUI pingText;
 
-    public int playerKills, playerDeaths, playerAssists = 0;
-
-    void OnEnable()
+    public void setStartInfo(string username)
     {
-        StartCoroutine(UpdatePing());
+        usernameText.text = username;
     }
 
-    private void Update()
-    {
-        PlayerName.text = SteamHandler.usernameSteam;
-
-        DisplayKills.text = playerKills.ToString() + "/" + playerDeaths.ToString() + "/" + playerAssists.ToString();
-    }
-
-    IEnumerator UpdatePing()
-    {
-        PingText.text = Client.latency.ToString() + "ms";
-        yield return new WaitForSeconds(0.5f);
-        StartCoroutine(UpdatePing());
-    }
-
-    public void Setup(string _PlayerName, Texture2D _PlayerIcon)
-    {
-        PlayerName.text = _PlayerName;
-        PlayerIcon.texture = _PlayerIcon;
-    }
+	public void updatePing(int ping)
+	{
+		pingText.text = ping + "";
+	}
 }
