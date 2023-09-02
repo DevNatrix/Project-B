@@ -32792,6 +32792,7 @@ GameObject:
   - component: {fileID: 1836363836}
   - component: {fileID: 1836363837}
   - component: {fileID: 1836363838}
+  - component: {fileID: 1836363839}
   m_Layer: 0
   m_Name: game manager
   m_TagString: Untagged
@@ -32852,6 +32853,8 @@ MonoBehaviour:
   killFeed: {fileID: 643860530}
   abilityManager: {fileID: 1836363838}
   weaponSwitcher: {fileID: 4589314065117614147}
+  menuController: {fileID: 643860529}
+  gameManager: {fileID: 1836363839}
 --- !u!114 &1836363831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33012,6 +33015,19 @@ MonoBehaviour:
   menuController: {fileID: 643860529}
   defaultStep: 0.1
   defaultMaxMult: 999
+--- !u!114 &1836363839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836363826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fc5d9c2e8f14445b615759d3880b42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverEvents: {fileID: 1836363827}
 --- !u!1 &1837425071
 GameObject:
   m_ObjectHideFlags: 0
@@ -39605,6 +39621,7 @@ MonoBehaviour:
     m_Bits: 262280
   crosshair: {fileID: 8552368880924771099}
   aimPointOffset: {x: -0.02, y: 0.312, z: 0}
+  gameManager: {fileID: 1836363839}
 --- !u!114 &7656093453908861211
 MonoBehaviour:
   m_ObjectHideFlags: 0

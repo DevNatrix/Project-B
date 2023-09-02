@@ -15,6 +15,8 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] KillFeed killFeed;
 	[SerializeField] AbilityManager abilityManager;
 	[SerializeField] WeaponSwitcher weaponSwitcher;
+	[SerializeField] MenuController menuController;
+	[SerializeField] GameManager gameManager;
 
 
 
@@ -58,6 +60,10 @@ public class CustomEvents : MonoBehaviour
 		{
 			serverEvents.sendGlobalEvent("startRound", new string[] { GameManager.matches + "" });
 		}
+		else//lobby menu is turned off for the owner locally for no delay
+		{
+			menuController.setLobbyMenu(false); 
+		}
 		Debug.Log("started game");
 	}
 	public void startRound(string[] data)
@@ -66,17 +72,47 @@ public class CustomEvents : MonoBehaviour
 		GameManager.matches = int.Parse(data[0]);
 		if (Client.owner)
 		{
-			serverEvents.sendGlobalEvent("startMatch", new string[] { GameManager.matchTimerStart + "" });
+			serverEvents.sendGlobalEvent("startMatch", new string[] { GameManager.matchTimerStart + "", 0 + "", 0 + ""});
 		}
+		GameManager.team0MatchCount = 0;
+		GameManager.team1MatchCount = 0;
 	}
 	public void startMatch(string[] data)
 	{
-		Debug.Log("started match");
 		GameManager.matchTimer = int.Parse(data[0]);
+		GameManager.team0MatchCount = int.Parse(data[1]);
+		GameManager.team1MatchCount = int.Parse(data[2]);
+		Debug.Log("started match: " + GameManager.team0MatchCount + " to " + GameManager.team1MatchCount);
+		StartCoroutine(setMatchActive());
 		playerManager.respawn();
+
+		foreach(OtherClient otherClient in serverEvents.otherClientList)
+		{
+			otherClient.dead = false;
+		}
 	}
 
+	IEnumerator setMatchActive()
+	{
+		yield return new WaitForSeconds(GameManager.matchTimer);
+		GameManager.matchInProgress = true;
 
+		yield return null;
+	}
+
+	public void otherPlayerDied(string[] data)
+	{
+		int otherClientID = int.Parse(data[0]);
+		serverEvents.getOtherClientScriptByID(otherClientID).dead = true;
+
+		gameManager.checkMatchStatus();
+	}
+
+	public void teamWon(string[] data)
+	{
+		int winningTeam = int.Parse(data[0]);
+		Debug.Log("Match over, team " + winningTeam + " won");
+	}
 
 	public void quickSettings(string[] data)
 	{

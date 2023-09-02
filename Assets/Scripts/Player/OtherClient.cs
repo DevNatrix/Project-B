@@ -63,6 +63,8 @@ public class OtherClient : MonoBehaviour
 	[SerializeField] float minXRot;
 	[SerializeField] float maxXRot;
 
+	[HideInInspector] public bool dead;
+
 	public void SetHealth(int _health, int newCurrentLife)
 	{
 		health = _health;

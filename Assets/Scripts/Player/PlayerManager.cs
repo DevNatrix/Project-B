@@ -49,6 +49,8 @@ public class PlayerManager : MonoBehaviour
 
 	public Vector3 aimPointOffset;
 
+	[SerializeField] GameManager gameManager;
+
 	void Start()
 	{
 		Invoke("initializeHealth", 1f);
@@ -171,6 +173,7 @@ public class PlayerManager : MonoBehaviour
 		menuController.death();
 
 		//string[] sendData = { Client.ID + "", health + "", currentLife + "" };
-		//serverEvents.sendEventToOtherClients("setHealth", sendData);
+		serverEvents.sendEventToOtherClients("otherPlayerDied", new string[] { Client.ID + "" });
+		gameManager.checkMatchStatus();
 	}
 }
