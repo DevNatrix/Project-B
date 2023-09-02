@@ -65,6 +65,14 @@ public class OtherClient : MonoBehaviour
 
 	[HideInInspector] public bool dead;
 
+	[SerializeField] GameObject scoreboardPrefab;
+	PlayerListItemUI scoreboardPeice;
+
+	Transform friendlyScoreboardParent;
+	Transform enemyScoreboardParent;
+
+	public int defaultTeam = 0;
+
 	public void SetHealth(int _health, int newCurrentLife)
 	{
 		health = _health;
@@ -82,8 +90,6 @@ public class OtherClient : MonoBehaviour
 		
 		leftTarget.rotation = weaponLeftTarget.rotation;
 		rightTarget.rotation = weaponRightTarget.rotation;
-
-
 
 		lerpPercent = (Time.time - pastUpdateTime) / (1 / (float)Client.transformTPS);
 
@@ -134,6 +140,11 @@ public class OtherClient : MonoBehaviour
 	{
 		playerCam = GameObject.Find("Main Camera").transform;
 		serverEvents = GameObject.Find("game manager").GetComponent<ServerEvents>();
+
+		enemyScoreboardParent = GameObject.Find("EnemyTeam").transform;
+		friendlyScoreboardParent = GameObject.Find("YourTeam").transform;
+
+		setTeam(defaultTeam);
 	}
 
 	public void setInfo(int _ID, string _username)
@@ -141,6 +152,9 @@ public class OtherClient : MonoBehaviour
 		ID = _ID;
 		username = _username;
 		usernameText.text = username;
+
+		scoreboardPeice = Instantiate(scoreboardPrefab).GetComponent<PlayerListItemUI>();
+		scoreboardPeice.setStartInfo(username);
 	}
 
 	public void setTransform(Vector3 position, Quaternion rotation, bool _isSliding)
@@ -183,12 +197,16 @@ public class OtherClient : MonoBehaviour
 			clientRenderer.material = friendlyMaterial;
 			friendlyUI.SetActive(true);
 			enemyUI.SetActive(false);
+
+			scoreboardPeice.transform.SetParent(friendlyScoreboardParent);
 		}
 		else
 		{
 			clientRenderer.material = opponentMaterial;
 			enemyUI.SetActive(true);
 			friendlyUI.SetActive(false);
+
+			scoreboardPeice.transform.SetParent(enemyScoreboardParent);
 		}
 	}
 

@@ -7,26 +7,28 @@ using Steamworks;
 
 public class PlayerListItem : MonoBehaviour
 {
-
-    public Texture2D PlayerIcon;
-    public TextMeshProUGUI PingText;
-    public TextMeshProUGUI PlayerNameText;
-    public PlayerListItemUI PlayerListItemPrefab;
+    //public Texture2D PlayerIcon;
+    //public TextMeshProUGUI PingText;
+    //public TextMeshProUGUI PlayerNameText;
+    public GameObject PlayerListItemPrefab;
+    public static PlayerListItemUI playerListItemUI;
     public Transform YourTeam;
+    public Transform EnemyTeam;
 
-    CSteamID cSteamId;
+	//CSteamID cSteamId;
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+
+	void Start()
     {
-        cSteamId = SteamUser.GetSteamID();
+		//cSteamId = SteamUser.GetSteamID();
 
-        HandleSteamID((ulong)cSteamId);
-        PlayerListItemUI newPlayerListItem = Instantiate(PlayerListItemPrefab, YourTeam);
-        newPlayerListItem.Setup(SteamHandler.usernameSteam, PlayerIcon);
+		//HandleSteamID((ulong)cSteamId);
+		playerListItemUI = Instantiate(PlayerListItemPrefab, YourTeam).GetComponent<PlayerListItemUI>();
+		playerListItemUI.setStartInfo("you");
     }
 
-    public void HandleSteamID(ulong newSteamId)
+    /*public void HandleSteamID(ulong newSteamId)
     {
         cSteamId = new CSteamID(newSteamId);
         int imageId = SteamFriends.GetLargeFriendAvatar(cSteamId);
@@ -56,5 +58,5 @@ public class PlayerListItem : MonoBehaviour
         }
 
         return ret;
-    }
+    }*/
 }

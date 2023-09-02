@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
@@ -21,7 +22,6 @@ public class MenuController : MonoBehaviour
 
 	public Camera spectateCam;
 	public GameObject InGameGUI;
-	public GameObject TeamSelection;
 
 	public GameObject deathScreen;
 	public GameObject lobbyScreen;
@@ -38,6 +38,9 @@ public class MenuController : MonoBehaviour
 
 	public GameObject buyScreenObject;
 	public ServerEvents serverEvents;
+
+	public Image team0ButtonImage;
+	public Image team1ButtonImage;
 
 	private void Update()
 	{
@@ -108,7 +111,6 @@ public class MenuController : MonoBehaviour
 	{
 		deathScreen.SetActive(false);
 		menuParent.SetActive(false);
-		TeamSelection.SetActive(false);
 		setLobbyMenu(true);
 
 		playerControls = new PlayerControls();
@@ -173,8 +175,16 @@ public class MenuController : MonoBehaviour
 	{
 		playerManager.setTeam(team);
 
-		setSpectate(false);
-		toggleMainMenu();
+		if(team == 0)
+		{
+			team0ButtonImage.color = Color.white;
+			team1ButtonImage.color = Color.gray;
+		}
+		else
+		{
+			team1ButtonImage.color = Color.white;
+			team0ButtonImage.color = Color.gray;
+		}
 	}
 
 	public void setSpectate(bool isEnabled)

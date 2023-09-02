@@ -1445,6 +1445,10 @@ MonoBehaviour:
   shoulder: {fileID: 2327105830185443202}
   minXRot: -35
   maxXRot: 30
+  dead: 0
+  scoreboardPrefab: {fileID: 4843274484820739331, guid: d3da77341b4c1b1449953db94496b47b, type: 3}
+  friendlyScoreboardParent: {fileID: 0}
+  enemyScoreboardParent: {fileID: 0}
 --- !u!114 &5857043976677814690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1459,6 +1463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2585917189629041350}
   otherClient: {fileID: 3525063224815408862}
+  playerRB: {fileID: 0}
+  localPlayer: 0
   directionChangeSpeedVertical: 20
   directionChangeSpeedHorizontal: 20
   direction: {x: 0, y: 0}
