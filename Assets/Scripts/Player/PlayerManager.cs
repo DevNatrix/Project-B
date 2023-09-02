@@ -120,7 +120,7 @@ public class PlayerManager : MonoBehaviour
 
 		if (health <= 0)
 		{
-			Death(_health, attackerID);
+			Death(attackerID);
 		}
 	}
 
@@ -129,6 +129,8 @@ public class PlayerManager : MonoBehaviour
 		transform.position = spawnPoints[team].position;
 		SetHealth((int)(maxHealth * AbilityManager.Instance.getMultiplier("health")));
 		menuController.spawn();
+
+		reloadAllGuns();
 	}
 
 	public void setTeam(int _team)
@@ -138,23 +140,12 @@ public class PlayerManager : MonoBehaviour
 		serverEvents.sendEventToOtherClients("setClientTeam", new string[] { Client.ID + "", team + "", "false" });
 	}
 
-	public void Death(int health, int attackerID)
+	public void Death(int attackerID = -1)
 	{
 		if (attackerID != -1)
 		{
 			OtherClient otherClient = serverEvents.getOtherClientScriptByID(attackerID);
 			killFeed.createNewFeed(otherClient.username, Client.username);
-		}
-
-		currentLife++;
-
-		foreach (GameObject weapon in WeaponSwitcher.Instance.weaponInventory)
-		{
-			if(weapon != null && weapon.GetComponent<WeaponSystem>() != null)
-            {
-				weapon.GetComponent<WeaponSystem>().currentAmmo = weapon.GetComponent<WeaponSystem>().crntAmmoReset;
-				weapon.GetComponent<WeaponSystem>().AmmoInReserve = weapon.GetComponent<WeaponSystem>().ammoReserve;
-			}
 		}
 
 		healthText.text = health.ToString();
@@ -163,5 +154,17 @@ public class PlayerManager : MonoBehaviour
 		//string[] sendData = { Client.ID + "", health + "", currentLife + "" };
 		serverEvents.sendEventToOtherClients("otherPlayerDied", new string[] { Client.ID + "" });
 		gameManager.checkMatchStatus();
+	}
+
+	public void reloadAllGuns()
+	{
+		foreach (GameObject weapon in WeaponSwitcher.Instance.weaponInventory)
+		{
+			if (weapon != null && weapon.GetComponent<WeaponSystem>() != null)
+			{
+				weapon.GetComponent<WeaponSystem>().currentAmmo = weapon.GetComponent<WeaponSystem>().crntAmmoReset;
+				weapon.GetComponent<WeaponSystem>().AmmoInReserve = weapon.GetComponent<WeaponSystem>().ammoReserve;
+			}
+		}
 	}
 }
