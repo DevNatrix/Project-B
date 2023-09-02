@@ -45,6 +45,8 @@ public class MenuController : MonoBehaviour
 
 	public Transform enemyScoreboardParent;
 	public Transform friendlyScoreboardParent;
+	public TextMeshProUGUI matchText;
+	public GameObject matchStartParent;
 
 	private void Update()
 	{
@@ -64,15 +66,25 @@ public class MenuController : MonoBehaviour
 
 		if (GameManager.matchTimer > 0)
 		{
-			matchTimerText.gameObject.SetActive(true);
+			matchStartParent.SetActive(true);
 			matchTimerText.text = Mathf.Round(GameManager.matchTimer * 10) / 10 + "";
+
 			GameManager.matchTimer -= Time.deltaTime;
 			countdown = true;
+
+			if(PlayerManager.team == 0)
+			{
+				matchText.text = GameManager.team0MatchCount + " - " + GameManager.team1MatchCount;
+			}
+			else
+			{
+				matchText.text = GameManager.team1MatchCount + " - " + GameManager.team0MatchCount;
+			}
 		}
 		else
 		{
 			countdown = false;
-			matchTimerText.gameObject.SetActive(false);
+			matchStartParent.SetActive(false);
 		}
 	}
 

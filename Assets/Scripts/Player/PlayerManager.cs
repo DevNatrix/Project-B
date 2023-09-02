@@ -134,7 +134,6 @@ public class PlayerManager : MonoBehaviour
 	public void setTeam(int _team)
 	{
 		team = _team;
-		Debug.Log("Joined team " + team);
 
 		serverEvents.sendEventToOtherClients("setClientTeam", new string[] { Client.ID + "", team + "", "false" });
 	}

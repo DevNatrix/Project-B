@@ -182,7 +182,6 @@ public class OtherClient : MonoBehaviour
 
 	public void setTeam(int _team)
 	{
-		Debug.Log("Other player team is now " + _team);
 		team = _team;
 
 		updateTeamThings(PlayerManager.team == team);
@@ -212,8 +211,6 @@ public class OtherClient : MonoBehaviour
 
 	public void setEquippedWeapon(int newWeapon)
 	{
-		Debug.Log("Client " + ID + " equipped weapon " + newWeapon);
-
 		//set only new weapon active
 		currentWeapon.SetActive(false);
 		currentWeapon = weapons[newWeapon];
