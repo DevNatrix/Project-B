@@ -172,7 +172,7 @@ public class WeaponSystem : MonoBehaviour
 
                     int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
                     OtherClient hitClientScript = serverEvents.getOtherClientScriptByID(clientID);
-                    serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(), hitClientScript.currentLife + "", Client.ID + "" }, clientID);
+                    serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(), Client.ID + "" }, clientID);
                 }
             }
             
@@ -207,7 +207,7 @@ public class WeaponSystem : MonoBehaviour
 						moddedDamage = (int)(damage * AbilityManager.Instance.getMultiplier("damage"));
 					}
 
-					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(), hitClientScript.currentLife + "",  Client.ID + ""}, clientID);
+					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(),  Client.ID + ""}, clientID);
                 }
 				else
 				{

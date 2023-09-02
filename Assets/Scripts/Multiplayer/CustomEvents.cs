@@ -232,10 +232,9 @@ public class CustomEvents : MonoBehaviour
 	public void damage(string[] data)
 	{
 		int damage = int.Parse(data[0]);
-		int attackedLife = int.Parse(data[1]);
-		int attackerID = int.Parse(data[2]);
+		int attackerID = int.Parse(data[1]);
 
-		playerManager.TakeDamage(damage, attackedLife, attackerID);
+		playerManager.TakeDamage(damage, attackerID);
 	}
 
 	public void setHealth(string[] data)
@@ -246,7 +245,7 @@ public class CustomEvents : MonoBehaviour
 
 		OtherClient otherClientScript = serverEvents.getOtherClientScriptByID(clientID);
 
-		otherClientScript.SetHealth(health, currentLife);
+		otherClientScript.SetHealth(health);
 	}
 
 	public void setClientTeam(string[] data)

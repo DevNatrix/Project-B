@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 	public static int rounds = 10;
 	public static int matches = 3;
 	public static float matchTimer = 0;
-	public static float matchTimerStart = 3;
+	public static float matchTimerStart = 2;
 	public static float team0MatchCount = 0;
 	public static float team1MatchCount = 0;
 	public static bool matchInProgress = false;

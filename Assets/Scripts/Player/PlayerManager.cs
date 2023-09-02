@@ -108,20 +108,10 @@ public class PlayerManager : MonoBehaviour
 		SetHealth(maxHealth);
 	}
 
-    public void TakeDamage(int damage, int attackedLife, int attackerID)
+    public void TakeDamage(int damage, int attackerID)
 	{
-		if(currentLife == attackedLife)
-		{
-			SetHealth(health - damage, attackerID);
-			vignette.intensity.value = hitBloodIntensity;
-			//set current life
-		}
-		else
-		{
-			string[] sendData = { Client.ID + "", health + "", currentLife + "" };
-			serverEvents.sendDirectEvent("setHealth", sendData, attackerID);
-			Debug.LogWarning("Client " + attackerID + " did damage in the past life " + attackedLife + " (current life is " + currentLife + ")");
-		}
+		SetHealth(health - damage, attackerID);
+		vignette.intensity.value = hitBloodIntensity;
 	}
 
 	public void SetHealth(int _health, int attackerID = -1)

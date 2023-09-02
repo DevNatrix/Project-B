@@ -39,7 +39,6 @@ public class OtherClient : MonoBehaviour
 	public int health;
 	public TextMeshProUGUI healthText;
 	public TextMeshProUGUI healthText2;
-	public int currentLife; //for keeping track of if a damage event is current or not
 
 	public float slideAngle;
 	bool isSliding = false;
@@ -73,13 +72,11 @@ public class OtherClient : MonoBehaviour
 
 	public int defaultTeam = 0;
 
-	public void SetHealth(int _health, int newCurrentLife)
+	public void SetHealth(int _health)
 	{
 		health = _health;
 		healthText.text = health + "";
 		healthText2.text = health + "";
-
-		currentLife = newCurrentLife;
 	}
 
 	private void Update()
