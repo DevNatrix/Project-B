@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 	public static float matchTimerStart = 2;
 	public static float team0MatchCount = 0;
 	public static float team1MatchCount = 0;
+	public static float team0RoundCount = 0;
+	public static float team1RoundCount = 0;
 	public static bool matchInProgress = false;
 	public static bool dead = false;
 
@@ -46,7 +48,22 @@ public class GameManager : MonoBehaviour
 		{
 			team1MatchCount++;
 		}
-		serverEvents.sendGlobalEvent("teamWon", new string[] { aliveTeam + "" });
+		serverEvents.sendGlobalEvent("teamWonMatch", new string[] { aliveTeam + "" });
+		
+		if(team0MatchCount >= matches || team1MatchCount >= matches) //if a team won the matches
+		{
+			if(aliveTeam == 0)
+			{
+				team0RoundCount++;
+			}
+			else { 
+				team1RoundCount++; 
+			}
+
+			serverEvents.sendGlobalEvent("teamWonRound", new string[] { aliveTeam + ""});
+			serverEvents.sendGlobalEvent("startRound", new string[] { matches + "", team0RoundCount + "", team1RoundCount + "" });
+
+		}
 		serverEvents.sendGlobalEvent("startMatch", new string[] { matchTimerStart + "", team0MatchCount + "", team1MatchCount + "" });
 		matchInProgress = false;
 	}

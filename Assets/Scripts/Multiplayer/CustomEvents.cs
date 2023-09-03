@@ -58,7 +58,7 @@ public class CustomEvents : MonoBehaviour
 
 		if (Client.owner)
 		{
-			serverEvents.sendGlobalEvent("startRound", new string[] { GameManager.matches + "" });
+			serverEvents.sendGlobalEvent("startRound", new string[] { GameManager.matches + "", 0 + "", 0 + "" });
 		}
 		else//lobby menu is turned off for the owner locally for no delay
 		{
@@ -70,6 +70,9 @@ public class CustomEvents : MonoBehaviour
 	{
 		Debug.Log("started round");
 		GameManager.matches = int.Parse(data[0]);
+		GameManager.team0RoundCount = int.Parse(data[1]);
+		GameManager.team1RoundCount = int.Parse(data[2]);
+
 		if (Client.owner)
 		{
 			serverEvents.sendGlobalEvent("startMatch", new string[] { GameManager.matchTimerStart + "", 0 + "", 0 + ""});
@@ -108,10 +111,15 @@ public class CustomEvents : MonoBehaviour
 		gameManager.checkMatchStatus();
 	}
 
-	public void teamWon(string[] data)
+	public void teamWonMatch(string[] data)
 	{
 		int winningTeam = int.Parse(data[0]);
 		Debug.Log("Match over, team " + winningTeam + " won");
+	}
+	public void teamWonRound(string[] data)
+	{
+		int winningTeam = int.Parse(data[0]);
+		Debug.Log("Round over, team " + winningTeam + " won");
 	}
 
 	public void quickSettings(string[] data)
