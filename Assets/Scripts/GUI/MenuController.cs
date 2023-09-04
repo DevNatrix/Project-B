@@ -31,10 +31,10 @@ public class MenuController : MonoBehaviour
 	public AbilityManager abilityManager;
 
 	public static bool buyMenu = false;
-	public static bool deathMenu = false;
 	public static bool mainMenu = false;
 	public static bool lobby = false;
 	public static bool countdown = false;
+	public static bool upgrading = false;
 	//public static bool dead = false;
 
 	public GameObject buyScreenObject;
@@ -49,9 +49,12 @@ public class MenuController : MonoBehaviour
 	public TextMeshProUGUI roundText;
 	public GameObject matchStartParent;
 
+	public GameObject upgradeMenu;
+	public Upgrades upgrades;
+
 	private void Update()
 	{
-		menu = buyMenu || deathMenu || mainMenu || lobby || countdown || GameManager.dead;
+		menu = buyMenu || mainMenu || lobby || countdown || GameManager.dead || upgrading;
 
 		if (menu && !countdown)
 		{
@@ -91,6 +94,16 @@ public class MenuController : MonoBehaviour
 		}
 	}
 
+	public void setUpgradeMenu(bool enable)
+	{
+		upgrading = enable;
+		upgradeMenu.SetActive(enable);
+		if(enable )
+		{
+			upgrades.openUpgrades();
+		}
+	}
+
 	public void setLobbyMenu(bool enable)
 	{
 		setSpectate(enable);
@@ -119,18 +132,11 @@ public class MenuController : MonoBehaviour
 		GameManager.dead = false;
 	}
 
-	public void setDeathMenu(bool enable)
-	{
-		abilityManager.updateKillMenu();
-		abilityManager.chooseSelectable();
-		deathScreen.SetActive(enable);
-		deathMenu = enable;
-	}
-
 	private void Awake()
 	{
 		deathScreen.SetActive(false);
 		menuParent.SetActive(false);
+		upgradeMenu.SetActive(false);
 		setLobbyMenu(true);
 
 		playerControls = new PlayerControls();
@@ -156,7 +162,7 @@ public class MenuController : MonoBehaviour
 	
 	private void buyMenuKey(InputAction.CallbackContext context)
 	{
-		if(!typing && !mainMenu && !deathMenu)
+		if(!typing && !mainMenu)
 		{
 			buyScreenObject.SetActive(!buyScreenObject.activeSelf);
 			buyMenu = buyScreenObject.activeSelf;

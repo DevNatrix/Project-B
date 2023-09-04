@@ -133,7 +133,7 @@ public class PlayerManager : MonoBehaviour
 	public void respawn()
 	{
 		transform.position = spawnPoints[team].position;
-		SetHealth((int)(maxHealth * AbilityManager.Instance.getMultiplier("health")));
+		SetHealth((int)(maxHealth));
 		menuController.spawn();
 
 		reloadAllGuns();

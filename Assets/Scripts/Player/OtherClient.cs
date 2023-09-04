@@ -71,6 +71,7 @@ public class OtherClient : MonoBehaviour
 	Transform enemyScoreboardParent;
 
 	public int defaultTeam = 0;
+	[HideInInspector] public bool doneUpgrading;
 
 	public void SetHealth(int _health)
 	{

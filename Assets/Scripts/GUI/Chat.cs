@@ -104,10 +104,7 @@ public class Chat : MonoBehaviour
 		else//process commands
 		{
 			string command = message.Substring(1, message.Length - 1);
-			if(command == "resetAbilities")
-			{
-				serverEvents.sendGlobalEvent("resetAbilities", new string[] { Lobby.username } );
-			}
+			
 			if(command == "die")
 			{
 				playerManager.SetHealth(0);

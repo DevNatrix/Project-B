@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class GameManager : MonoBehaviour
 		{
 			team0MatchCount++;
 		}
-		else if(aliveTeam == 1)
+		else// if(aliveTeam == 1) //comment "if" for debugging
 		{
 			team1MatchCount++;
 		}
@@ -62,10 +63,26 @@ public class GameManager : MonoBehaviour
 			}
 
 			serverEvents.sendGlobalEvent("teamWonRound", new string[] { aliveTeam + ""});
-			serverEvents.sendGlobalEvent("startRound", new string[] { matches + "", team0RoundCount + "", team1RoundCount + "" });
-
 		}
 		serverEvents.sendGlobalEvent("startMatch", new string[] { matchTimerStart + "", team0MatchCount + "", team1MatchCount + "" });
 		matchInProgress = false;
+	}
+
+	public void checkUpgradeStatus()
+	{
+		if (!Upgrades.doneUpgrading)
+		{
+			return;
+		}
+
+		foreach (OtherClient otherClient in serverEvents.otherClientList)
+		{
+			if (!otherClient.doneUpgrading)
+			{
+				return;
+			}
+		}
+		
+		serverEvents.sendGlobalEvent("startRound", new string[] { matches + "", team0RoundCount + "", team1RoundCount + "" });
 	}
 }

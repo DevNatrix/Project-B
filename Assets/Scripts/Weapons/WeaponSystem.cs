@@ -170,7 +170,7 @@ public class WeaponSystem : MonoBehaviour
             {
                 if(hit.transform.gameObject.GetComponent<OtherClient>())
                 {
-					int moddedDamage = (int)(damage * AbilityManager.Instance.getMultiplier("damage"));
+					int moddedDamage = (int)(damage);
 
                     int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
                     OtherClient hitClientScript = serverEvents.getOtherClientScriptByID(clientID);
@@ -184,7 +184,7 @@ public class WeaponSystem : MonoBehaviour
     {
        if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false && !MenuController.menu)
         {
-            nextFire = 1 / fireRate / AbilityManager.Instance.getMultiplier("fireRate");
+            nextFire = 1 / fireRate;
 
             //Shoot raycast
             Ray ray = new Ray(weaponContainer.position, weaponContainer.forward);
@@ -202,11 +202,11 @@ public class WeaponSystem : MonoBehaviour
 					int moddedDamage;
 					if (isHeadshot)
 					{
-						moddedDamage = (int)((float)damage * headshotMultiplier * AbilityManager.Instance.getMultiplier("damage"));
+						moddedDamage = (int)((float)damage * headshotMultiplier);
 					}
 					else
 					{
-						moddedDamage = (int)(damage * AbilityManager.Instance.getMultiplier("damage"));
+						moddedDamage = (int)(damage);
 					}
 
 					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(),  Client.ID + ""}, clientID);
@@ -231,7 +231,7 @@ public class WeaponSystem : MonoBehaviour
     {
         if(playerControls.Weapon.Reload.WasPressedThisFrame())
         {
-            if (currentAmmo < maxAmmo * AbilityManager.Instance.getMultiplier("clipSize") && AmmoInReserve > 0)
+            if (currentAmmo < maxAmmo && AmmoInReserve > 0)
             {
                 //Play Reload Animation
                 anim.SetBool("Reloading", true);
@@ -241,7 +241,7 @@ public class WeaponSystem : MonoBehaviour
 
     public void ReloadAmmo()
     {
-        int ammoToAdd = (int)(maxAmmo * AbilityManager.Instance.getMultiplier("clipSize")) - currentAmmo;
+        int ammoToAdd = (int)(maxAmmo) - currentAmmo;
         int clamped = Mathf.Min(ammoToAdd, AmmoInReserve);
         AmmoInReserve -= clamped;
         currentAmmo += clamped;

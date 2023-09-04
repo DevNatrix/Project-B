@@ -83,7 +83,10 @@ public class CustomEvents : MonoBehaviour
 		{
 			serverEvents.sendGlobalEvent("startMatch", new string[] { GameManager.matchTimerStart + "", 0 + "", 0 + ""});
 		}
+
+		menuController.setUpgradeMenu(false);
 	}
+
 	public void startMatch(string[] data)
 	{
 		GameManager.matchTimer = int.Parse(data[0]);
@@ -123,7 +126,26 @@ public class CustomEvents : MonoBehaviour
 	public void teamWonRound(string[] data)
 	{
 		int winningTeam = int.Parse(data[0]);
+
+		menuController.setUpgradeMenu(true);
+
+		foreach(OtherClient otherClient in serverEvents.otherClientList)
+		{
+			otherClient.doneUpgrading = false;
+		}
+
 		Debug.Log("Round over, team " + winningTeam + " won");
+	}
+
+	public void otherClientDoneUpgrading(string[] data)
+	{
+		int otherClientID = int.Parse(data[0]);
+
+		serverEvents.getOtherClientScriptByID(otherClientID).doneUpgrading = true;
+		if (Client.owner)
+		{
+			gameManager.checkUpgradeStatus();
+		}
 	}
 
 	public void quickSettings(string[] data)
@@ -136,7 +158,7 @@ public class CustomEvents : MonoBehaviour
 				string settingsTarget = settingsPeices[0];
 				if(settingsTarget == "ability")
 				{
-					abilityManager.newSettings(settingsPeices);
+					//abilityManager.newSettings(settingsPeices);
 				}
 				else if(settingsTarget == "player")
 				{
@@ -280,14 +302,6 @@ public class CustomEvents : MonoBehaviour
 		Vector3 bulletVel = ServerEvents.parseVector3(data[1]);
 
 		bulletManager.spawnBullet(bulletPos, bulletVel);
-	}
-
-	public void resetAbilities(string[] data)
-	{
-		string resetter = data[0];
-
-		abilityManager.resetUpgrades();
-		chat.serverMessage(resetter + " reset multipliers");
 	}
 
 	public void newDroppedWeapon(string[] data)

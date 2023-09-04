@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class AbilityManager : MonoBehaviour
 {
-	public static AbilityManager Instance;
+	/*public static AbilityManager Instance;
 
 	[HideInInspector] public List<float> multipliers;
 	List<float> steps;
@@ -121,5 +121,5 @@ public class AbilityManager : MonoBehaviour
 		}
 		Debug.LogError("Couldnt find multiplier " + name);
 		return 1;
-	}
+	}*/
 }
