@@ -182,7 +182,7 @@ public class WeaponSystem : MonoBehaviour
     }
     private void Shoot()
     {
-       if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false && !MenuController.menu)
+       if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false && !MenuController.weaponUseLocked)
         {
             nextFire = 1 / fireRate;
 

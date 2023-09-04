@@ -16,8 +16,6 @@ public class MenuController : MonoBehaviour
 	public GameObject menuParent;
 	public List<GameObject> subMenus;
 	public Client client;
-	[HideInInspector] public static bool menu;
-	[HideInInspector] public static bool typing = false;
 	public PlayerManager playerManager;
 
 	public Camera spectateCam;
@@ -30,12 +28,6 @@ public class MenuController : MonoBehaviour
 	public TextMeshProUGUI matchTimerText;
 	public AbilityManager abilityManager;
 
-	public static bool buyMenu = false;
-	public static bool mainMenu = false;
-	public static bool lobby = false;
-	public static bool countdown = false;
-	public static bool upgrading = false;
-	//public static bool dead = false;
 
 	public GameObject buyScreenObject;
 	public ServerEvents serverEvents;
@@ -51,12 +43,28 @@ public class MenuController : MonoBehaviour
 
 	public GameObject upgradeMenu;
 	public Upgrades upgrades;
+	
+	[HideInInspector] public static bool buyMenu = false;
+	[HideInInspector] public static bool mainMenu = false;
+	[HideInInspector] public static bool lobby = false;
+	[HideInInspector] public static bool upgrading = false;
+	[HideInInspector] public static bool countdown = false;
+	[HideInInspector] public static bool typing = false;
+
+	//locks
+	[HideInInspector] public static bool cursorUnlocked;
+	[HideInInspector] public static bool lookLocked;
+	[HideInInspector] public static bool movementLocked;
+	[HideInInspector] public static bool weaponUseLocked;
 
 	private void Update()
 	{
-		menu = buyMenu || mainMenu || lobby || countdown || GameManager.dead || upgrading;
+		cursorUnlocked = buyMenu || mainMenu || lobby || upgrading;
+		lookLocked = buyMenu || mainMenu || lobby || GameManager.dead || upgrading;
+		movementLocked = typing || countdown;
+		weaponUseLocked = buyMenu || mainMenu || lobby || upgrading || countdown || GameManager.dead;
 
-		if (menu && !countdown)
+		if (cursorUnlocked)
 		{
 			Cursor.lockState = CursorLockMode.None;
 		}

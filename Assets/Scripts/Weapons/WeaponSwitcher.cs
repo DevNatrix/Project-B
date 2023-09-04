@@ -109,7 +109,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     public void EquipWeapon()
     {
-		if(!MenuController.typing)
+		if(!MenuController.weaponUseLocked)
 		{
 			if (playerControls.Weapon.PrimaryWeapon.WasPerformedThisFrame())
 			{
@@ -225,7 +225,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     public void DropCurrentWeapon()
     {
-        if (playerControls.Weapon.Drop.WasPerformedThisFrame() && !MenuController.typing)
+        if (playerControls.Weapon.Drop.WasPerformedThisFrame() && !MenuController.weaponUseLocked)
         {
             if (currentSelectedWeapon != null && currentSelectedWeapon.GetComponent<WeaponSystem>().weaponType != WeaponSystem.WeaponType.Melee)
             {
