@@ -46,6 +46,7 @@ public class MenuController : MonoBehaviour
 	public Transform enemyScoreboardParent;
 	public Transform friendlyScoreboardParent;
 	public TextMeshProUGUI matchText;
+	public TextMeshProUGUI roundText;
 	public GameObject matchStartParent;
 
 	private void Update()
@@ -74,11 +75,13 @@ public class MenuController : MonoBehaviour
 
 			if(PlayerManager.team == 0)
 			{
-				matchText.text = GameManager.team0MatchCount + " - " + GameManager.team1MatchCount;
+				matchText.text = "Matches: " + GameManager.team0MatchCount + " - " + GameManager.team1MatchCount;
+				roundText.text = "Rounds: " + GameManager.team0RoundCount + " - " + GameManager.team1RoundCount;
 			}
 			else
 			{
-				matchText.text = GameManager.team1MatchCount + " - " + GameManager.team0MatchCount;
+				matchText.text = "Matches: " + GameManager.team1MatchCount + " - " + GameManager.team0MatchCount;
+				roundText.text = "Rounds: " + GameManager.team1RoundCount + " - " + GameManager.team0RoundCount;
 			}
 		}
 		else

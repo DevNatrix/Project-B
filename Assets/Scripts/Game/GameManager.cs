@@ -44,10 +44,11 @@ public class GameManager : MonoBehaviour
 		{
 			team0MatchCount++;
 		}
-		else
+		else if(aliveTeam == 1)
 		{
 			team1MatchCount++;
 		}
+
 		serverEvents.sendGlobalEvent("teamWonMatch", new string[] { aliveTeam + "" });
 		
 		if(team0MatchCount >= matches || team1MatchCount >= matches) //if a team won the matches
