@@ -18,38 +18,17 @@ public class Upgrades : MonoBehaviour
 	public static Upgrades instance;
 
 	List<UpgradeInfo> upgradeInfos;
-	public static List<bool> unlockedUpgrades;
-	public static List<int> upgradeLevels;
+	List<bool> unlockedUpgrades;
+	List<int> upgradeLevels;
 	List<string> upgradeNames;
 
-	public TextMeshProUGUI pointText;
+	public int healthPerLevel = 50;
+	public float damageMultPerLevel = .25f;
+	public float speedMultPerLevel = .5f;
+	public float headshotMultPerLevel = .1f;
+	public float firerateMultPerLevel = .2f;
 
-	/*upgrades to do:
-	 * health
-	 * heal
-	 * regen
-	 * shield
-	 * reflect damage
-	 * damage
-	 * charge shot
-	 * headshot mult
-	 * firerate
-	 * pierce players
-	 * wallhacks
-	 * multiple bullets
-	 * endless ammo 
-	 * no recoil
-	 * reload speed
-	 * clip size
-	 * instant reload
-	 * speed
-	 * dash
-	 * slash
-	 * double jump
-	 * recharge on hit
-	 * 
-	 * multple upgrades on one (health, damage, speed)
-	 */
+	public TextMeshProUGUI pointText;
 
 	private void Awake()
 	{
@@ -102,7 +81,13 @@ public class Upgrades : MonoBehaviour
 
 	public bool isUpgradeUnlocked(string upgradeName)
 	{
-		return unlockedUpgrades[upgradeNames.IndexOf(upgradeName)];
+		int upgradeID = upgradeNames.IndexOf(upgradeName);
+		if(upgradeID == -1)
+		{
+			Debug.LogError("Could not find upgrade " + upgradeName);
+			return false;
+		}
+		return unlockedUpgrades[upgradeID];
 	}
 
 	public bool isUpgradeUnlocked(int upgradeID)
@@ -112,7 +97,13 @@ public class Upgrades : MonoBehaviour
 
 	public int getUpgradeLevel(string upgradeName)
 	{
-		return upgradeLevels[upgradeNames.IndexOf(upgradeName)];
+		int upgradeID = upgradeNames.IndexOf(upgradeName);
+		if (upgradeID == -1)
+		{
+			Debug.LogError("Could not find upgrade " + upgradeName);
+			return 0;
+		}
+		return upgradeLevels[upgradeID];
 	}
 	public int getUpgradeLevel(int upgradeID)
 	{

@@ -141,7 +141,7 @@ public class WeaponSwitcher : MonoBehaviour
             currentSelectedWeapon.SetActive(true); // Equip the new weapon
 
 			WeaponSystem currentWeaponSystem = currentSelectedWeapon.GetComponent<WeaponSystem>();
-			Debug.Log(currentWeaponSystem);
+			//Debug.Log(currentWeaponSystem);
 			playerManager.leftHandTarget = currentWeaponSystem.leftHandTarget;
 			playerManager.rightHandTarget = currentWeaponSystem.rightHandTarget;
 

@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
 			else
 			{
 				serverEvents.sendGlobalEvent("teamWonRound", new string[] { aliveTeam + ""});
+				matchInProgress = false;
+				return;
 			}
 		}
 		serverEvents.sendGlobalEvent("startMatch", new string[] { matchTimerStart + "", team0MatchCount + "", team1MatchCount + "" });

@@ -170,7 +170,8 @@ public class WeaponSystem : MonoBehaviour
             {
                 if(hit.transform.gameObject.GetComponent<OtherClient>())
                 {
-					int moddedDamage = (int)(damage);
+					float damageMult = 1 + Upgrades.instance.damageMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Damage");
+					int moddedDamage = (int)((float)damage * damageMult);
 
                     int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
                     OtherClient hitClientScript = serverEvents.getOtherClientScriptByID(clientID);
@@ -184,7 +185,8 @@ public class WeaponSystem : MonoBehaviour
     {
        if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false && !MenuController.weaponUseLocked)
         {
-            nextFire = 1 / fireRate;
+			float fireRateMult = 1 + Upgrades.instance.firerateMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Firerate");
+            nextFire = 1 / (fireRate * fireRateMult);
 
             //Shoot raycast
             Ray ray = new Ray(weaponContainer.position, weaponContainer.forward);
@@ -199,14 +201,16 @@ public class WeaponSystem : MonoBehaviour
 					int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
 					OtherClient hitClientScript = serverEvents.getOtherClientScriptByID(clientID);
 
+					float damageMult = 1 + Upgrades.instance.damageMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Damage");
 					int moddedDamage;
 					if (isHeadshot)
 					{
-						moddedDamage = (int)((float)damage * headshotMultiplier);
+						float moddedHeadshot = headshotMultiplier + Upgrades.instance.headshotMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Headshot Mult");
+						moddedDamage = (int)((float)damage * moddedHeadshot * damageMult);
 					}
 					else
 					{
-						moddedDamage = (int)(damage);
+						moddedDamage = (int)((float)damage * damageMult);
 					}
 
 					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(),  Client.ID + ""}, clientID);
@@ -251,10 +255,5 @@ public class WeaponSystem : MonoBehaviour
     public void SetReloadFalse()
     {
         anim.SetBool("Reloading", false);
-    }
-
-    public void ResetWeapon()
-    {
-
     }
 }

@@ -15684,6 +15684,10 @@ PrefabInstance:
       value: Firerate
       objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: maxUpgradeLevel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: nextUpgrades.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -15806,6 +15810,7 @@ GameObject:
   - component: {fileID: 643860528}
   - component: {fileID: 643860529}
   - component: {fileID: 643860530}
+  - component: {fileID: 643860531}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -15990,7 +15995,7 @@ MonoBehaviour:
   roundText: {fileID: 904837409}
   matchStartParent: {fileID: 247437411}
   upgradeMenu: {fileID: 1163630850}
-  upgrades: {fileID: 1163630854}
+  upgrades: {fileID: 643860531}
 --- !u!114 &643860530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16035,6 +16040,29 @@ MonoBehaviour:
   - rudely
   - unexpectedly
   - fast
+--- !u!114 &643860531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643860521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e61ebeeb21e9964e803d6d0fec02ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  readyButton: {fileID: 1958474569}
+  waitingMessage: {fileID: 572152257}
+  upgradesParent: {fileID: 534826519}
+  serverEvents: {fileID: 1836363827}
+  gameManager: {fileID: 1836363839}
+  healthPerLevel: 50
+  damageMultPerLevel: 0.25
+  speedMultPerLevel: 0.5
+  headshotMultPerLevel: 0.3
+  firerateMultPerLevel: 0.2
+  pointText: {fileID: 890423685}
 --- !u!1 &644997038
 GameObject:
   m_ObjectHideFlags: 0
@@ -21837,6 +21865,10 @@ PrefabInstance:
       value: Headshot Mult
       objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: maxUpgradeLevel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: nextUpgrades.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -21848,6 +21880,10 @@ PrefabInstance:
       propertyPath: nextUpgrades.Array.data[1]
       value: 
       objectReference: {fileID: 1366290611}
+    - target: {fileID: 6068838606474719973, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
 --- !u!224 &1066369588 stripped
@@ -22646,7 +22682,6 @@ GameObject:
   - component: {fileID: 1163630851}
   - component: {fileID: 1163630853}
   - component: {fileID: 1163630852}
-  - component: {fileID: 1163630854}
   - component: {fileID: 1163630855}
   - component: {fileID: 1163630856}
   m_Layer: 5
@@ -22718,24 +22753,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163630850}
   m_CullTransparentMesh: 1
---- !u!114 &1163630854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163630850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e61ebeeb21e9964e803d6d0fec02ab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  readyButton: {fileID: 1958474569}
-  waitingMessage: {fileID: 572152257}
-  upgradesParent: {fileID: 534826519}
-  serverEvents: {fileID: 1836363827}
-  gameManager: {fileID: 1836363839}
-  pointText: {fileID: 890423685}
 --- !u!114 &1163630855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22773,7 +22790,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163630850}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
@@ -32573,7 +32590,7 @@ MonoBehaviour:
   weaponSwitcher: {fileID: 4589314065117614147}
   menuController: {fileID: 643860529}
   gameManager: {fileID: 1836363839}
-  upgrades: {fileID: 1163630854}
+  upgrades: {fileID: 643860531}
 --- !u!114 &1836363831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33247,7 +33264,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1163630854}
+      - m_Target: {fileID: 643860531}
         m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
         m_MethodName: finishedUpgrading
         m_Mode: 1

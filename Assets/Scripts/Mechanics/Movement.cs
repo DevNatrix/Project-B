@@ -165,7 +165,7 @@ public class Movement : MonoBehaviour
 	public IEnumerator dash()
 	{
 		Vector2 direction = horizontalInput;
-		if (dashTimer <= 0 && !MenuController.movementLocked)
+		if (dashTimer <= 0 && !MenuController.movementLocked && Upgrades.instance.isUpgradeUnlocked("Dash"))
 		{
 			dashTimer = dashCooldown + dashSeconds;
 			float timer = dashSeconds;
@@ -238,7 +238,8 @@ public class Movement : MonoBehaviour
 
 				if (!sliding)
 				{
-					playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * acceleration);
+					float speedMult = 1 + Upgrades.instance.speedMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Speed");
+					playerRB.AddForce((transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * acceleration * speedMult);
 				}
 			}
 			else if (wallRunning)
