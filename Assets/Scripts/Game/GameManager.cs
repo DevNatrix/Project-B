@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
 
 	public void checkMatchStatus()
 	{
+		if (!Client.owner)
+		{
+			return;
+		}
+
 		int aliveTeam = -1;
 		if (!GameManager.dead)
 		{
@@ -60,7 +65,7 @@ public class GameManager : MonoBehaviour
 			{
 				team0RoundCount++;
 			}
-			else { 
+			else if(aliveTeam == 1) { 
 				team1RoundCount++; 
 			}
 			if(team1RoundCount >= rounds || team0RoundCount >= rounds)

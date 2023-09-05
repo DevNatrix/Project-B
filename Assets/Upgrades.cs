@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class Upgrades : MonoBehaviour
@@ -27,6 +28,7 @@ public class Upgrades : MonoBehaviour
 	public float speedMultPerLevel = .5f;
 	public float headshotMultPerLevel = .1f;
 	public float firerateMultPerLevel = .2f;
+	public int regenPerUpgrade = 10;
 
 	public TextMeshProUGUI pointText;
 
@@ -34,6 +36,7 @@ public class Upgrades : MonoBehaviour
 	{
 		instance = this;
 		resetUpgrades();
+		changePoints(0);
 	}
 
 	public void finishedUpgrading()
@@ -52,6 +55,11 @@ public class Upgrades : MonoBehaviour
 		readyButton.SetActive(true);
 		waitingMessage.SetActive(false);
 		upgradesParent.localPosition = Vector3.zero;
+
+		if(GameManager.points == 0)
+		{
+			finishedUpgrading();
+		}
 	}
 
 	public void chooseUpgrade(UpgradeInfo upgrade)
@@ -60,6 +68,11 @@ public class Upgrades : MonoBehaviour
 
 		upgradeLevels[upgradeID]++;
 		unlockedUpgrades[upgradeID] = true;
+
+		if(GameManager.points == 0)
+		{
+			finishedUpgrading();
+		}
 	}
 
 	public void resetUpgrades()
@@ -105,6 +118,7 @@ public class Upgrades : MonoBehaviour
 		}
 		return upgradeLevels[upgradeID];
 	}
+
 	public int getUpgradeLevel(int upgradeID)
 	{
 		return upgradeLevels[upgradeID];

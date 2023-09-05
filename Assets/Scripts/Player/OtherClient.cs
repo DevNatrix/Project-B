@@ -197,7 +197,7 @@ public class OtherClient : MonoBehaviour
 			enemyUI.SetActive(false);
 
 			scoreboardPeice.gameObject.transform.SetParent(friendlyScoreboardParent);
-			Debug.Log(enemyScoreboardParent);
+			//Debug.Log(enemyScoreboardParent);
 		}
 		else
 		{
@@ -206,7 +206,7 @@ public class OtherClient : MonoBehaviour
 			friendlyUI.SetActive(false);
 
 			scoreboardPeice.gameObject.transform.SetParent(enemyScoreboardParent);
-			Debug.Log(enemyScoreboardParent);
+			//Debug.Log(enemyScoreboardParent);
 		}
 	}
 

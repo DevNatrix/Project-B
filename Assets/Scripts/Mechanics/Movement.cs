@@ -31,6 +31,8 @@ public class Movement : MonoBehaviour
 
 	[Header("Basic Movement Settings:")]
 	[HideInInspector] public bool jump;
+	[SerializeField] float jumpSpeed;
+	int jumps = 0;
 	bool isGrounded;
 	[SerializeField] float groundDistance = 1f;
 
@@ -255,9 +257,16 @@ public class Movement : MonoBehaviour
 		}
 
 		//jumping
-		if(jump && isGrounded && !MenuController.movementLocked)
+		if(isGrounded && playerRB.velocity.y < 1)
 		{
-			playerRB.AddForce(Vector3.up * jumpPower);// += new Vector3(0f, jumpPower, 0f);
+			jumps = 1 + Upgrades.instance.getUpgradeLevel("Extra Jump");
+		}
+
+		if(jump && jumps > 0 && !MenuController.movementLocked)
+		{
+			//playerRB.AddForce(Vector3.up * jumpPower);// += new Vector3(0f, jumpPower, 0f);
+			playerRB.velocity = new Vector3(playerRB.velocity.x, jumpSpeed, playerRB.velocity.z);
+			jumps--;
 		}
 		jump = false;
 

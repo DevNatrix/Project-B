@@ -51,14 +51,29 @@ public class PlayerManager : MonoBehaviour
 
 	[SerializeField] GameManager gameManager;
 
+	public float timeBeforeRegen;
+	float regenTimer;
+
 	void Start()
 	{
 		Invoke("initializeHealth", 1f);
+		InvokeRepeating("Regeneration", 1f, .1f);
 		postVolume.profile.TryGetSettings(out vignette);
+	}
+
+	void Regeneration()
+	{
+		if(regenTimer < 0f && !GameManager.dead)
+		{
+			int moddedMaxHealth = maxHealth + Upgrades.instance.healthPerLevel * Upgrades.instance.getUpgradeLevel("Health");
+			int newHealth = Mathf.Clamp(health + Upgrades.instance.regenPerUpgrade * Upgrades.instance.getUpgradeLevel("Regen"), 0, moddedMaxHealth);
+			SetHealth(newHealth);
+		}
 	}
 
 	private void Update()
 	{
+		regenTimer -= Time.deltaTime;
 		weaponContainer.position = rightShoulder.position;
 
 		RaycastHit hit;
@@ -114,6 +129,7 @@ public class PlayerManager : MonoBehaviour
 		{
 			SetHealth(health - damage, attackerID);
 			vignette.intensity.value = hitBloodIntensity;
+			regenTimer = timeBeforeRegen;
 		}
 	}
 
@@ -135,6 +151,7 @@ public class PlayerManager : MonoBehaviour
 		transform.position = spawnPoints[team].position;
 		SetHealth(maxHealth + Upgrades.instance.healthPerLevel * Upgrades.instance.getUpgradeLevel("Health"));
 		menuController.spawn();
+		regenTimer = 0;
 
 		reloadAllGuns();
 	}

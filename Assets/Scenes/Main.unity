@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: charge shot
       objectReference: {fileID: 0}
+    - target: {fileID: 6068838606474719969, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: title
       value: Charge Shot
@@ -785,11 +789,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6068838605092772078, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: m_text
-      value: Double Jump
+      value: Extra Jump
       objectReference: {fileID: 0}
     - target: {fileID: 6068838605092772078, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: m_fontSize
-      value: 31.5
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719968, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: m_Pivot.x
@@ -877,11 +881,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719969, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: m_Name
-      value: Double Jump
+      value: Extra jump
       objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: title
-      value: Double Jump
+      value: Extra Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: maxUpgradeLevel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
@@ -4749,6 +4757,10 @@ PrefabInstance:
     - target: {fileID: 6068838606474719969, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: m_Name
       value: reload speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068838606474719969, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: title
@@ -14494,6 +14506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reflect Damage
       objectReference: {fileID: 0}
+    - target: {fileID: 6068838606474719969, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: title
       value: Reflect Damage
@@ -16062,6 +16078,7 @@ MonoBehaviour:
   speedMultPerLevel: 0.5
   headshotMultPerLevel: 0.3
   firerateMultPerLevel: 0.2
+  regenPerUpgrade: 2
   pointText: {fileID: 890423685}
 --- !u!1 &644997038
 GameObject:
@@ -17294,6 +17311,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slash
       objectReference: {fileID: 0}
+    - target: {fileID: 6068838606474719969, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: title
       value: Slash
@@ -18459,7 +18480,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &890423685
@@ -19337,6 +19358,10 @@ PrefabInstance:
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: title
       value: Regen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: maxUpgradeLevel
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: nextUpgrades.Array.size
@@ -22208,6 +22233,10 @@ PrefabInstance:
     - target: {fileID: 6068838606474719969, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: m_Name
       value: multiple bullets
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068838606474719969, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: title
@@ -32217,6 +32246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pierce players
       objectReference: {fileID: 0}
+    - target: {fileID: 6068838606474719969, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6068838606474719971, guid: 79c3f59a796c92146ba00494ddd569d1, type: 3}
       propertyPath: title
       value: Pierce Players
@@ -39664,6 +39697,7 @@ MonoBehaviour:
   crosshair: {fileID: 8552368880924771099}
   aimPointOffset: {x: -0.02, y: 0.312, z: 0}
   gameManager: {fileID: 1836363839}
+  timeBeforeRegen: 2
 --- !u!114 &7656093453908861211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39695,6 +39729,7 @@ MonoBehaviour:
   look: {fileID: 2924846311551427072}
   playerManager: {fileID: 7656093453415565079}
   jump: 0
+  jumpSpeed: 12
   groundDistance: 1
   groundMask:
     serializedVersion: 2
