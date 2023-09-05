@@ -24,6 +24,13 @@ public class UpgradeInfo : MonoBehaviour
 
 	public void chooseUpgrade()
 	{
+		if(GameManager.points <= 0)
+		{
+			return;
+		}
+
+		Upgrades.instance.changePoints(-1);
+
 		foreach(UpgradeInfo upgrade in nextUpgrades)
 		{
 			upgrade.setChoosable(true);

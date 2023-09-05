@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 	public static float team1RoundCount = 0;
 	public static bool matchInProgress = false;
 	public static bool dead = false;
+	public static int points = 0;
 
 	[SerializeField] ServerEvents serverEvents;
 

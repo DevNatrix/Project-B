@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class Upgrades : MonoBehaviour
 	List<UpgradeInfo> upgradeInfos;
 	public static List<bool> unlockedUpgrades;
 	List<string> upgradeNames;
+
+	public TextMeshProUGUI pointText;
 
 	private void Awake()
 	{
@@ -72,5 +75,12 @@ public class Upgrades : MonoBehaviour
 	public bool isUpgradeUnlocked(int upgradeID)
 	{
 		return unlockedUpgrades[upgradeID];
+	}
+
+	public void changePoints(int points)
+	{
+		GameManager.points += points;
+
+		pointText.text = "Points: " + GameManager.points;
 	}
 }

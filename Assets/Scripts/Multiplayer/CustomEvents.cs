@@ -58,6 +58,7 @@ public class CustomEvents : MonoBehaviour
 
 		GameManager.team0RoundCount = 0;
 		GameManager.team1RoundCount = 0;
+		GameManager.points = 0;
 
 		if (Client.owner)
 		{
@@ -143,6 +144,11 @@ public class CustomEvents : MonoBehaviour
 		foreach(OtherClient otherClient in serverEvents.otherClientList)
 		{
 			otherClient.doneUpgrading = false;
+		}
+
+		if(PlayerManager.team != winningTeam)
+		{
+			Upgrades.instance.changePoints(1);
 		}
 
 		//Debug.Log("Round over, team " + winningTeam + " won");
