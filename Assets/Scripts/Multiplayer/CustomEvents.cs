@@ -124,10 +124,7 @@ public class CustomEvents : MonoBehaviour
 	{
 		int winningTeam = int.Parse(data[0]);
 
-		if (Client.owner)
-		{
-			serverEvents.sendGlobalEvent("startGame", new string[] { GameManager.rounds + "" });
-		}
+		menuController.setLobbyMenu(true);
 	}
 
 	public void teamWonMatch(string[] data)

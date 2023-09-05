@@ -6,8 +6,8 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
-	public static int rounds = 2;
-	public static int matches = 2;
+	public static int rounds = 10;
+	public static int matches = 3;
 	public static float matchTimer = 0;
 	public static float matchTimerStart = 2;
 	public static float team0MatchCount = 0;
@@ -66,7 +66,8 @@ public class GameManager : MonoBehaviour
 			if(team1RoundCount >= rounds || team0RoundCount >= rounds)
 			{
 				serverEvents.sendGlobalEvent("teamWonGame", new string[] { aliveTeam + ""});
-
+				matchInProgress = false;
+				return;
 			}
 			else
 			{
