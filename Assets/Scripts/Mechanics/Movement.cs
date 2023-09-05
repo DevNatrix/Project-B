@@ -105,7 +105,7 @@ public class Movement : MonoBehaviour
 
         //wallrunning
         float horizontalSpeed = new Vector3(playerRB.velocity.x, 0f, playerRB.velocity.z).magnitude;
-        nearbyWall = Physics.CheckSphere(transform.position + Vector3.up * wallDetectionHeight, wallDetectionRadius, groundMask);
+		nearbyWall = false;// Physics.CheckSphere(transform.position + Vector3.up * wallDetectionHeight, wallDetectionRadius, groundMask);
 		wallJumpingTimer -= Time.deltaTime;
 		if (nearbyWall && horizontalSpeed >= minVelocityForWallrun && jumping)
 		{
