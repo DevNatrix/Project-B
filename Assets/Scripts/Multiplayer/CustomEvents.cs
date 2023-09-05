@@ -17,8 +17,7 @@ public class CustomEvents : MonoBehaviour
 	[SerializeField] WeaponSwitcher weaponSwitcher;
 	[SerializeField] MenuController menuController;
 	[SerializeField] GameManager gameManager;
-
-
+	[SerializeField] Upgrades upgrades;
 
 	//example:
 	public void sendExampleEventExample()
@@ -54,7 +53,7 @@ public class CustomEvents : MonoBehaviour
 
 	public void startGame(string[] data)
 	{
-		Debug.Log("started game");
+		//Debug.Log("started game");
 		GameManager.rounds = int.Parse(data[0]);
 
 		GameManager.team0RoundCount = 0;
@@ -68,10 +67,12 @@ public class CustomEvents : MonoBehaviour
 		{
 			menuController.setLobbyMenu(false);
 		}
+
+		upgrades.resetUpgrades();
 	}
 	public void startRound(string[] data)
 	{
-		Debug.Log("started round");
+		//Debug.Log("started round");
 		GameManager.matches = int.Parse(data[0]);
 		GameManager.team0RoundCount = int.Parse(data[1]);
 		GameManager.team1RoundCount = int.Parse(data[2]);
@@ -92,7 +93,7 @@ public class CustomEvents : MonoBehaviour
 		GameManager.matchTimer = int.Parse(data[0]);
 		GameManager.team0MatchCount = int.Parse(data[1]);
 		GameManager.team1MatchCount = int.Parse(data[2]);
-		Debug.Log("started match: " + GameManager.team0MatchCount + " to " + GameManager.team1MatchCount);
+		//Debug.Log("started match: " + GameManager.team0MatchCount + " to " + GameManager.team1MatchCount);
 		StartCoroutine(setMatchActive());
 		playerManager.respawn();
 
@@ -118,10 +119,20 @@ public class CustomEvents : MonoBehaviour
 		gameManager.checkMatchStatus();
 	}
 
+	public void teamWonGame(string[] data)
+	{
+		int winningTeam = int.Parse(data[0]);
+
+		if (Client.owner)
+		{
+			serverEvents.sendGlobalEvent("startGame", new string[] { GameManager.rounds + "" });
+		}
+	}
+
 	public void teamWonMatch(string[] data)
 	{
 		int winningTeam = int.Parse(data[0]);
-		Debug.Log("Match over, team " + winningTeam + " won");
+		//Debug.Log("Match over, team " + winningTeam + " won");
 	}
 	public void teamWonRound(string[] data)
 	{
@@ -134,7 +145,7 @@ public class CustomEvents : MonoBehaviour
 			otherClient.doneUpgrading = false;
 		}
 
-		Debug.Log("Round over, team " + winningTeam + " won");
+		//Debug.Log("Round over, team " + winningTeam + " won");
 	}
 
 	public void otherClientDoneUpgrading(string[] data)
