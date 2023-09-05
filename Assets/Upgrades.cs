@@ -19,9 +19,37 @@ public class Upgrades : MonoBehaviour
 
 	List<UpgradeInfo> upgradeInfos;
 	public static List<bool> unlockedUpgrades;
+	public static List<int> upgradeLevels;
 	List<string> upgradeNames;
 
 	public TextMeshProUGUI pointText;
+
+	/*upgrades to do:
+	 * health
+	 * heal
+	 * regen
+	 * shield
+	 * reflect damage
+	 * damage
+	 * charge shot
+	 * headshot mult
+	 * firerate
+	 * pierce players
+	 * wallhacks
+	 * multiple bullets
+	 * endless ammo 
+	 * no recoil
+	 * reload speed
+	 * clip size
+	 * instant reload
+	 * speed
+	 * dash
+	 * slash
+	 * double jump
+	 * recharge on hit
+	 * 
+	 * multple upgrades on one (health, damage, speed)
+	 */
 
 	private void Awake()
 	{
@@ -49,7 +77,10 @@ public class Upgrades : MonoBehaviour
 
 	public void chooseUpgrade(UpgradeInfo upgrade)
 	{
-		Debug.Log("Got " + upgrade.title);
+		int upgradeID = upgradeNames.IndexOf(upgrade.title);
+
+		upgradeLevels[upgradeID]++;
+		unlockedUpgrades[upgradeID] = true;
 	}
 
 	public void resetUpgrades()
@@ -58,23 +89,34 @@ public class Upgrades : MonoBehaviour
 
 		unlockedUpgrades = new List<bool>(); //clear the lists
 		upgradeNames = new List<string>();
+		upgradeLevels = new List<int>();
 
 		foreach (UpgradeInfo upgrade in upgradeInfos) //re-fill the lists
 		{
 			upgrade.resetUpgrade();
 			unlockedUpgrades.Add(false);
 			upgradeNames.Add(upgrade.title);
+			upgradeLevels.Add(0);
 		}
 	}
 
 	public bool isUpgradeUnlocked(string upgradeName)
 	{
-		return isUpgradeUnlocked(upgradeNames.IndexOf(upgradeName));
+		return unlockedUpgrades[upgradeNames.IndexOf(upgradeName)];
 	}
 
 	public bool isUpgradeUnlocked(int upgradeID)
 	{
 		return unlockedUpgrades[upgradeID];
+	}
+
+	public int getUpgradeLevel(string upgradeName)
+	{
+		return upgradeLevels[upgradeNames.IndexOf(upgradeName)];
+	}
+	public int getUpgradeLevel(int upgradeID)
+	{
+		return upgradeLevels[upgradeID];
 	}
 
 	public void changePoints(int points)

@@ -16,9 +16,11 @@ public class UpgradeInfo : MonoBehaviour
 	public Color lockedColor;
 	public Color usedColor;
 
+	public int maxUpgradeLevel = 1;
+	int currentLevel = 0;
+
 	private void Start()
 	{
-		label.text = title;
 		setChoosable(canChooseOnStart);
 	}
 
@@ -38,11 +40,17 @@ public class UpgradeInfo : MonoBehaviour
 
 		Upgrades.instance.chooseUpgrade(this);
 
-		setChoosable(false);
+		currentLevel++;
+		if(currentLevel >= maxUpgradeLevel)
+		{
+			setChoosable(false);
 
-		ColorBlock colors = button.colors;
-		colors.disabledColor = usedColor;
-		button.colors = colors;
+			ColorBlock colors = button.colors;
+			colors.disabledColor = usedColor;
+			button.colors = colors;
+		}
+
+		updateLabel();
 	}
 
 	public void setChoosable(bool _choosable)
@@ -54,9 +62,24 @@ public class UpgradeInfo : MonoBehaviour
 	public void resetUpgrade()
 	{
 		setChoosable(canChooseOnStart);
-
+		
+		currentLevel = 0;
 		ColorBlock colors = button.colors;
 		colors.disabledColor = lockedColor;
 		button.colors = colors;
+
+		updateLabel();
+	}
+
+	void updateLabel()
+	{
+		if (maxUpgradeLevel > 1)
+		{
+			label.text = title + " " + currentLevel + "/" + maxUpgradeLevel;
+		}
+		else
+		{
+			label.text = title;
+		}
 	}
 }

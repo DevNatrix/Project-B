@@ -58,7 +58,7 @@ public class CustomEvents : MonoBehaviour
 
 		GameManager.team0RoundCount = 0;
 		GameManager.team1RoundCount = 0;
-		GameManager.points = 0;
+		GameManager.points = 100;
 
 		if (Client.owner)
 		{
