@@ -62,7 +62,7 @@ public class MenuController : MonoBehaviour
 		cursorUnlocked = buyMenu || mainMenu || lobby || upgrading;
 		lookLocked = buyMenu || mainMenu || lobby || GameManager.dead || upgrading;
 		movementLocked = typing || countdown;
-		weaponUseLocked = buyMenu || mainMenu || lobby || upgrading || countdown || GameManager.dead;
+		weaponUseLocked = buyMenu || mainMenu || lobby || upgrading || countdown || GameManager.dead || typing;
 
 		if (cursorUnlocked)
 		{

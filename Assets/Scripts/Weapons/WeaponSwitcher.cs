@@ -171,6 +171,11 @@ public class WeaponSwitcher : MonoBehaviour
         droppedItemPrefabPS.maxAmmo = itemDropWP.maxAmmo;
         droppedItemPrefabPS.WeaponID = itemDropWP.WeaponID;*/
 
+		/*if (MenuController.weaponUseLocked)
+		{
+			return;
+		}*/
+
         WeaponSystem itemDropWP = itemDrop.GetComponent<WeaponSystem>();
 		string[] dataToSend = new string[] { itemDropWP.WeaponID + "", currentDropID + "", transform.position + "", playerT.GetComponent<Rigidbody>().velocity + "", cam.transform.forward * dropForwardForce + "", randomVector3() * 10 + "", itemDropWP.AmmoInReserve + "", itemDropWP.currentAmmo + "", itemDropWP.maxAmmo + "" };
 
