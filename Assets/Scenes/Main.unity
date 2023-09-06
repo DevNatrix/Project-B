@@ -16080,6 +16080,7 @@ MonoBehaviour:
   firerateMultPerLevel: 0.2
   regenPerUpgrade: 2
   pointText: {fileID: 890423685}
+  minTimeBeforeUpgradeClose: 3
 --- !u!1 &644997038
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,6 +32,14 @@ public class Upgrades : MonoBehaviour
 
 	public TextMeshProUGUI pointText;
 
+	public float minTimeBeforeUpgradeClose = 3f;
+	public static float minUpgradeTimer = 0;
+
+	private void Update()
+	{
+		minUpgradeTimer -= Time.deltaTime;
+	}
+
 	private void Awake()
 	{
 		instance = this;
@@ -55,8 +63,9 @@ public class Upgrades : MonoBehaviour
 		readyButton.SetActive(true);
 		waitingMessage.SetActive(false);
 		upgradesParent.localPosition = Vector3.zero;
+		minUpgradeTimer = minTimeBeforeUpgradeClose;
 
-		if(GameManager.points == 0)
+		if (GameManager.points == 0)
 		{
 			finishedUpgrading();
 		}

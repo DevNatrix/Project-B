@@ -85,10 +85,23 @@ public class GameManager : MonoBehaviour
 		matchInProgress = false;
 	}
 
+	IEnumerator checkUpgradeAgain()
+	{
+		yield return new WaitForSeconds(Upgrades.minUpgradeTimer);
+		checkUpgradeStatus();
+		yield return null;
+	}
+
 	public void checkUpgradeStatus()
 	{
 		if (!Upgrades.doneUpgrading)
 		{
+			return;
+		}
+
+		if(Upgrades.minUpgradeTimer > 0)
+		{
+			StartCoroutine(checkUpgradeAgain());
 			return;
 		}
 
