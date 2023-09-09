@@ -60,6 +60,8 @@ public class WeaponSystem : MonoBehaviour
 
 	Transform weaponContainer;
 
+    public bool isShotgun = false;
+
     [HideInInspector] public int crntAmmoReset;
     [HideInInspector] public int ammoReserve;
 
@@ -183,47 +185,126 @@ public class WeaponSystem : MonoBehaviour
     }
     private void Shoot()
     {
-       if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false && !MenuController.weaponUseLocked)
+        if(isShotgun)
         {
-			float fireRateMult = 1 + Upgrades.instance.firerateMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Firerate");
+            ShotgunShoot();
+        }
+        else if(!isShotgun)
+        {
+            NormalShoot();
+        }
+    }
+
+    void NormalShoot()
+    {
+        if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false && !MenuController.weaponUseLocked)
+        {
+            float fireRateMult = 1 + Upgrades.instance.firerateMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Firerate");
             nextFire = 1 / (fireRate * fireRateMult);
 
-            //Shoot raycast
-            Ray ray = new Ray(weaponContainer.position, weaponContainer.forward);
+            RaycastHit hit;
 
-			RaycastHit hit;
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))
-            {
-                if (hit.transform.gameObject.GetComponent<OtherClient>())
+                //Shoot raycast
+                Ray ray = new Ray(weaponContainer.position, weaponContainer.forward);
+                if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))
                 {
-					bool isHeadshot = hit.point.y > hit.transform.position.y + headshotHeight;
-					hitMarker.hitPlayer(isHeadshot);
-					int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
-					OtherClient hitClientScript = serverEvents.getOtherClientScriptByID(clientID);
+                    if (hit.transform.gameObject.GetComponent<OtherClient>())
+                    {
+                        bool isHeadshot = hit.point.y > hit.transform.position.y + headshotHeight;
+                        hitMarker.hitPlayer(isHeadshot);
+                        int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
+                        OtherClient hitClientScript = serverEvents.getOtherClientScriptByID(clientID);
 
-					float damageMult = 1 + Upgrades.instance.damageMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Damage");
-					int moddedDamage;
-					if (isHeadshot)
-					{
-						float moddedHeadshot = headshotMultiplier + Upgrades.instance.headshotMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Headshot Mult");
-						moddedDamage = (int)((float)damage * moddedHeadshot * damageMult);
-					}
-					else
-					{
-						moddedDamage = (int)((float)damage * damageMult);
-					}
+                        float damageMult = 1 + Upgrades.instance.damageMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Damage");
+                        int moddedDamage;
+                        if (isHeadshot)
+                        {
+                            float moddedHeadshot = headshotMultiplier + Upgrades.instance.headshotMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Headshot Mult");
+                            moddedDamage = (int)((float)damage * moddedHeadshot * damageMult);
+                        }
+                        else
+                        {
+                            moddedDamage = (int)((float)damage * damageMult);
+                        }
 
-					serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(),  Client.ID + ""}, clientID);
+                        serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(), Client.ID + "" }, clientID);
+                    }
+                    else
+                    {
+                        GameObject shotbulletHole = Instantiate(bulletHole, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(hit.normal));
+                        Destroy(shotbulletHole, 6);
+                    }
                 }
-				else
-				{
-					GameObject shotbulletHole = Instantiate(bulletHole, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(hit.normal));
-					Destroy(shotbulletHole, 6);
-				}
+            
+
+
+            //create visual bullet
+            bulletManager.createBullet(shootPoint.position, weaponContainer.forward * bulletSpeed);
+
+            currentAmmo--;
+            Recoil.Instance.FireRecoil();
+            AudioPlayer.Instance.createAudio(1, gameObject.transform.position, .2f, 1, Client.ID);
+        }
+    }
+
+    void ShotgunShoot()
+    {
+        int shotgunPellets = 8;
+        float spreadAngle = 5f;
+
+        if (playerControls.Weapon.Fire.IsPressed() && nextFire <= 0 && currentAmmo > 0 && gameObject.GetComponent<Animator>().GetBool("Reloading") == false && !MenuController.weaponUseLocked)
+        {
+            float fireRateMult = 1 + Upgrades.instance.firerateMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Firerate");
+            nextFire = 1 / (fireRate * fireRateMult);
+
+            RaycastHit hit;
+            for (int i = 0; i < shotgunPellets; i++)
+            {
+                float spreadX = Random.Range(-spreadAngle, spreadAngle);
+                float spreadY = Random.Range(-spreadAngle, spreadAngle);
+
+                // Calculate the rotation for the pellet based on the spread angles
+                Quaternion spreadRotation = Quaternion.Euler(spreadX, spreadY, 0);
+
+                // Calculate the direction for the raycast using the spread rotation
+                Vector3 pelletDirection = spreadRotation * weaponContainer.forward;
+
+                //Shoot raycast
+                Ray ray = new Ray(weaponContainer.position, pelletDirection);
+                if (Physics.Raycast(ray.origin, ray.direction, out hit, maxDistance, hitMask))
+                {
+                    if (hit.transform.gameObject.GetComponent<OtherClient>())
+                    {
+                        bool isHeadshot = hit.point.y > hit.transform.position.y + headshotHeight;
+                        hitMarker.hitPlayer(isHeadshot);
+                        int clientID = hit.transform.gameObject.GetComponent<OtherClient>().ID;
+                        OtherClient hitClientScript = serverEvents.getOtherClientScriptByID(clientID);
+
+                        float damageMult = 1 + Upgrades.instance.damageMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Damage");
+                        int moddedDamage;
+                        if (isHeadshot)
+                        {
+                            float moddedHeadshot = headshotMultiplier + Upgrades.instance.headshotMultPerLevel * (float)Upgrades.instance.getUpgradeLevel("Headshot Mult");
+                            moddedDamage = (int)((float)damage * moddedHeadshot * damageMult);
+                        }
+                        else
+                        {
+                            moddedDamage = (int)((float)damage * damageMult);
+                        }
+
+                        serverEvents.sendDirectEvent("damage", new string[] { moddedDamage.ToString(), Client.ID + "" }, clientID);
+                    }
+                    else
+                    {
+                        GameObject shotbulletHole = Instantiate(bulletHole, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(hit.normal));
+                        Destroy(shotbulletHole, 6);
+                    }
+                }
             }
 
-			//create visual bullet
-			bulletManager.createBullet(shootPoint.position, weaponContainer.forward * bulletSpeed);
+
+            //create visual bullet
+            bulletManager.createBullet(shootPoint.position, weaponContainer.forward * bulletSpeed);
 
             currentAmmo--;
             Recoil.Instance.FireRecoil();
